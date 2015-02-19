@@ -15,6 +15,7 @@
 		50DEC26C1A960D6900336687 /* Rattle_GL_2_0.cp in Sources */ = {isa = PBXBuildFile; fileRef = 50DEC2531A960D6900336687 /* Rattle_GL_2_0.cp */; };
 		50DEC26D1A960D6900336687 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DEC25C1A960D6900336687 /* main.m */; };
 		50DEC2871A960E1B00336687 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DEC27E1A960E1B00336687 /* main.cpp */; };
+		50DEC28C1A960EFE00336687 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DEC28B1A960EFE00336687 /* OpenCL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,7 +76,6 @@
 		50DEC2691A960D6900336687 /* SimpleParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleParticle.h; path = "Objective-C/SimpleParticle.h"; sourceTree = SOURCE_ROOT; };
 		50DEC26A1A960D6900336687 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Window.h; path = "Objective-C/Window.h"; sourceTree = SOURCE_ROOT; };
 		50DEC26B1A960D6900336687 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = World.h; path = "Objective-C/World.h"; sourceTree = SOURCE_ROOT; };
-		50DEC26E1A960E1B00336687 /* ActionProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionProcessor.h; path = CPP/ActionProcessor.h; sourceTree = SOURCE_ROOT; };
 		50DEC2701A960E1B00336687 /* Art.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Art.h; sourceTree = "<group>"; };
 		50DEC2711A960E1B00336687 /* LightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightSource.h; sourceTree = "<group>"; };
 		50DEC2721A960E1B00336687 /* ShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeObject.h; sourceTree = "<group>"; };
@@ -96,6 +96,7 @@
 		50DEC2841A960E1B00336687 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		50DEC2851A960E1B00336687 /* PointOfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfView.h; sourceTree = "<group>"; };
 		50DEC2861A960E1B00336687 /* SimpleParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticle.h; sourceTree = "<group>"; };
+		50DEC28B1A960EFE00336687 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50DEC28C1A960EFE00336687 /* OpenCL.framework in Frameworks */,
 				50BC367C1A743774008E8B78 /* ApplicationServices.framework in Frameworks */,
 				509857871A72E01E009F50A3 /* OpenGL.framework in Frameworks */,
 				509857851A72E011009F50A3 /* GLKit.framework in Frameworks */,
@@ -162,6 +164,11 @@
 		50639F281A92CC9100A94E5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50BC367B1A743774008E8B78 /* ApplicationServices.framework */,
+				509857861A72E01E009F50A3 /* OpenGL.framework */,
+				509857841A72E011009F50A3 /* GLKit.framework */,
+				509857821A72E009009F50A3 /* GLUT.framework */,
+				50DEC28B1A960EFE00336687 /* OpenCL.framework */,
 				50639F291A92CC9100A94E5C /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
@@ -170,10 +177,6 @@
 		509857621A72A6C7009F50A3 = {
 			isa = PBXGroup;
 			children = (
-				50BC367B1A743774008E8B78 /* ApplicationServices.framework */,
-				509857861A72E01E009F50A3 /* OpenGL.framework */,
-				509857841A72E011009F50A3 /* GLKit.framework */,
-				509857821A72E009009F50A3 /* GLUT.framework */,
 				50639F281A92CC9100A94E5C /* Frameworks */,
 				5098576D1A72A6C7009F50A3 /* CPP */,
 				505ADED01A9579F000A91318 /* Objc */,
@@ -194,7 +197,6 @@
 		5098576D1A72A6C7009F50A3 /* CPP */ = {
 			isa = PBXGroup;
 			children = (
-				50DEC26E1A960E1B00336687 /* ActionProcessor.h */,
 				50DEC26F1A960E1B00336687 /* Art */,
 				50DEC2741A960E1B00336687 /* Foundation */,
 				50DEC2761A960E1B00336687 /* Header.h */,

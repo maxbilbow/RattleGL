@@ -28,6 +28,7 @@ float _dt;
 #import <GLKit/GLKit.h>
 #include <GLUT/glut.h>
 //#import <OpenGLES/ES1/gl.h>
+#include <OpenCL/OpenCL.h>
 
 @protocol RMXObject
 @property (readonly) NSString * name;

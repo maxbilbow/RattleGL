@@ -92,7 +92,8 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
     [world insertSprite: sh4];
     [world insertSprite: sun];
     
-    [self randomObjects];
+    //[self randomObjects];
+    
     return self;
     
     
@@ -102,13 +103,15 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
 {
     for (ShapeObject* sprite in [world sprites]){
         if ([sprite class]==[ShapeObject class]) {
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [sprite getColorfv]);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [sprite getColorfv]);
-    glPushMatrix();
-    //glTranslatef(3, 0, 0);
-    [sprite draw:DrawCubeWithTextureCoords];
-    glPopMatrix();
-                                                  }
+            glMaterialfv(GL_FRONT, GL_SPECULAR, [sprite getColorfv]);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, [sprite getColorfv]);
+            glPushMatrix();
+            //glTranslatef(3, 0, 0);
+            [sprite draw:DrawCubeWithTextureCoords];
+            glPopMatrix();
+            glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
+        }
     }
 }
 

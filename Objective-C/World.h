@@ -105,4 +105,4 @@
 
 @end
 
-RMXWorld *world;
+static const RMXWorld *world;

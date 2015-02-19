@@ -95,7 +95,7 @@ int init()
     gettimeofday (&last_idle_time, NULL);
 
     
-    //mouse.center();
+    //[mouse center];
     
     if ([window isFullscreen]) {
         [observer toggleFocus];
@@ -128,21 +128,12 @@ int main (int argc, char **argv) {
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        //window = [RMXWindow alloc]initWithName
         rmxDebugger = [[RMXDebugger alloc]init];
-        
         world = [[RMXWorld alloc]initWithName:@"World"];
         art = [[Art alloc]initWithName:@"Art"];
-        
-        //shapeObject Ground
-        
-        
-        //observer = [Observer alloc];
-        observer = world.observer;//[[Observer alloc]initWithName:@"Me"];//world.mainObserver;
+        observer = world.observer;
         
         glutInit(&argc, argv);
-        //Interface view = Interface();
-
         
         init();
     }

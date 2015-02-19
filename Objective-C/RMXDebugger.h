@@ -22,78 +22,102 @@
 #define RMX_DEPRECATED(from, to) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA)
 
 
-//struct WorldConstants {
-//    static const bool WATCHING = false;
-//    //static const float PI_OVER_180 = PI/180;
-//    static bool isWatching(bool local){
-//        return (WATCHING || local);
-//    }
-//    
-//    
-//};
-//
-//namespace WC {
-//    inline namespace WorldConstants{}
-//};
-//
-//
-//
-//using namespace std;
-
 @interface RMXDebugger : NSString
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
 @end
 
 @implementation RMXDebugger
+const bool debugging = true;
+const bool debugLoop = true;
+const int no_checks = 11;
+typedef struct _Loop {
+    float loss;
+    int count;
+    float totalTimePassed;
+    float average;
+    float previousAverage;
+    char diff;
+    //char * log;
+} Loop;
 
-    const int no_checks = 11;
-    int tog = 1;
-NSString *lastCheck;
+const int loopSampleSize = 100;
+NSString* loopLog = @"Collecting Data";
+int monitor=10;
+int tog = 1;
 
-    //bool * print = new bool[10];
+NSString * lastCheck;
+NSString * priorName;
+NSString * checks[no_checks];
 
-NSString *checks[no_checks];
-//=[
-//                       @"FirstList",
-//                       @"SecondList",
-//                       @"ThirdList",@"",@"",@"",@"",@"",@"",@"",nil];// = [names objectAtIndex:0];
+Loop loop;
 
-    int monitor=10;
-    bool debugging = true;
-    //GLKVector2 win = new GLKVector2(0,0);
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-//        checks = @[
-//                   @"FirstList",
-//                   @"SecondList",
-//                   @"ThirdList",@"",@"",@"",@"",@"",@"",@""];
         lastCheck = @"";
         for (int i=0;i<no_checks;++i)
             checks[i]=@"";
-    priorName = @"";
+        priorName = @"";
+        
+        loop.loss = 0;
+        loop.count = 0;
+        loop.totalTimePassed = 0;
+        loop.average = 0;
+        loop.previousAverage = 0;
+        loop.diff = '=';
+        //loop.log = "Collecting Data";
     }
-
     return self;
 }
 
-   // template <typename Print>
 
-
-- (void)feedback//:(GLKVector2)win
+- (bool)newLoopAverage
 {
-        //feedback(checks);
+    loop.count++;
+    loop.totalTimePassed += _dt;
+    if (loop.count <= loopSampleSize) {
+        return false;
+    } else {
+        loop.count = 0;
+        loop.previousAverage = loop.average;
+        loop.average = loop.totalTimePassed / loopSampleSize;
+        loop.totalTimePassed = 0;
+        const float dl = loop.average - loop.previousAverage;
+        loop.loss += dl;
 
-        if ((![checks[monitor] isEqualToString:lastCheck])&&(debugging))
-                NSLog(@"\nDEBUG #%i %@\n", monitor, checks[monitor]);
+        if (dl == 0)
+            return false;
+        else if (dl > 0)
+            loop.diff = '>';
+        else
+            loop.diff = '<';
+
         
-                
+        loopLog = [NSString stringWithFormat:@"Loop Time: %f, Average: %f %c %f => Loss of %f (+%f)", _dt, loop.average, loop.diff, loop.previousAverage, loop.loss, dl];
+        
+        return true;
+    }
+}
+
+- (void)feedback
+{
+    if (!debugging) return;
+    else if (![checks[monitor] isEqualToString:lastCheck] || [self newLoopAverage]) {
+        NSLog(@"\nDEBUG #%i %@\n%@", monitor, checks[monitor],debugLoop ? loopLog : @"");
+        if (debugLoop) {
+            const char * c = [loopLog UTF8String];
+            const long len = [loopLog length];
+            printf("%c\n",c[len]);
+        }
+    } else {
         lastCheck = checks[monitor];
-    checks[monitor] = @"";
-   // [checks setObject:(@"") atIndexedSubscript:(monitor)];// = "";//[NSString stringWithFormat: ""];
+        checks[monitor] = @"";
     }
     
+}
+
 -(void)cycle:(int)dir
 {
     monitor += dir;
@@ -101,36 +125,20 @@ NSString *checks[no_checks];
         monitor = 0;
     if(monitor<0)
         monitor = no_checks-1;
+    loop.loss = 0;
 }
-NSString* priorName;
--(void)add:(int)index n:(id)object t:(NSString*)text//, ...
+
+
+-(void)add:(int)index n:(id)object t:(NSString*)text
 {
-    
-//    NSString* eachObject;
-//    va_list argumentList;
-//    if (text) // The first argument isn't part of the varargs list,
-//    {                                   // so we'll handle it separately.
-//        [eachObject stringByAppendingString: text];
-//        va_start(argumentList, text); // Start scanning for arguments after firstObject.
-//        while ((eachObject != nil)) // As many times as we can get an argument of type "id"
-//           [eachObject stringByAppendingString: eachObject]; // that isn't nil, add it to self's contents.
-//        va_end(argumentList);
-//    }
-    //NSLog(@"%@",text);
+    if (!debugging||index!=monitor) return;
     NSString * s = ![[object description] isEqualToString: priorName] ? [NSString stringWithFormat:@"\n%@:\n ",[object description]] : @"";
-    //NSString * s = [NSString stringWithFormat:@"\n%@: ",[object description]];
     priorName = [object description];
-   // if [checks[index] isEqualToString:""]
-    
     checks[index] = [NSString stringWithFormat:@"%@ %@        %@\n",checks[index],s, text];
-//    [checks[index] stringByAppendingString:text];//(eachObject)];
-    
 }
 
 @end
 
 
-
-
-static RMXDebugger *rmxDebugger;
+static const RMXDebugger *rmxDebugger;
 
