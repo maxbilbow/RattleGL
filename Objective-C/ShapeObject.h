@@ -8,7 +8,7 @@
 
 
 @interface ShapeObject : Particle
-@property float size, rotation;
+@property float rotation;
 @property  GLKVector4 color;// = GLKVector4Make(1,1, 1, 10);
 @property  bool isRotating;
 
@@ -18,7 +18,7 @@
 
 @implementation ShapeObject
     //GLKVector4 position;
-@synthesize size, rotation, color, isRotating, rAxis;
+@synthesize rotation, color, isRotating, rAxis;
 
     const float nill[4] = {0,0,0,0};
 
@@ -28,11 +28,12 @@
 {
     self = [super initWithName:name];
     if (self) {
-         size =1;
-        color = GLKVector4Make(1,1, 1, 10);
-        rAxis = GLKVector3Make(0,0,1);
-        rotation = 0;
-        isRotating = false;
+        self.size = 1;
+        self.color = GLKVector4Make(1,1, 1, 10);
+        self.rAxis = GLKVector3Make(0,0,1);
+        self.rotation = 0;
+        self.isRotating = false;
+       
     }
     return self;
     
@@ -67,7 +68,7 @@
         glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
         glTranslatef([self position].x,[self position].y,[self position].z);
     [self setMaterial];
-        drawMe(size);
+        drawMe(self.size);
        // glDrawArrays(GL_TRIANGLES, 0, 36);
     [self unsetMaterial];
         
@@ -105,6 +106,11 @@
 {
     color = GLKVector4MakeWithArray(c);
 }
-    
+
+- (void)debug {
+    [super debug];
+    [rmxDebugger add:RMX_OBSERVER n:self t:[self describePosition] ];
+}
+
 
 @end

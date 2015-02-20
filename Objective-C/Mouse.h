@@ -7,7 +7,7 @@
 //
 
 
-@interface Mouse : NSEvent <RMXMouseOwner>
+@interface Mouse : RMXObject <RMXMouseOwner>
     //@property bool focus;
     @property int dx, dy;
     @property GLKVector2 pos;
@@ -19,12 +19,11 @@
 
 
 
-@synthesize name = _name, dx, dy, pos, focus;
+@synthesize dx, dy, pos, focus;
 
 - (id)initWithName:(NSString*)name
 {
-    self = [super init];
-    _name = name;
+    self = [super initWithName:name];
     focus = false;
     dx = 0;
     dy = 0;
@@ -46,7 +45,7 @@
     return pos;
 }
 
-- (void)center:(void(int x, int y))center
+- (void)centerView:(void(int x, int y))center
 {
     center(pos.x,pos.y);
 }
@@ -71,7 +70,7 @@
 //        pos.x += DeltaX;
 //        pos.y += DeltaY;
         //cout<< "  dx " << "|" << DeltaX << "|" << DeltaY << endl;
-    [rmxDebugger add:3 n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
+    [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
        
         
         //DeltaX -= dx; DeltaY -= dy;
@@ -94,5 +93,9 @@
 //        dy += y - CGDisplayPixelsHigh(0)/2;
     //setMousePos(pos.x-dx, pos.y-dy);
     //cout<< "  CALABRATING " << "|" << dx << "|" << dy << endl;    }
+}
+
+- (void)debug {
+    [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 @end

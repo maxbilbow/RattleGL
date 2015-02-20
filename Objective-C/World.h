@@ -88,7 +88,7 @@
     float dista=GLKVector3Distance([self observer].position, ((Particle*)[_sprites objectAtIndex:1]).position);
         for (Particle* sprite in _sprites){
             float distb = GLKVector3Distance([self observer].position, sprite.position);
-            NSString *lt = @" < ";
+            //NSString *lt = @" < ";
             if(distb<dista&&distb!=0){
                 closest = sprite;
                 //shapes[i];
@@ -101,7 +101,9 @@
         //cout << "closest: "<< closest << ", dist:" << dista << endl;
     return closest;//shapes[closest];
     }
-
+- (void)debug {
+    [rmxDebugger add:RMX_WORLD n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+}
 
 @end
 

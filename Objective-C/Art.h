@@ -15,17 +15,17 @@
 #include "Shapes.h"
 #include "LightSource.h"
 
-@interface Art : NSViewController <RMXObject>
+@interface Art : RMXObject
 @property GLfloat x, y, z, d, r,g, b,k;
 @property ShapeObject * sh, * sh2, * sh3, *sh4;
 @end
-ShapeObject * sh, * sh2, * sh3, *sh4;
+
 void RenderObjects(void);
 
 
 @implementation Art
 
-@synthesize name = _name;
+@synthesize sh, sh2, sh3, sh4,  x, y, z, d, r,g, b,k;
 
 float colorBronzeDiff[4] = { 0.8, 0.6, 0.0, 1.0 };
 float colorBronzeSpec[4] = { 1.0, 1.0, 0.4, 1.0 };
@@ -47,8 +47,8 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
     
 - (id)initWithName:(NSString *)name
 {
-    self = [super init];
-    _name = name;
+    self = [super initWithName:name];
+    
     if (self) {
         self.x = 0;//45.0f;
         self.y = (GLfloat)250/(GLfloat)250;
@@ -60,39 +60,41 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
         self.k = 0.0f;
     }
 
-    sh = [[ShapeObject alloc]initWithName:@"Shape1"];
-    sh2 = [[ShapeObject alloc]initWithName:@"Shape2"];
-    sh3 = [[ShapeObject alloc]initWithName:@"Shape3"];
-    sh4 = [[ShapeObject alloc]initWithName:@"Shape4"];
+//    self.sh = [[ShapeObject alloc]initWithName:@"Shape1"];
+//    self.sh2 = [[ShapeObject alloc]initWithName:@"Shape2"];
+//    self.sh3 = [[ShapeObject alloc]initWithName:@"Shape3"];
+//    self.sh4 = [[ShapeObject alloc]initWithName:@"Shape4"];
+//
+//    
+//    //sh = &world.getShapes()[World::Objects::BOX1];
+//    [sh calculatePosition:GLKVector3Make(6,0,0)];
+//    [sh setColor:GLKVector4MakeWithArray(yellow)];
+//    self.sh.rAxis = GLKVector3Make(0,1,0);
+//    
+//    
+//    //sh2 = &world.getShapes()[1];
+//    [sh2 calculatePosition:GLKVector3Make(-3,0,0)];
+//    [sh2 setColor:GLKVector4MakeWithArray(red)];
+//    self.sh2.rAxis = GLKVector3Make(0,1,0);
+//    
+//    //sh3 = &world.getShapes()[2];
+//    [sh3 calculatePosition:GLKVector3Make(3,0,0)];
+//    [sh3 setColor:GLKVector4MakeWithArray(colorBlue)];
+//    self.sh3.rAxis = GLKVector3Make(0,1,0);
+//    
+//    [sh4 calculatePosition:GLKVector3Make(0,0,-3)];
+//    [sh4 setColor:GLKVector4MakeWithArray(green)];
+//    self.sh4.rAxis = GLKVector3Make(0,1,0);
+//    
+//    [world insertSprite: self.sh];
+//    [world insertSprite: self.sh2];
+//    [world insertSprite: self.sh3];
+//    [world insertSprite: self.sh4];
+    
     sun = [[LightSource alloc]initWithName:@"SUN"];
-    
-    //sh = &world.getShapes()[World::Objects::BOX1];
-    [sh setPosition:GLKVector3Make(6,0,0)];
-    [sh setColor:GLKVector4MakeWithArray(yellow)];
-    sh.rAxis = GLKVector3Make(0,1,0);
-    
-    
-    //sh2 = &world.getShapes()[1];
-    [sh2 setPosition:GLKVector3Make(-3,0,0)];
-    [sh2 setColor:GLKVector4MakeWithArray(red)];
-    sh2.rAxis = GLKVector3Make(0,1,0);
-    
-    //sh3 = &world.getShapes()[2];
-    [sh3 setPosition:GLKVector3Make(3,0,0)];
-    [sh3 setColor:GLKVector4MakeWithArray(colorBlue)];
-    sh3.rAxis = GLKVector3Make(0,1,0);
-    
-    [sh4 setPosition:GLKVector3Make(0,0,-3)];
-    [sh4 setColor:GLKVector4MakeWithArray(green)];
-    sh4.rAxis = GLKVector3Make(0,1,0);
-    
-    [world insertSprite: sh];
-    [world insertSprite: sh2];
-    [world insertSprite: sh3];
-    [world insertSprite: sh4];
     [world insertSprite: sun];
     
-    //[self randomObjects];
+    [self randomObjects];
     
     return self;
     
@@ -119,25 +121,46 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
 
 - (void)randomObjects
 {
-    int max =100, min = -100;
+    //int max =100, min = -100;
+    BOOL gravity = true;
     
-               
-    for(int i=0;i<10;++i){
-        float r[3] = {(rand() % (max+1-min))+min, (rand() % (max+1-min))+min, (rand() % (max+1-min))+min};
-        float c[4] ={ rand() ,rand() ,rand(),rand() };
-        ShapeObject *shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ]];
-        [shape setPosition:GLKVector3MakeWithArray(r)];
-        [shape setColor:GLKVector4MakeWithArray(c)];
-        //shape.rAxis = GLKVector3Make(0,1,0);
+    for(int i=0;i<1000;++i){
+        float X = i;//rand() % max + min;
+        float Y = i;
+        float Z = contours(X,Y);
+        //float randPos[3] = {(rand() % (max + min))-max/2, (rand() % max), (rand() % (max + min))-max/2};
+        float randPos[3] = { X, Y, Z };
+        gravity = !gravity;
+        ShapeObject * shape;
+        if((rand() % 1000 == 1)) {
+            shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ]];
+        }
+        else {
+            shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ]];
+        }
+        [shape setHasGravity: gravity];
+        [shape setSize:(rand() % 10 + 1)/10];
+        [shape calculatePosition:GLKVector3MakeWithArray(randPos)];
+        [shape setColor:GLKVector4MakeWithArray([self rColor])];
+       // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
+        
         [world insertSprite:shape];
         //free(&shape);
 
     }
 }
+
+float contours(float x, float y){
+    return ((x*x +3*y*y) / 0.1 * 50*50 ) + (x*x +5*y*y)*exp2f(1-50*50)/2;
+}
+- (float*)rColor {
+    float randomColor[4] = { (rand() % 100)/10 ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
+    return randomColor;
+}
 - (void)drawPlane
 {
     glPushMatrix();
-    //glColor4fv(colorBlue);
+    glColor4fv(colorBlue);
     
     glTranslatef(0, -1, 0);
     glBegin(GL_QUADS);
@@ -146,6 +169,7 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
     glVertex3f(_INFINITY,-0.001,_INFINITY);
     glVertex3f(_INFINITY,-0.001, -_INFINITY);
     glEnd();
+    glColor4fv(colorNone);
     glPopMatrix();
 
     
@@ -163,11 +187,10 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
     
 - (void)animate
 {
-    // shanimate();
     // We don't use bias in the shader, but instead we draw back faces,
     // which are already separated from the front faces by a small distance
     // (if your geometry is made this way)
-    //glCullFace(GL_FRONT);
+    glCullFace(GL_FRONT);
     glClearColor(r, g, b, y);
     
     [self drawThings];
@@ -176,66 +199,17 @@ float yellow[4]          = { 1.0, 0.0, 1.0, 1.0 };
     
     RenderObjects();
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, GLKVector4Make(0.8,0.8,0.8,1).v);
+    //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, green);
     [self drawPlane];
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, colorNone);
     
-    /*
-    glMaterialfv(GL_FRONT, GL_SPECULAR, colorBlue);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBlue);
-    glColor4fv(colorBlue);
-    glPushMatrix();
-    glTranslatef(0, 0, 3);
-    //glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
-    DrawCubeWithTextureCoords(1.0);//drawCube();
-    glPopMatrix();
-    
-    
-    glPushMatrix();
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [sh4 getColorfv]);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [sh4 getColorfv]);
-    glTranslatef(0, sin(g_fTeapotAngle2/100)+0.5, -3);
-    glPushMatrix();
-    //glRotatef(g_fTeapotAngle2,0, 1, 0);
-    [sh4 draw:DrawCubeWithTextureCoords];
-    
-    glPopMatrix();
-    glPopMatrix();
-    
-    
-    
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [sh3 getColorfv]);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [sh3 getColorfv]);
-    glPushMatrix();
-    //glTranslatef(3, 0, 0);
-    [sh3 draw:DrawCubeWithTextureCoords];
-    glPopMatrix();
-    
-    
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [sh2 getColorfv]);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [sh2 getColorfv]);
-    glPushMatrix();
-    [sh2 draw:DrawCubeWithTextureCoords];
-    glPopMatrix();
-    
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-    
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, [sh getColorfv]);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, [sh getColorfv]);
-    [sh draw:DrawCubeWithTextureCoords];
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-    
-    //        for(int i=0;i<sizeof(shape);++i){
-    //            glMaterialfv(GL_FRONT, GL_DIFFUSE, shape[i].getColorfv());
-    //            glMaterialfv(GL_FRONT, GL_SPECULAR, shape[i].getColorfv());
-    //            shape[i].draw(DrawCubeFace);
-    //            glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
-    //            glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-    //        } */
+   
     glPopMatrix();
     
         }
+- (void)debug {
+    [rmxDebugger add:RMX_ART n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+}
 
 
 @end
@@ -273,6 +247,6 @@ void RenderObjects(void)
 }
 
 
-Art *art;// = Art();
+static const Art *art;// = Art();
 
 

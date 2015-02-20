@@ -16,7 +16,7 @@
 //void init();
 //template <typename Particle>
 
-@interface RMXWindow : NSObject <RMXObject>
+@interface RMXWindow :  RMXObject
 @property float fViewDistance, nearPlane, farPlane;
 @property int winID;
 @property (getter = isFullscreen) bool fullscreen;
@@ -77,7 +77,7 @@
 @implementation RMXWindow
 
    //GLKVector2 size;
-@synthesize fViewDistance, nearPlane, farPlane, name=_name, fullscreen, winID, wsize;
+@synthesize fViewDistance, nearPlane, farPlane, fullscreen, winID, wsize;
         //template <typename Number>
     const char * title = "Rattle X Window";
 
@@ -115,14 +115,13 @@
 
 - (id)initWithName:(NSString*)name
 {
-    self = [super init];
+    self = [super initWithName:name];
     wsize.y = 600;
     wsize.x = 600;
-    _name = name;
     fViewDistance = 3 * VIEWING_DISTANCE_MIN;
     nearPlane = 1;
     farPlane = 1000;
-    fullscreen = false;
+    fullscreen = RMX_FULL_SCREEN;
 
     return self;
 }
@@ -245,6 +244,10 @@ kp:(void(void (*func)(unsigned char key, int x, int y)))keyPressed
 - (void)idle:(void (void))func
 {
     idleFunc(func);
+}
+
+- (void)debug {
+    [rmxDebugger add:RMX_WINDOW n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 
 @end

@@ -74,12 +74,12 @@ void reshape (int width, int height) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-
+void debug();
 bool alt = true;
 void display (void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(art.r,art.g,art.b,art.k);
-    [rmxDebugger add:0 n:@"display()" t:[NSString stringWithFormat:@"r%f, g%f, b%f, k%f",art.r,art.g,art.b,art.k]];
+    [rmxDebugger add:RMX_DISPLAY_PROCESSOR n:@"DisplayProcessor" t:[NSString stringWithFormat:@"r%f, g%f, b%f, k%f",art.r,art.g,art.b,art.k]];
     glLoadIdentity(); // Load the Identity Matrix to reset our drawing locations
     [observer makeLookAtGl:gluLookAt];
   
@@ -89,7 +89,7 @@ void display (void) {
        // Make sure changes appear onscreen
     glutSwapBuffers();
     glFlush();
-    [rmxDebugger feedback];
+    debug();
     //tester.checks[1] = observer->toString();
    
     

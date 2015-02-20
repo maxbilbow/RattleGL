@@ -35,17 +35,17 @@
 {
     self = [super initWithName:name];
     if (self) {
-        [self setPosition:GLKVector3Make(50,0,0)];
+        [self calculatePosition:GLKVector3Make(50,0,0)];
+       // self.ground = -_INFINITY;
+        self.hasGravity = 0;
         w=1;
         self.size = 100;
         self.isRotating = true;
-        //temp = false;
-        [self.physics setGravity:0];// = 0;
-        
     }
     return self;
 }
-    
+
+
     
 - (void)shine:(void(GLenum l, GLenum type, const float* pos))light
 {
@@ -55,8 +55,8 @@
         
 - (void)lightUp:(float)i
 {
-    [self pMem]->x += i;
-    [rmxDebugger add:8 n:self.name t:[NSString stringWithFormat:@" Light Y: %f", [self position].x]];
+    [self calculatePosition: GLKVector3Make(self.position.x + i,self.position.y,self.position.z)];
+    [rmxDebugger add:RMX_LIGHT n:self.name t:[NSString stringWithFormat:@" Light Y: %f", [self position].x]];
 }
 - (void)lightSwitch:(char)i
 {
@@ -86,6 +86,11 @@
 - (void)unsetMaterial{
     glMaterialfv(GL_FRONT, GL_EMISSION,nill);
 }
+
+- (void)debug {
+    [rmxDebugger add:RMX_LIGHT n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+}
+
 
 @end
 

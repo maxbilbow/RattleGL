@@ -131,9 +131,9 @@ void movement(float speed, int key){
     }
     if (key == 32) {
         if (speed==0)
-             [observer upStop];
-        else
              [observer jump];
+        else
+             [observer prepareToJump];
     //TODO
     }
 
@@ -143,13 +143,13 @@ void keyDownOperations (int key) {
     bool test = true;
     movement((float)1.0, key);
     if(key =='y') {
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:y unassigned",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:y unassigned",key]];
     }
     if (key =='z') {
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:z unassigned",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:z unassigned",key]];
     }
     if (key =='x') {
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:x unassigned",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:x unassigned",key]];
     }
     
     if (keys.keyStates['=']) {
@@ -184,13 +184,13 @@ void keyDownOperations (int key) {
 void keyUpOperations(int key){
     movement((bool)false, key); //Change to Zero if maintaining velocity
     if (key == 'i'){
-        NSLog(@"%@",[observer viewDescription]);//me.toString();
+        NSLog(@"%@",observer.viewDescription);//me.toString();
     }
     
     switch (key)
     {
         default:
-            [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i unassigned",key]];
+            [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i unassigned",key]];
             break;
         case 27:             // ESCAPE key
             //glutSetKeyRepeat(true);
@@ -222,11 +222,11 @@ void keyUpOperations(int key){
             break;
         case 32:
     // [observer stop();
-            [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: Space Bar",key]];
+            [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: Space Bar",key]];
             break;
         case 9:
             // [observer stop();
-            [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: TAB",key]];
+            [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: TAB",key]];
             break;
         case 'G':
              [observer toggleGravity];
@@ -255,25 +255,25 @@ void keyUpOperations(int key){
 void keySpecialDownOperations(int key) {
     if (key == GLUT_KEY_UP) { // If the left arrow key has been pressed
         //me.look(Observer::UP);
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:UP Pressed",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:UP Pressed",key]];
         //TODO
     }
     
     if (key == GLUT_KEY_DOWN) {
         //me.look(Observer::DOWN);
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:DOWN Pressed",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:DOWN Pressed",key]];
         //TODO
     }
     
     if (key == GLUT_KEY_LEFT) {
         //me.look(Observer::LEFT);
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:LEFT Pressed",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:LEFT Pressed",key]];
         //TODO
     }
     
     if (key == GLUT_KEY_RIGHT) {
         //me.look(Observer::RIGHT);
-        [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:RIGHT Pressed",key]];
+        [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i:RIGHT Pressed",key]];
         //TODO
     }
     
@@ -299,7 +299,7 @@ void keySpecialUpOperations(char key) {
 //            break;
         case 32:
             // [observer stop();
-            [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: SPACE BAR Released",key]];
+            [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: SPACE BAR Released",key]];
             break;
 
     }
@@ -316,25 +316,25 @@ void keySpecialOperations(void) {
 void RMXkeyPressed (unsigned char key, int x, int y) {
     //char kTemp = key;
     //NSString * tmp = [NSString stringWithFormat:@"%c",key];//&kTemp;
-    [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%c: pressed",key]];
+    [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%c: pressed",key]];
     keys.keyStates[key] = true; // Set the state of the current key to pressed
     keyDownOperations(key);
 }
 
 void RMXkeyUp (unsigned char key, int x, int y) {
     //string tmp = to_string(key);
-    [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%c: released",key]];
+    [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%c: released",key]];
     keyUpOperations(key);
     keys.keyStates[key] = false; // Set the state of the current key to not pressed
 }
 void RMXkeySpecial (int key, int x, int y) {
-    [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: pressed (special)",key]];
+    [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: pressed (special)",key]];
     keys.keySpecialStates[key] = true; // Set the state of the current key to pressed
     keySpecialDownOperations(key);
 }
 
 void RMXkeySpecialUp (int key, int x, int y) {
-    [rmxDebugger add:7 n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: released (special)",key]];
+    [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: released (special)",key]];
     keySpecialUpOperations(key);
     keys.keySpecialStates[key] = false; // Set the state of the current key to not pressed
     

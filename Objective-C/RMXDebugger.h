@@ -6,30 +6,55 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
+#define RMX_FULL_SCREEN       1
+#define _INFINITY             99999
+#define PI                    (3.14159265f)
+#define RMX_DEBUGGING           0
 
-#define _INFINITY 99999
-#define PI (3.14159265f)
 
-#define U_DEPTH       2
-#define U_HORIZONTAL  0
-#define U_VERTICAL    1
-#define TWIST_AXIS    1
-#define NOD_AXIS      0
-#define ROLL_AXIS     2
-#define U_SPEED       0.05
-#define PI_OVER_180 (PI / 180)
+#define RMX_TOTAL_CHECKS        13
+#define RMX_WORLD               12
+#define RMX_WINDOW              12
+#define RMX_PHYSICS             12
+#define RMX_DISPLAY             11
+#define RMX_ART                 10
+#define RMX_SHAPE               9
+#define RMX_LIGHT               8
+#define RMX_PARTICLE            7
+#define RMX_MOUSE_PROCESSOR     6
+#define RMX_MOUSE               5
+#define RMX_KEY_PROCESSOR       4
+#define RMX_DISPLAY_PROCESSOR   3
+#define RMX_SIMPLE_PARTICLE     2
+#define RMX_OBSERVER            1
+#define RMX_ERROR               0
+
+#define U_GRAVITY               (0.0002)///50
+#define U_FRICTION              1.1
+
+#define U_DEPTH                 2
+#define U_HORIZONTAL            0
+#define U_VERTICAL              1
+#define TWIST_AXIS              1
+#define NOD_AXIS                0
+#define ROLL_AXIS               2
+#define U_SPEED                 0.05
+#define PI_OVER_180             (PI / 180)
 
 #define RMX_DEPRECATED(from, to) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA)
 
+@class RMXObject;
 
 @interface RMXDebugger : NSString
+@property const bool isDebugging;
+
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
 @end
 
 @implementation RMXDebugger
-const bool debugging = true;
-const bool debugLoop = true;
-const int no_checks = 11;
+const bool isDebugging = RMX_DEBUGGING;
+const bool doesDebugLoop = RMX_DEBUGGING;
+const int no_checks = RMX_TOTAL_CHECKS;
 typedef struct _Loop {
     float loss;
     int count;
@@ -42,7 +67,7 @@ typedef struct _Loop {
 
 const int loopSampleSize = 100;
 NSString* loopLog = @"Collecting Data";
-int monitor=10;
+int monitor=RMX_ERROR;
 int tog = 1;
 
 NSString * lastCheck;
@@ -103,18 +128,17 @@ Loop loop;
 
 - (void)feedback
 {
-    if (!debugging) return;
+    if (!isDebugging) return;
     else if (![checks[monitor] isEqualToString:lastCheck] || [self newLoopAverage]) {
-        NSLog(@"\nDEBUG #%i %@\n%@", monitor, checks[monitor],debugLoop ? loopLog : @"");
-        if (debugLoop) {
+        NSLog(@"\nDEBUG #%i \n%@\n%@", monitor, checks[monitor],doesDebugLoop ? loopLog : @"");
+        if (doesDebugLoop) {
             const char * c = [loopLog UTF8String];
             const long len = [loopLog length];
             printf("%c\n",c[len]);
         }
-    } else {
-        lastCheck = checks[monitor];
-        checks[monitor] = @"";
     }
+    lastCheck = checks[monitor];
+    checks[monitor] = @"";
     
 }
 
@@ -129,16 +153,18 @@ Loop loop;
 }
 
 
--(void)add:(int)index n:(id)object t:(NSString*)text
+-(void)add:(int)index n:(NSObject*)object t:(NSString*)text
 {
-    if (!debugging||index!=monitor) return;
-    NSString * s = ![[object description] isEqualToString: priorName] ? [NSString stringWithFormat:@"\n%@:\n ",[object description]] : @"";
-    priorName = [object description];
+    NSString* name = [object isKindOfClass:[RMXObject class]] ? ((RMXObject*) object).name : object.description;
+    if (!isDebugging||index!=monitor) return;
+    NSString * s = ![name isEqualToString: priorName] ? [NSString stringWithFormat:@"\n%@:\n ", name] : @"";
+    priorName = name;
     checks[index] = [NSString stringWithFormat:@"%@ %@        %@\n",checks[index],s, text];
 }
 
 @end
 
+    
 
 static const RMXDebugger *rmxDebugger;
 

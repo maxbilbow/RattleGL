@@ -30,21 +30,15 @@ float _dt;
 //#import <OpenGLES/ES1/gl.h>
 #include <OpenCL/OpenCL.h>
 
-@protocol RMXObject
+@interface RMXObject : NSObject
 @property (readonly) NSString * name;
 - (id)initWithName:(NSString*)name;
+- (void)debug;
 @end
-
-union GLKVector3 {
-    struct{
-    
-    };
-    
-}RMXVector3;
 
 #include "RMXDebugger.h"
 
-
+#include "RMXObject.h"
 #include "RMXEventProcessor.h"
 #include "Observer.h"
 

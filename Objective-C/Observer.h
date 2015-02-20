@@ -19,11 +19,7 @@
 
 @interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
 @property Mouse *mouse;
-@property Particle * item;
-@property GLKVector3 itemPosition;
-@property float armLength, reach, rotationSpeed; //return 1?;
-- (void)jump;
-- (void)setView;
+- (void)debug;
 @end
 /*
  Provides basic movement attributes to any object
@@ -37,7 +33,7 @@
      - Up
      - Right
      */
-@synthesize mouse, item, itemPosition, armLength, reach;
+@synthesize mouse, viewDescription;
 
 
     
@@ -46,54 +42,44 @@
     self = [super initWithName:name];
     if (self) {
         mouse = [[Mouse alloc]initWithName:name];
-        self.item = self.origin;
-        itemPosition = item.position;
-        armLength = 2;
-        reach = 6;
-        self.ground=1;
+        //self.origin;
+        self.armLength = 2;
+        self.reach = 6;
+        //self.ground=1;
     }
+    [self debug];
     return self;
 }
     
 
 
-- (void)jump
-{
-    if ([self hasGravity]&&[self isGrounded])
-        [self accelerateUp:self.jumpStrength];
-}
-    
+
     
 - (void)grabObject:(Particle*)i
 {
-        if ((self.item == i)||(GLKVector3Distance(self.position, i.position)>reach))
-            [self releaseObject];
-        else {
-            self.item = i;
-            itemPosition = i.position;
-            armLength = GLKVector3Distance([self getCenter], itemPosition);
-            
-        }
-        
-    }
+    if (self.item == nil && GLKVector3Distance(self.position, i.position) < self.reach) {
+        self.item = i;
+        self.itemPosition = i.position;
+        self.armLength = GLKVector3Distance(self.getCenter, self.itemPosition);
+    } else
+        [self releaseObject];
+}
 
 -(void)releaseObject
 {
-        //origin.setPosition(anchor->getCenter());
-    self.item = self.origin;//[[Particle alloc]init];
+    self.item = nil;
 }
-    
--(void)manipulate
-{
-        //item->setAnchor(this->getPosition());
-    [item setPosition:GLKVector3Add([self getCenter],
-                                    GLKVector3MultiplyScalar(self.forwardVector,armLength))];
+
+- (float)ground {
+    [super ground];
+    return [self size];
 }
-    
+
+ 
 - (void)extendArmLength:(float)i
 {
-    if (armLength+i>1)
-        armLength += i;
+    if (self.armLength+i>1)
+        self.armLength += i;
         
 }
 
@@ -123,10 +109,10 @@
     
     return (GLKMatrix4)make(60*m ,width / height, 1.0, 1000.0);
 }
-- (void)setView
-{
-    [rmxDebugger add:1 n:self.name t:@"SetView in Observer not implemented"];
-}
+//- (void)setView
+//{
+//    [rmxDebugger add:RMX_OBSERVER n:self t:@"SetView in Observer not implemented"];
+//}
 
 
 - (void)setMousePos:(int)x y:(int)y{
@@ -144,8 +130,8 @@
 - (void)toggleFocus {
     [mouse toggleFocus];
 }
-- (void)center:(void(int x, int y))center {
-    [mouse center:center];
+- (void)centerView:(void(int x, int y))center {
+    [mouse centerView:center];
 }
 - (void)calibrateView:(int)x vert:(int)y {
     [mouse calibrateView:x vert:y];
@@ -154,10 +140,13 @@
     return [mouse hasFocus];
 }
 
+- (void)debug{
+    [super debug];
+    [rmxDebugger add:RMX_ERROR n:self t: self.viewDescription];
+}
 
-- (NSString*)viewDescription{
-    return [NSString stringWithFormat:
-    @"\n      EYE x%f, y%f, z%f\n   CENTRE x%f, y%f, z%f\n      UP: x%f, y%f, z%f\n",
+- (NSString*)viewDescription {
+    return [NSString stringWithFormat:@"\n      EYE x%f, y%f, z%f\n   CENTRE x%f, y%f, z%f\n      UP: x%f, y%f, z%f\n",
             [self getEye].x,[self getEye].y,[self getEye].z,
             [self getCenter].x,[self getCenter].y,[self getCenter].z,
             [self getUp].x,[self getUp].y,[self getUp].z];

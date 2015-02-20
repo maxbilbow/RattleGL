@@ -9,5 +9,5 @@
 @protocol RMXPointOfView
 - (GLKMatrix4)makeLookAt:(GLKMatrix4(float eyeX,float eyeY, float eyeZ, float cx,float cy, float cz, float ux,float uy, float uz ))lookAt;
 - (void)makeLookAtGl:(void(double eyeX,double eyeY, double eyeZ, double cx,double cy, double cz, double ux,double uy, double uz ))lookAt;
-- (NSString*)viewDescription;
+@property NSString* viewDescription;
 @end

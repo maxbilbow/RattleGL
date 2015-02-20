@@ -7,7 +7,7 @@
 //
 
 //#import <Foundation/Foundation.h>
-#import "Header.h"
+#import "oHeader.h"
 
 void InitGraphics(void)
 {
@@ -125,6 +125,12 @@ int main (int argc, char **argv) {
 }
 
 */
+void debug(){
+    [observer.item debug];
+    [observer debug];
+    [rmxDebugger feedback];
+};
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {

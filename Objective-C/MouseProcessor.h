@@ -57,7 +57,7 @@ void MouseMotion(int x, int y)
         [observer setMousePos:x y:y];
         //observer->calibrateMouse(x,y);
     }
-    [rmxDebugger add:5 n:@"MouseProcessor" t:[NSString stringWithFormat:@"MouseMotion: %i | %i",x,y]];
+    [rmxDebugger add:RMX_MOUSE_PROCESSOR n:@"MouseProcessor" t:[NSString stringWithFormat:@"MouseMotion: %i | %i",x,y]];
     // If button1 pressed, zoom in/out if mouse is moved up/down.
     if (g_bButton1Down)
     {

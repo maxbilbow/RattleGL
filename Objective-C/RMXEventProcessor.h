@@ -12,16 +12,16 @@
 
 #endif
 
-@protocol RMXAnyInput <RMXObject>
+@protocol RMXAnyInput
 
 - (void)toggleFocus;
-- (void)center:(void(int x, int y))center;
+- (void)centerView:(void(int x, int y))center;
 - (void)calibrateView:(int)x vert:(int)y;
 - (bool)hasFocus;
 
 @end
 
-@protocol RMXMouseOwner <RMXObject, RMXAnyInput>
+@protocol RMXMouseOwner <RMXAnyInput>
 - (void)setMousePos:(int)x y:(int)y;
 - (void)mouse2view:(int)x y:(int)y;
 //- (void)setPos:(int)x v:(int)y;
