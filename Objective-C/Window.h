@@ -113,9 +113,9 @@
     
 
 
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     wsize.y = 600;
     wsize.x = 600;
     fViewDistance = 3 * VIEWING_DISTANCE_MIN;

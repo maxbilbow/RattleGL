@@ -13,9 +13,6 @@
 #endif
 #include "ShapeObject.h"
 
-@interface LightSource : ShapeObject
-@property float w;
-@end
 
 @implementation LightSource
 
@@ -31,9 +28,9 @@
 //        this->type = type;
 //    }
     
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     if (self) {
         [self calculatePosition:GLKVector3Make(50,0,0)];
        // self.ground = -_INFINITY;

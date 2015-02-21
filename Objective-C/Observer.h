@@ -15,12 +15,8 @@
 #include "Particle.h"
 //#include "RMXEventProcessor.h"
 #include "Mouse.h"
-#include "PointOfView.h"
 
-@interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
-@property Mouse *mouse;
-- (void)debug;
-@end
+
 /*
  Provides basic movement attributes to any object
  */
@@ -37,14 +33,15 @@
 
 
     
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     if (self) {
-        mouse = [[Mouse alloc]initWithName:name];
+        mouse = [[Mouse alloc]initWithName:name parent:self world:world];
         //self.origin;
         self.armLength = 2;
-        self.reach = 6;
+        self.reach = self.size+6;
+        self.mass = 1.5;
         //self.ground=1;
     }
     [self debug];
@@ -53,13 +50,15 @@
     
 
 
-
+bool _itemWasAnimated = false;
     
 - (void)grabObject:(Particle*)i
 {
     if (self.item == nil && GLKVector3Distance(self.position, i.position) < self.reach) {
         self.item = i;
         self.itemPosition = i.position;
+        _itemWasAnimated = self.item.isAnimated;
+        [self.item setIsAnimated:false]; //TODO: Make this not necessary
         self.armLength = GLKVector3Distance(self.getCenter, self.itemPosition);
     } else
         [self releaseObject];
@@ -67,6 +66,8 @@
 
 -(void)releaseObject
 {
+    if (_itemWasAnimated)
+        [self.item setIsAnimated:true];
     self.item = nil;
 }
 
@@ -142,7 +143,7 @@
 
 - (void)debug{
     [super debug];
-    [rmxDebugger add:RMX_ERROR n:self t: self.viewDescription];
+    [rmxDebugger add:RMX_OBSERVER n:self t: self.viewDescription];
 }
 
 - (NSString*)viewDescription {

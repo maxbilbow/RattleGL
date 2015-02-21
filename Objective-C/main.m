@@ -42,7 +42,7 @@ void InitGraphics(void)
 int init()
 {
     initKeys();
-    window = [[RMXWindow alloc]initWithName:@"RMX Window"];
+
     //    window = [[RMXWindow alloc]initWithMethods:glutInitWindowSize
 //                                               disp:glutDisplayFunc rs:glutReshapeFunc
 //                                               kp:glutKeyboardFunc ku:glutKeyboardUpFunc ks:glutSpecialFunc ksu:glutSpecialUpFunc
@@ -135,9 +135,10 @@ void debug(){
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         rmxDebugger = [[RMXDebugger alloc]init];
-        world = [[RMXWorld alloc]initWithName:@"World"];
-        art = [[Art alloc]initWithName:@"Art"];
+        world = [[RMXWorld alloc]initWithName:@"World" parent:nil world:nil];
+        art = [[Art alloc]initWithName:@"Art" parent:world world:world];
         observer = world.observer;
+        window = [[RMXWindow alloc]initWithName:@"RMX Window" parent:world world:world];
         
         glutInit(&argc, argv);
         

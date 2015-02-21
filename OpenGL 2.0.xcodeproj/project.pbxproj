@@ -40,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		50220C951A9767A000E8DAC3 /* RMXMaths.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXMaths.h; sourceTree = "<group>"; };
 		505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL 2.1 (OC)"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rattle GL 2.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50639F291A92CC9100A94E5C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -68,10 +69,7 @@
 		50DEC2601A960D6900336687 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Observer.h; path = "Objective-C/Observer.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2611A960D6900336687 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = "Objective-C/Particle.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2621A960D6900336687 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Physics.h; path = "Objective-C/Physics.h"; sourceTree = SOURCE_ROOT; };
-		50DEC2631A960D6900336687 /* PointOfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PointOfView.h; path = "Objective-C/PointOfView.h"; sourceTree = SOURCE_ROOT; };
-		50DEC2641A960D6900336687 /* RattleGLI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RattleGLI.h; path = "Objective-C/RattleGLI.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2651A960D6900336687 /* RMXDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXDebugger.h; path = "Objective-C/RMXDebugger.h"; sourceTree = SOURCE_ROOT; };
-		50DEC2661A960D6900336687 /* RMXEventProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXEventProcessor.h; path = "Objective-C/RMXEventProcessor.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2671A960D6900336687 /* ShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeObject.h; path = "Objective-C/ShapeObject.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2681A960D6900336687 /* Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shapes.h; path = "Objective-C/Shapes.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2691A960D6900336687 /* s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = s; path = "Objective-C/s"; sourceTree = SOURCE_ROOT; };
@@ -150,9 +148,6 @@
 				50DEC2601A960D6900336687 /* Observer.h */,
 				50DEC2611A960D6900336687 /* Particle.h */,
 				50DEC2621A960D6900336687 /* Physics.h */,
-				50DEC2631A960D6900336687 /* PointOfView.h */,
-				50DEC2641A960D6900336687 /* RattleGLI.h */,
-				50DEC2661A960D6900336687 /* RMXEventProcessor.h */,
 				50DEC2671A960D6900336687 /* ShapeObject.h */,
 				50DEC2681A960D6900336687 /* Shapes.h */,
 				50DEC2691A960D6900336687 /* s */,
@@ -179,6 +174,7 @@
 		509857621A72A6C7009F50A3 = {
 			isa = PBXGroup;
 			children = (
+				50220C951A9767A000E8DAC3 /* RMXMaths.h */,
 				50639F281A92CC9100A94E5C /* Frameworks */,
 				5098576D1A72A6C7009F50A3 /* CPP */,
 				505ADED01A9579F000A91318 /* Objc */,

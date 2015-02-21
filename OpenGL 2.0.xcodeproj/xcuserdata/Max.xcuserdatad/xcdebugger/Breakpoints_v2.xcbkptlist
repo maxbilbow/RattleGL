@@ -243,13 +243,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Objective-C/Particle.h"
-            timestampString = "446077079.357117"
+            filePath = "Objective-C/Observer.h"
+            timestampString = "446171244.655594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-initWithName:"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-grabObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Objective-C/Physics.h"
+            timestampString = "446169431.735424"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-addGravity:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

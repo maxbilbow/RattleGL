@@ -7,15 +7,6 @@
 //
 
 
-@interface ShapeObject : Particle
-@property float rotation;
-@property  GLKVector4 color;// = GLKVector4Make(1,1, 1, 10);
-@property  bool isRotating;
-
-@property  GLKVector3 rAxis;
-- (float*)getColorfv;
-@end
-
 @implementation ShapeObject
     //GLKVector4 position;
 @synthesize rotation, color, isRotating, rAxis;
@@ -24,9 +15,9 @@
 
 
 
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     if (self) {
         self.size = 1;
         self.color = GLKVector4Make(1,1, 1, 10);

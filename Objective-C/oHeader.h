@@ -23,22 +23,20 @@ float _dt;
 //using namespace std;
 //#include <ApplicationServices/ApplicationServices.h>
 #include <ApplicationServices/ApplicationServices.h>
-#include <math.h>
+
 #include <GLKit/GLKMatrix4.h>
 #import <GLKit/GLKit.h>
 #include <GLUT/glut.h>
 //#import <OpenGLES/ES1/gl.h>
 #include <OpenCL/OpenCL.h>
+#include "RMXMaths.h"
 
-@interface RMXObject : NSObject
-@property (readonly) NSString * name;
-- (id)initWithName:(NSString*)name;
-- (void)debug;
-@end
+
+#include "RMXObject.h"
 
 #include "RMXDebugger.h"
 
-#include "RMXObject.h"
+
 #include "RMXEventProcessor.h"
 #include "Observer.h"
 

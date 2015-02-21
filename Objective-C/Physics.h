@@ -9,22 +9,20 @@
 
 
 
-@interface Physics : RMXObject
-@property float gravity, friction;
-@end
 
-@implementation Physics
+
+@implementation RMXPhysics
 
 
 
 @synthesize gravity = _gravity, friction = _friction;//, hasFriction = _hasFriction, hasGravity = _hasGravity;
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     if (self) {
-        _gravity = 0.0005;//U_GRAVITY;
+        _gravity = 0.005;//U_GRAVITY;
         _friction = 0.1;
+        self.upVector = GLKVector3Make(0,1,0);
         NSLog(@"init Physics");
     }
     return self;
@@ -39,8 +37,20 @@
     [rmxDebugger add:RMX_PHYSICS n:self t:[NSString stringWithFormat:@" / Gravity: %f", _gravity]];
 }
 
-
+- (void)applyGravityTo:(Particle*)particle{
     
+//    float dist = (particle.position.y - self.ground);
+//    double hh = exp2f(dist)/100;
+//    float scaler = ( hh > 10 ) ? 10 : 1 + hh;
+//    float g = self.physics.gravity * _mass * _hasGravity / scaler;
+    
+    self.upVector = GLKVector3MultiplyScalar(self.upVector, -_gravity);
+    [particle setVelocity:GLKVector3Add(particle.velocity, self.upVector)];
+}
+- (GLKVector3)gVector:(BOOL)hasGravity {
+    return GLKVector3MultiplyScalar(self.upVector,(hasGravity)?-_gravity:0);
+}
+
 - (void)addFriction:(float)f
 {
     _friction += f;

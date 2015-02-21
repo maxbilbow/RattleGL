@@ -7,13 +7,6 @@
 //
 
 
-@interface Mouse : RMXObject <RMXMouseOwner>
-    //@property bool focus;
-    @property int dx, dy;
-    @property GLKVector2 pos;
-@property (getter=hasFocus) bool focus;
-- (void)mouse2view:(int)x y:(int)y owner:(id)owner;
-@end
 
 @implementation Mouse
 
@@ -21,9 +14,9 @@
 
 @synthesize dx, dy, pos, focus;
 
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     focus = false;
     dx = 0;
     dy = 0;

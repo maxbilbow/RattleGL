@@ -12,26 +12,4 @@
 
 #endif
 
-@protocol RMXAnyInput
 
-- (void)toggleFocus;
-- (void)centerView:(void(int x, int y))center;
-- (void)calibrateView:(int)x vert:(int)y;
-- (bool)hasFocus;
-
-@end
-
-@protocol RMXMouseOwner <RMXAnyInput>
-- (void)setMousePos:(int)x y:(int)y;
-- (void)mouse2view:(int)x y:(int)y;
-//- (void)setPos:(int)x v:(int)y;
-- (GLKVector2)getMouse;
-@end
-
-@protocol RMXOrienrationProcessor
-
-//- (void)rotate;
-- (void)rotateAroundVerticle:(float)theta;
-- (void)rotateAroundHorizontal:(float)phi;
-- (void)plusAngle:(float)theta up:(float)phi;
-@end

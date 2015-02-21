@@ -18,16 +18,6 @@
 #define VIEWING_DISTANCE_MIN  3.0
 #define TEXTURE_ID_CUBE 1
 
-@interface RMXWorld : Physics
-@property NSMutableArray* sprites;
-@property NSString* observerName;
-@property float dt;
-- (id)closestObject;
-- (void)animate;
-- (void)insertSprite:(Particle*)sprite;
-- (id)objectWithName:(NSString*)name;
-- (void)setObserverWithId:(Particle*)object;
-@end
 
 
 @implementation RMXWorld
@@ -36,12 +26,18 @@
     const float _f = W_FRICTION;
 
 
-- (id)initWithName:(NSString*)name
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
-    self = [super initWithName:name];
+    self = [super initWithName:name parent:parent world:world];
     observerName = @"Main Observer";
+    self.radius = 400;
+    
     _sprites = [[NSMutableArray alloc]initWithCapacity:10];
-    [_sprites addObject:[[Observer alloc]initWithName:observerName]];// inPropertyWithKey:observerName];
+    [_sprites addObject:[[Observer alloc]initWithName:observerName parent:self world:self]];// inPropertyWithKey:observerName];
+    if (self.radius == 0)
+        exit(1);
+    if ([self observer].parent.radius == 0)
+    exit(0);
     return self;
 }
 
@@ -107,4 +103,4 @@
 
 @end
 
-static const RMXWorld *world;
+static RMXWorld *world;

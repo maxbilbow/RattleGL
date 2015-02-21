@@ -6,11 +6,8 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#define RMX_FULL_SCREEN       1
-#define _INFINITY             99999
-#define PI                    (3.14159265f)
-#define RMX_DEBUGGING           0
-
+#define RMX_DEBUGGING           1
+#define RMX_FULL_SCREEN         0
 
 #define RMX_TOTAL_CHECKS        13
 #define RMX_WORLD               12
@@ -43,13 +40,7 @@
 
 #define RMX_DEPRECATED(from, to) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA)
 
-@class RMXObject;
 
-@interface RMXDebugger : NSString
-@property const bool isDebugging;
-
--(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
-@end
 
 @implementation RMXDebugger
 const bool isDebugging = RMX_DEBUGGING;
