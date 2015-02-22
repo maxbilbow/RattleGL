@@ -20,7 +20,9 @@
 
 @interface RMXDebugger : NSString
 @property const bool isDebugging;
+#ifdef TARGET_IOS
 @property UIViewController * window;
+#endif
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
 @end
 
@@ -30,7 +32,9 @@
 @property RMXWorld * world;
 @property RMXPhysics * physics;
 @property BOOL isAnimated;
+#ifdef TARGET_IOS
 @property UIViewController * uiView;
+#endif
 @property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
 - (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world;
 - (void)debug;
@@ -156,7 +160,7 @@
 @property UIViewController* owner;
 @end
 
-@interface RMXEventHandler : RMXObject <RMXMouseOwner>
+@interface Mouse : RMXObject <RMXMouseOwner>
 //@property bool focus;
 @property int dx, dy;
 @property GLKVector2 pos;
@@ -167,7 +171,7 @@
 
 
 @interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
-@property RMXEventHandler *mouse;
+@property Mouse *mouse;
 @property (readonly) GLKMatrix4 modelViewMatrix, projectionMatrix;
 - (void)debug;
 - (void)grabObject:(RMXObject*)i;
@@ -182,7 +186,7 @@
 
 @interface RMXArt : RMXObject
 //@property float x, y, z, d, r,g, b,k;
-+ (RMXWorld*)initializeTestingEnvironment:(UIViewController*)sender;
++ (RMXWorld*)initializeTestingEnvironment:(id)sender;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
 + (GLKVector4)rColor;
@@ -191,7 +195,7 @@
 
 
 @interface RMXWorld : RMXPhysics {
-    RMXEventHandler* eventHandler;
+    Mouse* eventHandler;
 }
 @property NSMutableArray* sprites;
 @property NSString* observerName;

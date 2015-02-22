@@ -36,7 +36,7 @@ float _dt;
 #include "RMXObject.h"
 
 #include "RMXDebugger.h"
-#include "RMXEventHandler.h"
+#include "Mouse.h"
 
 #include "Observer.h"
 

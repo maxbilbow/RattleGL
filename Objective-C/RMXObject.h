@@ -18,11 +18,13 @@
     self = [super init];
     _parent = parent;
     _world = world;
+#ifdef TARGET_IOS
     if (world != nil && [world isKindOfClass:[RMXWorld class]]){
         _uiView = ((RMXWorld*)world).uiView;
     } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
         _uiView = (UIVideoEditorController*) parent;
     }
+#endif
     _name = name;
     _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: [self isKindOfClass:[RMXWorld class]] ? (RMXWorld*) self : nil];
     [self reInit];

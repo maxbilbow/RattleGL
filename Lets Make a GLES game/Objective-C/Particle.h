@@ -104,9 +104,9 @@ bool ignoreNextjump = false;
     GLKVector3 g = (_hasGravity) ? [self.physics gravityFor:self] : GLKVector3Make(0,0,0);
     GLKVector3 n = (_hasGravity) ? [self.physics normalFor:self] : GLKVector3Make(0,0,0);
     GLKVector3 f = (_hasFriction) ? [self.physics frictionFor:self] : GLKVector3Make(1,1,1);
-    GLKVector3 d = (_hasFriction) ? [self.physics dragFor:self] : GLKVector3Make(1,1,1);
+    GLKVector3 d = [self.physics dragFor:self];// : GLKVector3Make(1,1,1);
     
-    body.velocity = GLKVector3DivideScalar(body.velocity, 1/* + [self.world µAt:self] * d.x */);
+    body.velocity = GLKVector3DivideScalar(body.velocity, 1 /* + [self.world µAt:self] * d.x */);
     
     
     
