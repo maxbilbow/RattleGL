@@ -24,9 +24,9 @@ float _dt;
 
 #include <GLKit/GLKMatrix4.h>
 #import <GLKit/GLKit.h>
-#include <GLUT/glut.h>
+//#include <GLUT/glut.h>
 #import <OpenGLES/ES1/gl.h>
-#include <OpenCL/OpenCL.h>
+//#include <OpenCL/OpenCL.h>
 #include "RMXMaths.h"
 
 #include "RMXEquations.h"
