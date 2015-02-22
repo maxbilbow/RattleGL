@@ -35,7 +35,7 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        mouse = [[RMXEventHandler alloc]initWithName:name parent:self world:world];
+       // mouse = [[RMXEventHandler alloc]initWithName:name parent:self world:world];
         //self.ground=1;
     }
     [self debug];

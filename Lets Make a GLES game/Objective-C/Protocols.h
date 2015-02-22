@@ -20,7 +20,7 @@
 
 @interface RMXDebugger : NSString
 @property const bool isDebugging;
-#ifdef TARGET_IOS
+#ifdef TARGET_OS_IPHONE
 @property UIViewController * window;
 #endif
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
@@ -32,7 +32,7 @@
 @property RMXWorld * world;
 @property RMXPhysics * physics;
 @property BOOL isAnimated;
-#ifdef TARGET_IOS
+#ifdef TARGET_OS_IPHONE
 @property UIViewController * uiView;
 #endif
 @property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;

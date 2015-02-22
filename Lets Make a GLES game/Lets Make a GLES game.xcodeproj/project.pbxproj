@@ -53,7 +53,6 @@
 		5035B17B1A99ED2E00E16AF7 /* LightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightSource.h; sourceTree = "<group>"; };
 		5035B17C1A99ED2E00E16AF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5035B17D1A99ED2E00E16AF7 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
-		5035B17E1A99ED2E00E16AF7 /* RMXEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXEventHandler.h; sourceTree = "<group>"; };
 		5035B17F1A99ED2E00E16AF7 /* MouseProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseProcessor.h; sourceTree = "<group>"; };
 		5035B1801A99ED2E00E16AF7 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
 		5035B1811A99ED2E00E16AF7 /* oHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oHeader.h; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		5035B18E1A99ED7500E16AF7 /* RMXDataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXDataTypes.h; sourceTree = "<group>"; };
 		5035B18F1A99ED7500E16AF7 /* RMXEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXEquations.h; sourceTree = "<group>"; };
 		5035B1901A99ED7500E16AF7 /* RMXMaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMaths.h; sourceTree = "<group>"; };
+		5039ED1F1A9A9ECA00FCBD6E /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
 		5045FBBA1A9A8CDB001A92CC /* RMXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXViewController.h; sourceTree = "<group>"; };
 		5045FBBB1A9A8D11001A92CC /* RMXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMXViewController.m; sourceTree = "<group>"; };
 		509066D11A9A2FDA000879C4 /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RMXObject.h; path = "../../Objective-C/RMXObject.h"; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 				509066D11A9A2FDA000879C4 /* RMXObject.h */,
 				5035B1771A99ED2E00E16AF7 /* Art.h */,
 				5035B1791A99ED2E00E16AF7 /* Info.plist */,
-				5035B17E1A99ED2E00E16AF7 /* RMXEventHandler.h */,
 				5035B1801A99ED2E00E16AF7 /* Observer.h */,
 				5035B1811A99ED2E00E16AF7 /* oHeader.h */,
 				5035B1821A99ED2E00E16AF7 /* Particle.h */,
@@ -192,6 +191,7 @@
 				5035B1881A99ED2E00E16AF7 /* Window.h */,
 				5035B1861A99ED2E00E16AF7 /* ShapeObject.h */,
 				5035B1871A99ED2E00E16AF7 /* Shapes.h */,
+				5039ED1F1A9A9ECA00FCBD6E /* Mouse.h */,
 				5035B17C1A99ED2E00E16AF7 /* main.m */,
 				5035B1781A99ED2E00E16AF7 /* DisplayProcessor.h */,
 				5035B17A1A99ED2E00E16AF7 /* KeyboardProcessor.h */,

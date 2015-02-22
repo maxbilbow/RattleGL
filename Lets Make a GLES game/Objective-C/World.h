@@ -39,7 +39,7 @@
     
     _sprites = [[NSMutableArray alloc]initWithCapacity:10];
     [_sprites addObject:[[Observer alloc]initWithName:observerName parent:self world:self]];// inPropertyWithKey:observerName];
-    eventHandler = [[RMXEventHandler alloc]initWithName:@"Event Handler" parent:self world:self];
+    //eventHandler = [[RMXEventHandler alloc]initWithName:@"Event Handler" parent:self world:self];
     
     if (body.radius == 0)
         exit(1);
