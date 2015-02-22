@@ -25,13 +25,6 @@ void RenderObjects(void);
 
 @synthesize sh, sh2, sh3, sh4,  x, y, z, d, r,g, b,k;
 
-float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
-float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
-float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
-float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
-float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
-float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
-float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
@@ -61,6 +54,13 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     [sun setShine:glLightfv];
     [self randomObjects];
     
+    ShapeObject *ZX = [[ShapeObject alloc]initWithName:@"ZX PLANE" parent:self world:self.world];
+    [ZX setRender:DrawPlane];
+    [ZX setColor:GLKVector4Make(0.8,1.2,0.8,1)];
+    [ZX setIsAnimated:false];
+    ZX->body.position.y = -1;
+    [world insertSprite:ZX];
+    
     return self;
     
     
@@ -83,7 +83,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 //}
 
 - (void)drawAxis:(float**)colors {//xCol y:(float*)yCol z:(float*)zCol{
-    BOOL gravity = false;
+    //BOOL gravity = false;
     double noOfShapes = self.world->body.radius / 4;
     float axis[3][3];
     double limit = self.parent->body.radius / noOfShapes;
@@ -97,7 +97,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
                 count = 0;
                 axis[j][j] = i;
                 ShapeObject * shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
-                [shape setHasGravity: gravity];
+                [shape setHasGravity: false];// ? true : false];
                 [shape setRender:DrawCubeWithTextureCoords];
                 shape->body.radius = limit;
                 shape->body.position = GLKVector3MakeWithArray(axis[j]);
@@ -114,18 +114,56 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 - (void)randomObjects
 {
     //int max =100, min = -100;
-    BOOL gravity = true;
+    //BOOL gravity = true;
     double noOfShapes = 360;
-    for(int i=0;i<noOfShapes;++i) {
-        GLKVector4 points = point_on_circle ( self.parent->body.radius, i* 360/noOfShapes, 0 );
+    for(int i=-noOfShapes/2;i<noOfShapes/2;++i) {
+        GLKVector4 points = doASum(self.parent->body.radius, i,noOfShapes );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
         //float randPos[3] = {(rand() % (max + min))-max/2, (rand() % max), (rand() % (max + min))-max/2};
+        int chance = (rand() % 6 + 1);
         float randPos[3] = { X, Y, Z };
-        gravity = !gravity;
+        switch (chance) {
+            case 1:
+                randPos[0] = X;
+                randPos[1] = Y;
+                randPos[2] = Z;
+                break;
+            case 2:
+                randPos[0] = Z;
+                randPos[1] = X;
+                randPos[2] = Y;
+                break;
+            case 3:
+                randPos[0] = Y;
+                randPos[1] = Z;
+                randPos[2] = X;
+                break;
+            case 4:
+                randPos[0] = Y;
+                randPos[1] = X;
+                randPos[2] = Z;
+                break;
+            case 5:
+                randPos[0] = X;
+                randPos[1] = Z;
+                randPos[2] = Y;
+                break;
+            case 6:
+                default:
+                randPos[0] = Z;
+                randPos[1] = Y;
+                randPos[2] = X;
+                break;
+                
+            
+        }
+        randPos[1]+=50;
+        
+        //gravity = !gravity;
         ShapeObject * shape;
-        if((rand() % 10 == 1)) {
+        if((rand() % 100 == 1)) {
             shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:self.parent world:self.world];
             shape->body.radius = 20;
         }
@@ -133,19 +171,22 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
             shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
         }
         
-        if(rand() % 3 == 1) {
+        if(rand() % 5 == 1) {
             [shape setRender:DrawSphere];
-        } else{
+        } else if (rand() % 3 == 1) {
+            [shape setRender:DrawTeapot];
+        } else {
             [shape setRender:DrawCubeWithTextureCoords];
         }
         
-        [shape setHasGravity: gravity];
+        [shape setHasGravity: (rand()% 1000 + 1)==1];
         shape->body.radius = (rand() % 5 + 4);
         shape->body.position = GLKVector3MakeWithArray(randPos);
         [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
        // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
         
         [world insertSprite:shape];
+        
         //free(&shape);
 
     }
@@ -163,36 +204,11 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
     return rCol;
 }
-- (void)drawPlane
-{
-    glPushMatrix();
-    glColor4fv(colorBlue);
-    
-    glTranslatef(0, -1, 0);
-    glBegin(GL_QUADS);
-    glVertex3f( -_INFINITY,-0.001, -_INFINITY);
-    glVertex3f( -_INFINITY,-0.001,_INFINITY);
-    glVertex3f(_INFINITY,-0.001,_INFINITY);
-    glVertex3f(_INFINITY,-0.001, -_INFINITY);
-    glEnd();
-    glColor4fv(colorNone);
-    glPopMatrix();
 
-    
-//        glBegin(GL_LINES);
-//        for(int i=0;i<=10;i++) {
-//            if (i==0) { glColor3f(.6,.3,.3); } else { glColor3f(.25,.25,.25); };
-//            glVertex3f(i,0,0);
-//            glVertex3f(i,0,10);
-//            if (i==0) { glColor3f(.3,.3,.6); } else { glColor3f(.25,.25,.25); };
-//            glVertex3f(0,0,i);
-//            glVertex3f(10,0,i);
-//        };
-//        glEnd();
-    }
     
 - (void)animate
 {
+    
     // We don't use bias in the shader, but instead we draw back faces,
     // which are already separated from the front faces by a small distance
     // (if your geometry is made this way)
@@ -204,9 +220,9 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     glPushMatrix();
     
     RenderObjects();
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, GLKVector4Make(0.8,0.8,0.8,1).v);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, GLKVector4Make(0.8,1.2,0.8,1).v);
     //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, green);
-    [self drawPlane];
+    //[self drawPlane];
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, colorNone);
     
    
@@ -220,37 +236,6 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 
 @end
 
-//Particle pCube = Particle();
-void RenderObjects(void)
-{
-    
-    glMatrixMode(GL_MODELVIEW);
-    
-    glPushMatrix();
-    // Main object (cube) ... transform to its coordinates, and render
-    glRotatef(15, 1, 0, 0);
-    glRotatef(45, 0, 1, 0);
-    glRotatef(g_fTeapotAngle, 0, 0, 1);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBlue);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-    glColor4fv(colorBlue);
-    glBindTexture(GL_TEXTURE_2D, TEXTURE_ID_CUBE);
-    DrawCubeWithTextureCoords(1.0);
-    // Child object (teapot) ... relative transform, and render
-    glPushMatrix();
-    glTranslatef(2, 0, 0);
-    glRotatef(g_fTeapotAngle2, 1, 1, 0);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBronzeDiff);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, colorBronzeSpec);
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
-    glColor4fv(colorBronzeDiff);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glutSolidTeapot(0.3);
-    glPopMatrix();
-    glPopMatrix();
-    
-    
-}
 
 
 static const Art *art;// = Art();

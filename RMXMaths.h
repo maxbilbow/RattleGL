@@ -23,26 +23,6 @@
 
 
 
-float rmxEquateContours(float x, float y){
-    return x+y;//((x*x +3*y*y) / 0.1 * 50*50 ) + (x*x +5*y*y)*exp2f(1-50*50)/2;
-}
-
-float rmxEquateCircle(float x, float y, float r, float plane){
-    
-    return sqrt(x*x+y*y);//((x*x +3*y*y) / 0.1 * 50*50 ) + (x*x +5*y*y)*exp2f(1-50*50)/2;
-}
-
-
-GLKVector4 point_on_circle ( double radius, double angle_in_degrees,  double centre)
-{
-    GLKVector4 result;
-
-    result.x = centre + radius * cexp ( PI * I * ( angle_in_degrees  / 180.0 ) );
-    result.y = 0;
-    result.z = centre + radius * sinh ( PI * I * ( angle_in_degrees  / 180.0 ) );
-    return result;
-}
-
 
 
 BOOL RMXVector3IsZero(GLKVector3 v)

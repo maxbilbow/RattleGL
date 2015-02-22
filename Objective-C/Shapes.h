@@ -38,6 +38,13 @@ static GLfloat g_fTeapotAngle2 = 0.0;
 //    int g_Height = 600;                         // Initial window height
 static int g_yClick = 0;
 
+float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
+float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
+float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
+float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
+float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
+float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
+float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 
 void DrawCubeFace(float fSize)
 {
@@ -96,8 +103,77 @@ void DrawSpheree(double r, int lats, int longs)
     }
 
 void DrawSphere(float size){
-    DrawSpheree(size,10,10);
+    DrawSpheree(size,size,size);
 }
 
 
+//Particle pCube = Particle();
+void RenderObjects(void)
+{
+    float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
+    float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
+    float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
+    float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
+    float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
+    float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
+    float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
+    glMatrixMode(GL_MODELVIEW);
+    
+    glPushMatrix();
+    // Main object (cube) ... transform to its coordinates, and render
+    glRotatef(15, 1, 0, 0);
+    glRotatef(45, 0, 1, 0);
+    glRotatef(g_fTeapotAngle, 0, 0, 1);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBlue);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
+    glColor4fv(colorBlue);
+    glBindTexture(GL_TEXTURE_2D, TEXTURE_ID_CUBE);
+    DrawCubeWithTextureCoords(1.0);
+    // Child object (teapot) ... relative transform, and render
+    glPushMatrix();
+    glTranslatef(2, 0, 0);
+    glRotatef(g_fTeapotAngle2, 1, 1, 0);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, colorBronzeDiff);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, colorBronzeSpec);
+    glMaterialf(GL_FRONT, GL_SHININESS, 50.0);
+    glColor4fv(colorBronzeDiff);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glutSolidTeapot(0.3);
+    glPopMatrix();
+    glPopMatrix();
+    
+    
+}
 
+void DrawTeapot(float f){
+    glRotatef(g_fTeapotAngle2, 1, 1, 0);
+}
+
+
+void DrawPlane(float x)
+{
+    glPushMatrix();
+    glColor4fv(colorBlue);
+    
+    glTranslatef(0, -1, 0);
+    glBegin(GL_QUADS);
+    glVertex3f( -_INFINITY,-0.001, -_INFINITY);
+    glVertex3f( -_INFINITY,-0.001,_INFINITY);
+    glVertex3f(_INFINITY,-0.001,_INFINITY);
+    glVertex3f(_INFINITY,-0.001, -_INFINITY);
+    glEnd();
+    glColor4fv(colorNone);
+    glPopMatrix();
+    
+    
+    //        glBegin(GL_LINES);
+    //        for(int i=0;i<=10;i++) {
+    //            if (i==0) { glColor3f(.6,.3,.3); } else { glColor3f(.25,.25,.25); };
+    //            glVertex3f(i,0,0);
+    //            glVertex3f(i,0,10);
+    //            if (i==0) { glColor3f(.3,.3,.6); } else { glColor3f(.25,.25,.25); };
+    //            glVertex3f(0,0,i);
+    //            glVertex3f(10,0,i);
+    //        };
+    //        glEnd();
+}
