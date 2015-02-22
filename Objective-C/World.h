@@ -66,7 +66,7 @@
         return 0.01; //air;
 }
 
-- (bool)collisionTest:(Particle*)sender;{
+- (bool)collisionTest:(Particle*)sender{
     //Have I gone through a barrier?
     if (sender->body.position.y < /*ground - */ sender.ground) {
        //sender->body.position.y = sender.ground;
@@ -116,12 +116,12 @@
     [self.observer reInit];//->body.position = GLKVector3Make(0,0,0);
     //self.observer->body.velocity = GLKVector3Make(0,0,0);
 }
-- (id)closestObject
+- (RMXObject*)closestObjectTo:(RMXObject*)sender
 {
     id closest = [_sprites objectAtIndex:1];
-    float dista=GLKVector3Distance([self observer]->body.position, ((Particle*)[_sprites objectAtIndex:1])->body.position);
+    float dista=GLKVector3Distance(sender->body.position, ((Particle*)[_sprites objectAtIndex:1])->body.position);
         for (Particle* sprite in _sprites){
-            float distb = GLKVector3Distance([self observer]->body.position, sprite->body.position);
+            float distb = GLKVector3Distance(sender->body.position, sprite->body.position);
             //NSString *lt = @" < ";
             if(distb<dista&&distb!=0){
                 closest = sprite;
@@ -132,6 +132,7 @@
             }
            
         }
+    NSLog(@"Returning:\n %@",closest);
         //cout << "closest: "<< closest << ", dist:" << dista << endl;
     return closest;//shapes[closest];
     }

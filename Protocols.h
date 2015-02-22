@@ -85,7 +85,7 @@
 @interface Particle : RMXObject  <RMXOrienrationProcessor>
 @property (readonly) GLKVector3 eye, center, up;
 @property GLKVector3 anchor,itemPosition;
-@property Particle  * item; //return 1?;
+@property RMXObject  * item; //return 1?;
 @property (readonly) float weight, ground;
 @property float armLength, reach, accelerationRate, speedLimit, squatLevel,rotationSpeed,jumpStrength;
 @property BOOL limitSpeed, hasFriction, hasGravity, prepairingToJump, goingUp;
@@ -160,6 +160,7 @@
 @interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
 @property Mouse *mouse;
 - (void)debug;
+- (void)grabObject:(RMXObject*)i;
 @end
 
 
@@ -178,7 +179,7 @@
 @property NSMutableArray* sprites;
 @property NSString* observerName;
 @property float dt;
-- (id)closestObject;
+- (RMXObject*)closestObjectTo:(Particle*)sender;
 - (void)animate;
 - (void)insertSprite:(Particle*)sprite;
 - (id)objectWithName:(NSString*)name;

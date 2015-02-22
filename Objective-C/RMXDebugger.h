@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#define RMX_DEBUGGING           1
+#define RMX_DEBUGGING           0
 #define RMX_FULL_SCREEN         0
 
 #define RMX_TOTAL_CHECKS        13

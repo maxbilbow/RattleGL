@@ -64,19 +64,19 @@ void initKeys(){
 
 void repeatedKeys(){
     
-//    if (keys.keySpecialStates[GLUT_KEY_UP]) {
-//        if (keys.keyStates[9])
-//            [sun lightUp:1];
-//        else
-//            [observer extendArmLength:1];
-//
-//    } else if(keys.keySpecialStates[GLUT_KEY_DOWN]) {
-//        if (keys.keyStates[9]) {
-//            [sun lightUp:-1];
-//        } else {
-//            [observer extendArmLength:-1];
-//        }
-//    }
+    if (keys.keySpecialStates[GLUT_KEY_UP]) {
+        if (keys.keyStates[9])
+            return;//[sun lightUp:1];
+        else
+            [observer extendArmLength:1];
+
+    } else if(keys.keySpecialStates[GLUT_KEY_DOWN]) {
+        if (keys.keyStates[9]) {
+            return;//[sun lightUp:-1];
+        } else {
+            [observer extendArmLength:-1];
+        }
+    }
 }
 
 void movement(float speed, int key){
@@ -292,12 +292,12 @@ void keySpecialUpOperations(char key) {
         case GLUT_KEY_RIGHT:
             [rmxDebugger cycle:1];
             break;
-//        case GLUT_KEY_UP:
-//            sun.lightUp(10);
-//            break;
-//        case GLUT_KEY_DOWN:
-//            sun.lightUp(-10);
-//            break;
+        case GLUT_KEY_UP:
+            //[[observer item]lightUp:10];
+            break;
+        case GLUT_KEY_DOWN:
+            //[[observer item]lightUp:-10];
+            break;
         case 32:
             // [observer stop();
             [rmxDebugger add:RMX_KEY_PROCESSOR n:@"KeyProcessor" t:[NSString stringWithFormat:@"%i: SPACE BAR Released",key]];

@@ -39,7 +39,7 @@ GLKVector4 point_on_circle ( double radius, double angle_in_degrees,  double cen
 
     result.x = centre + radius * cexp ( PI * I * ( angle_in_degrees  / 180.0 ) );
     result.y = 0;
-    result.z = centre + radius * csin ( PI * I * ( angle_in_degrees  / 180.0 ) );
+    result.z = centre + radius * sinh ( PI * I * ( angle_in_degrees  / 180.0 ) );
     return result;
 }
 

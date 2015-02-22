@@ -175,8 +175,9 @@ bool ignoreNextjump = false;
 {
     
     if ( _item == nil ) return;
-    _item->body.position = GLKVector3Add([self getCenter],
+    _item->body.position = GLKVector3Add(self.getCenter,
                                     GLKVector3MultiplyScalar(self.forwardVector,_armLength));
+    NSLog(@"manipulating: %@:\n%@",((Particle*)_item).name,((Particle*)_item).describePosition);
 }
 
 - (void)stop
@@ -202,7 +203,7 @@ bool ignoreNextjump = false;
 //        phi = 0;
 //        body.angles.phi = -lim;
 //    }
-    NSLog(@"Theta: %f, Phi: %f",body.angles.theta,body.angles.phi);
+//    NSLog(@"Theta: %f, Phi: %f",body.angles.theta,body.angles.phi);
     
     
     
@@ -210,15 +211,7 @@ bool ignoreNextjump = false;
     body.orientation = GLKMatrix3RotateWithVector3(body.orientation, phi, GLKMatrix3GetRow(body.orientation,0));
     
     [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",theta,phi ]];
-   // NSLog(@"Theta: %f, Phi: %f",theta,phi);
-    /*
-    //try this instead:
-    GLKMatrix4 rm = GLKMatrix4MakeRotation(theta, upVector.x, upVector.y, upVector.z);
-    forwardVector = GLKMatrix4MultiplyVector3WithTranslation(rm, upForwardVector);
-    // and this
-    GLKMatrix4 rm = GLKMatrix4MakeRotation(phi, self.upVector.x, self.upVector.y, self.upVector.z);
-    self.forwardVector = GLKMatrix4MultiplyVector3WithTranslation(rm, [self forwardVector]);
-    */
+   
 }
 
 
@@ -282,7 +275,7 @@ bool ignoreNextjump = false;
 
 - (GLKVector3)getCenter
 {
-    return GLKVector3Add(body.position,GLKMatrix3GetRow(body.orientation,2));
+    return GLKVector3Add(body.position,self.forwardVector);
 }
 
 - (GLKVector3)getUp

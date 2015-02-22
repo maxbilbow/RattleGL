@@ -177,9 +177,8 @@
 		509857621A72A6C7009F50A3 = {
 			isa = PBXGroup;
 			children = (
-				50220C951A9767A000E8DAC3 /* RMXMaths.h */,
-				506226FB1A98DFBD008E6752 /* RMXDataTypes.h */,
 				50639F281A92CC9100A94E5C /* Frameworks */,
+				50A40CB61A99CB9F00935BB6 /* C */,
 				5098576D1A72A6C7009F50A3 /* CPP */,
 				505ADED01A9579F000A91318 /* Objc */,
 				5098576C1A72A6C7009F50A3 /* Products */,
@@ -210,6 +209,15 @@
 			);
 			name = CPP;
 			path = "OpenGL 2.0";
+			sourceTree = "<group>";
+		};
+		50A40CB61A99CB9F00935BB6 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				50220C951A9767A000E8DAC3 /* RMXMaths.h */,
+				506226FB1A98DFBD008E6752 /* RMXDataTypes.h */,
+			);
+			name = C;
 			sourceTree = "<group>";
 		};
 		50DEC2521A960D6900336687 /* Header */ = {

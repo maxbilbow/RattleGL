@@ -33,7 +33,7 @@ void MouseButton(int button, int state, int x, int y)
     // Respond to mouse button presses.
     // If button1 pressed, mark this state so we know in motion function.
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_UP))
-        [observer grabObject:[world closestObject]];//&art.sh);
+        [observer grabObject:[world closestObjectTo:observer]];//&art.sh);
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_DOWN))
         [observer calibrateView:x vert:y];
     if (button == GLUT_LEFT_BUTTON)

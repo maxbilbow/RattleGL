@@ -59,7 +59,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     [self drawAxis:axisColors];
     [sun setRender: DrawSphere];
     [sun setShine:glLightfv];
-    //[self randomObjects];
+    [self randomObjects];
     
     return self;
     
@@ -125,12 +125,20 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
         float randPos[3] = { X, Y, Z };
         gravity = !gravity;
         ShapeObject * shape;
-        if((rand() % 1000 == 1)) {
+        if((rand() % 10 == 1)) {
             shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:self.parent world:self.world];
+            shape->body.radius = 20;
         }
         else {
             shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
         }
+        
+        if(rand() % 3 == 1) {
+            [shape setRender:DrawSphere];
+        } else{
+            [shape setRender:DrawCubeWithTextureCoords];
+        }
+        
         [shape setHasGravity: gravity];
         shape->body.radius = (rand() % 5 + 4);
         shape->body.position = GLKVector3MakeWithArray(randPos);

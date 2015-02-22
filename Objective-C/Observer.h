@@ -48,8 +48,8 @@
     [super reInit];
     
     //self.origin;
-    self.armLength = 2;
-    self.reach = body.radius;
+    self.armLength = 6;
+    self.reach = 8;
     body = RMXPhyisicsBodyMake(0.5,10);
     body.position = GLKVector3Make(-10,body.radius,-10);
     body.dragC = 0.1;
@@ -59,16 +59,18 @@
 
 bool _itemWasAnimated = false;
     
-- (void)grabObject:(Particle*)i
+- (void)grabObject:(RMXObject*)i
 {
+    
     if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach) {
         self.item = i;
         self.itemPosition = i->body.position;
         _itemWasAnimated = self.item.isAnimated;
-        [self.item setIsAnimated:false]; //TODO: Make this not necessary
+        //[self.item setIsAnimated:false]; //TODO: Make this not necessary
         self.armLength = GLKVector3Distance(self.getCenter, self.itemPosition);
     } else
         [self releaseObject];
+   // NSLog(@"Grabbing: %@:\n%@",((Particle*)self.item).name,((Particle*)self.item).describePosition);
 }
 
 -(void)releaseObject
