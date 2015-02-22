@@ -144,6 +144,11 @@ GLfloat gCubeVertexData[216] =
     [self.view addSubview:rightView];
     
     
+    UITapGestureRecognizer * dt =
+    [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleDoubleTap:)];
+    [dt setNumberOfTapsRequired:2];
+    [self.view addGestureRecognizer:dt];
+    
     
     
 }
@@ -479,19 +484,13 @@ GLfloat gCubeVertexData[216] =
 
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)recognizer {
-    recognizer.numberOfTapsRequired = 2;
     [_world.observer reInit];
 }
 
 //The event handling method
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-    [_world.observer stop];
-    CGPoint tap = [recognizer locationOfTouch:0 inView:self.view];
-    float width = self.view.bounds.size.width;
-    if (tap.x < width/2 )
-        NSLog(@"Left Tap: %f / %f",tap.x,tap.y);
-    else
-        NSLog(@"Right tap: %f / %f",tap.x,tap.y);
+    //[_world.observer stop];
+
 }
 
 //The event handling method
@@ -510,7 +509,7 @@ GLfloat gCubeVertexData[216] =
     CGPoint location = [recognizer velocityInView:self.view];
     [_world.observer accelerateForward:-location.y*0.01 ];
     [_world.observer accelerateLeft:-location.x*0.01 ];
-    NSLog(@"Left Pan: %f , %f",location.x,location.y);
+    //NSLog(@"Left Pan: %f , %f",location.x,location.y);
 }
 
 
@@ -518,8 +517,10 @@ GLfloat gCubeVertexData[216] =
 - (void)handlePanRightSide:(UIPanGestureRecognizer *)recognizer {
     CGPoint location = [recognizer velocityInView:self.view];
     [_world.observer plusAngle:location.x up:-location.y];
-    NSLog(@"Right Pan: %f , %f",location.x,location.y);
+    //NSLog(@"Right Pan: %f , %f",location.x,location.y);
 }
+
+
 
 
 

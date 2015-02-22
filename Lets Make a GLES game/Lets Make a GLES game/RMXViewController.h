@@ -12,7 +12,7 @@
 
 #endif
 
-#include "GameViewController.h"
+
 
 @interface RMXViewController : GameViewController
 

@@ -42,6 +42,7 @@ float _dt;
 
 #include "World.h"
 #include "Art.h"
+#include "GameViewController.h"
 
 //#include "RMXViewController.h"
 
