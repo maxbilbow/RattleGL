@@ -20,21 +20,23 @@
 
 @interface RMXDebugger : NSString
 @property const bool isDebugging;
-
+@property UIViewController * window;
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
 @end
 
 @protocol RMXObject
 @property (readonly) NSString * name;
 @property RMXObject * parent;
-@property (readonly) RMXWorld * world;
+@property RMXWorld * world;
 @property RMXPhysics * physics;
 @property BOOL isAnimated;
+@property UIViewController * uiView;
 @property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
 - (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world;
 - (void)debug;
 - (void)reInit;
 @end
+
 @interface RMXObject : NSObject <RMXObject> {
     @public RMXPhysicsBody body;
 }
@@ -150,18 +152,22 @@
 
 @end
 
-@interface Mouse : RMXObject <RMXMouseOwner>
+@interface RMXDPad : RMXObject
+@property UIViewController* owner;
+@end
+
+@interface RMXEventHandler : RMXObject <RMXMouseOwner>
 //@property bool focus;
 @property int dx, dy;
 @property GLKVector2 pos;
+@property RMXDPad* dPad;
 @property (getter=hasFocus) bool focus;
 - (void)mouse2view:(int)x y:(int)y owner:(id)owner;
 @end
 
 
 @interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
-@property Mouse *mouse;
-@property UIViewController* window;
+@property RMXEventHandler *mouse;
 @property (readonly) GLKMatrix4 modelViewMatrix, projectionMatrix;
 - (void)debug;
 - (void)grabObject:(RMXObject*)i;
@@ -176,7 +182,7 @@
 
 @interface RMXArt : RMXObject
 //@property float x, y, z, d, r,g, b,k;
-+ (RMXWorld*)initializeTestingEnvironment:(RMXWorld*)world;
++ (RMXWorld*)initializeTestingEnvironment:(UIViewController*)sender;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
 + (GLKVector4)rColor;
@@ -202,10 +208,7 @@
 - (bool)collisionTest:(Particle*)sender;
 @end
 
-@interface RMXEventHandler : RMXObject
-- (void)swipeLeft;
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
-@end
+
 
 
 

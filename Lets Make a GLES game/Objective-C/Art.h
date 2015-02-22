@@ -46,10 +46,13 @@ void RenderObjects(void);
 }
 
 
-+ (RMXWorld*)initializeTestingEnvironment:(RMXWorld*)world {
++ (RMXWorld*)initializeTestingEnvironment:(UIViewController*)sender {
 
     //if (world == nil){
-         world = [[RMXWorld alloc]initWithName:@"Brave New World" parent:nil world:nil];
+       RMXWorld* world = [[RMXWorld alloc]initWithName:@"Brave New World" parent:(RMXObject*)sender world:nil];
+   // world.uiView = sender;
+    //world.observer.uiView = sender;
+    if (world.observer == nil )exit(0);
     //}
     
     LightSource * sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];

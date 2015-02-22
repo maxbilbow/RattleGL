@@ -49,10 +49,11 @@ RMXPhysicsBody RMXPhyisicsBodyMake(float m, float r){
     b.velocity = GLKVector3Make(0,0,0);
     b.acceleration = GLKVector3Make(0,0,0);
     b.forces = GLKVector3Make(0,0,0);
-    b.orientation = GLKMatrix3Make(
-                                   1,0,0,
-                                   0,1,0,
-                                   0,0,1
+    b.orientation = GLKMatrix4Make(
+                                   1,0,0,0,
+                                   0,1,0,0,
+                                   0,0,1,0,
+                                   0,0,0,1
                                    );
     b.vMatrix = GLKMatrix3Make(
                                0,0,0,
@@ -156,4 +157,8 @@ RMXVector3 RMXMatrix3MultiplyVector3(GLKMatrix3 matrixLeft, GLKVector3 vectorRig
         matrixLeft.m[3] * vectorRight.v[1] + matrixLeft.m[4] * vectorRight.v[1] + matrixLeft.m[1] * vectorRight.v[2],
         matrixLeft.m[6] * vectorRight.v[2] + matrixLeft.m[7] * vectorRight.v[2] + matrixLeft.m[2] * vectorRight.v[2] };
     return v;
+}
+
+void RMXPrintMatrix(GLKMatrix4 m){
+    
 }

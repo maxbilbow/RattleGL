@@ -72,6 +72,7 @@ typedef union _GLKMatrix3 GLKMatrix3;
 
 typedef GLKVector3 RMXVector3;
 typedef GLKMatrix3 RMXMatrix3;
+typedef GLKMatrix4 RMXMatrix4;
 
 
 typedef struct _RMXPhysicsBody
@@ -80,7 +81,7 @@ typedef struct _RMXPhysicsBody
     RMXVector3 velocity;
     RMXVector3 acceleration;
     RMXVector3 forces;
-    RMXMatrix3 orientation;
+    RMXMatrix4 orientation;
     RMXMatrix3 vMatrix;
     RMXVector2 angles;
     

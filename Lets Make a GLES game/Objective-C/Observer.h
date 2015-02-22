@@ -13,8 +13,6 @@
 #endif
 
 #include "Particle.h"
-//#include "RMXEventProcessor.h"
-#include "Mouse.h"
 
 
 /*
@@ -29,7 +27,7 @@
      - Up
      - Right
      */
-@synthesize mouse, viewDescription, window;
+@synthesize mouse, viewDescription;
 
 
     
@@ -37,7 +35,7 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        mouse = [[Mouse alloc]initWithName:name parent:self world:world];
+        mouse = [[RMXEventHandler alloc]initWithName:name parent:self world:world];
         //self.ground=1;
     }
     [self debug];
@@ -51,7 +49,7 @@
     self.armLength = 6;
     self.reach = 8;
     body = RMXPhyisicsBodyMake(0.5,10);
-    body.position = GLKVector3Make(-10,body.radius,-10);
+    body.position = GLKVector3Make(0,0,-0.4);
     body.dragC = 0.1;
     body.dragArea = PI * body.radius;
     //body.dragC = 2;
@@ -67,7 +65,7 @@ bool _itemWasAnimated = false;
         self.itemPosition = i->body.position;
         _itemWasAnimated = self.item.isAnimated;
         //[self.item setIsAnimated:false]; //TODO: Make this not necessary
-        self.armLength = GLKVector3Distance(self.getCenter, self.itemPosition);
+        self.armLength = GLKVector3Distance(self.center, self.itemPosition);
     } else
         [self releaseObject];
    // NSLog(@"Grabbing: %@:\n%@",((Particle*)self.item).name,((Particle*)self.item).describePosition);
@@ -95,9 +93,9 @@ bool _itemWasAnimated = false;
 - (GLKMatrix4)makeLookAt:(GLKMatrix4(float eyeX,float eyeY, float eyeZ, float cx,float cy, float cz, float ux,float uy, float uz ))lookAt
 {
     return (GLKMatrix4)lookAt(
-                              [self getEye].x,   [self getEye].y,     [self getEye].z,
-                              [self getCenter].x, [self getCenter].y, [self getCenter].z,
-                              [self getUp].x,     [self getUp].y,     [self getUp].z
+                              [self eye].x,   [self eye].y,     [self eye].z,
+                              [self center].x, [self center].y, [self center].z,
+                              [self up].x,     [self up].y,     [self up].z
                               );
 
 }
@@ -105,9 +103,9 @@ bool _itemWasAnimated = false;
 - (void)makeLookAtGl:(void(double eyeX,double eyeY, double eyeZ, double cx,double cy, double cz, double ux,double uy, double uz ))lookAt
 {
      lookAt(
-                              [self getEye].x,   [self getEye].y,     [self getEye].z,
-                              [self getCenter].x, [self getCenter].y, [self getCenter].z,
-                              [self getUp].x,     [self getUp].y,     [self getUp].z
+                              [self eye].x,   [self eye].y,     [self eye].z,
+                              [self center].x, [self center].y, [self center].z,
+                              [self up].x,     [self up].y,     [self up].z
                               );
     
 }
@@ -154,24 +152,26 @@ bool _itemWasAnimated = false;
 
 - (NSString*)viewDescription {
     return [NSString stringWithFormat:@"\n      EYE x%f, y%f, z%f\n   CENTRE x%f, y%f, z%f\n      UP: x%f, y%f, z%f\n",
-            [self getEye].x,[self getEye].y,[self getEye].z,
-            [self getCenter].x,[self getCenter].y,[self getCenter].z,
-            [self getUp].x,[self getUp].y,[self getUp].z];
+            [self eye].x,[self eye].y,[self eye].z,
+            [self center].x,[self center].y,[self center].z,
+            [self up].x,[self up].y,[self up].z];
 }
 
 
 - (GLKMatrix4)modelViewMatrix {
-    GLKMatrix4 m = GLKMatrix4MakeWithColumns(
-                                             GLKVector4MakeWithVector3(self.eye, 0),
-                                             GLKVector4MakeWithVector3(self.center, 0),
-                                             GLKVector4MakeWithVector3(self.up, 0),
-                                             GLKVector4MakeWithVector3(GLKVector3Make(0,0,0), 1)
-                                             );
+    
+    GLKMatrix4 m = GLKMatrix4TranslateWithVector3(body.orientation, body.velocity);
+//    (
+//                                             GLKVector4MakeWithVector3(self.eye, 0),
+//                                             GLKVector4MakeWithVector3(self.center, 0),
+//                                             GLKVector4MakeWithVector3(self.up, 0),
+//                                             GLKVector4MakeWithVector3(GLKVector3Make(0,0,0), 1)
+//                                             );
     return m;
 }
 
 - (GLKMatrix4)projectionMatrix {
-    float aspect = fabsf(self.window.view.bounds.size.width / self.window.view.bounds.size.height);
+    float aspect = fabsf(self.uiView.view.bounds.size.width / self.uiView.view.bounds.size.height);
     return GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
 }
 

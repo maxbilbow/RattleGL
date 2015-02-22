@@ -13,11 +13,16 @@
 #endif
 
 @implementation RMXObject : NSObject
-@synthesize name = _name, parent = _parent, world = _world, physics = _physics, isAnimated = _isAnimated;
+@synthesize name = _name, parent = _parent, world = _world, physics = _physics, isAnimated = _isAnimated, uiView = _uiView;
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world{
     self = [super init];
     _parent = parent;
     _world = world;
+    if (world != nil && [world isKindOfClass:[RMXWorld class]]){
+        _uiView = ((RMXWorld*)world).uiView;
+    } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
+        _uiView = (UIVideoEditorController*) parent;
+    }
     _name = name;
     _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: [self isKindOfClass:[RMXWorld class]] ? (RMXWorld*) self : nil];
     [self reInit];
@@ -32,19 +37,23 @@
 }
 
 - (RMXVector3)upVector{
-    return GLKMatrix3GetRow(body.orientation,1);
+    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),1);
+    return GLKVector3Make(v.x,v.y,v.z);
 }
 
 - (RMXVector3)rightVector{
-    return GLKVector3Negate(GLKMatrix3GetRow(body.orientation,0));
+    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0);
+    return GLKVector3Negate(GLKVector3Make(v.x,v.y,v.z));
 }
 
 - (RMXVector3)leftVector{
-    return GLKMatrix3GetRow(body.orientation,0);
+    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0);
+    return GLKVector3Make(v.x,v.y,v.z);
 }
 
 - (RMXVector3)forwardVector{
-    return GLKMatrix3GetRow(body.orientation,2);
+    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),2);
+    return GLKVector3Make(v.x,v.y,v.z);
 }
 @end
 

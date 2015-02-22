@@ -34,14 +34,16 @@ float _dt;
 
 #include "Protocols.h"
 #include "RMXObject.h"
-#include "RMXEventHandler.h"
-#include "RMXDebugger.h"
 
+#include "RMXDebugger.h"
+#include "RMXEventHandler.h"
 
 #include "Observer.h"
 
 #include "World.h"
 #include "Art.h"
+
+//#include "RMXViewController.h"
 
 
 //#include "Window.h"

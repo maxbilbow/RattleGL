@@ -9,22 +9,27 @@
 #define RMX_DEBUGGING           1
 #define RMX_FULL_SCREEN         0
 
-#define RMX_TOTAL_CHECKS        13
-#define RMX_WORLD               12
-#define RMX_WINDOW              12
-#define RMX_PHYSICS             12
-#define RMX_DISPLAY             11
-#define RMX_ART                 10
-#define RMX_SHAPE               9
-#define RMX_LIGHT               8
+
+#define RMX_TOTAL_CHECKS        7
+#define RMX_ERROR               0
+#define RMX_OBSERVER            1
+#define RMX_WORLD               2
+#define RMX_PHYSICS             3
+#define RMX_ART                 4
+#define RMX_SHAPE               5
+#define RMX_LIGHT               6
 #define RMX_PARTICLE            7
-#define RMX_MOUSE_PROCESSOR     6
+
+#define RMX_DISPLAY             11
+#define RMX_MOUSE_PROCESSOR     12
 #define RMX_MOUSE               5
 #define RMX_KEY_PROCESSOR       4
 #define RMX_DISPLAY_PROCESSOR   3
 #define RMX_SIMPLE_PARTICLE     2
-#define RMX_OBSERVER            1
-#define RMX_ERROR               0
+#define RMX_WINDOW              12
+
+
+
 
 #define U_GRAVITY               (0.0002)///50
 #define U_FRICTION              1.1

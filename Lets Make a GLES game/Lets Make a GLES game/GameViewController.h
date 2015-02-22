@@ -8,14 +8,20 @@
 
 //#import <GLKit/GLKit.h>
 #import "oHeader.h"
+//#import "RMXViewController.h"
 
-@interface GameViewController : GLKViewController <RMXObject>{
-@public RMXPhysicsBody body;
+@interface GameViewController : GLKViewController <RMXObject> {
+    @public RMXPhysicsBody body;
 }
 
-@property RMXWorld* rWorld;
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
-- (void)handlePan:(UIPanGestureRecognizer *)recognize;
-- (void)handleSwipe:(UISwipeGestureRecognizer *)recognizer;
+//- (void)handlePan:(UIPanGestureRecognizer *)recognize;
+//- (void)handleSwipe:(UISwipeGestureRecognizer *)recognizer;
+//- (void)handleLongPress:(UILongPressGestureRecognizer*)recogniser;
+- (void)handlePanRightSide:(UIPanGestureRecognizer *)recognizer;
+- (void)handlePanLeftSide:(UIPanGestureRecognizer *)recognizer;
+
+
 @end
+
