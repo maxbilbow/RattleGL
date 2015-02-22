@@ -46,18 +46,24 @@ float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
 float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
 float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 
+/*
 void DrawCubeFace(float fSize)
 {
     fSize /= 2.0;
-    glBegin(GL_QUADS);
-    glVertex3f(-fSize, -fSize, fSize);    glTexCoord2f (0, 0);
-    glVertex3f(fSize, -fSize, fSize);     glTexCoord2f (1, 0);
-    glVertex3f(fSize, fSize, fSize);      glTexCoord2f (1, 1);
-    glVertex3f(-fSize, fSize, fSize);     glTexCoord2f (0, 1);
-    glEnd();
-}
+//    glBegin(GL_QUADS);
+    
+//    glVertex3v(-fSize, -fSize, fSize);   // glTexCoord2f (0, 0);
+//    glVertex3f(fSize, -fSize, fSize);     //glTexCoord2f (1, 0);
+//    glVertex3f(fSize, fSize, fSize);     // glTexCoord2f (1, 1);
+//    glVertex3f(-fSize, fSize, fSize);    // glTexCoord2f (0, 1);
+   // glEnd();
+} 
+ */
+
 void DrawCubeWithTextureCoords (float fSize)
 {
+    //NSLog(@"Hello!");
+    /*
     glPushMatrix();
     DrawCubeFace (fSize);
     glRotatef (90, 1, 0, 0);
@@ -71,12 +77,22 @@ void DrawCubeWithTextureCoords (float fSize)
     glRotatef (180, 0, 1, 0);
     DrawCubeFace (fSize);
     glPopMatrix();
+    */
+    const GLfloat verts[] = {
+        0.0f,   1.0f,   0.0f,
+        -1.0f,  -1.0f,  0.0f,
+        1.0f,   -1.0f,  0.0f
+    };
+    
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, verts);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
 }
 
 
 void DrawSpheree(double r, int lats, int longs)
 {
-
+/*
           int i, j;
           for(i = 0; i <= lats; i++) {
                   double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
@@ -94,13 +110,14 @@ void DrawSpheree(double r, int lats, int longs)
                           double y = sin(lng);
             
                           glNormal3f(x * zr0, y * zr0, z0);
-                         glVertex3f(x * zr0, y * zr0, z0);
+                        glVertex3f(x * zr0, y * zr0, z0);
                           glNormal3f(x * zr1, y * zr1, z1);
                           glVertex3f(x * zr1, y * zr1, z1);
                       }
                   glEnd();
         }
-    }
+ */
+}
 
 void DrawSphere(float size){
     DrawSpheree(size,size,size);
@@ -109,7 +126,7 @@ void DrawSphere(float size){
 
 //Particle pCube = Particle();
 void RenderObjects(void)
-{
+{/*
     float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
     float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
     float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
@@ -142,7 +159,7 @@ void RenderObjects(void)
     glPopMatrix();
     glPopMatrix();
     
-    
+ */
 }
 
 void DrawTeapot(float f){
@@ -152,6 +169,19 @@ void DrawTeapot(float f){
 
 void DrawPlane(float x)
 {
+    
+    const GLfloat verts[] = {
+        -_INFINITY,   -0.001,   -_INFINITY,
+        -_INFINITY,-0.001,_INFINITY,
+        _INFINITY,-0.001,_INFINITY,
+        _INFINITY,-0.001, -_INFINITY
+    };
+    
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, verts);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+    
+    /*
     glPushMatrix();
     glColor4fv(colorBlue);
     
@@ -176,4 +206,5 @@ void DrawPlane(float x)
     //            glVertex3f(10,0,i);
     //        };
     //        glEnd();
+     */
 }

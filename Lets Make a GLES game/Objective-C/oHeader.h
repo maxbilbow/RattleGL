@@ -22,6 +22,7 @@
 float _dt;
 //using namespace std;
 
+#import <UIKit/UIKit.h>
 #include <GLKit/GLKMatrix4.h>
 #import <GLKit/GLKit.h>
 //#include <GLUT/glut.h>
@@ -33,19 +34,21 @@ float _dt;
 
 #include "Protocols.h"
 #include "RMXObject.h"
-
+#include "RMXEventHandler.h"
 #include "RMXDebugger.h"
 
 
-#include "RMXEventProcessor.h"
 #include "Observer.h"
 
 #include "World.h"
 #include "Art.h"
 
 
-#include "Window.h"
+//#include "Window.h"
 
+//#include "MouseProcessor.h"
+//#include "KeyboardProcessor.h"
+//#include "DisplayProcessor.h"
 
 
 

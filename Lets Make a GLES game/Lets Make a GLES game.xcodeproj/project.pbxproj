@@ -17,7 +17,6 @@
 		5035B14B1A99EC4A00E16AF7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5035B1491A99EC4A00E16AF7 /* LaunchScreen.xib */; };
 		5035B1571A99EC4A00E16AF7 /* Lets_Make_a_GLES_gameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5035B1561A99EC4A00E16AF7 /* Lets_Make_a_GLES_gameTests.m */; };
 		5035B18A1A99ED2E00E16AF7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5035B1791A99ED2E00E16AF7 /* Info.plist */; };
-		5035B18B1A99ED2E00E16AF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5035B17C1A99ED2E00E16AF7 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +59,6 @@
 		5035B1821A99ED2E00E16AF7 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		5035B1831A99ED2E00E16AF7 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		5035B1841A99ED2E00E16AF7 /* RMXDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXDebugger.h; sourceTree = "<group>"; };
-		5035B1851A99ED2E00E16AF7 /* RMXEventProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXEventProcessor.h; sourceTree = "<group>"; };
 		5035B1861A99ED2E00E16AF7 /* ShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeObject.h; sourceTree = "<group>"; };
 		5035B1871A99ED2E00E16AF7 /* Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shapes.h; sourceTree = "<group>"; };
 		5035B1881A99ED2E00E16AF7 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
@@ -69,7 +67,8 @@
 		5035B18E1A99ED7500E16AF7 /* RMXDataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXDataTypes.h; sourceTree = "<group>"; };
 		5035B18F1A99ED7500E16AF7 /* RMXEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXEquations.h; sourceTree = "<group>"; };
 		5035B1901A99ED7500E16AF7 /* RMXMaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMaths.h; sourceTree = "<group>"; };
-		5035B1911A99ED7500E16AF7 /* RMXObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXObject.h; sourceTree = "<group>"; };
+		509066D11A9A2FDA000879C4 /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RMXObject.h; path = "../../Objective-C/RMXObject.h"; sourceTree = "<group>"; };
+		50F647D91A9A380800F4AB38 /* RMXEventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXEventHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,25 +155,18 @@
 		5035B1761A99ED2E00E16AF7 /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
+				509066D11A9A2FDA000879C4 /* RMXObject.h */,
+				5035B1921A99F14D00E16AF7 /* OpenGL heavey */,
 				5035B18C1A99ED6200E16AF7 /* Protocols.h */,
 				5035B1771A99ED2E00E16AF7 /* Art.h */,
-				5035B1781A99ED2E00E16AF7 /* DisplayProcessor.h */,
 				5035B1791A99ED2E00E16AF7 /* Info.plist */,
-				5035B17A1A99ED2E00E16AF7 /* KeyboardProcessor.h */,
-				5035B17B1A99ED2E00E16AF7 /* LightSource.h */,
-				5035B17C1A99ED2E00E16AF7 /* main.m */,
-				5035B17D1A99ED2E00E16AF7 /* Menu.h */,
 				5035B17E1A99ED2E00E16AF7 /* Mouse.h */,
-				5035B17F1A99ED2E00E16AF7 /* MouseProcessor.h */,
+				50F647D91A9A380800F4AB38 /* RMXEventHandler.h */,
 				5035B1801A99ED2E00E16AF7 /* Observer.h */,
 				5035B1811A99ED2E00E16AF7 /* oHeader.h */,
 				5035B1821A99ED2E00E16AF7 /* Particle.h */,
 				5035B1831A99ED2E00E16AF7 /* Physics.h */,
 				5035B1841A99ED2E00E16AF7 /* RMXDebugger.h */,
-				5035B1851A99ED2E00E16AF7 /* RMXEventProcessor.h */,
-				5035B1861A99ED2E00E16AF7 /* ShapeObject.h */,
-				5035B1871A99ED2E00E16AF7 /* Shapes.h */,
-				5035B1881A99ED2E00E16AF7 /* Window.h */,
 				5035B1891A99ED2E00E16AF7 /* World.h */,
 			);
 			path = "Objective-C";
@@ -186,10 +178,25 @@
 				5035B18E1A99ED7500E16AF7 /* RMXDataTypes.h */,
 				5035B18F1A99ED7500E16AF7 /* RMXEquations.h */,
 				5035B1901A99ED7500E16AF7 /* RMXMaths.h */,
-				5035B1911A99ED7500E16AF7 /* RMXObject.h */,
 			);
 			name = C;
 			path = ../C;
+			sourceTree = "<group>";
+		};
+		5035B1921A99F14D00E16AF7 /* OpenGL heavey */ = {
+			isa = PBXGroup;
+			children = (
+				5035B1881A99ED2E00E16AF7 /* Window.h */,
+				5035B1861A99ED2E00E16AF7 /* ShapeObject.h */,
+				5035B1871A99ED2E00E16AF7 /* Shapes.h */,
+				5035B17C1A99ED2E00E16AF7 /* main.m */,
+				5035B1781A99ED2E00E16AF7 /* DisplayProcessor.h */,
+				5035B17A1A99ED2E00E16AF7 /* KeyboardProcessor.h */,
+				5035B17B1A99ED2E00E16AF7 /* LightSource.h */,
+				5035B17D1A99ED2E00E16AF7 /* Menu.h */,
+				5035B17F1A99ED2E00E16AF7 /* MouseProcessor.h */,
+			);
+			name = "OpenGL heavey";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,7 +304,6 @@
 			files = (
 				5035B13C1A99EC4A00E16AF7 /* AppDelegate.m in Sources */,
 				5035B1431A99EC4A00E16AF7 /* GameViewController.m in Sources */,
-				5035B18B1A99ED2E00E16AF7 /* main.m in Sources */,
 				5035B1391A99EC4A00E16AF7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +497,7 @@
 				5035B15C1A99EC4A00E16AF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5035B15D1A99EC4A00E16AF7 /* Build configuration list for PBXNativeTarget "Lets Make a GLES gameTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +506,7 @@
 				5035B15F1A99EC4A00E16AF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

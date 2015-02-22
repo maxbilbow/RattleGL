@@ -84,6 +84,7 @@ GLfloat gCubeVertexData[216] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    
 }
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
@@ -99,10 +100,49 @@ GLfloat gCubeVertexData[216] =
 
 @implementation GameViewController
 
+@synthesize rWorld = _rWorld, name = _name, parent = _parent, world = _world, physics = _physics, isAnimated = _isAnimated;
+
+
+- (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world{
+    self = [super init];
+    _parent = parent;
+    _world = world;
+    _name = name;
+    _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: [self isKindOfClass:[RMXWorld class]] ? (RMXWorld*) self : nil];
+    [self reInit];
+    return self;
+}
+
+- (void)reInit {
+    body = RMXPhyisicsBodyMake(1, 1);
+    rmxDebugger = [[RMXDebugger alloc]init];
+}
+- (void)debug {
+    //[rmxDebugger add:RMX_ERROR n:self t:_name];
+}
+
+- (RMXVector3)upVector{
+    return GLKMatrix3GetRow(body.orientation,1);
+}
+
+- (RMXVector3)rightVector{
+    return GLKVector3Negate(GLKMatrix3GetRow(body.orientation,0));
+}
+
+- (RMXVector3)leftVector{
+    return GLKMatrix3GetRow(body.orientation,0);
+}
+
+- (RMXVector3)forwardVector{
+    return GLKMatrix3GetRow(body.orientation,2);
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self reInit];
+    _rWorld = [RMXArt initializeTestingEnvironment:_rWorld];
+    world = _rWorld;
+    [_rWorld.observer setWindow:self];
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
     if (!self.context) {
@@ -114,6 +154,25 @@ GLfloat gCubeVertexData[216] =
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleFingerTap];
+    //[singleFingerTap release];
+    
+    UISwipeGestureRecognizer *swipey =
+    [[UISwipeGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleSwipe:)];
+    [self.view addGestureRecognizer:swipey];
+
+    UIPanGestureRecognizer *panny =
+    [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                              action:@selector(handlePan:)];
+    [self.view addGestureRecognizer:panny];
+
+
 }
 
 - (void)dealloc
@@ -193,13 +252,15 @@ GLfloat gCubeVertexData[216] =
 
 - (void)update
 {
+    
+    if (world.observer == nil) { NSLog(@"Danger: Not initialised!"); return;}
+//    GLKMatrix4 projectionMatrix = [world.observer projectionMatrix];
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
-    
-    self.effect.transform.projectionMatrix = projectionMatrix;
+    self.effect.transform.projectionMatrix =  projectionMatrix;
     
     GLKMatrix4 baseModelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -4.0f);
-    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, _rotation, 0.0f, 1.0f, 0.0f);
+    baseModelViewMatrix = GLKMatrix4Rotate(baseModelViewMatrix, world.observer->body.angles.theta*0.1, 0.0f, 1.0f, 0.0f);
     
     // Compute the model view matrix for the object rendered with GLKit
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -1.5f);
@@ -210,7 +271,7 @@ GLfloat gCubeVertexData[216] =
     
     // Compute the model view matrix for the object rendered with ES2
     modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 1.5f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, world.observer->body.angles.phi*0.1, 1.0f, 1.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(baseModelViewMatrix, modelViewMatrix);
     
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
@@ -237,7 +298,7 @@ GLfloat gCubeVertexData[216] =
     
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-    
+    [_rWorld animate];
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
@@ -391,6 +452,49 @@ GLfloat gCubeVertexData[216] =
     }
     
     return YES;
+}
+
+
+
+//The event handling method
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    NSLog(@"Look! %f , %f",location.x, location.y);
+    [rmxDebugger cycle:1];
+    //Do stuff here...
+}
+
+
+//The event handling method
+- (void)handleSwipe:(UISwipeGestureRecognizer *)recognizer {
+    //CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+  //  NSLog(@"Swipe!! %f , %f",location.x, location.y);
+    if (recognizer.direction == 0 ) {
+        NSLog(@"Whoops!");
+    } else if(recognizer.direction == UISwipeGestureRecognizerDirectionRight){
+        NSLog(@"Move Right");
+         [rmxDebugger cycle:1];
+    } else if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft){
+        NSLog(@"Move Left");
+         [rmxDebugger cycle:-1];
+    } else if(recognizer.direction == UISwipeGestureRecognizerDirectionUp){
+        NSLog(@"Move Up");
+    } else if(recognizer.direction == UISwipeGestureRecognizerDirectionDown){
+        NSLog(@"Move Down");
+    }
+    
+
+    
+    //Do stuff here...
+}
+
+//The event handling method
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+        CGPoint location = [recognizer locationInView:[recognizer.view superview]];
+    //NSLog(@"Panny!! %f , %f",location.x, location.y);
+    [_rWorld.observer plusAngle:location.x up:location.y];
+    
+    //Do stuff here...
 }
 
 @end

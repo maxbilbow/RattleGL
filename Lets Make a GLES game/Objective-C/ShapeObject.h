@@ -34,7 +34,7 @@
 - (void)draw {
    
         glPushMatrix();
-       
+    
         glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
         
         glPushMatrix();

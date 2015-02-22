@@ -210,7 +210,7 @@ bool ignoreNextjump = false;
     body.orientation = GLKMatrix3RotateWithVector3(body.orientation, theta, GLKVector3Make(0,1,0));
     body.orientation = GLKMatrix3RotateWithVector3(body.orientation, phi, GLKMatrix3GetRow(body.orientation,0));
     
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",theta,phi ]];
+    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",body.angles.theta,body.angles.phi ]];
    
 }
 

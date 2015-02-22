@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
+#include "Shapes.h"
+#include "LightSource.h"
+
+
 #ifndef OpenGL_2_0_World_h
 #define OpenGL_2_0_World_h
 
@@ -18,6 +22,7 @@
 #define VIEWING_DISTANCE_MIN  3.0
 #define TEXTURE_ID_CUBE 1
 
+//#include <foundation.h>
 
 
 @implementation RMXWorld
@@ -34,6 +39,8 @@
     
     _sprites = [[NSMutableArray alloc]initWithCapacity:10];
     [_sprites addObject:[[Observer alloc]initWithName:observerName parent:self world:self]];// inPropertyWithKey:observerName];
+    eventHandler = [[RMXEventHandler alloc]initWithName:@"Event Handler" parent:self world:self];
+    
     if (body.radius == 0)
         exit(1);
     if ([self observer].parent->body.radius == 0)
@@ -44,6 +51,11 @@
 - (Observer*)observer {
     return [_sprites firstObject];
 }
+
+
+
+
+
 
 - (void)setObserverWithName:(NSString*)name {
     if ([_sprites valueForKey:name])
@@ -87,10 +99,11 @@
         return someBody->body.mass * someBody->body.acceleration.y;// * self.physics.gravity; //air;
     }
 }
+
 - (void)setObserverWithId:(Particle*)object {
     observerName = [object name];
-    if (![_sprites doesContain:object])
-        [self insertSprite:object];
+//    if (![_sprites doesContain:object])
+//        [self insertSprite:object];
 }
 
 
@@ -110,6 +123,7 @@
     for (Particle* sprite in _sprites) {
         [sprite animate];
     }
+    [self debug];
 }
 
 - (void)resetWorld{
@@ -138,6 +152,8 @@
     }
 - (void)debug {
     [rmxDebugger add:RMX_WORLD n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+    [rmxDebugger feedback];
+   // NSLog(@"Well, hellooo!");
 }
 
 @end

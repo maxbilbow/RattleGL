@@ -13,17 +13,15 @@
 #endif
 
 
-#include "Shapes.h"
-#include "LightSource.h"
 
 
 
 void RenderObjects(void);
 
 
-@implementation Art
+@implementation RMXArt
 
-@synthesize sh, sh2, sh3, sh4,  x, y, z, d, r,g, b,k;
+//@synthesize x, y, z, d, r,g, b,k;
 
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
@@ -31,16 +29,28 @@ void RenderObjects(void);
     self = [super initWithName:name parent:parent world:world];
     
     if (self) {
-        self.x = 0;//45.0f;
-        self.y = (GLfloat)250/(GLfloat)250;
-        self.z = 0.1f;
-        self.d = 100.0f;
-        self.r = 0.8f;
-        self.g = 0.85f;
-        self.b = 1.8f;
-        self.k = 0.0f;
+//        self.x = 0;//45.0f;
+//        self.y = (GLfloat)250/(GLfloat)250;
+//        self.z = 0.1f;
+//        self.d = 100.0f;
+//        self.r = 0.8f;
+//        self.g = 0.85f;
+//        self.b = 1.8f;
+//        self.k = 0.0f;
         
     }
+    
+    return self;
+    
+    
+}
+
+
++ (RMXWorld*)initializeTestingEnvironment:(RMXWorld*)world {
+
+    //if (world == nil){
+         world = [[RMXWorld alloc]initWithName:@"Brave New World" parent:nil world:nil];
+    //}
     
     LightSource * sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
@@ -48,55 +58,39 @@ void RenderObjects(void);
     [world insertSprite: sun];
     
     
+    
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
-    [self drawAxis:axisColors];
+    [RMXArt drawAxis:axisColors world:world];
     [sun setRender: DrawSphere];
     [sun setShine:glLightfv];
-    [self randomObjects];
+    [RMXArt randomObjects:world];
     
-    ShapeObject *ZX = [[ShapeObject alloc]initWithName:@"ZX PLANE" parent:self world:self.world];
+    ShapeObject *ZX = [[ShapeObject alloc]initWithName:@"ZX PLANE" parent:world world:world];
     [ZX setRender:DrawPlane];
     [ZX setColor:GLKVector4Make(0.8,1.2,0.8,1)];
     [ZX setIsAnimated:false];
     ZX->body.position.y = -1;
     [world insertSprite:ZX];
     
-    return self;
-    
-    
-}
-//
-//- (void)drawThings
-//{
-//    for (ShapeObject* sprite in [world sprites]){
-//        if ([sprite class]==[ShapeObject class]) {
-//            glMaterialfv(GL_FRONT, GL_SPECULAR, [sprite getColorfv]);
-//            glMaterialfv(GL_FRONT, GL_DIFFUSE, [sprite getColorfv]);
-//            glPushMatrix();
-//            //glTranslatef(3, 0, 0);
-//            [sprite draw];//:DrawCubeWithTextureCoords];
-//            glPopMatrix();
-//            glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-//            glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
-//        }
-//    }
-//}
+    return world;
 
-- (void)drawAxis:(float**)colors {//xCol y:(float*)yCol z:(float*)zCol{
+}
+
++ (void)drawAxis:(float**)colors world:(RMXWorld*)world {//xCol y:(float*)yCol z:(float*)zCol{
     //BOOL gravity = false;
-    double noOfShapes = self.world->body.radius / 4;
+    double noOfShapes = world->body.radius / 4;
     float axis[3][3];
-    double limit = self.parent->body.radius / noOfShapes;
+    double limit = world->body.radius / noOfShapes;
     int test = 0;
     for (int j=0;j<3;++j) {
         int count = 0;
-        for(int i=-self.parent->body.radius;i<self.parent->body.radius;++i) {
+        for(int i=-world->body.radius;i<world->body.radius;++i) {
             if (count<limit) {
                 ++count;
             } else {
                 count = 0;
                 axis[j][j] = i;
-                ShapeObject * shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
+                ShapeObject * shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
                 [shape setHasGravity: false];// ? true : false];
                 [shape setRender:DrawCubeWithTextureCoords];
                 shape->body.radius = limit;
@@ -108,16 +102,16 @@ void RenderObjects(void);
             }
         }
     }
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"axis shapes: %i, radius: %f",test,self.parent->body.radius ]];
+    //[rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"axis shapes: %i, radius: %f",test,self.parent->body.radius ]];
 }
 
-- (void)randomObjects
++ (void)randomObjects:(RMXWorld*)world
 {
     //int max =100, min = -100;
     //BOOL gravity = true;
     double noOfShapes = 360;
     for(int i=-noOfShapes/2;i<noOfShapes/2;++i) {
-        GLKVector4 points = doASum(self.parent->body.radius, i,noOfShapes );
+        GLKVector4 points = doASum(world->body.radius, i,noOfShapes );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
@@ -164,11 +158,11 @@ void RenderObjects(void);
         //gravity = !gravity;
         ShapeObject * shape;
         if((rand() % 100 == 1)) {
-            shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:self.parent world:self.world];
+            shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:world world:world];
             shape->body.radius = 20;
         }
         else {
-            shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
+            shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
         }
         
         if(rand() % 5 == 1) {
@@ -193,7 +187,7 @@ void RenderObjects(void);
 }
 
 
-- (GLKVector4)rColor {
++ (GLKVector4)rColor {
     //float rCol[4];
     GLKVector4 rCol;
     //rCol.x = (rand() % 100)/10;
@@ -205,7 +199,7 @@ void RenderObjects(void);
     return rCol;
 }
 
-    
+    /*
 - (void)animate
 {
     
@@ -232,12 +226,10 @@ void RenderObjects(void);
 - (void)debug {
     [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
-
+*/
 
 @end
 
 
-
-static const Art *art;// = Art();
 
 

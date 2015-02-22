@@ -8,7 +8,7 @@
 
 
 
-@implementation Mouse
+@implementation Mouse 
 
 
 
@@ -34,7 +34,7 @@
     
 - (GLKVector2)getMouse
 {
-    //GLKVector2 pos = { this->pos.x - dx,this->pos.y - dy};
+
     return pos;
 }
 
@@ -59,33 +59,25 @@
         int DeltaX, DeltaY;// =
         
         
-        CGGetLastMouseDelta(&DeltaX, &DeltaY);
-//        pos.x += DeltaX;
-//        pos.y += DeltaY;
-        //cout<< "  dx " << "|" << DeltaX << "|" << DeltaY << endl;
+     //   CGGetLastMouseDelta(&DeltaX, &DeltaY);
+//
+    
+    
     [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
        
-        
-        //DeltaX -= dx; DeltaY -= dy;
-        //cout<< "  dx " << "|" << DeltaX << "|" << DeltaY << endl;
         int dir = focus ? 1 : -1;
         
         float theta = (float)(DeltaX)*dir;
         float phi = (float)(DeltaY)*dir;// / 20.0f;
         
     [owner plusAngle:theta up:phi];
-        // cout<< "  Mouse Pos: " << "|" << pos.x << "|" << pos.y << endl;
-        
+    
         
     }
     
 - (void)calibrateView:(int)x vert:(int)y
-{//GLKVector2 pos){
-    CGGetLastMouseDelta(&dx, &dy);
-//        dx += x - CGDisplayPixelsWide(0)/2;
-//        dy += y - CGDisplayPixelsHigh(0)/2;
-    //setMousePos(pos.x-dx, pos.y-dy);
-    //cout<< "  CALABRATING " << "|" << dx << "|" << dy << endl;    }
+{
+   // CGGetLastMouseDelta(&dx, &dy);
 }
 
 - (void)debug {

@@ -15,6 +15,8 @@
 @class RMXWorld;
 @class RMXPhysics;
 @class Particle;
+@class RMXObject;
+@class RMXEventHandler;
 
 @interface RMXDebugger : NSString
 @property const bool isDebugging;
@@ -22,10 +24,7 @@
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
 @end
 
-
-@interface RMXObject : NSObject {
-    @public RMXPhysicsBody body;
-}
+@protocol RMXObject
 @property (readonly) NSString * name;
 @property RMXObject * parent;
 @property (readonly) RMXWorld * world;
@@ -36,8 +35,11 @@
 - (void)debug;
 - (void)reInit;
 @end
+@interface RMXObject : NSObject <RMXObject> {
+    @public RMXPhysicsBody body;
+}
 
-
+@end
 
 
 
@@ -159,6 +161,8 @@
 
 @interface Observer : Particle <RMXMouseOwner,RMXPointOfView>
 @property Mouse *mouse;
+@property UIViewController* window;
+@property (readonly) GLKMatrix4 modelViewMatrix, projectionMatrix;
 - (void)debug;
 - (void)grabObject:(RMXObject*)i;
 @end
@@ -170,12 +174,19 @@
  Art draws the world.
  */
 
-@interface Art : RMXObject
-@property float x, y, z, d, r,g, b,k;
-@property ShapeObject * sh, * sh2, * sh3, *sh4;
+@interface RMXArt : RMXObject
+//@property float x, y, z, d, r,g, b,k;
++ (RMXWorld*)initializeTestingEnvironment:(RMXWorld*)world;
++ (void)randomObjects:(RMXWorld*)sender;
++ (void)drawAxis:(float**)colors world:(RMXWorld*)world;
++ (GLKVector4)rColor;
 @end
 
-@interface RMXWorld : RMXPhysics
+
+
+@interface RMXWorld : RMXPhysics {
+    RMXEventHandler* eventHandler;
+}
 @property NSMutableArray* sprites;
 @property NSString* observerName;
 @property float dt;
@@ -190,5 +201,12 @@
 - (float)normalForceAt:(Particle*)someBody;
 - (bool)collisionTest:(Particle*)sender;
 @end
+
+@interface RMXEventHandler : RMXObject
+- (void)swipeLeft;
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer;
+@end
+
+
 
 

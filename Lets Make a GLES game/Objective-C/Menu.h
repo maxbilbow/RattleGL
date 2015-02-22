@@ -24,7 +24,7 @@ void SelectFromMenu(int idCommand)
             break;
         case MENU_POLYMODE:
             g_bFillPolygons = !g_bFillPolygons;
-            glPolygonMode (GL_FRONT_AND_BACK, g_bFillPolygons ? GL_FILL : GL_LINE);
+            //glPolygonMode (GL_FRONT_AND_BACK, g_bFillPolygons ? GL_FILL : GL_LINE);
             break;
         case MENU_TEXTURING:
             g_bTexture = !g_bTexture;
@@ -44,10 +44,10 @@ void SelectFromMenu(int idCommand)
 int BuildPopupMenu (void)
 {
     int menu;
-    menu = glutCreateMenu (SelectFromMenu);
-    glutAddMenuEntry ("Toggle lighting\tl", MENU_LIGHTING);
-    glutAddMenuEntry ("Toggle polygon fill\tp", MENU_POLYMODE);
-    glutAddMenuEntry ("Toggle texturing\tt", MENU_TEXTURING);
-    glutAddMenuEntry ("Exit demo\tEsc", MENU_EXIT);
+//    menu = glutCreateMenu (SelectFromMenu);
+//    glutAddMenuEntry ("Toggle lighting\tl", MENU_LIGHTING);
+//    glutAddMenuEntry ("Toggle polygon fill\tp", MENU_POLYMODE);
+//    glutAddMenuEntry ("Toggle texturing\tt", MENU_TEXTURING);
+//    glutAddMenuEntry ("Exit demo\tEsc", MENU_EXIT);
     return menu;
 }

@@ -29,7 +29,7 @@
      - Up
      - Right
      */
-@synthesize mouse, viewDescription;
+@synthesize mouse, viewDescription, window;
 
 
     
@@ -157,6 +157,22 @@ bool _itemWasAnimated = false;
             [self getEye].x,[self getEye].y,[self getEye].z,
             [self getCenter].x,[self getCenter].y,[self getCenter].z,
             [self getUp].x,[self getUp].y,[self getUp].z];
+}
+
+
+- (GLKMatrix4)modelViewMatrix {
+    GLKMatrix4 m = GLKMatrix4MakeWithColumns(
+                                             GLKVector4MakeWithVector3(self.eye, 0),
+                                             GLKVector4MakeWithVector3(self.center, 0),
+                                             GLKVector4MakeWithVector3(self.up, 0),
+                                             GLKVector4MakeWithVector3(GLKVector3Make(0,0,0), 1)
+                                             );
+    return m;
+}
+
+- (GLKMatrix4)projectionMatrix {
+    float aspect = fabsf(self.window.view.bounds.size.width / self.window.view.bounds.size.height);
+    return GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
 }
 
 
