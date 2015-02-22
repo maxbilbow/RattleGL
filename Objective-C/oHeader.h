@@ -31,7 +31,7 @@ float _dt;
 #include <OpenCL/OpenCL.h>
 #include "RMXMaths.h"
 
-
+#include "Protocols.h"
 #include "RMXObject.h"
 
 #include "RMXDebugger.h"

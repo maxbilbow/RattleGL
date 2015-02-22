@@ -30,13 +30,13 @@
 {
     self = [super initWithName:name parent:parent world:world];
     observerName = @"Main Observer";
-    self.radius = 400;
+    body.radius = 1000;
     
     _sprites = [[NSMutableArray alloc]initWithCapacity:10];
     [_sprites addObject:[[Observer alloc]initWithName:observerName parent:self world:self]];// inPropertyWithKey:observerName];
-    if (self.radius == 0)
+    if (body.radius == 0)
         exit(1);
-    if ([self observer].parent.radius == 0)
+    if ([self observer].parent->body.radius == 0)
     exit(0);
     return self;
 }
@@ -53,6 +53,40 @@
     
 }
 
+- (float)µAt:(Particle*)someBody {
+    if (someBody->body.position.y <= someBody.ground  )
+        return 0.2;// * RMXGetSpeed(someBody->body.velocity);//Rolling wheel resistance
+    else
+        return 0.01;// * RMXGetSpeed(someBody->body.velocity); //air;
+}
+- (float)massDensityAt:(Particle*)someBody{
+    if (someBody->body.position.y < 0 )// someBody.ground )
+        return 99.1;//water or other
+    else
+        return 0.01; //air;
+}
+
+- (bool)collisionTest:(Particle*)sender;{
+    //Have I gone through a barrier?
+    if (sender->body.position.y < /*ground - */ sender.ground) {
+       //sender->body.position.y = sender.ground;
+        //sender->body.velocity.y = 0;
+        return true;
+    } else return false;
+    
+    //Then restore
+}
+
+- (float)normalForceAt:(Particle*)someBody {
+    if (someBody->body.position.y < someBody.ground - 1 ){
+        return someBody->body.mass * self.physics.gravity + someBody.ground - someBody->body.position.y;
+    } else if (someBody->body.position.y <= someBody.ground ) {
+        someBody->body.position.y = someBody.ground;
+            return someBody->body.mass * self.physics.gravity;
+    } else {
+        return someBody->body.mass * someBody->body.acceleration.y;// * self.physics.gravity; //air;
+    }
+}
 - (void)setObserverWithId:(Particle*)object {
     observerName = [object name];
     if (![_sprites doesContain:object])
@@ -77,13 +111,17 @@
         [sprite animate];
     }
 }
-    
+
+- (void)resetWorld{
+    [self.observer reInit];//->body.position = GLKVector3Make(0,0,0);
+    //self.observer->body.velocity = GLKVector3Make(0,0,0);
+}
 - (id)closestObject
 {
     id closest = [_sprites objectAtIndex:1];
-    float dista=GLKVector3Distance([self observer].position, ((Particle*)[_sprites objectAtIndex:1]).position);
+    float dista=GLKVector3Distance([self observer]->body.position, ((Particle*)[_sprites objectAtIndex:1])->body.position);
         for (Particle* sprite in _sprites){
-            float distb = GLKVector3Distance([self observer].position, sprite.position);
+            float distb = GLKVector3Distance([self observer]->body.position, sprite->body.position);
             //NSString *lt = @" < ";
             if(distb<dista&&distb!=0){
                 closest = sprite;

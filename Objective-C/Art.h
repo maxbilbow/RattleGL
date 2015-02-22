@@ -42,82 +42,55 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
         self.y = (GLfloat)250/(GLfloat)250;
         self.z = 0.1f;
         self.d = 100.0f;
-        self.r = 0.5f;
-        self.g = 0.2f;
-        self.b = 0.2f;
+        self.r = 0.8f;
+        self.g = 0.85f;
+        self.b = 1.8f;
         self.k = 0.0f;
         
     }
-
-//    self.sh = [[ShapeObject alloc]initWithName:@"Shape1"];
-//    self.sh2 = [[ShapeObject alloc]initWithName:@"Shape2"];
-//    self.sh3 = [[ShapeObject alloc]initWithName:@"Shape3"];
-//    self.sh4 = [[ShapeObject alloc]initWithName:@"Shape4"];
-//
-//    
-//    //sh = &world.getShapes()[World::Objects::BOX1];
-//    [sh calculatePosition:GLKVector3Make(6,0,0)];
-//    [sh setColor:GLKVector4MakeWithArray(yellow)];
-//    self.sh.rAxis = GLKVector3Make(0,1,0);
-//    
-//    
-//    //sh2 = &world.getShapes()[1];
-//    [sh2 calculatePosition:GLKVector3Make(-3,0,0)];
-//    [sh2 setColor:GLKVector4MakeWithArray(red)];
-//    self.sh2.rAxis = GLKVector3Make(0,1,0);
-//    
-//    //sh3 = &world.getShapes()[2];
-//    [sh3 calculatePosition:GLKVector3Make(3,0,0)];
-//    [sh3 setColor:GLKVector4MakeWithArray(colorBlue)];
-//    self.sh3.rAxis = GLKVector3Make(0,1,0);
-//    
-//    [sh4 calculatePosition:GLKVector3Make(0,0,-3)];
-//    [sh4 setColor:GLKVector4MakeWithArray(green)];
-//    self.sh4.rAxis = GLKVector3Make(0,1,0);
-//    
-//    [world insertSprite: self.sh];
-//    [world insertSprite: self.sh2];
-//    [world insertSprite: self.sh3];
-//    [world insertSprite: self.sh4];
     
-    sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
+    LightSource * sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
+    //[sun setRAxis:GLKVector3Make(0, 0, 1)];
+    sun->body.radius = 100;
     [world insertSprite: sun];
     
     
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
     [self drawAxis:axisColors];
+    [sun setRender: DrawSphere];
+    [sun setShine:glLightfv];
     //[self randomObjects];
     
     return self;
     
     
 }
-
-- (void)drawThings
-{
-    for (ShapeObject* sprite in [world sprites]){
-        if ([sprite class]==[ShapeObject class]) {
-            glMaterialfv(GL_FRONT, GL_SPECULAR, [sprite getColorfv]);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, [sprite getColorfv]);
-            glPushMatrix();
-            //glTranslatef(3, 0, 0);
-            [sprite draw:DrawCubeWithTextureCoords];
-            glPopMatrix();
-            glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
-        }
-    }
-}
+//
+//- (void)drawThings
+//{
+//    for (ShapeObject* sprite in [world sprites]){
+//        if ([sprite class]==[ShapeObject class]) {
+//            glMaterialfv(GL_FRONT, GL_SPECULAR, [sprite getColorfv]);
+//            glMaterialfv(GL_FRONT, GL_DIFFUSE, [sprite getColorfv]);
+//            glPushMatrix();
+//            //glTranslatef(3, 0, 0);
+//            [sprite draw];//:DrawCubeWithTextureCoords];
+//            glPopMatrix();
+//            glMaterialfv(GL_FRONT, GL_SPECULAR, colorNone);
+//            glMaterialfv(GL_FRONT, GL_DIFFUSE, colorNone);
+//        }
+//    }
+//}
 
 - (void)drawAxis:(float**)colors {//xCol y:(float*)yCol z:(float*)zCol{
     BOOL gravity = false;
-    double noOfShapes = 100;
+    double noOfShapes = self.world->body.radius / 4;
     float axis[3][3];
-    double limit = self.parent.radius / noOfShapes;
+    double limit = self.parent->body.radius / noOfShapes;
     int test = 0;
     for (int j=0;j<3;++j) {
         int count = 0;
-        for(int i=-self.parent.radius;i<self.parent.radius;++i) {
+        for(int i=-self.parent->body.radius;i<self.parent->body.radius;++i) {
             if (count<limit) {
                 ++count;
             } else {
@@ -125,8 +98,9 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
                 axis[j][j] = i;
                 ShapeObject * shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
                 [shape setHasGravity: gravity];
-                [shape setSize:limit];
-                [shape calculatePosition:GLKVector3MakeWithArray(axis[j])];
+                [shape setRender:DrawCubeWithTextureCoords];
+                shape->body.radius = limit;
+                shape->body.position = GLKVector3MakeWithArray(axis[j]);
                 [shape setColor:GLKVector4MakeWithArray(colors[j])];
                 [shape setIsAnimated:false];
                 [world insertSprite:shape];
@@ -134,7 +108,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
             }
         }
     }
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"axis shapes: %i, radius: %f",test,self.parent.radius ]];
+    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"axis shapes: %i, radius: %f",test,self.parent->body.radius ]];
 }
 
 - (void)randomObjects
@@ -143,7 +117,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     BOOL gravity = true;
     double noOfShapes = 360;
     for(int i=0;i<noOfShapes;++i) {
-        RMXVector4 points = point_on_circle ( self.parent.radius, i* 360/noOfShapes, 0 );
+        GLKVector4 points = point_on_circle ( self.parent->body.radius, i* 360/noOfShapes, 0 );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
@@ -158,8 +132,8 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
             shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:self.parent world:self.world];
         }
         [shape setHasGravity: gravity];
-        [shape setSize:(rand() % 5 + 4)];
-        [shape calculatePosition:GLKVector3MakeWithArray(randPos)];
+        shape->body.radius = (rand() % 5 + 4);
+        shape->body.position = GLKVector3MakeWithArray(randPos);
         [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
        // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
         
@@ -170,9 +144,9 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 }
 
 
-- (RMXVector4)rColor {
+- (GLKVector4)rColor {
     //float rCol[4];
-    RMXVector4 rCol;
+    GLKVector4 rCol;
     //rCol.x = (rand() % 100)/10;
     for (int i = 0; i<3; ++i)
         rCol.v[i] = (rand() % 100)/10;
@@ -217,7 +191,7 @@ float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
     glCullFace(GL_FRONT);
     glClearColor(r, g, b, y);
     
-    [self drawThings];
+    //[self drawThings];
     
     glPushMatrix();
     

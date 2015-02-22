@@ -64,21 +64,22 @@ void initKeys(){
 
 void repeatedKeys(){
     
-    if (keys.keySpecialStates[GLUT_KEY_UP])
-        if (keys.keyStates[9])
-            [sun lightUp:1];
-        else
-            [observer extendArmLength:1];
-
-    else if(keys.keySpecialStates[GLUT_KEY_DOWN])
-        if (keys.keyStates[9])
-            [sun lightUp:-1];
-        else
-            [observer extendArmLength:-1];
+//    if (keys.keySpecialStates[GLUT_KEY_UP]) {
+//        if (keys.keyStates[9])
+//            [sun lightUp:1];
+//        else
+//            [observer extendArmLength:1];
+//
+//    } else if(keys.keySpecialStates[GLUT_KEY_DOWN]) {
+//        if (keys.keyStates[9]) {
+//            [sun lightUp:-1];
+//        } else {
+//            [observer extendArmLength:-1];
+//        }
+//    }
 }
 
 void movement(float speed, int key){
-    bool test = false;
     //if (keys.keyStates[keys.forward])  [observer accelerateForward:speed];
     if (key == keys.forward) {
         if (!speed)
@@ -161,8 +162,6 @@ void keyDownOperations (int key) {
             art.b += 0.05;
         if (keys.keyStates['k'])
             art.k += 0.05;
-        if (keys.keyStates['G'])
-            [observer addGravity:0.1];
             
     } else if (keys.keyStates['-']) {
         if (keys.keyStates['r'])
@@ -173,8 +172,6 @@ void keyDownOperations (int key) {
             art.b -= 0.05;
         if (keys.keyStates['k'])
             art.k -= 0.05;
-        if (keys.keyStates['G'])
-            [observer addGravity:-0.1];
     }
     //if (keys.keySpecialStates[])
     
@@ -241,13 +238,17 @@ void keyUpOperations(int key){
         case '7':
         case '8':
         case '9':
-            [sun lightSwitch:key];
+            exit(0);//[sun lightSwitch:key];
             break;
         case 'S':
            // sun.setAnchor(&observer);
             break;
+        case 'R':
+            [world resetWorld];
+            break;
         case 6: //cntrl f
             NSLog(@"ERROR: Toggle Full Screen not working");//[window toggleFullScreen];
+            break;
     }
    // keys.keyStates[key] = false;
     

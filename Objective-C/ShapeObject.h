@@ -9,7 +9,7 @@
 
 @implementation ShapeObject
     //GLKVector4 position;
-@synthesize rotation, color, isRotating, rAxis;
+@synthesize rotation = _rotation, color = _color, isRotating = _isRotating, rAxis = _rAxis, render = _render, shine = _shine, type = _type, gl_light = _gl_light,  w = _w;
 
     const float nill[4] = {0,0,0,0};
 
@@ -19,83 +19,72 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        self.size = 1;
         self.color = GLKVector4Make(1,1, 1, 10);
         self.rAxis = GLKVector3Make(0,0,1);
         self.rotation = 0;
         self.isRotating = false;
+        body = RMXPhyisicsBodyMake(1,1);
        
     }
     return self;
     
 }
 
-- (void)draw
-{
-    glPushMatrix();
-    
-    glRotatef(rotation, rAxis.x, rAxis.y, rAxis.z);
-    
-    glPushMatrix();
-    
-    glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
-    glTranslatef([self position].x,[self position].y,[self position].z);
-    [self setMaterial];
-    //drawMe(size);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    [self unsetMaterial];
-    
-    //glPopMatrix();
-    glPopMatrix();
-    glPopMatrix();
-}
-- (void)draw:(void(float size))drawMe{
+
+- (void)draw {
+   
         glPushMatrix();
        
-        glRotatef(rotation, rAxis.x, rAxis.y, rAxis.z);
+        glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
         
         glPushMatrix();
         
         glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
-        glTranslatef([self position].x,[self position].y,[self position].z);
+        glTranslatef(body.position.x,body.position.y,body.position.z);
     [self setMaterial];
-        drawMe(self.size);
-       // glDrawArrays(GL_TRIANGLES, 0, 36);
+    _render(body.radius);
     [self unsetMaterial];
-        
-        //glPopMatrix();
+    
         glPopMatrix();
         glPopMatrix();
-    }
+    
+}
 
 
 - (void)animate
 {
     //if (temp) tester.checks[9] += "\nSHAPE:\n" + toString();
-    if (isRotating) rotation += _dt;//*dift;// * 30;
-    
+    if (_isRotating) _rotation += _dt;//*dift;// * 30;
     [super animate];
+    if (self.shine != nil )
+        _shine(_gl_light, _type, GLKVector4MakeWithVector3(body.position, _w).v);
+    [self draw];
+    
 }
 
 - (void)setMaterial
 {
-        //glMaterialfv(GL_FRONT,GL_EMISSION, color.v);
+    //glMaterialfv(GL_FRONT, GL_EMISSION, self.color.v);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, self.getColorfv);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, self.getColorfv);
 }
     
 - (void)unsetMaterial
 {
-        //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
+    //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
+    glMaterialfv(GL_FRONT, GL_SPECULAR,nill);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
 }
     
 - (float*)getColorfv
 {
-    return color.v;
+    return _color.v;
 }
 
 
 - (void)setColorfv:(float*)c
 {
-    color = GLKVector4MakeWithArray(c);
+    _color = GLKVector4MakeWithArray(c);
 }
 
 - (void)debug {

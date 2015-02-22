@@ -38,25 +38,32 @@
     self = [super initWithName:name parent:parent world:world];
     if (self) {
         mouse = [[Mouse alloc]initWithName:name parent:self world:world];
-        //self.origin;
-        self.armLength = 2;
-        self.reach = self.size+6;
-        self.mass = 1.5;
         //self.ground=1;
     }
     [self debug];
     return self;
 }
     
-
+- (void)reInit {
+    [super reInit];
+    
+    //self.origin;
+    self.armLength = 2;
+    self.reach = body.radius;
+    body = RMXPhyisicsBodyMake(0.5,10);
+    body.position = GLKVector3Make(-10,body.radius,-10);
+    body.dragC = 0.1;
+    body.dragArea = PI * body.radius;
+    //body.dragC = 2;
+}
 
 bool _itemWasAnimated = false;
     
 - (void)grabObject:(Particle*)i
 {
-    if (self.item == nil && GLKVector3Distance(self.position, i.position) < self.reach) {
+    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach) {
         self.item = i;
-        self.itemPosition = i.position;
+        self.itemPosition = i->body.position;
         _itemWasAnimated = self.item.isAnimated;
         [self.item setIsAnimated:false]; //TODO: Make this not necessary
         self.armLength = GLKVector3Distance(self.getCenter, self.itemPosition);
@@ -72,8 +79,7 @@ bool _itemWasAnimated = false;
 }
 
 - (float)ground {
-    [super ground];
-    return [self size];
+    return [super ground];
 }
 
  
@@ -110,10 +116,7 @@ bool _itemWasAnimated = false;
     
     return (GLKMatrix4)make(60*m ,width / height, 1.0, 1000.0);
 }
-//- (void)setView
-//{
-//    [rmxDebugger add:RMX_OBSERVER n:self t:@"SetView in Observer not implemented"];
-//}
+
 
 
 - (void)setMousePos:(int)x y:(int)y{
@@ -142,7 +145,8 @@ bool _itemWasAnimated = false;
 }
 
 - (void)debug{
-    [super debug];
+//    [super debug];
+    [rmxDebugger add:RMX_OBSERVER n:self t: self.describePosition];
     [rmxDebugger add:RMX_OBSERVER n:self t: self.viewDescription];
 }
 

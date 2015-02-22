@@ -36,7 +36,6 @@
 #define NOD_AXIS                0
 #define ROLL_AXIS               2
 #define U_SPEED                 0.05
-#define PI_OVER_180             (PI / 180)
 
 #define RMX_DEPRECATED(from, to) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA)
 

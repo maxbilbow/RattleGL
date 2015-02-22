@@ -41,7 +41,9 @@
 
 /* Begin PBXFileReference section */
 		50220C951A9767A000E8DAC3 /* RMXMaths.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXMaths.h; sourceTree = "<group>"; };
+		50560C371A98EFD4007565BF /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXObject.h; sourceTree = SOURCE_ROOT; };
 		505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL 2.1 (OC)"; sourceTree = BUILT_PRODUCTS_DIR; };
+		506226FB1A98DFBD008E6752 /* RMXDataTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXDataTypes.h; sourceTree = "<group>"; };
 		50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rattle GL 2.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50639F291A92CC9100A94E5C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		506C4A411A78896F00EB3C97 /* Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Window.xib; path = GUI/Window.xib; sourceTree = SOURCE_ROOT; };
@@ -49,7 +51,7 @@
 		509857821A72E009009F50A3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		509857841A72E011009F50A3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		509857861A72E01E009F50A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		50B9E83E1A964A790012E585 /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXObject.h; sourceTree = SOURCE_ROOT; };
+		50B9E83E1A964A790012E585 /* Protocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Protocols.h; sourceTree = SOURCE_ROOT; };
 		50BC367B1A743774008E8B78 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		50DEC2501A960D6900336687 /* Art.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Art.h; path = "Objective-C/Art.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2511A960D6900336687 /* DisplayProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayProcessor.h; path = "Objective-C/DisplayProcessor.h"; sourceTree = SOURCE_ROOT; };
@@ -137,7 +139,8 @@
 				50DEC2511A960D6900336687 /* DisplayProcessor.h */,
 				50DEC2521A960D6900336687 /* Header */,
 				50DEC2581A960D6900336687 /* oHeader.h */,
-				50B9E83E1A964A790012E585 /* RMXObject.h */,
+				50B9E83E1A964A790012E585 /* Protocols.h */,
+				50560C371A98EFD4007565BF /* RMXObject.h */,
 				50DEC2591A960D6900336687 /* Info.plist */,
 				50DEC25A1A960D6900336687 /* KeyboardProcessor.h */,
 				50DEC25B1A960D6900336687 /* LightSource.h */,
@@ -175,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				50220C951A9767A000E8DAC3 /* RMXMaths.h */,
+				506226FB1A98DFBD008E6752 /* RMXDataTypes.h */,
 				50639F281A92CC9100A94E5C /* Frameworks */,
 				5098576D1A72A6C7009F50A3 /* CPP */,
 				505ADED01A9579F000A91318 /* Objc */,

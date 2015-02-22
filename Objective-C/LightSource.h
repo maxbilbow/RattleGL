@@ -16,72 +16,63 @@
 
 @implementation LightSource
 
-    GLenum type = GL_POSITION;
-    GLenum gl_light = GL_LIGHT0;
-    @synthesize w;
 
-
-    
-//    LightSource(GLenum num, GLenum type, GLKVector4 position){
-//        this->position = position;
-//        this->gl_light = num;
-//        this->type = type;
-//    }
     
 - (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        [self calculatePosition:GLKVector3Make(50,0,0)];
+        body.position = GLKVector3Make(50,0,0);
        // self.ground = -_INFINITY;
         self.hasGravity = 0;
-        w=1;
-        self.size = 100;
+        self.w=1;
+        body.radius = 100;
         self.isRotating = true;
+        self.type = GL_POSITION;
+        self.gl_light = GL_LIGHT0;
     }
     return self;
 }
 
 
     
-- (void)shine:(void(GLenum l, GLenum type, const float* pos))light
-{
-    light(gl_light, type, GLKVector4MakeWithVector3([self position], w).v);
-}
+
     
         
 - (void)lightUp:(float)i
 {
-    [self calculatePosition: GLKVector3Make(self.position.x + i,self.position.y,self.position.z)];
-    [rmxDebugger add:RMX_LIGHT n:self.name t:[NSString stringWithFormat:@" Light Y: %f", [self position].x]];
+    body.position = GLKVector3Make(body.position.x + i,body.position.y,body.position.z);
+    [rmxDebugger add:RMX_LIGHT n:self.name t:[NSString stringWithFormat:@" Light Y: %f", body.position.x]];
 }
 - (void)lightSwitch:(char)i
 {
         switch (i){
             case '1':
-                type = GL_POSITION;
+                self.type = GL_POSITION;
                 break;
             case '2':
-                type = GL_SPECULAR;
+                self.type = GL_SPECULAR;
                 break;
             case '3':
-                type = GL_AMBIENT;
+                self.type = GL_AMBIENT;
                 break;
             case '4':
-                type = GL_DIFFUSE;
+                self.type = GL_DIFFUSE;
                 break;
             case '5':
-                type = GL_AMBIENT_AND_DIFFUSE;
+                self.type = GL_AMBIENT_AND_DIFFUSE;
                 break;
         }
     }
     
 - (void)setMaterial{
     glMaterialfv(GL_FRONT,GL_EMISSION, self.color.v);
+    [super setMaterial];
 }
     
 - (void)unsetMaterial{
     glMaterialfv(GL_FRONT, GL_EMISSION,nill);
+    [super unsetMaterial];
 }
 
 - (void)debug {
@@ -91,4 +82,4 @@
 
 @end
 
-LightSource * sun;
+

@@ -55,8 +55,7 @@ void AnimateScene(void)
 {
     animate();
     [world animate];
-    [sun draw:DrawSphere];
-    [sun shine:glLightfv];
+    //[sun draw:DrawSphere];
     
     [art animate];
    // getDt();
