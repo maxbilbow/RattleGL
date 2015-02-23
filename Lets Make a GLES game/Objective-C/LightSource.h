@@ -28,8 +28,10 @@
         self.w=1;
         body.radius = 100;
         self.isRotating = true;
+#ifdef MAC_OS_X
         self.type = GL_POSITION;
         self.gl_light = GL_LIGHT0;
+#endif
     }
     return self;
 }
@@ -46,6 +48,8 @@
 }
 - (void)lightSwitch:(char)i
 {
+#ifdef MAC_OS_X
+
         switch (i){
             case '1':
                 self.type = GL_POSITION;
@@ -63,15 +67,22 @@
                 self.type = GL_AMBIENT_AND_DIFFUSE;
                 break;
         }
-    }
+#endif
+}
     
 - (void)setMaterial{
+#ifdef MAC_OS_X
+
     glMaterialfv(GL_FRONT,GL_EMISSION, self.color.v);
+#endif
     [super setMaterial];
 }
     
 - (void)unsetMaterial{
+#ifdef MAC_OS_X
+
     glMaterialfv(GL_FRONT, GL_EMISSION,nill);
+#endif
     [super unsetMaterial];
 }
 

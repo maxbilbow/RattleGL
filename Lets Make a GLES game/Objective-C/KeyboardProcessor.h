@@ -64,6 +64,7 @@ void initKeys(){
 
 void repeatedKeys(){
     
+    #ifdef MAC_OS_X
     if (keys.keySpecialStates[GLUT_KEY_UP]) {
         if (keys.keyStates[9])
             return;//[sun lightUp:1];
@@ -77,6 +78,7 @@ void repeatedKeys(){
             [observer extendArmLength:-1];
         }
     }
+#endif
 }
 
 void movement(float speed, int key){

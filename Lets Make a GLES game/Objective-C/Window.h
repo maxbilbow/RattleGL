@@ -187,7 +187,9 @@ kp:(void(void (*func)(unsigned char key, int x, int y)))keyPressed
     
 - (void)toggleFullScreen
 {
+    /*
     if (fullscreen) {
+        
         glutLeaveGameMode();
         glutInitWindowSize ([self width], [self height]);
         //glutInitWindowPosition (100, 100);
@@ -201,7 +203,7 @@ kp:(void(void (*func)(unsigned char key, int x, int y)))keyPressed
         glutPostRedisplay();
         fullscreen = true;
     }
-    
+    */
 }
     
 - (void)create:(int(const char * s))createWindow

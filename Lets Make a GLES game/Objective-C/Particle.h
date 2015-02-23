@@ -32,8 +32,14 @@ bool ignoreNextjump = false;
 
 - (void)reInit {
     [super reInit];
-    _hasGravity = false;
-    _hasFriction = false;
+    
+#if TARGET_OS_X
+    _hasGravity = TRUE;
+    _hasFriction = TRUE;
+#else
+    _hasGravity = NO;
+    _hasFriction = NO;
+#endif
     _accelerationRate = 0.1;
     _speedLimit = 0.20;
     _limitSpeed = false;

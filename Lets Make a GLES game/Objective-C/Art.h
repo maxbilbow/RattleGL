@@ -65,7 +65,11 @@ void RenderObjects(void);
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
     [RMXArt drawAxis:axisColors world:world];
     [sun setRender: DrawSphere];
+    #ifdef MAC_OS_X
     [sun setShine:glLightfv];
+#elseif TARGET_IOS_IPHONE
+    
+#endif
     [RMXArt randomObjects:world];
     
     ShapeObject *ZX = [[ShapeObject alloc]initWithName:@"ZX PLANE" parent:world world:world];

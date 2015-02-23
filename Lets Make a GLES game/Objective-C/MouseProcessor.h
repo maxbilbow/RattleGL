@@ -21,7 +21,9 @@ void center(){
     bool center = false;//observer->hasFocus();
     int x = center ? window.width/2 :[observer getMouse].x;
     int y = center ? window.height/2 : [observer getMouse].y;
+    #ifdef MAC_OS_X
     CGWarpMouseCursorPosition(CGPointMake(x + glutGet(GLUT_WINDOW_X), y + glutGet(GLUT_WINDOW_Y) ));
+#endif
   //  pos.x = glutGet(GLUT_WINDOW_X)/2;
   //  pos.y = glutGet(GLUT_WINDOW_Y)/2;
     
@@ -32,6 +34,7 @@ void MouseButton(int button, int state, int x, int y)
 {
     // Respond to mouse button presses.
     // If button1 pressed, mark this state so we know in motion function.
+    #ifdef MAC_OS_X
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_UP))
         [observer grabObject:[world closestObjectTo:observer]];//&art.sh);
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_DOWN))
@@ -43,6 +46,7 @@ void MouseButton(int button, int state, int x, int y)
         g_yClick = y - 3 * window.fViewDistance;
         //art.sh.setAnchor(&observer);
     }
+#endif
 }
 
 

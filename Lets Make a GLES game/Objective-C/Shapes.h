@@ -63,7 +63,7 @@ void DrawCubeFace(float fSize)
 void DrawCubeWithTextureCoords (float fSize)
 {
     //NSLog(@"Hello!");
-    /*
+#ifdef MAC_OS_X
     glPushMatrix();
     DrawCubeFace (fSize);
     glRotatef (90, 1, 0, 0);
@@ -77,16 +77,18 @@ void DrawCubeWithTextureCoords (float fSize)
     glRotatef (180, 0, 1, 0);
     DrawCubeFace (fSize);
     glPopMatrix();
-    */
+    
     const GLfloat verts[] = {
         0.0f,   1.0f,   0.0f,
         -1.0f,  -1.0f,  0.0f,
         1.0f,   -1.0f,  0.0f
     };
-    
+
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, verts);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+#endif
+    
 }
 
 
@@ -126,7 +128,8 @@ void DrawSphere(float size){
 
 //Particle pCube = Particle();
 void RenderObjects(void)
-{/*
+{
+#ifdef MAC_OS_X
     float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
     float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
     float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
@@ -159,17 +162,19 @@ void RenderObjects(void)
     glPopMatrix();
     glPopMatrix();
     
- */
+#endif
 }
 
 void DrawTeapot(float f){
+#ifdef MAC_OS_X
     glRotatef(g_fTeapotAngle2, 1, 1, 0);
+#endif
 }
 
 
 void DrawPlane(float x)
 {
-    
+#ifdef MAC_OS_X
     const GLfloat verts[] = {
         -_INFINITY,   -0.001,   -_INFINITY,
         -_INFINITY,-0.001,_INFINITY,
@@ -181,7 +186,7 @@ void DrawPlane(float x)
     glVertexPointer(3, GL_FLOAT, 0, verts);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
     
-    /*
+
     glPushMatrix();
     glColor4fv(colorBlue);
     
@@ -206,5 +211,5 @@ void DrawPlane(float x)
     //            glVertex3f(10,0,i);
     //        };
     //        glEnd();
-     */
+#endif
 }

@@ -20,15 +20,6 @@
 		504771D21A99E8DA00484D8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504771D11A99E8DA00484D8C /* Images.xcassets */; };
 		504771D51A99E8DA00484D8C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504771D31A99E8DA00484D8C /* LaunchScreen.xib */; };
 		504771E11A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504771E01A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift */; };
-		504771F11A99EAA600484D8C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 504771F01A99EAA600484D8C /* main.m */; };
-		504771F41A99EAA600484D8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 504771F31A99EAA600484D8C /* AppDelegate.m */; };
-		504771F61A99EAA600484D8C /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 504771F51A99EAA600484D8C /* Shader.fsh */; };
-		504771F81A99EAA600484D8C /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 504771F71A99EAA600484D8C /* Shader.vsh */; };
-		504771FB1A99EAA600484D8C /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 504771FA1A99EAA600484D8C /* GameViewController.m */; };
-		504771FE1A99EAA600484D8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504771FC1A99EAA600484D8C /* Main.storyboard */; };
-		504772001A99EAA600484D8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504771FF1A99EAA600484D8C /* Images.xcassets */; };
-		504772031A99EAA600484D8C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504772011A99EAA600484D8C /* LaunchScreen.xib */; };
-		5047720F1A99EAA700484D8C /* RattleGL__objc_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5047720E1A99EAA700484D8C /* RattleGL__objc_Tests.m */; };
 		50639F2A1A92CC9100A94E5C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50639F291A92CC9100A94E5C /* CoreFoundation.framework */; };
 		509857831A72E009009F50A3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509857821A72E009009F50A3 /* GLUT.framework */; };
 		509857851A72E011009F50A3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509857841A72E011009F50A3 /* GLKit.framework */; };
@@ -112,20 +103,7 @@
 		504771DF1A99E8DA00484D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		504771E01A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RattleGL_iOS_objcTests.swift; sourceTree = "<group>"; };
 		504771EC1A99EAA600484D8C /* RattleGL (objc).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RattleGL (objc).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		504771EF1A99EAA600484D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		504771F01A99EAA600484D8C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		504771F21A99EAA600484D8C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		504771F31A99EAA600484D8C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		504771F51A99EAA600484D8C /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		504771F71A99EAA600484D8C /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		504771F91A99EAA600484D8C /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		504771FA1A99EAA600484D8C /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		504771FD1A99EAA600484D8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		504771FF1A99EAA600484D8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		504772021A99EAA600484D8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		504772081A99EAA600484D8C /* RattleGL (objc)Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RattleGL (objc)Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5047720D1A99EAA700484D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5047720E1A99EAA700484D8C /* RattleGL__objc_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RattleGL__objc_Tests.m; sourceTree = "<group>"; };
 		505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL 2.1 (OC)"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rattle GL 2.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50639F291A92CC9100A94E5C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -135,8 +113,6 @@
 		509857841A72E011009F50A3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		509857861A72E01E009F50A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		50BC367B1A743774008E8B78 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
-		50DEC2511A960D6900336687 /* DisplayProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DisplayProcessor.h; path = "Objective-C/DisplayProcessor.h"; sourceTree = SOURCE_ROOT; };
-		50DEC2681A960D6900336687 /* Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shapes.h; path = "Objective-C/Shapes.h"; sourceTree = SOURCE_ROOT; };
 		50DEC2701A960E1B00336687 /* Art.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Art.h; sourceTree = "<group>"; };
 		50DEC2711A960E1B00336687 /* LightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightSource.h; sourceTree = "<group>"; };
 		50DEC2721A960E1B00336687 /* ShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeObject.h; sourceTree = "<group>"; };
@@ -288,50 +264,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		504771ED1A99EAA600484D8C /* RattleGL (objc) */ = {
-			isa = PBXGroup;
-			children = (
-				5047720B1A99EAA700484D8C /* RattleGL (objc)Tests */,
-				504771F21A99EAA600484D8C /* AppDelegate.h */,
-				504771F31A99EAA600484D8C /* AppDelegate.m */,
-				504771F51A99EAA600484D8C /* Shader.fsh */,
-				504771F71A99EAA600484D8C /* Shader.vsh */,
-				504771F91A99EAA600484D8C /* GameViewController.h */,
-				504771FA1A99EAA600484D8C /* GameViewController.m */,
-				504771FC1A99EAA600484D8C /* Main.storyboard */,
-				504771FF1A99EAA600484D8C /* Images.xcassets */,
-				504772011A99EAA600484D8C /* LaunchScreen.xib */,
-				504771EE1A99EAA600484D8C /* Supporting Files */,
-			);
-			path = "RattleGL (objc)";
-			sourceTree = "<group>";
-		};
-		504771EE1A99EAA600484D8C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				504771EF1A99EAA600484D8C /* Info.plist */,
-				504771F01A99EAA600484D8C /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5047720B1A99EAA700484D8C /* RattleGL (objc)Tests */ = {
-			isa = PBXGroup;
-			children = (
-				5047720E1A99EAA700484D8C /* RattleGL__objc_Tests.m */,
-				5047720C1A99EAA700484D8C /* Supporting Files */,
-			);
-			path = "RattleGL (objc)Tests";
-			sourceTree = SOURCE_ROOT;
-		};
-		5047720C1A99EAA700484D8C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5047720D1A99EAA700484D8C /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		50639F281A92CC9100A94E5C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,7 +284,6 @@
 				50A40CB61A99CB9F00935BB6 /* C */,
 				5098576D1A72A6C7009F50A3 /* CPP */,
 				5039ED091A9A9D5500FCBD6E /* Objective-C */,
-				504771ED1A99EAA600484D8C /* RattleGL (objc) */,
 				5098576C1A72A6C7009F50A3 /* Products */,
 				504771C31A99E8DA00484D8C /* RattleGL iOS Swift */,
 			);
@@ -394,8 +325,6 @@
 				5039ED011A9A9C2900FCBD6E /* RMXDataTypes.h */,
 				5039ED021A9A9C2900FCBD6E /* RMXEquations.h */,
 				5039ED031A9A9C2900FCBD6E /* RMXMaths.h */,
-				50DEC2681A960D6900336687 /* Shapes.h */,
-				50DEC2511A960D6900336687 /* DisplayProcessor.h */,
 			);
 			name = C;
 			sourceTree = "<group>";
@@ -669,11 +598,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				504772031A99EAA600484D8C /* LaunchScreen.xib in Resources */,
-				504771FE1A99EAA600484D8C /* Main.storyboard in Resources */,
-				504772001A99EAA600484D8C /* Images.xcassets in Resources */,
-				504771F81A99EAA600484D8C /* Shader.vsh in Resources */,
-				504771F61A99EAA600484D8C /* Shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -709,9 +633,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				504771F41A99EAA600484D8C /* AppDelegate.m in Sources */,
-				504771FB1A99EAA600484D8C /* GameViewController.m in Sources */,
-				504771F11A99EAA600484D8C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,7 +640,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5047720F1A99EAA700484D8C /* RattleGL__objc_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,22 +693,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				504771D41A99E8DA00484D8C /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		504771FC1A99EAA600484D8C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				504771FD1A99EAA600484D8C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		504772011A99EAA600484D8C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				504772021A99EAA600484D8C /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";

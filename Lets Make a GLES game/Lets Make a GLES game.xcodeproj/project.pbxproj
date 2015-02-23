@@ -68,9 +68,9 @@
 		5035B18F1A99ED7500E16AF7 /* RMXEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXEquations.h; sourceTree = "<group>"; };
 		5035B1901A99ED7500E16AF7 /* RMXMaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMaths.h; sourceTree = "<group>"; };
 		5039ED1F1A9A9ECA00FCBD6E /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
+		5039ED201A9AA34800FCBD6E /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXObject.h; sourceTree = "<group>"; };
 		5045FBBA1A9A8CDB001A92CC /* RMXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXViewController.h; sourceTree = "<group>"; };
 		5045FBBB1A9A8D11001A92CC /* RMXViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMXViewController.m; sourceTree = "<group>"; };
-		509066D11A9A2FDA000879C4 /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RMXObject.h; path = "../../Objective-C/RMXObject.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +162,8 @@
 				5035B1841A99ED2E00E16AF7 /* RMXDebugger.h */,
 				5035B1921A99F14D00E16AF7 /* OpenGL heavey */,
 				5035B18C1A99ED6200E16AF7 /* Protocols.h */,
-				509066D11A9A2FDA000879C4 /* RMXObject.h */,
 				5035B1771A99ED2E00E16AF7 /* Art.h */,
+				5039ED201A9AA34800FCBD6E /* RMXObject.h */,
 				5035B1791A99ED2E00E16AF7 /* Info.plist */,
 				5035B1801A99ED2E00E16AF7 /* Observer.h */,
 				5035B1811A99ED2E00E16AF7 /* oHeader.h */,

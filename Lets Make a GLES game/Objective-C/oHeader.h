@@ -17,17 +17,41 @@
 #else
 #	include <sys/time.h>
 #endif
-//#include <iostream>
+
+//#if __APPLE__
+#include "TargetConditionals.h"
+//#if TARGET_IPHONE_SIMULATOR
+//// iOS Simulator
+//#elif TARGET_OS_IPHONE
+//// iOS device
+//#elif TARGET_OS_MAC
+//// Other kinds of Mac OS
+//#else
+//// Unsupported platform
+//#endif
+
 
 float _dt;
-//using namespace std;
-
+#ifdef __cplusplus
+#include <iostream>
+using namespace std;
+#endif
+#ifdef TARGET_IOS_IPHONE
 #import <UIKit/UIKit.h>
+#endif
+
+
 #include <GLKit/GLKMatrix4.h>
 #import <GLKit/GLKit.h>
-//#include <GLUT/glut.h>
+
+#if TARGET_OS_X
+#include <GLUT/glut.h>
+#endif
+
+#if TARGET_IOS_IPHONE
 #import <OpenGLES/ES1/gl.h>
-//#include <OpenCL/OpenCL.h>
+#endif
+
 #include "RMXMaths.h"
 
 #include "RMXEquations.h"
@@ -42,18 +66,21 @@ float _dt;
 
 #include "World.h"
 #include "Art.h"
+
+#if TARGET_IOS_IPHONE
 #include "GameViewController.h"
-
-//#include "RMXViewController.h"
-
-
-//#include "Window.h"
-
-//#include "MouseProcessor.h"
-//#include "KeyboardProcessor.h"
-//#include "DisplayProcessor.h"
+#endif
 
 
+
+#if TARGER_OS_X
+
+#include "Window.h"
+#include "MouseProcessor.h"
+#include "KeyboardProcessor.h"
+#include "DisplayProcessor.h"
+
+#endif
 
 
 

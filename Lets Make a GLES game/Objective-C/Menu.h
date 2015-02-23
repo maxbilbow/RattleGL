@@ -13,6 +13,7 @@
 #endif
 void SelectFromMenu(int idCommand)
 {
+#ifdef MAC_OS_X
     switch (idCommand)
     {
         case MENU_LIGHTING:
@@ -39,6 +40,7 @@ void SelectFromMenu(int idCommand)
     }
     // Almost any menu selection requires a redraw
      glutPostRedisplay();
+#endif
 }
 
 int BuildPopupMenu (void)

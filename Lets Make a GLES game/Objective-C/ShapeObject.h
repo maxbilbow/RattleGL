@@ -32,7 +32,7 @@
 
 
 - (void)draw {
-   
+   #ifdef MAC_OS_X
         glPushMatrix();
     
         glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
@@ -41,12 +41,16 @@
         
         glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
         glTranslatef(body.position.x,body.position.y,body.position.z);
+#endif
+    
     [self setMaterial];
     _render(body.radius);
     [self unsetMaterial];
-    
+
+#ifdef MAC_OS_X
         glPopMatrix();
         glPopMatrix();
+#endif
     
 }
 
@@ -64,18 +68,22 @@
 
 - (void)setMaterial
 {
+    #ifdef MAC_OS_X
     //glMaterialfv(GL_FRONT, GL_EMISSION, self.color.v);
     glMaterialfv(GL_FRONT, GL_SPECULAR, self.getColorfv);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, self.getColorfv);
+#endif
 }
-    
+
 - (void)unsetMaterial
 {
+    #ifdef MAC_OS_X
     //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
     glMaterialfv(GL_FRONT, GL_SPECULAR,nill);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
+#endif
 }
-    
+
 - (float*)getColorfv
 {
     return _color.v;
