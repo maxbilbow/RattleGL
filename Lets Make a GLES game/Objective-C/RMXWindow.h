@@ -120,7 +120,7 @@
     wsize.x = 600;
     fViewDistance = 3 * VIEWING_DISTANCE_MIN;
     nearPlane = 1;
-    farPlane = 1000;
+    farPlane = world->body.radius*2;
     fullscreen = RMX_FULL_SCREEN;
 
     return self;
@@ -257,11 +257,4 @@ kp:(void(void (*func)(unsigned char key, int x, int y)))keyPressed
 RMXWindow * window;// = RMXWindow;
 
 Observer * observer;// = * Observer();
-
-#include "Menu.h"
-#include "MouseProcessor.h"
-#include "KeyboardProcessor.h"
-#include "DisplayProcessor.h"
-
-
 

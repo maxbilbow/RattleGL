@@ -56,8 +56,8 @@ void AnimateScene(void)
     animate();
     [world animate];
     //[sun draw:DrawSphere];
-    
-    [art animate];
+    DrawFog();
+    //[art animate];
    // getDt();
     glutPostRedisplay();
 }
@@ -74,6 +74,7 @@ void reshape (int width, int height) {
 }
 
 void debug();
+
 bool alt = true;
 void display (void) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#include "Physics.h"
+#include "RMXPhysics.h"
 //#include "Mouse.h"
 
 
@@ -33,18 +33,24 @@ bool ignoreNextjump = false;
 - (void)reInit {
     [super reInit];
     
-#if TARGET_OS_X
-    _hasGravity = TRUE;
-    _hasFriction = TRUE;
-#else
+
+#if TARGET_OS_IPHONE
     _hasGravity = NO;
     _hasFriction = NO;
+#else
+    _hasGravity = TRUE;
+    _hasFriction = TRUE;
+    
 #endif
     _accelerationRate = 0.1;
     _speedLimit = 0.20;
     _limitSpeed = false;
     _anchor = GLKVector3Make(0,0,0);
+#if TARGET_OS_IPHONE
     _rotationSpeed = -0.005;
+#else
+    _rotationSpeed = -0.1;
+#endif
     _jumpStrength = 0.5;
     _item = nil;
     _itemPosition = self.center;
@@ -109,11 +115,14 @@ bool ignoreNextjump = false;
     //GLKVector3 upThrust = GLKVector3Make( 0,0,0 );
     GLKVector3 g = (_hasGravity) ? [self.physics gravityFor:self] : GLKVector3Make(0,0,0);
     GLKVector3 n = (_hasGravity) ? [self.physics normalFor:self] : GLKVector3Make(0,0,0);
-    GLKVector3 f = (_hasFriction) ? [self.physics frictionFor:self] : GLKVector3Make(1,1,1);
+    GLKVector3 f = [self.physics frictionFor:self];// : GLKVector3Make(1,1,1);
     GLKVector3 d = [self.physics dragFor:self];// : GLKVector3Make(1,1,1);
     
-    body.velocity = GLKVector3DivideScalar(body.velocity, 1 /* + [self.world µAt:self] * d.x */);
-    
+#if TARGET_OS_IPHONE
+    body.velocity = GLKVector3DivideScalar(body.velocity, 1 );
+#else
+    body.velocity = GLKVector3DivideScalar(body.velocity, 1+ [self.world µAt:self] + d.x );
+#endif
     
     
     GLKVector3 forces = GLKVector3Make(
@@ -173,7 +182,7 @@ bool ignoreNextjump = false;
     
     if ( _item == nil ) return;
     _item->body.position = GLKVector3Add(self.center,
-                                    GLKVector3MultiplyScalar(self.forwardVector,_armLength));
+                                    GLKVector3MultiplyScalar(self.forwardVector,_armLength+_item->body.radius));
     NSLog(@"manipulating: %@:\n%@",((Particle*)_item).name,((Particle*)_item).describePosition);
 }
 
@@ -228,6 +237,8 @@ bool ignoreNextjump = false;
 {
     body.velocity = GLKVector3Add(body.velocity, direction);
 }
+
+
 
 -(void)prepareToJump{
     _prepairingToJump = true;

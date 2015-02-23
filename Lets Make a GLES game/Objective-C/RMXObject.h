@@ -13,12 +13,16 @@
 #endif
 
 @implementation RMXObject : NSObject
-@synthesize name = _name, parent = _parent, world = _world, physics = _physics, isAnimated = _isAnimated, uiView = _uiView;
+@synthesize name = _name, parent = _parent, world = _world, physics = _physics, isAnimated = _isAnimated;
+#if TARGET_OS_IPHONE
+
+@synthesize uiView = _uiView;
+#endif
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world{
     self = [super init];
     _parent = parent;
     _world = world;
-#ifdef TARGET_IOS
+#if TARGET_OS_IPHONE
     if (world != nil && [world isKindOfClass:[RMXWorld class]]){
         _uiView = ((RMXWorld*)world).uiView;
     } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {

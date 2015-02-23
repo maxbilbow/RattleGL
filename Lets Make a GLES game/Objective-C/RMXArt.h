@@ -20,23 +20,27 @@ void RenderObjects(void);
 
 
 @implementation RMXArt
-
-//@synthesize x, y, z, d, r,g, b,k;
-
+#if TARGET_OS_IPHONE
+#else
+@synthesize x, y, z, d, r,g, b,k;
+#endif
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
     self = [super initWithName:name parent:parent world:world];
     
     if (self) {
-//        self.x = 0;//45.0f;
-//        self.y = (GLfloat)250/(GLfloat)250;
-//        self.z = 0.1f;
-//        self.d = 100.0f;
-//        self.r = 0.8f;
-//        self.g = 0.85f;
-//        self.b = 1.8f;
-//        self.k = 0.0f;
+#if TARGET_OS_IPHONE
+#else
+        self.x = 0;//45.0f;
+        self.y = (GLfloat)250/(GLfloat)250;
+        self.z = 0.1f;
+        self.d = 100.0f;
+        self.r = 0.8f;
+        self.g = 0.85f;
+        self.b = 1.8f;
+        self.k = 0.0f;
+#endif
         
     }
     
@@ -46,7 +50,7 @@ void RenderObjects(void);
 }
 
 
-+ (RMXWorld*)initializeTestingEnvironment:(UIViewController*)sender {
++ (RMXWorld*)initializeTestingEnvironment:(id)sender {
 
     //if (world == nil){
        RMXWorld* world = [[RMXWorld alloc]initWithName:@"Brave New World" parent:(RMXObject*)sender world:nil];
@@ -65,9 +69,11 @@ void RenderObjects(void);
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
     [RMXArt drawAxis:axisColors world:world];
     [sun setRender: DrawSphere];
-    #ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+
+#else
     [sun setShine:glLightfv];
-#elseif TARGET_IOS_IPHONE
+    
     
 #endif
     [RMXArt randomObjects:world];
@@ -116,14 +122,14 @@ void RenderObjects(void);
 {
     //int max =100, min = -100;
     //BOOL gravity = true;
-    double noOfShapes = 360;
+    double noOfShapes = 1980;
     for(int i=-noOfShapes/2;i<noOfShapes/2;++i) {
         GLKVector4 points = doASum(world->body.radius, i,noOfShapes );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
         //float randPos[3] = {(rand() % (max + min))-max/2, (rand() % max), (rand() % (max + min))-max/2};
-        int chance = (rand() % 6 + 1);
+        int chance = 1;//(rand() % 6 + 1);
         float randPos[3] = { X, Y, Z };
         switch (chance) {
             case 1:
@@ -180,9 +186,12 @@ void RenderObjects(void);
             [shape setRender:DrawCubeWithTextureCoords];
         }
         
-        [shape setHasGravity: (rand()% 1000 + 1)==1];
+        [shape setHasGravity: (rand()% 100 + 1)==1];
         shape->body.radius = (rand() % 5 + 4);
         shape->body.position = GLKVector3MakeWithArray(randPos);
+        shape->body.mass = (rand()%15)/10;
+        shape->body.dragArea = (rand()%10)/40;
+        shape->body.dragC = (rand()%10)/200;
         [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
        // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
         
@@ -238,5 +247,8 @@ void RenderObjects(void);
 @end
 
 
+#if TARGET_OS_IPHONE
 
-
+#else
+static RMXArt *art;
+#endif

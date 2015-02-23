@@ -87,7 +87,7 @@ int init()
     glutIdleFunc(AnimateScene);
     
     // Create our popup menu
-    BuildPopupMenu();
+    //BuildPopupMenu();
     InitGraphics();
     glutAttachMenu (GLUT_RIGHT_BUTTON);
     // Get the initial time, for use by animation
@@ -135,8 +135,8 @@ void debug(){
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         rmxDebugger = [[RMXDebugger alloc]init];
-        world = [[RMXWorld alloc]initWithName:@"World" parent:nil world:nil];
-        art = [[Art alloc]initWithName:@"Art" parent:world world:world];
+        world = [RMXArt initializeTestingEnvironment:nil];
+        art = [[RMXArt alloc]initWithName:@"Art" parent:world world:world];
         observer = world.observer;
         window = [[RMXWindow alloc]initWithName:@"RMX Window" parent:world world:world];
         

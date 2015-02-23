@@ -12,7 +12,7 @@
 
 #endif
 
-#include "Particle.h"
+#include "RMXParticle.h"
 
 
 /*
@@ -35,7 +35,7 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-       // mouse = [[RMXEventHandler alloc]initWithName:name parent:self world:world];
+       mouse = [[Mouse alloc]initWithName:name parent:self world:world];
         //self.ground=1;
     }
     [self debug];
@@ -46,10 +46,14 @@
     [super reInit];
     
     //self.origin;
-    self.armLength = 6;
-    self.reach = 8;
+    self.armLength = 8;
+    self.reach = 10;
     body = RMXPhyisicsBodyMake(0.5,10);
+#if TARGET_OS_IPHONE
     body.position = GLKVector3Make(0,0,-0.4);
+#else
+    body.position = GLKVector3Make(-10,body.radius,-10);
+#endif
     body.dragC = 0.1;
     body.dragArea = PI * body.radius;
     //body.dragC = 2;
@@ -60,7 +64,7 @@ bool _itemWasAnimated = false;
 - (void)grabObject:(RMXObject*)i
 {
     
-    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach) {
+    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach+i->body.radius) {
         self.item = i;
         self.itemPosition = i->body.position;
         _itemWasAnimated = self.item.isAnimated;
@@ -75,6 +79,10 @@ bool _itemWasAnimated = false;
 {
     if (_itemWasAnimated)
         [self.item setIsAnimated:true];
+    if ([self.item isKindOfClass:[Particle class]]) {
+       ((Particle*) self.item).hasGravity = true;
+        ((Particle*) self.item).isAnimated = true;
+    }
     self.item = nil;
 }
 
@@ -171,9 +179,20 @@ bool _itemWasAnimated = false;
 }
 
 - (GLKMatrix4)projectionMatrix {
-    float aspect = fabsf(self.uiView.view.bounds.size.width / self.uiView.view.bounds.size.height);
-    return GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+//
+//    float aspect = fabsf(self.uiView.view.bounds.size.width / self.uiView.view.bounds.size.height);
+//    return GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+//#else
+    return GLKMatrix4Identity;
 }
 
+- (void)throwItem:(float)strength
+{
+    if (self.item == nil)return;
+    
+    self.item->body.velocity = GLKVector3Add(body.velocity,GLKVector3MultiplyScalar(self.forwardVector,strength));
+    self.item.isAnimated = true;
+    self.item = nil;
+}
 
 @end

@@ -1,5 +1,5 @@
 //
-//  Menu.h
+//  RMXMenu.h
 //  OpenGL 2.0
 //
 //  Created by Max Bilbow on 24/01/2015.
@@ -11,9 +11,12 @@
 
 
 #endif
+
 void SelectFromMenu(int idCommand)
 {
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+    
+#else
     switch (idCommand)
     {
         case MENU_LIGHTING:
@@ -45,11 +48,14 @@ void SelectFromMenu(int idCommand)
 
 int BuildPopupMenu (void)
 {
+#if TARGET_OS_IPHONE
+#else
     int menu;
-//    menu = glutCreateMenu (SelectFromMenu);
-//    glutAddMenuEntry ("Toggle lighting\tl", MENU_LIGHTING);
-//    glutAddMenuEntry ("Toggle polygon fill\tp", MENU_POLYMODE);
-//    glutAddMenuEntry ("Toggle texturing\tt", MENU_TEXTURING);
-//    glutAddMenuEntry ("Exit demo\tEsc", MENU_EXIT);
+    menu = glutCreateMenu (SelectFromMenu);
+    glutAddMenuEntry ("Toggle lighting\tl", MENU_LIGHTING);
+    glutAddMenuEntry ("Toggle polygon fill\tp", MENU_POLYMODE);
+    glutAddMenuEntry ("Toggle texturing\tt", MENU_TEXTURING);
+    glutAddMenuEntry ("Exit demo\tEsc", MENU_EXIT);
     return menu;
+#endif
 }

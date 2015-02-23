@@ -63,9 +63,10 @@
         
         int DeltaX, DeltaY;// =
         
-        
-     //   CGGetLastMouseDelta(&DeltaX, &DeltaY);
-//
+#if TARGET_OS_IPHONE
+#else
+    CGGetLastMouseDelta(&DeltaX, &DeltaY);
+#endif
     
     
     [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
@@ -82,7 +83,10 @@
     
 - (void)calibrateView:(int)x vert:(int)y
 {
-   // CGGetLastMouseDelta(&dx, &dy);
+#if TARGET_OS_IPHONE
+#else
+    CGGetLastMouseDelta(&dx, &dy);
+#endif
 }
 
 - (void)debug {

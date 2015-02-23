@@ -12,9 +12,16 @@
 
 #endif
 GLKVector4 RMXSomeCircle (int i);
+float rFloat(int radius);
+
 GLKVector4 doASum(float radius, int i, int noOfShapes ){
-    return RMXSomeCircle(i);
+    radius = ceil(radius);
+    return GLKVector4Make(rFloat(radius*2)-radius,rFloat(2*radius),rFloat(radius*2)-radius,rFloat(radius));
     
+}
+
+float rFloat(int radius){
+    return (rand() % radius);
 }
 
 GLKVector4 RMXSomeCircle (int i){

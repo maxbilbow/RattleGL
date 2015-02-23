@@ -19,7 +19,8 @@
 #endif
 
 //#if __APPLE__
-#include "TargetConditionals.h"
+#include <TargetConditionals.h>
+//#endif
 //#if TARGET_IPHONE_SIMULATOR
 //// iOS Simulator
 //#elif TARGET_OS_IPHONE
@@ -32,11 +33,11 @@
 
 
 float _dt;
-#ifdef __cplusplus
+#if __cplusplus
 #include <iostream>
 using namespace std;
 #endif
-#ifdef TARGET_IOS_IPHONE
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #endif
 
@@ -44,41 +45,41 @@ using namespace std;
 #include <GLKit/GLKMatrix4.h>
 #import <GLKit/GLKit.h>
 
-#if TARGET_OS_X
-#include <GLUT/glut.h>
-#endif
 
-#if TARGET_IOS_IPHONE
+
+#if TARGET_OS_IPHONE
 #import <OpenGLES/ES1/gl.h>
+#else
+#include <GLUT/glut.h>
 #endif
 
 #include "RMXMaths.h"
 
 #include "RMXEquations.h"
 
-#include "Protocols.h"
+#include "RMXProtocols.h"
 #include "RMXObject.h"
 
 #include "RMXDebugger.h"
-#include "Mouse.h"
+#include "RMXMouse.h"
 
-#include "Observer.h"
+#include "RMXObserver.h"
 
-#include "World.h"
-#include "Art.h"
 
-#if TARGET_IOS_IPHONE
+#include "RMXShapes.h"
+#include "RMXShapeObject.h"
+#include "RMXLightSource.h"
+#include "RMXWorld.h"
+#include "RMXArt.h"
+
+#if TARGET_OS_IPHONE
 #include "GameViewController.h"
-#endif
-
-
-
-#if TARGER_OS_X
-
-#include "Window.h"
-#include "MouseProcessor.h"
-#include "KeyboardProcessor.h"
-#include "DisplayProcessor.h"
+#else
+#include "RMXMenu.h"
+#include "RMXWindow.h"
+#include "RMXMouseProcessor.h"
+#include "RMXKeyboardProcessor.h"
+#include "RMXDisplayProcessor.h"
 
 #endif
 

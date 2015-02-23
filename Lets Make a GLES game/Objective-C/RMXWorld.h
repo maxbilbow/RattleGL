@@ -6,8 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#include "Shapes.h"
-#include "LightSource.h"
+
 
 
 #ifndef OpenGL_2_0_World_h
@@ -102,8 +101,8 @@
 
 - (void)setObserverWithId:(Particle*)object {
     observerName = [object name];
-//    if (![_sprites doesContain:object])
-//        [self insertSprite:object];
+    if (![_sprites doesContain:object])
+        [self insertSprite:object];
 }
 
 
@@ -152,10 +151,16 @@
     }
 - (void)debug {
     [rmxDebugger add:RMX_WORLD n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
-    [rmxDebugger feedback];
+    //[rmxDebugger feedback];
    // NSLog(@"Well, hellooo!");
 }
 
+- (void)applyGravity:(bool)hasGrav {
+    for (Particle* sprite in _sprites){
+            sprite.hasGravity=hasGrav;
+            //sprite.isAnimated=YES;
+    }
+}
 @end
 
 static RMXWorld *world;

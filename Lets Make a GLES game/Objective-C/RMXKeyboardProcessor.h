@@ -64,7 +64,8 @@ void initKeys(){
 
 void repeatedKeys(){
     
-    #ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
     if (keys.keySpecialStates[GLUT_KEY_UP]) {
         if (keys.keyStates[9])
             return;//[sun lightUp:1];
@@ -204,8 +205,15 @@ void keyUpOperations(int key){
         case 't':
             SelectFromMenu(MENU_TEXTURING);
             break;
+        case 'z':
+            [world applyGravity:YES];
+            break;
+        case 'Z':
+            [world applyGravity:NO];
+            break;
         case 'm':
              [observer toggleFocus];
+            NSLog(@"m");
             if ( [observer hasFocus]){
                 //center();
                 glutSetCursor(GLUT_CURSOR_NONE);

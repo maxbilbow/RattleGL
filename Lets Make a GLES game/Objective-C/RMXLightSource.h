@@ -11,7 +11,7 @@
 
 
 #endif
-#include "ShapeObject.h"
+
 
 
 @implementation LightSource
@@ -28,7 +28,8 @@
         self.w=1;
         body.radius = 100;
         self.isRotating = true;
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
         self.type = GL_POSITION;
         self.gl_light = GL_LIGHT0;
 #endif
@@ -48,7 +49,8 @@
 }
 - (void)lightSwitch:(char)i
 {
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
 
         switch (i){
             case '1':
@@ -71,16 +73,16 @@
 }
     
 - (void)setMaterial{
-#ifdef MAC_OS_X
-
+#if TARGET_OS_IPHONE
+#else
     glMaterialfv(GL_FRONT,GL_EMISSION, self.color.v);
 #endif
     [super setMaterial];
 }
     
 - (void)unsetMaterial{
-#ifdef MAC_OS_X
-
+#if TARGET_OS_IPHONE
+#else
     glMaterialfv(GL_FRONT, GL_EMISSION,nill);
 #endif
     [super unsetMaterial];

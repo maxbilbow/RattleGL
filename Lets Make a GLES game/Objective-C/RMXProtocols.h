@@ -20,7 +20,7 @@
 
 @interface RMXDebugger : NSString
 @property const bool isDebugging;
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 @property UIViewController * window;
 #endif
 -(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
@@ -32,7 +32,7 @@
 @property RMXWorld * world;
 @property RMXPhysics * physics;
 @property BOOL isAnimated;
-#ifdef TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE
 @property UIViewController * uiView;
 #endif
 @property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
@@ -157,7 +157,9 @@
 @end
 
 @interface RMXDPad : RMXObject
+#if TARGET_OS_IPHONE
 @property UIViewController* owner;
+#endif
 @end
 
 @interface Mouse : RMXObject <RMXMouseOwner>
@@ -175,6 +177,7 @@
 @property (readonly) GLKMatrix4 modelViewMatrix, projectionMatrix;
 - (void)debug;
 - (void)grabObject:(RMXObject*)i;
+- (void)throwItem:(float)strength;
 @end
 
 
@@ -185,7 +188,11 @@
  */
 
 @interface RMXArt : RMXObject
-//@property float x, y, z, d, r,g, b,k;
+#if TARGET_OS_IPHONE
+
+#else
+@property float x, y, z, d, r,g, b,k;
+#endif
 + (RMXWorld*)initializeTestingEnvironment:(id)sender;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
@@ -210,6 +217,7 @@
 - (float)massDensityAt:(Particle*)someBody;
 - (float)normalForceAt:(Particle*)someBody;
 - (bool)collisionTest:(Particle*)sender;
+- (void)applyGravity:(BOOL)hasGrav;
 @end
 
 

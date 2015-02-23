@@ -198,10 +198,6 @@ Window window = Window();
 
 Observer * observer;// = * Observer();
 
-#include "Menu.h"
-#include "MouseProcessor.h"
-#include "KeyboardProcessor.h"
-#include "DisplayProcessor.h"
 
 
 

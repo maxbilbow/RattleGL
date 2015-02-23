@@ -28,7 +28,7 @@ using namespace std;
 #include <GLUT/glut.h>
 //#include "glfw3.h"
 
-#include "RMXDebugger.h"
+#include "Debugger.h"
 #include "Observer.h"
 
 #include "Art.h"

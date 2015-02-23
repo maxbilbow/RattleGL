@@ -46,24 +46,28 @@ float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
 float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
 float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
 
-/*
+
 void DrawCubeFace(float fSize)
 {
     fSize /= 2.0;
-//    glBegin(GL_QUADS);
+#if TARGET_OS_IPHONE
+#else
+    glBegin(GL_QUADS);
     
-//    glVertex3v(-fSize, -fSize, fSize);   // glTexCoord2f (0, 0);
-//    glVertex3f(fSize, -fSize, fSize);     //glTexCoord2f (1, 0);
-//    glVertex3f(fSize, fSize, fSize);     // glTexCoord2f (1, 1);
-//    glVertex3f(-fSize, fSize, fSize);    // glTexCoord2f (0, 1);
-   // glEnd();
-} 
- */
+    glVertex3f(-fSize, -fSize, fSize);    glTexCoord2f (0, 0);
+    glVertex3f(fSize, -fSize, fSize);   glTexCoord2f (1, 0);
+    glVertex3f(fSize, fSize, fSize);     glTexCoord2f (1, 1);
+    glVertex3f(-fSize, fSize, fSize);     glTexCoord2f (0, 1);
+    glEnd();
+#endif
+}
+
 
 void DrawCubeWithTextureCoords (float fSize)
 {
     //NSLog(@"Hello!");
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
     glPushMatrix();
     DrawCubeFace (fSize);
     glRotatef (90, 1, 0, 0);
@@ -129,7 +133,9 @@ void DrawSphere(float size){
 //Particle pCube = Particle();
 void RenderObjects(void)
 {
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+    
+#else
     float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
     float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
     float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
@@ -166,7 +172,8 @@ void RenderObjects(void)
 }
 
 void DrawTeapot(float f){
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
     glRotatef(g_fTeapotAngle2, 1, 1, 0);
 #endif
 }
@@ -174,12 +181,14 @@ void DrawTeapot(float f){
 
 void DrawPlane(float x)
 {
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+    
+#else
     const GLfloat verts[] = {
-        -_INFINITY,   -0.001,   -_INFINITY,
-        -_INFINITY,-0.001,_INFINITY,
+        -INFINITY,   -0.001,   -INFINITY,
+        -INFINITY,-0.001,_INFINITY,
         _INFINITY,-0.001,_INFINITY,
-        _INFINITY,-0.001, -_INFINITY
+        _INFINITY,-0.001, -INFINITY
     };
     
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -212,4 +221,32 @@ void DrawPlane(float x)
     //        };
     //        glEnd();
 #endif
+}
+
+void DrawFog(){
+GLfloat density = 0.0005;
+
+GLfloat fogColor[4] = {0.9, 0.6, 0.9, 1.0};
+    
+    glEnable (GL_FOG);
+    glFogi (GL_FOG_MODE, GL_EXP2);
+    
+    glFogfv (GL_FOG_COLOR, fogColor);
+    
+ 
+    
+    glFogf (GL_FOG_DENSITY, density);
+    
+
+    
+    glHint (GL_FOG_HINT, GL_NICEST);
+    
+    //glClearColor (0.0,0.0,0.0,1.0);
+    
+    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    
+
+    
+
 }

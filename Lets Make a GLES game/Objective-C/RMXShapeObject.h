@@ -32,7 +32,8 @@
 
 
 - (void)draw {
-   #ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
         glPushMatrix();
     
         glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
@@ -47,7 +48,8 @@
     _render(body.radius);
     [self unsetMaterial];
 
-#ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
         glPopMatrix();
         glPopMatrix();
 #endif
@@ -68,7 +70,8 @@
 
 - (void)setMaterial
 {
-    #ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
     //glMaterialfv(GL_FRONT, GL_EMISSION, self.color.v);
     glMaterialfv(GL_FRONT, GL_SPECULAR, self.getColorfv);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, self.getColorfv);
@@ -77,7 +80,8 @@
 
 - (void)unsetMaterial
 {
-    #ifdef MAC_OS_X
+#if TARGET_OS_IPHONE
+#else
     //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
     glMaterialfv(GL_FRONT, GL_SPECULAR,nill);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
