@@ -108,7 +108,7 @@ class RMXDPad : CMMotionManager {
         
         if self.accelerometerData? != nil {
             let dp = "04.1"
-            println("          userAcc2: x\(self.accelerometerData!.acceleration.x.toData()),\(self.accelerometerData!.acceleration.y.toData()),\(self.accelerometerData!.acceleration.z.toData())")
+            println("          userAcc2,\(self.accelerometerData!.acceleration.x.toData()),\(self.accelerometerData!.acceleration.y.toData()),\(self.accelerometerData!.acceleration.z.toData())")
            // println("      Magnetic field accuracy: \(d)")
         }
         }
