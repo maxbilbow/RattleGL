@@ -59,22 +59,25 @@ void RenderObjects(void);
     if (world.observer == nil )exit(0);
     //}
     
-    LightSource * sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
+    
+    
+    LightSource * sun;
+    sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
     sun->body.radius = 100;
     
     
-    
-    
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
-    [RMXArt drawAxis:axisColors world:world];
+    
     [sun setRender: DrawSphere];
 //#if TARGET_OS_IPHONE
 //
 //#else
+
     [sun setShine:glLightfv];
     
     [world insertSprite: sun];
+    [RMXArt drawAxis:axisColors world:world];
 //#endif
     [RMXArt randomObjects:world];
     
@@ -170,15 +173,17 @@ void RenderObjects(void);
         
         //gravity = !gravity;
         ShapeObject * shape;
-        if((rand() % 1000) == 1) {
+        if(false){//(rand() % 10000) == 1) {
             shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:world world:world];
-            shape->body.radius = 20;
+            //shape->body.radius = 20;
+            [shape setShine:glLightfv];
+            //[shape setRender:DrawCubeWithTextureCoords];
         }
         else {
             shape = [[ShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
         }
         
-        if(rand() % 5 == 1) {
+        if(rand() % 500 == 1) {
             [shape setRender:DrawSphere];
         } else if (rand() % 3 == 1) {
             [shape setRender:DrawTeapot];
@@ -189,7 +194,7 @@ void RenderObjects(void);
         [shape setHasGravity: (rand()% 100)==1];
         shape->body.radius = (rand() % 5 + 4);
         shape->body.position = GLKVector3MakeWithArray(randPos);
-        shape->body.mass = (rand()%15+1)/10;
+        shape->body.mass = (rand()%15+2)/10;
         //int drag = shape->body.mass * 10;
         shape->body.dragC = (rand()% 99+1)/100;
         shape->body.dragArea = shape->body.radius * shape->body.radius * PI;
@@ -209,14 +214,14 @@ void RenderObjects(void);
     GLKVector4 rCol;
     //rCol.x = (rand() % 100)/10;
     for (int i = 0; i<3; ++i)
-        rCol.v[i] = (rand() % 1000)/500;
+        rCol.v[i] = (rand() % 800)/500;
     
     rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
     //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
     return rCol;
 }
 
-    /*
+
 - (void)animate
 {
     
@@ -243,7 +248,7 @@ void RenderObjects(void);
 - (void)debug {
     [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
-*/
+
 
 @end
 

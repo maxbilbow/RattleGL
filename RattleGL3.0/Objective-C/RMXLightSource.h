@@ -22,22 +22,27 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        body.position = GLKVector3Make(50,0,0);
-       // self.ground = -_INFINITY;
-        self.hasGravity = 0;
+       
+         body.position = GLKVector3Make(1000,0,1000);
+        //self.hasGravity = 0;
         self.w=1;
-        body.radius = 100;
+        body.radius = 50;
         self.isRotating = true;
+
 #if TARGET_OS_IPHONE
 #else
         self.type = GL_POSITION;
         self.gl_light = GL_LIGHT0;
 #endif
+        
+        
     }
     return self;
 }
 
-
+- (void)animate{
+    [super animate];
+}
     
 
     

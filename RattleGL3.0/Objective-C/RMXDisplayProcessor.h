@@ -55,7 +55,7 @@ void AnimateScene(void)
 {
     animate();
     [world animate];
-    //[sun draw:DrawSphere];
+    //[sun drawWith:DrawSphere];
     DrawFog();
     //[art animate];
    // getDt();

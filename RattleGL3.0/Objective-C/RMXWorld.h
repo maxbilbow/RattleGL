@@ -36,7 +36,7 @@
     observerName = @"Main Observer";
     body.radius = 1000;
     
-    _sprites = [[NSMutableArray alloc]initWithCapacity:10000];
+    _sprites = [[NSMutableArray alloc]initWithCapacity:1500];
     [_sprites addObject:[[Observer alloc]initWithName:observerName parent:self world:self]];// inPropertyWithKey:observerName];
     //eventHandler = [[RMXEventHandler alloc]initWithName:@"Event Handler" parent:self world:self];
     

@@ -98,35 +98,35 @@ void DrawCubeWithTextureCoords (float fSize)
 
 void DrawSpheree(double r, int lats, int longs)
 {
-/*
+
           int i, j;
           for(i = 0; i <= lats; i++) {
                   double lat0 = M_PI * (-0.5 + (double) (i - 1) / lats);
-                  double z0  = sin(lat0);
-                  double zr0 =  cos(lat0);
+                  double z0  = sin(lat0)*r;
+                  double zr0 =  cos(lat0)*r;
         
                   double lat1 = M_PI * (-0.5 + (double) i / lats);
-                  double z1 = sin(lat1);
-                  double zr1 = cos(lat1);
+                  double z1 = sin(lat1)*r;
+                  double zr1 = cos(lat1)*r;
         
                   glBegin(GL_QUAD_STRIP);
                   for(j = 0; j <= longs; j++) {
                         double lng = 2 * M_PI * (double) (j - 1) / longs;
-                          double x = cos(lng);
-                          double y = sin(lng);
+                          double x = cos(lng) ;
+                          double y = sin(lng) ;
             
-                          glNormal3f(x * zr0, y * zr0, z0);
-                        glVertex3f(x * zr0, y * zr0, z0);
+                          glNormal3f(x * zr0 , y * zr0 , z0  );
+                        glVertex3f(x * zr0 , y * zr0 , z0 );
                           glNormal3f(x * zr1, y * zr1, z1);
                           glVertex3f(x * zr1, y * zr1, z1);
                       }
                   glEnd();
         }
- */
+ 
 }
 
 void DrawSphere(float size){
-    DrawSpheree(size,size,size);
+    DrawSpheree(size,20,20);
 }
 
 
@@ -138,11 +138,11 @@ void RenderObjects(void)
 #else
     float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
     float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
-    float colorBlue[4]        = { 0.0, 0.0, 1.0, 1.0 };
+    float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
     float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
-    float colorRed[4]         = { 1.0, 0.0, 0.0, 1.0 };
-    float colorGreen[4]       = { 0.0, 1.0, 0.0, 1.0 };
-    float colorYellow[4]      = { 1.0, 0.0, 1.0, 1.0 };
+    float colorRed[4]         = { 0.1, 0.0, 0.0, 1.0 };
+    float colorGreen[4]       = { 0.0, 0.1, 0.0, 1.0 };
+    float colorYellow[4]      = { 1.0, 0.0, 0.0, 1.0 };
     glMatrixMode(GL_MODELVIEW);
     
     glPushMatrix();
@@ -224,7 +224,7 @@ void DrawPlane(float x)
 }
 
 void DrawFog(){
-GLfloat density = 0.0005;
+GLfloat density = 0.0008;
 
 GLfloat fogColor[4] = {0.9, 0.6, 0.9, 1.0};
     

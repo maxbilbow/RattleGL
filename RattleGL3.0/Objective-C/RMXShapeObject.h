@@ -57,13 +57,46 @@
 }
 
 
+
+- (void)drawWith:(void(float))shape {
+#if TARGET_OS_IPHONE
+#else
+    glPushMatrix();
+    
+    glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
+    
+    glPushMatrix();
+    
+    glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
+    glTranslatef(body.position.x,body.position.y,body.position.z);
+#endif
+    
+    [self setMaterial];
+    shape(body.radius);
+    [self unsetMaterial];
+    
+#if TARGET_OS_IPHONE
+#else
+    glPopMatrix();
+    glPopMatrix();
+#endif
+    
+}
+
+
 - (void)animate
 {
     //if (temp) tester.checks[9] += "\nSHAPE:\n" + toString();
     if (_isRotating) _rotation += _dt;//*dift;// * 30;
     [super animate];
-    if (self.shine != nil )
-        _shine(_gl_light, _type, GLKVector4MakeWithVector3(body.position, _w).v);
+    if ([self isKindOfClass:[LightSource class]]) {
+        //glEnable(GL_LIGHTING);
+        // Render lit geometry.
+                _shine(_gl_light, _type, GLKVector4MakeWithVector3(body.position, _w).v);
+        //glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
+        //glDisable(GL_LIGHTING);
+
+    }//else
     [self draw];
     
 }

@@ -43,7 +43,7 @@ bool ignoreNextjump = false;
     _hasFriction = TRUE;
     
 #endif
-    _accelerationRate = 0.1;
+    _accelerationRate = 0.4;
     _speedLimit = 0.20;
     _limitSpeed = false;
     _anchor = GLKVector3Make(0,0,0);

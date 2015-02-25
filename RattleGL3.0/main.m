@@ -60,7 +60,7 @@ int init()
         //window.create(glutCreateWindow);
         //[window create:glutCreateWindow];
         glutInitWindowPosition(100,100);
-        glutInitWindowSize(640,360);
+        glutInitWindowSize(1280,750);
         glutCreateWindow(window.title);
     }
     
@@ -131,15 +131,15 @@ void debug(){
     [observer debug];
     [rmxDebugger feedback];
 };
-@class RMXHello;
-#import "OpenGL 2.1 (OC)-Bridging-Header.h"
-#import "RattleGL2.5-Swift.h"
+//@class RMXHello;
+//#import "OpenGL 2.1 (OC)-Bridging-Header.h"
+//#import "RattleGL2.5-Swift.h"
 
 //#import "OpenGL 2.0-Bridging-Header.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        RMXHello *h = [RMXHello new];
+     //   RMXHello *h = [RMXHello new];
         //[Hello print];
        // [Hello print];
         rmxDebugger = [[RMXDebugger alloc]init];
