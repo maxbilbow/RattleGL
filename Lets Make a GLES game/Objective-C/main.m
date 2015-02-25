@@ -7,6 +7,7 @@
 //
 
 //#import <Foundation/Foundation.h>
+
 #import "oHeader.h"
 
 void InitGraphics(void)
@@ -130,10 +131,17 @@ void debug(){
     [observer debug];
     [rmxDebugger feedback];
 };
+@class RMXHello;
+#import "OpenGL 2.1 (OC)-Bridging-Header.h"
+#import "RattleGL2.5-Swift.h"
 
+//#import "OpenGL 2.0-Bridging-Header.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        RMXHello *h = [RMXHello new];
+        //[Hello print];
+       // [Hello print];
         rmxDebugger = [[RMXDebugger alloc]init];
         world = [RMXArt initializeTestingEnvironment:nil];
         art = [[RMXArt alloc]initWithName:@"Art" parent:world world:world];

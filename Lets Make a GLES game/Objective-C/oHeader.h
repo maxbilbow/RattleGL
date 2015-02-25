@@ -30,7 +30,7 @@
 //#else
 //// Unsupported platform
 //#endif
-
+#import "OpenGL 2.0-Bridging-Header.h"
 
 float _dt;
 #if __cplusplus

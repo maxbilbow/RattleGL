@@ -11,7 +11,7 @@
 
 
 #endif
-
+@class Hello;
 @class RMXWorld;
 @class RMXPhysics;
 @class Particle;

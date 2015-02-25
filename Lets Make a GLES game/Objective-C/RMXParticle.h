@@ -15,7 +15,8 @@
  Provides basic movement attributes to any object
  */
 @implementation Particle
-@synthesize anchor = _anchor, item = _item, itemPosition = _itemPosition, armLength = _armLength, reach = _reach, accelerationRate = _accelerationRate, speedLimit = _speedLimit,rotationSpeed = _rotationSpeed,jumpStrength = _jumpStrength,limitSpeed = _limitSpeed, hasFriction = _hasFriction, hasGravity = _hasGravity, goingUp = _goingUp;
+//@synthesize anchor = _anchor, item = _item, itemPosition = _itemPosition, armLength = _armLength, reach = _reach, accelerationRate = _accelerationRate, speedLimit = _speedLimit,rotationSpeed = _rotationSpeed,jumpStrength = _jumpStrength,limitSpeed = _limitSpeed, hasFriction = _hasFriction, hasGravity = _hasGravity, goingUp = _goingUp;
+
 
 bool ignoreNextjump = false;
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world

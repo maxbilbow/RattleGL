@@ -55,7 +55,7 @@
     body.position = GLKVector3Make(-10,body.radius,-10);
 #endif
     body.dragC = 0.1;
-    body.dragArea = PI * body.radius;
+    body.dragArea = PI * body.radius * body.radius;
     //body.dragC = 2;
 }
 

@@ -62,20 +62,20 @@ void RenderObjects(void);
     LightSource * sun = [[LightSource alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
     sun->body.radius = 100;
-    [world insertSprite: sun];
+    
     
     
     
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
     [RMXArt drawAxis:axisColors world:world];
     [sun setRender: DrawSphere];
-#if TARGET_OS_IPHONE
-
-#else
+//#if TARGET_OS_IPHONE
+//
+//#else
     [sun setShine:glLightfv];
     
-    
-#endif
+    [world insertSprite: sun];
+//#endif
     [RMXArt randomObjects:world];
     
     ShapeObject *ZX = [[ShapeObject alloc]initWithName:@"ZX PLANE" parent:world world:world];
@@ -170,7 +170,7 @@ void RenderObjects(void);
         
         //gravity = !gravity;
         ShapeObject * shape;
-        if((rand() % 100 == 1)) {
+        if((rand() % 1000) == 1) {
             shape = [[LightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:world world:world];
             shape->body.radius = 20;
         }
@@ -186,12 +186,13 @@ void RenderObjects(void);
             [shape setRender:DrawCubeWithTextureCoords];
         }
         
-        [shape setHasGravity: (rand()% 100 + 1)==1];
+        [shape setHasGravity: (rand()% 100)==1];
         shape->body.radius = (rand() % 5 + 4);
         shape->body.position = GLKVector3MakeWithArray(randPos);
-        shape->body.mass = (rand()%15)/10;
-        shape->body.dragArea = (rand()%10)/40;
-        shape->body.dragC = (rand()%10)/200;
+        shape->body.mass = (rand()%15+1)/10;
+        //int drag = shape->body.mass * 10;
+        shape->body.dragC = (rand()% 99+1)/100;
+        shape->body.dragArea = shape->body.radius * shape->body.radius * PI;
         [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
        // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
         
@@ -208,7 +209,7 @@ void RenderObjects(void);
     GLKVector4 rCol;
     //rCol.x = (rand() % 100)/10;
     for (int i = 0; i<3; ++i)
-        rCol.v[i] = (rand() % 100)/10;
+        rCol.v[i] = (rand() % 1000)/500;
     
     rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
     //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
