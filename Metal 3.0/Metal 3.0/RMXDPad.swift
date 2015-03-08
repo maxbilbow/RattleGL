@@ -19,20 +19,23 @@ class RMXDPad : CMMotionManager {
     var vRotation:Float = 0.0   //Vertical rotation angle of the camera
     var cameraMovementSpeed:Float = 0.02
     var dataIn: String = "No Data"
-    var parent: UIViewController
+    var gameView: GameViewController
     var leftPanData: CGPoint = CGPoint(x: 0,y: 0)
     var rightPanData: CGPoint = CGPoint(x: 0,y: 0)
+    var hasMotion = false
 
-    init(parent: UIViewController){
+    init(gameView: GameViewController){
         
-        self.parent = parent
+        self.gameView = gameView
     
         super.init()
         
+        if hasMotion {
         self.startAccelerometerUpdates()
         self.startDeviceMotionUpdates()
         self.startGyroUpdates()
         self.startMagnetometerUpdates()
+        }
         self.viewDidLoad()
     }
 
@@ -67,6 +70,7 @@ class RMXDPad : CMMotionManager {
     }
     
     func interpretAccelerometerData(){
+        if !hasMotion { return }
         self.i++
         if self.i == 1 { self.i=0 } else { return }
         if deviceMotion != nil {
@@ -119,25 +123,25 @@ class RMXDPad : CMMotionManager {
     }
         
     func viewDidLoad(){
-        let w = parent.view.bounds.size.width
-        let h = parent.view.bounds.size.height
+        let w = gameView.view.bounds.size.width
+        let h = gameView.view.bounds.size.height
         
         let leftView: UIView = UIImageView(frame: CGRectMake(0, 0, w/2, h))
         let lPan:UIPanGestureRecognizer = UIPanGestureRecognizer(target: self,action: "handlePanLeftSide:")
         leftView.addGestureRecognizer(lPan)
         leftView.userInteractionEnabled = true
-        parent.view.addSubview(leftView)
+        gameView.view.addSubview(leftView)
         
         let rightView: UIView = UIImageView(frame: CGRectMake(w/2, 0, w/2, h))
         let rPan:UIPanGestureRecognizer = UIPanGestureRecognizer(target: self,action: "handlePanRightSide:")
         rightView.addGestureRecognizer(rPan)
         rightView.userInteractionEnabled = true
-        parent.view.addSubview(rightView)
+        gameView.view.addSubview(rightView)
         
         
         let dt: UITapGestureRecognizer = UITapGestureRecognizer(target: self,  action: "handleDoubleTap:")
         dt.numberOfTapsRequired = 2
-        parent.view.addGestureRecognizer(dt)
+        gameView.view.addGestureRecognizer(dt)
         
     }
     var i: Int = 0
@@ -154,24 +158,31 @@ class RMXDPad : CMMotionManager {
     func handleDoubleTap(recognizer: UITapGestureRecognizer) {
         //self.world!.reInit();
         println("Double Tap")
+        gameView.world.modelMatrix = Matrix4()
+        gameView.world.modelMatrix.translate(0.0, y: 0.0, z: -7.0)
+        gameView.world.modelMatrix.rotateAroundX(Matrix4.degreesToRad(25), y: 0.0, z: 0.0)
     }
    
     
     
     //The event Le method
     func handlePanLeftSide(recognizer: UIPanGestureRecognizer) {
-        let point = recognizer.velocityInView(parent.view);
-        leftPanData.x = point.x; leftPanData.y = point.y
-        println("MOVE")//  x\(point.x) y\(point.y)")
+        let point = recognizer.velocityInView(gameView.view);
+        let speed:Float = -0.001
+        gameView.world.modelMatrix.translate(Float(point.x)*speed, y: 0, z: Float(point.y)*speed)
+        //gameView.objectToDraw.positionX += Float(point.x) * speed
+        //gameView.objectToDraw.positionZ += Float(point.y) * speed
+        //.transform = CATransform3DTranslate(gameView.metalLayer.transform, point.x*speed, 0, point.y*speed)
+        
     }
     
     
     //The event handling method
     func handlePanRightSide(recognizer: UIPanGestureRecognizer) {
-        let point = recognizer.velocityInView(parent.view);
-        rightPanData.x = point.x; rightPanData.y = point.y
-        println("TURN ")// x\(point.x) y\(point.y)")
+        let point = recognizer.velocityInView(gameView.view);
+        let speed:Float = 0.0001
         
+        gameView.world.modelMatrix.rotateAroundX(Float(point.y)*speed, y: Float(point.x)*speed, z: 0)
     }
     
     

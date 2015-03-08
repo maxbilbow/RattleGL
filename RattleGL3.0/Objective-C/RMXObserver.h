@@ -48,7 +48,7 @@
     //self.origin;
     self.armLength = 8;
     self.reach = 10;
-    body = RMXPhyisicsBodyMake(2,10);
+    body = RMXPhyisicsBodyMake(3,10);
 #if TARGET_OS_IPHONE
     body.position = GLKVector3Make(0,0,-0.4);
 #else
@@ -57,6 +57,7 @@
     body.dragC = 0.1;
     body.dragArea = PI * body.radius * body.radius;
     //body.dragC = 2;
+    self.jumpStrength = 1.5;
 }
 
 bool _itemWasAnimated = false;

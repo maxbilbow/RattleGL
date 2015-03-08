@@ -22,7 +22,7 @@ void RenderObjects(void);
 @implementation RMXArt
 #if TARGET_OS_IPHONE
 #else
-@synthesize x, y, z, d, r,g, b,k;
+//@synthesize x, y, z, d, r,g, b,k;
 #endif
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
@@ -229,7 +229,7 @@ void RenderObjects(void);
     // which are already separated from the front faces by a small distance
     // (if your geometry is made this way)
     glCullFace(GL_FRONT);
-    glClearColor(r, g, b, y);
+    glClearColor(self.r, self.g, self.b, self.y);
     
     //[self drawThings];
     

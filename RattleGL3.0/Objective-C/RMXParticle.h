@@ -44,7 +44,7 @@ bool ignoreNextjump = false;
     
 #endif
     _accelerationRate = 0.4;
-    _speedLimit = 0.20;
+    _speedLimit = 1.0;
     _limitSpeed = false;
     _anchor = GLKVector3Make(0,0,0);
 #if TARGET_OS_IPHONE
@@ -52,7 +52,7 @@ bool ignoreNextjump = false;
 #else
     _rotationSpeed = -0.1;
 #endif
-    _jumpStrength = 0.5;
+    _jumpStrength = 1;
     _item = nil;
     _itemPosition = self.center;
     _squatLevel = 0;
@@ -255,8 +255,8 @@ bool ignoreNextjump = false;
     }
     else if (self.hasGravity&&_prepairingToJump && !_goingUp) {
         //_upV = GLKVector3Add(_upV, _jumpStrength*20);
-        NSLog(@"Jump!");
-        body.acceleration.y += _squatLevel + _accelerationRate + self.weight;// -_squatLevel * _jumpStrength;
+        //NSLog(@"Jump!");
+        body.acceleration.y += (_squatLevel + _accelerationRate + self.weight)*_jumpStrength;// -_squatLevel * _jumpStrength;
         _goingUp = true;
         _prepairingToJump = false;
     }

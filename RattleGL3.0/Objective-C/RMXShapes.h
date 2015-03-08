@@ -226,7 +226,7 @@ void DrawPlane(float x)
 void DrawFog(){
 GLfloat density = 0.0008;
 
-GLfloat fogColor[4] = {0.9, 0.6, 0.9, 1.0};
+GLfloat fogColor[4] = {0.9, 0.5, 0.5, 1.0};
     
     glEnable (GL_FOG);
     glFogi (GL_FOG_MODE, GL_EXP2);
