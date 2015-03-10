@@ -170,10 +170,6 @@ class RMXDPad : CMMotionManager {
         let point = recognizer.velocityInView(gameView.view);
         let speed:Float = -0.001
         gameView.world.modelMatrix.translate(Float(point.x)*speed, y: 0, z: Float(point.y)*speed)
-        //gameView.objectToDraw.positionX += Float(point.x) * speed
-        //gameView.objectToDraw.positionZ += Float(point.y) * speed
-        //.transform = CATransform3DTranslate(gameView.metalLayer.transform, point.x*speed, 0, point.y*speed)
-        
     }
     
     

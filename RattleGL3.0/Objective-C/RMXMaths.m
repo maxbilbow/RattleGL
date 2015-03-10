@@ -6,26 +6,17 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#ifndef OpenGL_2_0_Maths_h
-#define OpenGL_2_0_Maths_h
 
-
-#endif
-#include <complex.h>
-#include <math.h>
-#include "RMXDataTypes.h"
-
-
-#define _INFINITY               99999
-#define PI                      3.14159265358979323846
-#define PI_OVER_180             (PI / 180)
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
+#import <complex.h>
+#import <math.h>
+#import "RMXMaths.h"
 
 
 
 
-
-
-BOOL RMXVector3IsZero(GLKVector3 v)
+BOOL RMXVector3IsZero(RMXVector3 v)
 {
     return ((v.x==0)&&(v.y==0)&&(v.z==0));
 }
@@ -33,13 +24,13 @@ BOOL RMXVector3IsZero(GLKVector3 v)
 
 
 
-float RMXGetSpeed(GLKVector3 v){
+float RMXGetSpeed(RMXVector3 v){
     float squared = v.x*v.x + v.y*v.y + v.z*v.z;
     return sqrtf(squared);
 }
 
 
-GLKVector3 RMXVector3Abs(GLKVector3 v){
+RMXVector3 RMXVector3Abs(RMXVector3 v){
     return GLKVector3Make(fabs(v.x),fabs(v.y),fabs(v.z));
 }
 
@@ -64,7 +55,7 @@ RMXPhysicsBody RMXPhyisicsBodyMake(float m, float r){
     b.mass = m;
     b.radius = r;
     b.dragC = 0.5;
-    b.dragArea = r*r * PI;
+    //b.dragArea = r*r * PI;
     return b;
 }
 

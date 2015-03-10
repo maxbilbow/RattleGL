@@ -6,15 +6,13 @@
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
-
-#import "oHeader.h"
-
+#import "RattleGL3.0-Bridging-Header.h"
+#define TEXTURE_ID_CUBE 1
 void InitGraphics(void)
 {
-    int width, height;
-    int nComponents;
-    void* pTextureImage;
+//    int width, height;
+//    int nComponents;
+//    void* pTextureImage;
     
     
     glEnable(GL_DEPTH_TEST);
@@ -26,13 +24,15 @@ void InitGraphics(void)
     // Create texture for cube; load marble texture from file and bind it
     //pTextureImage = read_texture("marble.rgb", &width, &height, &nComponents);
     glBindTexture(GL_TEXTURE_2D, TEXTURE_ID_CUBE);
-    gluBuild2DMipmaps(GL_TEXTURE_2D,     // texture to specify
-                      GL_RGBA,           // internal texture storage format
-                      width,             // texture width
-                      height,            // texture height
-                      GL_RGBA,           // pixel format
-                      GL_UNSIGNED_BYTE,	// color component format
-                      pTextureImage);    // pointer to texture image
+    
+    glGenerateMipmap(GL_MAP1_NORMAL);
+//    gluBuild2DMipmaps(GL_TEXTURE_2D,     // texture to specify
+//                      GL_RGBA,           // internal texture storage format
+//                      width,             // texture width
+//                      height,            // texture height
+//                      GL_RGBA,           // pixel format
+//                      GL_UNSIGNED_BYTE,	// color component format
+//                      pTextureImage);    // pointer to texture image
     glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
                      GL_LINEAR_MIPMAP_LINEAR);
@@ -40,8 +40,9 @@ void InitGraphics(void)
 }
 
 
-int init()
+int run(int argc, char * argv[])
 {
+    glutInit(&argc, argv);
     initKeys();
 
     //    window = [[RMXWindow alloc]initWithMethods:glutInitWindowSize
@@ -90,7 +91,7 @@ int init()
     // Create our popup menu
     //BuildPopupMenu();
     InitGraphics();
-    glutAttachMenu (GLUT_RIGHT_BUTTON);
+    //glutAttachMenu (GLUT_RIGHT_BUTTON);
     // Get the initial time, for use by animation
 
     gettimeofday (&last_idle_time, NULL);
@@ -109,48 +110,11 @@ int init()
 }
 
 
-
-/*
-
-//using namespace World;
-//World world = World();
-int main (int argc, char **argv) {
-    
-    
-    //glutInitDisplayMode( GLUT_SINGLE );//GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE );
-    
-    //glutMainLoop(); // Enter GLUT's main loop
-    
-    return 0;
-    
-}
-
-*/
 void debug(){
     [observer.item debug];
     [observer debug];
     [rmxDebugger feedback];
 };
-//@class RMXHello;
-//#import "OpenGL 2.1 (OC)-Bridging-Header.h"
-//#import "RattleGL2.5-Swift.h"
 
-//#import "OpenGL 2.0-Bridging-Header.h"
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-     //   RMXHello *h = [RMXHello new];
-        //[Hello print];
-       // [Hello print];
-        rmxDebugger = [[RMXDebugger alloc]init];
-        world = [RMXArt initializeTestingEnvironment:nil];
-        art = [[RMXArt alloc]initWithName:@"Art" parent:world world:world];
-        observer = world.observer;
-        window = [[RMXWindow alloc]initWithName:@"RMX Window" parent:world world:world];
-        
-        glutInit(&argc, argv);
-        
-        init();
-    }
-    return 0;
-}
+

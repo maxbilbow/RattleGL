@@ -12,38 +12,31 @@ import Metal
 
 class RMXShape : RMXNode {
     
-    var time:CFTimeInterval = 0.0
     
-    var positionX:Float = 0.0
-    var positionY:Float = 0.0
-    var positionZ:Float = 0.0
     
-    var rotationX:Float = 0.0
-    var rotationY:Float = 0.0
-    var rotationZ:Float = 0.0
-    var scale:Float     = 1.0
-    
-    var vertexCount: Int
-    var vertexBuffer: MTLBuffer
-    var uniformBuffer: MTLBuffer?
     
     init(name: String, vertices: Array<Vertex>, gameView: RMXGameView){
+        
         // 1
         var vertexData = Array<Float>()
         for vertex in vertices{
             vertexData += vertex.floatBuffer()
         }
-        
+        super.init(name: name, gameView: gameView)
         // 2
         let dataSize = vertexData.count * sizeofValue(vertexData[0])
         self.vertexBuffer = gameView.device.newBufferWithBytes(vertexData, length: dataSize, options: nil)
         
         // 3
         self.vertexCount = vertices.count
-        super.init(name: name, gameView: gameView)
+        
+        self.isVisible = true
     }
-    
-    func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?){
+    override func update() {
+        super.update()
+//        self.render(self.gameView.commandQueue, pipelineState: self.gameView.pipelineState, drawable: self.gameView.metalLayer.nextDrawable(), parentModelViewMatrix: self.world.modelMatrix, projectionMatrix: self.gameView.projectionMatrix ,clearColor: nil)
+    }
+    /* func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, parentModelViewMatrix: Matrix4, projectionMatrix: Matrix4, clearColor: MTLClearColor?){
         
         let renderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor.colorAttachments[0].texture = drawable.texture
@@ -78,19 +71,10 @@ class RMXShape : RMXNode {
         
         commandBuffer.presentDrawable(drawable)
         commandBuffer.commit()
-    }
+    } */
     
-    func modelMatrix() -> Matrix4 {
-        var matrix = Matrix4()
-        matrix.translate(positionX, y: positionY, z: positionZ)
-        matrix.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
-        matrix.scale(scale, y: scale, z: scale)
-        return matrix
-    }
     
-    func updateWithDelta(delta: CFTimeInterval){
-        time += delta
-    }
+    
 }
 
 
@@ -103,10 +87,12 @@ class Triangle: RMXShape {
         let V2 = Vertex(x:  1.0, y:  -1.0, z:   0.0, r:  0.0, g:  0.0, b:  1.0, a:  1.0)
         
         var verticesArray = [V0,V1,V2]
-        super.init(name: "Triangle", vertices: verticesArray, gameView: gameView)
+        super.init(name: "Triangle \(RMXData.count)", vertices: verticesArray, gameView: gameView)
     }
     
 }
+
+
 
 class Cube: RMXShape {
     
@@ -133,7 +119,7 @@ class Cube: RMXShape {
             B,S,T ,B,T,C    //Bot
         ]
         
-        super.init(name: "Cube", vertices: verticesArray, gameView: gameView)
+        super.init(name: "Cube \(RMXData.count)", vertices: verticesArray, gameView: gameView)
     }
     
     override func updateWithDelta(delta: CFTimeInterval) {

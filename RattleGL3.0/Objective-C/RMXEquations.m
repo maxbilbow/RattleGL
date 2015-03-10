@@ -6,11 +6,15 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#ifndef OpenGL_2_0_RMXEquations_h
-#define OpenGL_2_0_RMXEquations_h
 
 
-#endif
+#import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
+#import <complex.h>
+#import <math.h>
+#import "RMXMaths.h"
+
+
 GLKVector4 RMXSomeCircle (int i);
 float rFloat(int radius);
 

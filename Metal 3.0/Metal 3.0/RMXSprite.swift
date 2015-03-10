@@ -13,13 +13,13 @@ protocol RMXSprite {
     //var transform: CATransform3D { get set }
     var world: RMXWorld { get }
     var physicsBody: RMXPhysicsBody { get }
+    var isVisible: Bool { get }
+    var vertexCount: Int { get }
+    var vertexBuffer: MTLBuffer? { get }
+    //var uniformBuffer: MTLBuffer? { get set }
     //init(world: RMXWorld)
     func update()
+    func modelMatrix() -> Matrix4
     //    func render(commandQueue: MTLCommandQueue, pipelineState: MTLRenderPipelineState, drawable: CAMetalDrawable, clearColor: MTLClearColor?)
 }
 
-protocol RMXGameView {
-    var world: RMXWorld! { get }
-    var dPad: RMXDPad! { get }
-    var device: MTLDevice! { get }
-}
