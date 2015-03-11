@@ -22,7 +22,7 @@ func start() {
         world = RMXArt.initializeTestingEnvironment()
         art = RMXArt(name: "Art", parent:world, world:world)
         observer = world.observer
-       // observer.physicsBody.mass = 90
+        //observer.physicsBody.mass = 90
         
         window = RMXWindow(name:"RMX Window", parent:world, world:world)
         

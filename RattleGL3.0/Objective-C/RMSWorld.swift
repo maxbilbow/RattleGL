@@ -48,7 +48,7 @@ import Foundation
         }
     }
     func massDensityAt(someBody: RMXParticle) -> Float {
-        if (someBody.altitude < someBody.ground ) {// someBody.ground )
+        if (someBody.altitude < someBody.ground  * 8 / 10 ) {// someBody.ground )
             return 99.1 //water or other
         } else {
             return 0.01 //air;
@@ -67,21 +67,25 @@ import Foundation
     
     func normalForceAt(someBody: RMXParticle) -> Float {
         var result: Float = 0
-        let bounce: Float = 0.5
-        if someBody.altitude <= someBody.ground - 1 {
-            result = someBody.weight + (0 + abs(-someBody.altitude + someBody.ground)*bounce)
-            
-        } else if (someBody.altitude <= someBody.ground ){
-            //if someBody.altitude < someBody.ground + 1 {
-                someBody.setAltitude(someBody.ground)
-            //}
+        let bounce: Float = 1.5
+        var s: String = ""
+        if someBody.altitude < someBody.ground  * 9 / 10 {
+            result = someBody.weight + abs(-someBody.altitude / someBody.ground) * bounce
+            s = "\(someBody.altitude) Bouncing   || "
+        } else if someBody.altitude <= someBody.ground  {
+            s = "\(someBody.altitude) == Ground  || "
             result = someBody.weight
-        } else {
+            someBody.setAltitude(someBody.ground - someBody.upThrust)
+        } else if someBody.altitude > someBody.ground {
             result = 0//someBody.weight// * self.physics.gravity; //air;
+            s = "\(someBody.altitude) IN THE AIR || "
+        } else {
+            s = "\(someBody.altitude) DEFAULT    || "
+            result = someBody.weight
         }
-        if (someBody.altitude <= someBody.ground) && (someBody is RMXObserver) {
-            println ("Normal: \(result), Weight: \(someBody.weight), Altitude: \(someBody.altitude) <= \(someBody.ground)")
-        }
+//        if someBody is RMXObserver {
+//            println ("\(s)Normal: \(result), Weight: \(someBody.weight), Altitude: \(someBody.altitude), upThrust: \(someBody.upThrust), Ground: \(someBody.ground), Radius: \(someBody.physicsBody.radius), dF: \(someBody.downForce)")
+//        }
         return result
     }
     
@@ -117,7 +121,7 @@ import Foundation
             }
         }
         
-        NSLog("Returning:\n \(closest)")
+        //NSLog("Returning:\n \(closest)")
         return closest;//shapes[closest];
     }
     

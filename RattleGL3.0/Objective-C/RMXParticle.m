@@ -110,7 +110,7 @@ bool ignoreNextjump = false;
 //#if TARGET_OS_IPHONE
 //    body.velocity = GLKVector3DivideScalar(body.velocity, 1 );
 //#else
-    body.velocity = GLKVector3DivideScalar(body.velocity, 1+ [self.world µAt:self] + d.x );
+    body.velocity = GLKVector3DivideScalar(body.velocity, 1 + [self.world µAt:self] + d.x );
     
     
     GLKVector3 forces = GLKVector3Make(
@@ -123,15 +123,18 @@ bool ignoreNextjump = false;
     body.forces.y += g.y + n.y;
     body.forces.z += g.z + n.z;
     
-
+    
     body.forces = GLKVector3Add(forces,GLKMatrix4MultiplyVector3( GLKMatrix4Transpose(body.orientation),body.acceleration));
     body.velocity = GLKVector3Add(body.velocity,body.forces);
    
     
     
     [self.world collisionTest:self];
+
     [self applyLimits];
     body.position = GLKVector3Add(body.position,body.velocity);
+    
+    
     
     if([self.name isEqual:@"Main Observer"]) {
         [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"\n gv %f , %f, %f\n nv %f , %f, %f\n fv %f , %f, %f\n Dv %f , %f, %f"
@@ -227,8 +230,13 @@ bool ignoreNextjump = false;
     body.velocity = GLKVector3Add(body.velocity, direction);
 }
 
+- (float)upThrust {
+    return body.velocity.y;
+}
 
-
+- (float)downForce {
+    return body.forces.y;
+}
 -(void)prepareToJump{
     _prepairingToJump = true;
 }
@@ -245,7 +253,7 @@ bool ignoreNextjump = false;
     else if (self.hasGravity&&_prepairingToJump && !_goingUp) {
         //_upV = GLKVector3Add(_upV, _jumpStrength*20);
         //NSLog(@"Jump!");
-        body.acceleration.y += (_squatLevel + _accelerationRate + self.weight)*_jumpStrength;// -_squatLevel * _jumpStrength;
+        body.acceleration.y += self.weight*_jumpStrength * self.physicsBody.radius / _squatLevel;// -_squatLevel * _jumpStrength;
         _goingUp = true;
         _prepairingToJump = false;
     }
