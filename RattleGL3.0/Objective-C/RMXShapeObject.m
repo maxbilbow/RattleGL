@@ -5,23 +5,24 @@
 //  Created by Max Bilbow on 25/01/2015.
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
 
-
+#import <RattleGL-Swift.h>
 
 @implementation RMXShapeObject
-
-
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        self.color = GLKVector4Make(1,1, 1, 10);
+        self.color = GLKVector4Make(1,1, 1, 1);
+        self.rotationSpeed = 2;
         self.rAxis = GLKVector3Make(0,0,1);
         self.rotation = 0;
         self.isRotating = false;
-        body = RMXPhyisicsBodyMake(1,1);
+        self.r = 0;
+        body = RMXPhyisicsBodyMake();
+        
        
     }
     return self;
@@ -32,47 +33,32 @@
 - (void)draw {
         glPushMatrix();
     
-        glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
-        
-        glPushMatrix();
-        
+//        glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
+//        
+//        glPushMatrix();
+//        
         glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
         glTranslatef(body.position.x,body.position.y,body.position.z);
     
     [self setMaterial];
-    _render(body.radius);
+    _render(self.physicsBody.radius);
     [self unsetMaterial];
 
         glPopMatrix();
-        glPopMatrix();
+       // glPopMatrix();
     
 }
 
-
-
-- (void)drawWith:(void(float))shape {
-
-    glPushMatrix();
-    
-    glRotatef(_rotation, _rAxis.x, _rAxis.y, _rAxis.z);
-    
-    glPushMatrix();
-    
-    glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
-    glTranslatef(body.position.x,body.position.y,body.position.z);
-
-    [self setMaterial];
-    shape(body.radius);
-    [self unsetMaterial];
-    glPopMatrix();
-    glPopMatrix();    
-}
 
 
 - (void)animate
 {
-    //if (temp) tester.checks[9] += "\nSHAPE:\n" + toString();
-    if (_isRotating) _rotation += _dt;//*dift;// * 30;
+    if (_isRotating) {
+        _rotation += self.rotationSpeed/_r;
+    //body.position.y += _rotation;
+        GLKVector4 temp = RMXSomeCircle(_rotation, _r*2);
+        body.position = GLKVector3Make(temp.x-_r,temp.y,0);
+    }
     [super animate];
     if ([self isKindOfClass:[RMXLightSource class]]) {
         //glEnable(GL_LIGHTING);

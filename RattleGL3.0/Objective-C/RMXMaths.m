@@ -11,9 +11,8 @@
 #import <GLKit/GLKit.h>
 #import <complex.h>
 #import <math.h>
+
 #import "RMXMaths.h"
-
-
 
 
 BOOL RMXVector3IsZero(RMXVector3 v)
@@ -34,7 +33,7 @@ RMXVector3 RMXVector3Abs(RMXVector3 v){
     return GLKVector3Make(fabs(v.x),fabs(v.y),fabs(v.z));
 }
 
-RMXPhysicsBody RMXPhyisicsBodyMake(float m, float r){
+RMXPhysicsBody RMXPhyisicsBodyMake() {//float m, float r){
     RMXPhysicsBody b;
     b.position = GLKVector3Make(0,0,0);
     b.velocity = GLKVector3Make(0,0,0);
@@ -51,11 +50,11 @@ RMXPhysicsBody RMXPhyisicsBodyMake(float m, float r){
                                0,0,0,
                                0,0,0
                                );
-    b.angles.theta = b.angles.phi = 0;
-    b.mass = m;
-    b.radius = r;
-    b.dragC = 0.5;
-    //b.dragArea = r*r * PI;
+//    b.angles.theta = b.angles.phi = 0;
+//    b.mass = m;
+//    b.radius = r;
+//    b.dragC = 0.5;
+//    b.dragArea = r*r * PI;
     return b;
 }
 

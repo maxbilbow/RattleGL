@@ -36,9 +36,9 @@
 
 
 
-
-#define U_GRAVITY               (0.0002)///50
-#define U_FRICTION              1.1
+//
+//#define U_GRAVITY               (0.0002)///50
+//#define U_FRICTION              1.1
 
 #define U_DEPTH                 2
 #define U_HORIZONTAL            0

@@ -17,17 +17,8 @@
 
 
 
-float _dt;
 
 
-// Position of light
-#ifdef _WIN32
-static DWORD last_idle_time;
-#else
-static struct timeval last_idle_time;
-#endif
-
-void animate(void);
 
 void AnimateScene(void);
 void reshape (int width, int height);

@@ -13,23 +13,23 @@
 #import <complex.h>
 #import <math.h>
 #import "RMXMaths.h"
+#import "RMXEquations.h"
 
 
-GLKVector4 RMXSomeCircle (int i);
-float rFloat(int radius);
 
 GLKVector4 doASum(float radius, int i, int noOfShapes ){
     radius = ceil(radius);
-    return GLKVector4Make(rFloat(radius*2)-radius,rFloat(2*radius),rFloat(radius*2)-radius,rFloat(radius));
+    return GLKVector4Make(RMXRandomFloat(radius*2)-radius,RMXRandomFloat(2*radius),RMXRandomFloat(radius*2)-radius, RMXRandomFloat(radius));
     
 }
 
-float rFloat(int radius){
+float RMXRandomFloat(int radius){
     return (rand() % radius);
 }
 
-GLKVector4 RMXSomeCircle (int i){
-    return  GLKVector4Make(sin(i)*sin(i)*100, sin(i)*cos(i)*100, cos(i)*cos(i)*100,1);
+GLKVector4 RMXSomeCircle (float i, float r){
+    
+    return  GLKVector4Make(sin(i)*sin(i)*r, sin(i)*cos(i)*r, cos(i)*cos(i)*r,1);
     
 }
 GLKVector4 randomSpurt (float i){

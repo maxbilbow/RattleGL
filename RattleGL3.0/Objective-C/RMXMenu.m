@@ -8,7 +8,7 @@
 
 
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
 enum {
     MENU_LIGHTING = 1,
     MENU_POLYMODE,

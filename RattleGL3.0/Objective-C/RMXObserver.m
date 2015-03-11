@@ -13,8 +13,8 @@
 #endif
 
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 /*
  Provides basic movement attributes to any object
  */
@@ -47,13 +47,15 @@
     //self.origin;
     self.armLength = 8;
     self.reach = 10;
+    self.physicsBody.mass = 9;
+    self.physicsBody.radius = 10;
     body = RMXPhyisicsBodyMake(3,10);
     body.position = GLKVector3Make(0,0,-0.4);
-    body.position = GLKVector3Make(-10,body.radius,-10);
-    body.dragC = 0.1;
-    //body.dragArea = PI * body.radius * body.radius;
-    //body.dragC = 2;
-    self.jumpStrength = 1.5;
+    body.position = GLKVector3Make(20,self.physicsBody.radius,20);
+    
+    //self.physicsBody.position[2] = -0.4;
+    //    body.position = GLKVector3Make(-10,body.radius,-10);
+    self.jumpStrength = 1;
 }
 
 bool _itemWasAnimated = false;
@@ -61,7 +63,7 @@ bool _itemWasAnimated = false;
 - (void)grabObject:(RMXObject*)i
 {
     
-    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach+i->body.radius) {
+    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach+i.physicsBody.radius) {
         self.item = i;
         self.itemPosition = i->body.position;
         _itemWasAnimated = self.item.isAnimated;

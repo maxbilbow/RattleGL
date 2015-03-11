@@ -15,14 +15,25 @@
 @import GLKit;
 @import OpenGL;
 
-@class RMXObject, RMXArt, RMXDebugger, RMXPhysics, RMXLightSource, RMXWorld, RMXObserver, RMXMouse, RMXShapeObject, RMXParticle, RMXDPad, RMXMouseProcessor;
+
+
+#ifdef _WIN32
+#	include <windows.h>
+#else
+#	include <sys/time.h>
+#endif
+
+//Swift
+@class RMSPhysicsBody, RMXWorld, Main;
+//Objc
+@class RMXObject, RMXArt, RMXDebugger, RMXPhysics, RMXLightSource, RMXObserver, RMXMouse, RMXShapeObject, RMXParticle, RMXDPad, RMXMouseProcessor;
 
 
 //
 //#import <GLKit/GLKMatrix4.h>
 //#import <GLKit/GLKit.h>
 
-//#import "RMXDataTypes.h"
+//#import "RattleGL3-0-Swift.h"
 #import "RMXMaths.h"
 #import "RMXEquations.h"
 #import "RMXShapes.h"
@@ -40,7 +51,7 @@
 #import "RMXDrawable.h"
 #import "RMXShapeObject.h"
 #import "RMXLightSource.h"
-#import "RMXWorld.h"
+//#import "RMXWorld.h"
 #import "RMXArt.h"
 
 //desktop below

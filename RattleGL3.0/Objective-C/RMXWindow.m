@@ -12,8 +12,8 @@
 
 #endif
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 @implementation RMXWindow
 
     const char * title = "Rattle X Window";
@@ -57,7 +57,7 @@
     _size.x = 1250;
     _fViewDistance = 3 * VIEWING_DISTANCE_MIN;
     _nearPlane = 1;
-    _farPlane = world->body.radius*2;
+    _farPlane = world.physicsBody.radius*2;
     _fullscreen = RMX_FULL_SCREEN;
 
     return self;

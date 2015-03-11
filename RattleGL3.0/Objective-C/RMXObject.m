@@ -12,7 +12,8 @@
 
 #endif
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 
 @implementation RMXObject
 
@@ -20,19 +21,38 @@
     self = [super init];
     _parent = parent;
     _world = world;
-//    if (world != nil && [world isKindOfClass:[RMXWorld class]]){
-//        _uiView = ((RMXWorld*)world).uiView;
-//    } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
-//        _uiView = (UIVideoEditorController*) parent;
-//    }
+    //    if (world != nil && [world isKindOfClass:[RMXWorld class]]){
+    //        _uiView = ((RMXWorld*)world).uiView;
+    //    } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
+    //        _uiView = (UIVideoEditorController*) parent;
+    //    }
     _name = name;
-    _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: [self isKindOfClass:[RMXWorld class]] ? (RMXWorld*) self : nil];
+//    _physics = nil;
+    _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: (RMXWorld*) self];
     [self reInit];
-        return self;
+    return self;
+}
+
+- (float)altitude{
+    return body.position.y;
+}
+
+- (void)setAltitude:(float)altitude {
+    body.position.y = altitude;
+}
+
+- (float)positionX{
+    return body.position.x;
+}
+
+- (float)positionZ{
+    return body.position.z;
 }
 
 - (void)reInit {
-    body = RMXPhyisicsBodyMake(1, 1);
+    body = RMXPhyisicsBodyMake();
+    self.physicsBody = [RMSPhysicsBody New];
+    
 }
 - (void)debug {
     //[rmxDebugger add:RMX_ERROR n:self t:_name];
@@ -57,6 +77,12 @@
     GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),2);
     return GLKVector3Make(v.x,v.y,v.z);
 }
+
+- (float)distanceTo:(RMXObject*)object {
+    return GLKVector3Distance(body.position, object->body.position);
+}
+//- (void)animate{}
+
+
+
 @end
-
-

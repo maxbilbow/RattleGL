@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
 
 @implementation RMXDebugger
 const bool isDebugging = RMX_DEBUGGING;
@@ -58,7 +58,7 @@ Loop loop;
 - (bool)newLoopAverage
 {
     loop.count++;
-    loop.totalTimePassed += _dt;
+    loop.totalTimePassed += TIME_RELATIVE;
     if (loop.count <= loopSampleSize) {
         return false;
     } else {
@@ -77,7 +77,7 @@ Loop loop;
             loop.diff = '<';
 
         
-        loopLog = [NSString stringWithFormat:@"Loop Time: %f, Average: %f %c %f => Loss of %f (+%f)", _dt, loop.average, loop.diff, loop.previousAverage, loop.loss, dl];
+        loopLog = [NSString stringWithFormat:@"Loop Time: %f, Average: %f %c %f => Loss of %f (+%f)", 1.0, loop.average, loop.diff, loop.previousAverage, loop.loss, dl];
         
         return true;
     }

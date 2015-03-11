@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 @implementation RMXParticle
 
 bool ignoreNextjump = false;
@@ -25,7 +25,7 @@ bool ignoreNextjump = false;
 
 - (void)reInit {
     [super reInit];
-    
+
 
     _hasGravity = TRUE;
     _hasFriction = TRUE;
@@ -41,11 +41,14 @@ bool ignoreNextjump = false;
     _itemPosition = self.center;
     _squatLevel = 0;
     _goingUp = false;
+//    if (body.position.y < self.ground) {
+//        body.position.y = self.physicsBody.radius;
+//    }
     self.isAnimated = true;
 }
 
 - (float)ground {
-    return body.radius - _squatLevel;
+    return self.physicsBody.radius - _squatLevel;
 }
     
 
@@ -57,7 +60,7 @@ bool ignoreNextjump = false;
 }
     
 - (float)weight{
-    return body.mass * self.physics.gravity;
+    return self.physicsBody.mass * self.physics.gravity;
 }
 
 -(void)animate
@@ -71,7 +74,7 @@ bool ignoreNextjump = false;
 
 - (void)jumpTest{
     if (_prepairingToJump || _goingUp || _squatLevel != 0){// || _squatLevel > 0){
-        float i = body.radius / 200;
+        float i = self.physicsBody.radius / 200;
         if (_prepairingToJump){
             _squatLevel += i;
             if (_squatLevel >= self.ground/4-i) {
@@ -97,12 +100,13 @@ bool ignoreNextjump = false;
 
 - (void)accelerate
 {
-    //GLKVector3 upThrust = GLKVector3Make( 0,0,0 );
+       //GLKVector3 upThrust = GLKVector3Make( 0,0,0 );
     GLKVector3 g = (_hasGravity) ? [self.physics gravityFor:self] : GLKVector3Make(0,0,0);
     GLKVector3 n = (_hasGravity) ? [self.physics normalFor:self] : GLKVector3Make(0,0,0);
     GLKVector3 f = [self.physics frictionFor:self];// : GLKVector3Make(1,1,1);
     GLKVector3 d = [self.physics dragFor:self];// : GLKVector3Make(1,1,1);
     
+
 //#if TARGET_OS_IPHONE
 //    body.velocity = GLKVector3DivideScalar(body.velocity, 1 );
 //#else
@@ -123,10 +127,11 @@ bool ignoreNextjump = false;
     body.forces = GLKVector3Add(forces,GLKMatrix4MultiplyVector3( GLKMatrix4Transpose(body.orientation),body.acceleration));
     body.velocity = GLKVector3Add(body.velocity,body.forces);
    
-    [self applyLimits];
-    body.position = GLKVector3Add(body.position,body.velocity);
+    
     
     [self.world collisionTest:self];
+    [self applyLimits];
+    body.position = GLKVector3Add(body.position,body.velocity);
     
     if([self.name isEqual:@"Main Observer"]) {
         [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"\n gv %f , %f, %f\n nv %f , %f, %f\n fv %f , %f, %f\n Dv %f , %f, %f"
@@ -166,8 +171,8 @@ bool ignoreNextjump = false;
     
     if ( _item == nil ) return;
     _item->body.position = GLKVector3Add(self.center,
-                                    GLKVector3MultiplyScalar(self.forwardVector,_armLength+_item->body.radius));
-    NSLog(@"manipulating: %@:\n%@",((RMXParticle*)_item).name,((RMXParticle*)_item).describePosition);
+                                    GLKVector3MultiplyScalar(self.forwardVector,_armLength+_item.physicsBody.radius));
+    //NSLog(@"manipulating: %@:\n%@",((RMXParticle*)_item).name,((RMXParticle*)_item).describePosition);
 }
 
 - (void)stop
@@ -184,8 +189,8 @@ bool ignoreNextjump = false;
     
 //    float lim = cos(0);
     
-    body.angles.theta += theta;
-    body.angles.phi += phi;
+    self.physicsBody.theta += theta;
+    self.physicsBody.phi += phi;
 //    if (body.angles.phi + phi > lim){
 //        phi = 0;
 //        body.angles.phi = lim;
@@ -200,7 +205,7 @@ bool ignoreNextjump = false;
     body.orientation = GLKMatrix4RotateWithVector3(body.orientation, theta, GLKVector3Make(0,1,0));
     body.orientation = GLKMatrix4RotateWithVector4(body.orientation, phi, GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0));
     
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",body.angles.theta,body.angles.phi ]];
+    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",self.physicsBody.theta,self.physicsBody.phi ]];
    
 }
 
@@ -214,7 +219,7 @@ bool ignoreNextjump = false;
 
     
 - (bool)isGrounded{
-    return (body.position.y <= body.radius);
+    return (body.position.y <= self.physicsBody.radius);
 }
     
 - (void)push:(GLKVector3)direction
@@ -230,6 +235,7 @@ bool ignoreNextjump = false;
 
 - (void)jump
 {
+
     if (ignoreNextjump) {
         ignoreNextjump = false;
         _goingUp = false;
@@ -283,7 +289,7 @@ bool ignoreNextjump = false;
 
 - (void)accelerateUp:(float)v
 {
-    body.acceleration.y = v * _accelerationRate;
+    body.acceleration.y = v * _accelerationRate;// * !self.hasGravity;
     //  accelerate();
     //       accelerate(GLKVector3Make(0,velocity*accelerationRate,0));
 }

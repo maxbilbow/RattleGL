@@ -7,10 +7,9 @@
 //
 
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
 #import <complex.h>
-
-
+#import <RattleGL-Swift.h>
 float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
 float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
 float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
@@ -44,10 +43,10 @@ float nillVector[4]       = {0,0,0,0};
 }
 
 
-+ (RMXWorld*)initializeTestingEnvironment:(id)sender {
++ (RMXWorld*)initializeTestingEnvironment {
     
     //if (world == nil){
-    RMXWorld* world = [[RMXWorld alloc]initWithName:@"Brave New World" parent:(RMXObject*)sender world:nil];
+    RMXWorld* world = [RMXWorld New];
     // world.uiView = sender;
     //world.observer.uiView = sender;
     if (world.observer == nil )exit(0);
@@ -58,7 +57,7 @@ float nillVector[4]       = {0,0,0,0};
     RMXLightSource * sun;
     sun = [[RMXLightSource alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
-    sun->body.radius = 100;
+    sun.physicsBody.radius = 100;
     
     
     float* axisColors[3] = {colorBlue , colorRed , colorGreen};
@@ -68,7 +67,7 @@ float nillVector[4]       = {0,0,0,0};
     
     [sun setShine:glLightfv];
     
-    [world insertSprite: sun];
+    [world insertSprite:sun];
     [RMXArt drawAxis:axisColors world:world];
     
     [RMXArt randomObjects:world];
@@ -77,7 +76,7 @@ float nillVector[4]       = {0,0,0,0};
     [ZX setRender:DrawPlane];
     [ZX setColor:GLKVector4Make(0.8,1.2,0.8,1)];
     [ZX setIsAnimated:false];
-    ZX->body.position.y = -1;
+    ZX->body.position.y = 0;
     [world insertSprite:ZX];
     
     return world;
@@ -86,13 +85,13 @@ float nillVector[4]       = {0,0,0,0};
 
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world {//xCol y:(float*)yCol z:(float*)zCol{
     //BOOL gravity = false;
-    double noOfShapes = world->body.radius / 4;
+    double noOfShapes = world.physicsBody.radius / 4;
     float axis[3][3];
-    double limit = world->body.radius / noOfShapes;
+    double limit = world.physicsBody.radius / noOfShapes;
     int test = 0;
     for (int j=0;j<3;++j) {
         int count = 0;
-        for(int i=-world->body.radius;i<world->body.radius;++i) {
+        for(int i=-world.physicsBody.radius;i<world.physicsBody.radius;++i) {
             if (count<limit) {
                 ++count;
             } else {
@@ -101,8 +100,9 @@ float nillVector[4]       = {0,0,0,0};
                 RMXShapeObject * shape = [[RMXShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
                 [shape setHasGravity: false];// ? true : false];
                 [shape setRender:DrawCubeWithTextureCoords];
-                shape->body.radius = limit;
+                shape.physicsBody.radius = limit/2;
                 shape->body.position = GLKVector3MakeWithArray(axis[j]);
+                if ( j != 1 ) shape->body.position.y = shape.physicsBody.radius;
                 [shape setColor:GLKVector4MakeWithArray(colors[j])];
                 [shape setIsAnimated:false];
                 [world insertSprite:shape];
@@ -119,7 +119,7 @@ float nillVector[4]       = {0,0,0,0};
     //BOOL gravity = true;
     double noOfShapes = 1980;
     for(int i=-noOfShapes/2;i<noOfShapes/2;++i) {
-        GLKVector4 points = doASum(world->body.radius, i,noOfShapes );
+        GLKVector4 points = doASum(world.physicsBody.radius, i,noOfShapes );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
@@ -182,11 +182,11 @@ float nillVector[4]       = {0,0,0,0};
         }
         
         [shape setHasGravity: (rand()% 100)==1];
-        shape->body.radius = (rand() % 5 + 4);
+        shape.physicsBody.radius = (rand() % 3 + 2);
         shape->body.position = GLKVector3MakeWithArray(randPos);
-        shape->body.mass = (rand()%15+2)/10;
+        shape.physicsBody.mass = (rand()%15+2)/10;
         //int drag = shape->body.mass * 10;
-        shape->body.dragC = (rand()% 99+1)/100;
+        shape.physicsBody.dragC = (rand()% 99+1)/100;
         //shape->body.dragArea = shape->body.radius * shape->body.radius * PI;
         [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
         // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);

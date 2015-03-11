@@ -11,9 +11,12 @@
 
 
 #endif
+#include "Matrix4.h"
+
 
 #define PI                      3.14159265358979323846
 #define PI_OVER_180             (PI / 180)
+#define RMX_INFINITY            9999
 
 #if defined(__STRICT_ANSI__)
 struct _RMXVector2
@@ -44,21 +47,24 @@ typedef struct _RMXPhysicsBody
     RMXVector3 forces;
     RMXMatrix4 orientation;
     RMXMatrix3 vMatrix;
+  /*
     RMXVector2 angles;
-    
+   
     float radius;
     float mass;
     float dragC;
-    const float dragArea;
+    float dragArea;
+    */
     
 }RMXPhysicsBody;
+
 
 
 BOOL RMXVector3IsZero(RMXVector3 v);
 float RMXGetSpeed(RMXVector3 v);
 RMXVector3 RMXVector3Abs(RMXVector3 v);
 
-RMXPhysicsBody RMXPhyisicsBodyMake(float m, float r);
+RMXPhysicsBody RMXPhyisicsBodyMake();//float m, float r);
 
 RMXVector3 RMXVector3DivideByScalar(RMXVector3 v, float s);
 
@@ -82,4 +88,5 @@ RMXMatrix3 RMXMatrix3RotateAboutY(float theta, RMXMatrix3  matrix);
 RMXVector3 RMXMatrix3MultiplyVector3(GLKMatrix3 matrixLeft, GLKVector3 vectorRight);
 
 void RMXPrintMatrix(GLKMatrix4 m);
+//@class RMXParticle;
 

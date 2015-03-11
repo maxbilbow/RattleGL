@@ -11,7 +11,7 @@ float colorBronzeDiff[4], colorBronzeSpec[4], colorBlue[4], colorNone[4], colorR
 @interface RMXArt : RMXObject
 
 @property float x, y, z, d, r, g, b, k;
-+ (RMXWorld*)initializeTestingEnvironment:(id)sender;
++ (RMXWorld*)initializeTestingEnvironment;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
 + (GLKVector4)rColor;

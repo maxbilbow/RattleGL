@@ -12,18 +12,28 @@
 
 #endif
 
+@protocol RMXObjectProtocol
+@property RMXObject * parent;
+@property RMXWorld * world;
+@end
 
+@interface RMXObject : NSObject <RMXObjectProtocol>{
 
-@interface RMXObject : NSObject  {
     @public RMXPhysicsBody body;
 }
 @property BOOL isAnimated;
+@property RMSPhysicsBody * physicsBody;
 @property (readonly) NSString * name;
 @property RMXObject * parent;
 @property RMXWorld * world;
 @property RMXPhysics * physics;
-@property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
+@property (readonly) float altitude, positionX, positionY;
+//@property RMXPhysicsBody body;
+@property (readonly) GLKVector3 upVector, rightVector, forwardVector, leftVector;
 - (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world;
 - (void)debug;
 - (void)reInit;
+- (void)setAltitude:(float)altitude;
+- (float)distanceTo:(RMXObject*)object;
+//+ (float)distanceBetween:(RMXObject*)a and:(RMXObject*)b;
 @end

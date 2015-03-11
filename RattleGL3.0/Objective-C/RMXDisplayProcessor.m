@@ -8,44 +8,16 @@
 
 
 
-#import "RattleGL3.0-Bridging-Header.h"
-
-#ifdef _WIN32
-#	include <windows.h>
-#else
-#	include <sys/time.h>
-#endif
-
-void animate(void)
-{
-    //float dt;
-#ifdef _WIN32
-    DWORD time_now;
-    time_now = GetTickCount();
-    dt = (float) (time_now - last_idle_time) / 1000.0;
-#else
-    // Figure out time elapsed since last call to idle function
-    struct timeval time_now;
-    gettimeofday(&time_now, NULL);
-    _dt = (float)(time_now.tv_sec  - last_idle_time.tv_sec) +
-    1.0e-6*(time_now.tv_usec - last_idle_time.tv_usec);
-#endif
-    // Animate the teapot by updating its angles
-//    g_fTeapotAngle += _dt * 30.0;
-//    g_fTeapotAngle2 += _dt * 100.0;
-   
-    // Save time_now for next time
-    last_idle_time = time_now;
-    // Force redraw
-    glutPostRedisplay();
-
-}
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 
 
 void AnimateScene(void)
 {
-    animate();
+    //animate();
     [world animate];
+    if (world == nil) exit(1);
+
     //[sun drawWith:DrawSphere];
     DrawFog();
     //[art animate];

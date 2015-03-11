@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
 
 static GLfloat g_fTeapotAngle2 = 0.0;
 //static GLfloat g_fViewDistance = 3 * VIEWING_DISTANCE_MIN;
@@ -20,7 +20,7 @@ static GLfloat g_fTeapotAngle2 = 0.0;
 
 void DrawCubeFace(float fSize)
 {
-    fSize /= 2.0;
+    //fSize /= 2.0;
 
     glBegin(GL_QUADS);
     
@@ -109,10 +109,10 @@ void DrawPlane(float x)
 {
 
     const GLfloat verts[] = {
-        -INFINITY,   -0.001,   -INFINITY,
-        -INFINITY,-0.001,INFINITY,
-        INFINITY,-0.001,INFINITY,
-        INFINITY,-0.001, -INFINITY
+        -RMX_INFINITY,   -0.001,   -RMX_INFINITY,
+        -RMX_INFINITY,-0.001,RMX_INFINITY,
+        RMX_INFINITY,-0.001,RMX_INFINITY,
+        RMX_INFINITY,-0.001, -RMX_INFINITY
     };
     
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -125,10 +125,10 @@ void DrawPlane(float x)
     
     glTranslatef(0, -1, 0);
     glBegin(GL_QUADS);
-    glVertex3f( -INFINITY,-0.001, -INFINITY);
-    glVertex3f( -INFINITY,-0.001,INFINITY);
-    glVertex3f(INFINITY,-0.001,INFINITY);
-    glVertex3f(INFINITY,-0.001, -INFINITY);
+    glVertex3f( -RMX_INFINITY,-0.001, -RMX_INFINITY);
+    glVertex3f( -RMX_INFINITY,-0.001,RMX_INFINITY);
+    glVertex3f(RMX_INFINITY,-0.001,RMX_INFINITY);
+    glVertex3f(RMX_INFINITY,-0.001, -RMX_INFINITY);
     glEnd();
     glColor4fv(colorNone);
     glPopMatrix();

@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 #define TEXTURE_ID_CUBE 1
 void InitGraphics(void)
 {
@@ -42,6 +43,8 @@ void InitGraphics(void)
 
 int run(int argc, char * argv[])
 {
+    //main = [Main new];
+   // world = [RMXArt initializeTestingEnvironment];
     glutInit(&argc, argv);
     initKeys();
 
@@ -94,7 +97,7 @@ int run(int argc, char * argv[])
     //glutAttachMenu (GLUT_RIGHT_BUTTON);
     // Get the initial time, for use by animation
 
-    gettimeofday (&last_idle_time, NULL);
+    //gettimeofday (&last_idle_time, NULL);
 
     
     //[mouse center];

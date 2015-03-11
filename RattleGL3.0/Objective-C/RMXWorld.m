@@ -15,8 +15,8 @@
 
 #endif
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 
 @implementation RMXWorld
     const float _g = W_GRAVITY;
@@ -27,15 +27,15 @@
 {
     self = [super initWithName:name parent:parent world:world];
     _observerName = @"Main Observer";
-    body.radius = 1000;
+    self.physicsBody.radius = 1000;
     
     _sprites = [[NSMutableArray alloc]initWithCapacity:2500];
     [_sprites addObject:[[RMXObserver alloc]initWithName:_observerName parent:self world:self]];// inPropertyWithKey:observerName];
     //eventHandler = [[RMXEventHandler alloc]initWithName:@"Event Handler" parent:self world:self];
     
-    if (body.radius == 0)
+    if (self.physicsBody.radius == 0)
         exit(1);
-    if ([self observer].parent->body.radius == 0)
+    if ([self observer].parent.physicsBody.radius == 0)
     exit(0);
     return self;
 }
@@ -82,13 +82,13 @@
 }
 
 - (float)normalForceAt:(RMXParticle*)someBody {
-    if (someBody->body.position.y < someBody.ground - 1 ){
-        return someBody->body.mass * self.physics.gravity + someBody.ground - someBody->body.position.y;
+    if (someBody->body.position.y < someBody.ground - 1){//someBody.physicsBody.radius/4 ){
+        return someBody.physicsBody.mass * self.physics.gravity + someBody.ground - someBody->body.position.y;
     } else if (someBody->body.position.y <= someBody.ground ) {
         someBody->body.position.y = someBody.ground;
-            return someBody->body.mass * self.physics.gravity;
+            return someBody.physicsBody.mass * self.physics.gravity;
     } else {
-        return someBody->body.mass * someBody->body.acceleration.y;// * self.physics.gravity; //air;
+        return someBody.physicsBody.mass * someBody->body.acceleration.y;// * self.physics.gravity; //air;
     }
 }
 
@@ -125,7 +125,7 @@
 - (RMXObject*)closestObjectTo:(RMXObject*)sender
 {
     id closest = [_sprites objectAtIndex:1];
-    float dista=GLKVector3Distance(sender->body.position, ((RMXParticle*)[_sprites objectAtIndex:1])->body.position);
+    float dista = GLKVector3Distance(sender->body.position, ((RMXParticle*)[_sprites objectAtIndex:1])->body.position);
         for (RMXParticle* sprite in _sprites){
             float distb = GLKVector3Distance(sender->body.position, sprite->body.position);
             //NSString *lt = @" < ";

@@ -7,8 +7,8 @@
 //
 
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 
 
 struct KeyProcessor {
@@ -176,10 +176,10 @@ void keyUpOperations(int key){
             SelectFromMenu(MENU_TEXTURING);
             break;*/
         case 'z':
-            [world applyGravity:YES];
+            [world applyGravity:true];
             break;
         case 'Z':
-            [world applyGravity:NO];
+            [world applyGravity:false];
             break;
         case 'm':
              [observer toggleFocus];

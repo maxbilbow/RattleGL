@@ -15,6 +15,7 @@
 @interface RMXShapeObject : RMXParticle <RMXDrawable>
 
 @property  GLKVector4 color;
+@property float r;
 @property  bool isRotating;
 @property  GLKVector3 rAxis;
 @property float rotation,  w;

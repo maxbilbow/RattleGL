@@ -23,7 +23,7 @@
 @property GLKVector3 anchor,itemPosition;
 @property RMXObject  * item; //return 1?;
 @property (readonly) float weight, ground;
-@property float armLength, reach, accelerationRate, speedLimit, squatLevel,rotationSpeed,jumpStrength;
+@property float armLength, reach, accelerationRate, speedLimit, squatLevel, rotationSpeed, jumpStrength;
 @property BOOL limitSpeed, hasFriction, hasGravity, prepairingToJump, goingUp;
 - (void)accelerateForward:(float)velocity;
 - (void)accelerateUp:(float)velocity;

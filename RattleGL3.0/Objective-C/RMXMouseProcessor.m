@@ -11,7 +11,9 @@
 
 
 
-#import "RattleGL3.0-Bridging-Header.h"
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
+@class Main;
 //static BOOL g_bLightingEnabled = TRUE;
 //static BOOL g_bFillPolygons = TRUE;
 //static BOOL g_bTexture = FALSE;

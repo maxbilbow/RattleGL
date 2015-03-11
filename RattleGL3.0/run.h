@@ -17,3 +17,4 @@
 //int init();
 void debug();
 int run(int argc, char * argv[]);
+RMXWorld * world;

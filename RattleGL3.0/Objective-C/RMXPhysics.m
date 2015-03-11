@@ -8,8 +8,8 @@
 
 
 
-#import "RattleGL3.0-Bridging-Header.h"
-
+#import "RattleGL-Bridging-Header.h"
+#import <RattleGL-Swift.h>
 
 @implementation RMXPhysics
 
@@ -48,10 +48,10 @@
 
 
 - (GLKVector3)dragFor:(RMXParticle*)sender{
-    float dragC = sender->body.dragC;
-    float rho = 0.005;
+    float dragC = sender.physicsBody.dragC;
+    float rho = 0.005 * [self.world massDensityAt:sender];
     float u = RMXGetSpeed(sender->body.velocity);// RMXScaler3FromMatrix3(body.vMatrix);
-    float area = sender->body.dragArea;//PI * sender->body.radius * sender->body.radius;
+    float area = sender.physicsBody.dragArea;//PI * sender->body.radius * sender->body.radius;
     GLKVector3 v;
     //for (int i = 0;i<3;++i){
         v.v[0] = 0.5 * rho * u*u * dragC * area;
