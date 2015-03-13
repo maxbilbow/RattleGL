@@ -6,22 +6,23 @@
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
 
-
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <complex.h>
 #import <RattleGL-Swift.h>
+
 float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
-float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
+ float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
+float colorWhite[4]        = { 1,1,1,1 };
 float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
-float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
-float colorRed[4]         = { 0.1, 0.0, 0.0, 1.0 };
-float colorGreen[4]       = { 0.0, 0.1, 0.0, 1.0 };
-float colorYellow[4]      = { 1.0, 0.0, 0.0, 1.0 };
-float nillVector[4]       = {0,0,0,0};
+ float colorNone[4]        = { 0.0, 0.0, 0.0, 0.0 };
+ float colorRed[4]         = { 0.1, 0.0, 0.0, 1.0 };
+ float colorGreen[4]       = { 0.0, 0.1, 0.0, 1.0 };
+ float colorYellow[4]      = { 1.0, 0.0, 0.0, 1.0 };
+ float nillVector[4]       = {0,0,0,0};
 
 @implementation RMXArt
 
-
+/*
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
 {
     self = [super initWithName:name parent:parent world:world];
@@ -42,7 +43,7 @@ float nillVector[4]       = {0,0,0,0};
     
 }
 
-
+*/
 + (RMXWorld*)initializeTestingEnvironment {
     
     //if (world == nil){
@@ -54,15 +55,16 @@ float nillVector[4]       = {0,0,0,0};
     
     
     
-    RMXLightSource * sun;
-    sun = [[RMXLightSource alloc]initWithName:@"SUN" parent:world world:world];
+    RMXLightSource * sun = [[RMXLightSource alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
-    sun.physicsBody.radius = 100;
+    sun.body.radius = 100;
     
+    [sun setColorfv:colorWhite];
     
-    float* axisColors[3] = {colorBlue , colorRed , colorGreen};
+    float * axisColors[3] = {colorBlue , colorRed , colorGreen};
     
     [sun setRender: DrawSphere];
+    
     
     
     [sun setShine:glLightfv];
@@ -74,9 +76,10 @@ float nillVector[4]       = {0,0,0,0};
     
     RMXShapeObject *ZX = [[RMXShapeObject alloc]initWithName:@"ZX PLANE" parent:world world:world];
     [ZX setRender:DrawPlane];
-    [ZX setColor:GLKVector4Make(0.8,1.2,0.8,1)];
-    [ZX setIsAnimated:false];
-    ZX->body.position.y = 0;
+    float planeColor[4]= {0.8,1.2,0.8,1};
+    [ZX setColorfv:planeColor];
+    ZX.isAnimated = false;
+    ZX.body.position = SCNVector3Make(ZX.body.position.x, 0, ZX.body.position.z);
     [world insertSprite:ZX];
     
     return world;
@@ -85,13 +88,13 @@ float nillVector[4]       = {0,0,0,0};
 
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world {//xCol y:(float*)yCol z:(float*)zCol{
     //BOOL gravity = false;
-    double noOfShapes = world.physicsBody.radius / 4;
-    float axis[3][3];
-    double limit = world.physicsBody.radius / noOfShapes;
+    double noOfShapes = world.body.radius / 4;
+    vector_float3 axis[3];
+    double limit = world.body.radius / noOfShapes;
     int test = 0;
     for (int j=0;j<3;++j) {
         int count = 0;
-        for(int i=-world.physicsBody.radius;i<world.physicsBody.radius;++i) {
+        for(int i=-world.body.radius;i<world.body.radius;++i) {
             if (count<limit) {
                 ++count;
             } else {
@@ -100,10 +103,10 @@ float nillVector[4]       = {0,0,0,0};
                 RMXShapeObject * shape = [[RMXShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
                 [shape setHasGravity: false];// ? true : false];
                 [shape setRender:DrawCubeWithTextureCoords];
-                shape.physicsBody.radius = limit/2;
-                shape->body.position = GLKVector3MakeWithArray(axis[j]);
-                if ( j != 1 ) shape->body.position.y = shape.physicsBody.radius;
-                [shape setColor:GLKVector4MakeWithArray(colors[j])];
+                shape.body.radius = limit/2;
+                shape.body.position = SCNVector3FromFloat3(axis[j]);
+                if ( j != 1 ) shape.body.position = SCNVector3Make(shape.body.position.x, shape.body.radius, shape.body.position.z);
+                [shape setColorfv:colors[j]];
                 [shape setIsAnimated:false];
                 [world insertSprite:shape];
                 test++;
@@ -119,13 +122,13 @@ float nillVector[4]       = {0,0,0,0};
     //BOOL gravity = true;
     double noOfShapes = 1980;
     for(int i=-noOfShapes/2;i<noOfShapes/2;++i) {
-        GLKVector4 points = doASum(world.physicsBody.radius, i,noOfShapes );
+        GLKVector4 points = doASum(world.body.radius, i,noOfShapes );
         complex double X = points.x;
         complex double Y = points.y;
         complex double Z = points.z;
         //float randPos[3] = {(rand() % (max + min))-max/2, (rand() % max), (rand() % (max + min))-max/2};
         int chance = 1;//(rand() % 6 + 1);
-        float randPos[3] = { X, Y, Z };
+        vector_float3 randPos = { X, Y, Z };
         switch (chance) {
             case 1:
                 randPos[0] = X;
@@ -182,13 +185,13 @@ float nillVector[4]       = {0,0,0,0};
         }
         
         [shape setHasGravity: (rand()% 100)==1];
-        shape.physicsBody.radius = (rand() % 3 + 2);
-        shape->body.position = GLKVector3MakeWithArray(randPos);
-        shape.physicsBody.mass = (rand()%15+2)/10;
+        shape.body.radius = (rand() % 3 + 2);
+        shape.body.position = SCNVector3FromFloat3(randPos);
+        shape.body.mass = (rand()%15+2)/10;
         //int drag = shape->body.mass * 10;
-        shape.physicsBody.dragC = (rand()% 99+1)/100;
+        shape.body.dragC = (rand()% 99+1)/100;
         //shape->body.dragArea = shape->body.radius * shape->body.radius * PI;
-        [shape setColor:GLKVector4MakeWithArray([self rColor].v)];
+        [shape setColor:[self rColor]];
         // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
         
         [world insertSprite:shape];
@@ -199,14 +202,14 @@ float nillVector[4]       = {0,0,0,0};
 }
 
 
-+ (GLKVector4)rColor {
++ (vector_float4)rColor {
     //float rCol[4];
-    GLKVector4 rCol;
+    vector_float4 rCol;
     //rCol.x = (rand() % 100)/10;
     for (int i = 0; i<3; ++i)
-        rCol.v[i] = (rand() % 800)/500;
+        rCol[i] = (rand() % 800)/500;
     
-    rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
+    rCol[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
     //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
     return rCol;
 }
@@ -214,7 +217,7 @@ float nillVector[4]       = {0,0,0,0};
 
 
 - (void)debug {
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+   // [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 
 

@@ -2,14 +2,6 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#ifndef OpenGL_2_0_Header_h
-#define OpenGL_2_0_Header_h
-
-
-#endif
-
-
-//#import <TargetConditionals.h>
 @import Foundation;
 @import GLUT;
 @import GLKit;
@@ -24,9 +16,9 @@
 #endif
 
 //Swift
-@class RMSPhysicsBody, RMXWorld, Main;
+@class RMSPhysicsBody, RMXWorld, RMXPhysics, RMXObject, world;
 //Objc
-@class RMXObject, RMXArt, RMXDebugger, RMXPhysics, RMXLightSource, RMXObserver, RMXMouse, RMXShapeObject, RMXParticle, RMXDPad, RMXMouseProcessor;
+@class RMXArt, RMXDebugger, RMXLightSource, RMXObserver, RMXMouse, RMXShapeObject, RMXParticle, RMXDPad, RMXMouseProcessor;
 
 
 //
@@ -34,6 +26,8 @@
 //#import <GLKit/GLKit.h>
 
 //#import "RattleGL3-0-Swift.h"
+#import "cStuff.h"
+#import <SceneKit/SceneKit.h>
 #import "RMXMaths.h"
 #import "RMXEquations.h"
 #import "RMXShapes.h"
@@ -44,9 +38,9 @@
 #import "RMXDebugger.h"
 #import "RMXMouse.h"
 
-#import "RMXPhysics.h"
+//#import "RMXPhysics.h"
 #import "RMXParticle.h"
-#import "RMXObserver.h"
+//#import "RMXObserver.h"
 
 #import "RMXDrawable.h"
 #import "RMXShapeObject.h"
@@ -57,7 +51,7 @@
 //desktop below
 
 //#import "RMXMenu.h"
-#import "RMXWindow.h"
+//#import "RMXWindow.h"
 #import "RMXMouseProcessor.h"
 #import "RMXKeyboardProcessor.h"
 #import "RMXDisplayProcessor.h"

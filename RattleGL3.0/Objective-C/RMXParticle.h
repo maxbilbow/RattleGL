@@ -19,9 +19,9 @@
  Particle
  */
 @interface RMXParticle : RMXObject  <RMXOrienrationProcessor>
-@property (readonly) GLKVector3 eye, center, up;
-@property GLKVector3 anchor,itemPosition;
-@property RMXObject  * item; //return 1?;
+@property (readonly) RMXVector3 eye, center, up;
+@property RMXVector3 anchor,itemPosition;
+@property RMXParticle  * item; //return 1?;
 @property (readonly) float weight, ground;
 @property (readonly) float upThrust, downForce;
 @property float armLength, reach, accelerationRate, speedLimit, squatLevel, rotationSpeed, jumpStrength;
@@ -41,7 +41,7 @@
 - (void)animate;
 - (void)manipulate;
 - (bool)isGrounded;
-- (void)push:(GLKVector3)direction;
+- (void)push:(RMXVector3)direction;
 - (void)plusAngle:(float)theta up:(float)phi;
 - (void)prepareToJump;
 - (void)toggleGravity;

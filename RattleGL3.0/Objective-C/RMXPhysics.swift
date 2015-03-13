@@ -7,60 +7,52 @@
 //
 
 
-@objc public class RMXPhysics : NSObject, RMXObjectProtocol{
+@objc public class RMXPhysics {
     var gravity: Float = 0.098
-    var parent: RMXObjectProtocol!
+    public var parent: RMXObject!
     public var world: RMXWorld!
+    var upVector: RMXVector3
     
     init(parent: RMXObject! = nil, world:RMXWorld! = nil) {
+        //super.init(name: "World Physics", parent: parent, world: world)
         self.parent = parent
         self.world = world
+        self.upVector = SCNVector3Make(0,1,0)
     }
     
-    
-    func applyGravityTo(particle: RMXParticle) {
-     // NSLog(@"Probably should delete this: (void)applyGravityTo:(RMXParticle*)particle");
-        exit(0);
-    }
-    func gVector(hasGravity: Bool) -> RMXVector3 {
-        return GLKVector3MultiplyScalar(self.upVector,(hasGravity)?-_gravity:0);
-    }
-    
-    
-    
-    
-    
-    
-    - (GLKVector3)gravityFor:(RMXParticle*)sender {
-    return GLKVector3MultiplyScalar(self.upVector,-sender.weight);
-    }
-    
-    
-    
-    - (GLKVector3)dragFor:(RMXParticle*)sender{
-    float dragC = sender.physicsBody.dragC;
-    float rho = 0.005 * [self.world massDensityAt:sender];
-    float u = RMXGetSpeed(sender->body.velocity);// RMXScaler3FromMatrix3(body.vMatrix);
-    float area = sender.physicsBody.dragArea;//PI * sender->body.radius * sender->body.radius;
-    GLKVector3 v;
-    //for (int i = 0;i<3;++i){
-    v.v[0] = 0.5 * rho * u*u * dragC * area;
-    // }
-    
-    return v;
-    }
-    
-    - (GLKVector3)frictionFor:(RMXParticle*)sender {
-    float µ = [self.world µAt:sender];
-    
-    
-    
-    return RMXMatrix3MultiplyScalarAndSpeed(sender->body.vMatrix,µ); //RMXVector3Add4(GLKVector3Make(0,0,0),µX,µY,µZ);
-    }
-    
-    - (RMXVector3)normalFor:(RMXParticle*)sender{
-    float normal = [self.world normalForceAt:sender];
-    return GLKVector3MultiplyScalar(self.upVector,normal);// : GLKVector3Make(0,0,0);
+    class func New(parent: RMXObject! = nil, world:RMXWorld! = nil) -> RMXPhysics {
+        return RMXPhysics(parent: parent, world: world)
     }
 
+    func gVector(hasGravity: Bool) -> RMXVector3 {
+        return RMXVector3MultiplyScalar(self.upVector, hasGravity ? -gravity : 0 )
+    }
+    
+    
+    
+    func gravityFor(sender: RMXParticle) -> RMXVector3{
+        return RMXVector3MultiplyScalar(self.upVector,-sender.weight)
+    }
+    
+    
+    
+    func dragFor(sender: RMXParticle) -> RMXVector3{
+        let dragC = CGFloat(sender.body.dragC)
+        let rho = CGFloat(0.005 * self.world.massDensityAt(sender))
+        let u = CGFloat(RMXGetSpeed(sender.body.velocity))
+        let area = CGFloat(sender.body.dragArea)
+        var v: RMXVector3 = RMXVector3Zero()
+        v.x = CGFloat(0.5 * rho * u * u * dragC * area)
+        return v
+    }
+    
+    func frictionFor(sender: RMXParticle) -> RMXVector3{
+        let µ = CGFloat(self.world.µAt(sender))
+        return SCNVector3Make(µ, µ, µ);//TODO
+    }
+    
+    func normalFor(sender: RMXParticle) -> RMXVector3 {
+        let normal = self.world.normalForceAt(sender)
+        return RMXVector3MultiplyScalar(self.upVector,normal);// : GLKVector3Make(0,0,0);
+    }
 }

@@ -58,4 +58,4 @@
 - (void)feedback;
 @end
 
-const RMXDebugger *rmxDebugger;
+//const RMXDebugger *rmxDebugger;

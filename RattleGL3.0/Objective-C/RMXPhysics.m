@@ -8,7 +8,7 @@
 
 
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 
 @implementation RMXPhysics
@@ -29,48 +29,48 @@
     exit(0);
    
 }
-- (GLKVector3)gVector:(BOOL)hasGravity {
-    return GLKVector3MultiplyScalar(self.upVector,(hasGravity)?-_gravity:0);
+- (RMXVector3)gVector:(BOOL)hasGravity {
+    return RMXVector3MultiplyScalar(self.upVector,(hasGravity)?-_gravity:0);
 }
 
 
 
 - (void)debug {
-    [rmxDebugger add:RMX_PHYSICS n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+    //[rmxDebugger add:RMX_PHYSICS n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 
 
 
-- (GLKVector3)gravityFor:(RMXParticle*)sender {
-    return GLKVector3MultiplyScalar(self.upVector,-sender.weight);
+- (RMXVector3)gravityFor:(RMXParticle*)sender {
+    return RMXVector3MultiplyScalar(self.upVector,-sender.weight);
 }
 
 
 
-- (GLKVector3)dragFor:(RMXParticle*)sender{
-    float dragC = sender.physicsBody.dragC;
+- (RMXVector3)dragFor:(RMXParticle*)sender{
+    float dragC = sender.body.dragC;
     float rho = 0.005 * [self.world massDensityAt:sender];
-    float u = RMXGetSpeed(sender->body.velocity);// RMXScaler3FromMatrix3(body.vMatrix);
-    float area = sender.physicsBody.dragArea;//PI * sender->body.radius * sender->body.radius;
-    GLKVector3 v;
+    float u = RMXGetSpeed(sender.body.velocity);// RMXScaler3FromMatrix3(body.vMatrix);
+    float area = sender.body.dragArea;//PI * sender->body.radius * sender->body.radius;
+    RMXVector3 v;
     //for (int i = 0;i<3;++i){
-        v.v[0] = 0.5 * rho * u*u * dragC * area;
+        v.x = 0.5 * rho * u*u * dragC * area;
    // }
     
     return v;
 }
 
-- (GLKVector3)frictionFor:(RMXParticle*)sender {
+- (RMXVector3)frictionFor:(RMXParticle*)sender {
     float µ = [self.world µAt:sender];
     
+    return SCNVector3Make(µ, µ, µ);//TODO
     
-    
-    return RMXMatrix3MultiplyScalarAndSpeed(sender->body.vMatrix,µ); //RMXVector3Add4(GLKVector3Make(0,0,0),µX,µY,µZ);
+    //return RMXMatrix3MultiplyScalarAndSpeed(sender.body.vMatrix,µ); //RMXVector3Add4(GLKVector3Make(0,0,0),µX,µY,µZ);
 }
 
 - (RMXVector3)normalFor:(RMXParticle*)sender{
     float normal = [self.world normalForceAt:sender];
-    return GLKVector3MultiplyScalar(self.upVector,normal);// : GLKVector3Make(0,0,0);
+    return RMXVector3MultiplyScalar(self.upVector,normal);// : GLKVector3Make(0,0,0);
 }
 
 @end;

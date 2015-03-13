@@ -12,7 +12,7 @@
 
 #endif
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 
 @implementation RMXObject
@@ -28,30 +28,29 @@
     //    }
     _name = name;
 //    _physics = nil;
-    _physics = (world != nil) ? world.physics : [[RMXPhysics alloc]initWithName:@"Root Node" parent:parent world: (RMXWorld*) self];
+    _physics = (world != nil) ? world.physics : [RMXPhysics NewWithParent:parent world: (RMXWorld*) self];
     [self reInit];
     return self;
 }
 
 - (float)altitude{
-    return body.position.y;
+    return _body.position.y;
 }
-
+/*
 - (void)setAltitude:(float)altitude {
-    body.position.y = altitude;
+    self.body.position.y = altitude;
 }
-
+*/
 - (float)positionX{
-    return body.position.x;
+    return _body.position.x;
 }
 
 - (float)positionZ{
-    return body.position.z;
+    return _body.position.z;
 }
 
 - (void)reInit {
-    body = RMXPhyisicsBodyMake();
-    self.physicsBody = [RMSPhysicsBody New];
+    self.body = [RMSPhysicsBody New];
     
 }
 - (void)debug {
@@ -59,27 +58,27 @@
 }
 
 - (RMXVector3)upVector{
-    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),1);
-    return GLKVector3Make(v.x,v.y,v.z);
+   // GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),1);
+    return SCNVector3Make(_body.orientation.m12,_body.orientation.m22,_body.orientation.m32);
 }
 
 - (RMXVector3)rightVector{
-    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0);
-    return GLKVector3Negate(GLKVector3Make(v.x,v.y,v.z));
+   //  GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
+    return SCNVector3Make(-_body.orientation.m11, -_body.orientation.m21, -_body.orientation.m31);
 }
 
 - (RMXVector3)leftVector{
-    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0);
-    return GLKVector3Make(v.x,v.y,v.z);
+    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
+    return SCNVector3Make(_body.orientation.m11,_body.orientation.m21,_body.orientation.m31);
 }
 
 - (RMXVector3)forwardVector{
-    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),2);
-    return GLKVector3Make(v.x,v.y,v.z);
+    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),2);
+    return SCNVector3Make(_body.orientation.m13,_body.orientation.m23,_body.orientation.m33);
 }
 
 - (float)distanceTo:(RMXObject*)object {
-    return GLKVector3Distance(body.position, object->body.position);
+    return GLKVector3Distance(SCNVector3ToGLKVector3(_body.position),SCNVector3ToGLKVector3(object.body.position));
 }
 //- (void)animate{}
 

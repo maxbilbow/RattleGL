@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
 
-float colorBronzeDiff[4], colorBronzeSpec[4], colorBlue[4], colorNone[4], colorRed[4], colorGreen[4], colorYellow[4], nillVector[4];
+//const vector_float4 colorBronzeDiff, colorBronzeSpec, colorBlue, colorRed, colorGreen, colorYellow, nillVector;
 
-@interface RMXArt : RMXObject
+@interface RMXArt : RMXObject 
 
-@property float x, y, z, d, r, g, b, k;
+//@property float x, y, z, d, r, g, b, k;
 + (RMXWorld*)initializeTestingEnvironment;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
-+ (GLKVector4)rColor;
++ (vector_float4)rColor;
 
 @end
 
-const RMXArt* art;
+//const RMXArt* art;

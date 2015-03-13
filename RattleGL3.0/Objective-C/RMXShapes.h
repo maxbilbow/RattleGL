@@ -12,11 +12,10 @@
 
 #endif
 
-//#define VIEWING_DISTANCE_MIN  3.0
+#define VIEWING_DISTANCE_MIN  3.0
 //#define TEXTURE_ID_CUBE 1
 
 
-//float colorBronzeDiff[4], colorBronzeSpec[4], colorBlue[4], colorNone[4], colorRed[4], colorGreen[4], colorYellow[4];
 void DrawCubeFace(float fSize);
 void DrawCubeWithTextureCoords (float fSize);
 void DrawSpheree(double r, int lats, int longs);

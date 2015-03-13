@@ -7,48 +7,79 @@
 //
 
 
-public class RMXObject  {
+@objc public class RMXObject : NSObject {
+    var isAnimated: Bool = true
+    var body: RMSPhysicsBody! = nil
+    var name: String
+    var parent: RMXObject!
+    var world: RMXWorld!
+   // var physics: RMXPhysics
+//    @property (readonly) float altitude, positionX, positionY;
+    //@property RMXPhysicsBody body;
+//    @property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
     
-    init(name: NSString,  parent:RMXObject, world:RMXWorld) {
-        super.init()
-        self.parent = parent;
-        self.world = world;
+    init(name:String!, parent: RMXObject!, world: RMXWorld!){
+        
+        self.parent = parent
+        self.world = world
+        //    if (world != nil && [world isKindOfClass:[RMXWorld class]]){
+        //        self.uiView = ((RMXWorld*)world).uiView;
+        //    } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
+        //        self.uiView = (UIVideoEditorController*) parent;
+        //    }
         self.name = name;
-        if self is RMXWorld {
-            self.physics = RMXPhysics(name: "World Physics", parent:self, world: self)
-        } else {
-            self.physics = (world != nil) ? world.physics : nil
-        }
+        //    self.physics = nil;
+        //self.physics = (world != nil) ? world.physics : RMXPhysics(parent: parent, world: self as RMXWorld)
+       
         self.reInit()
     }
     
+    var altitude: CGFloat {
+        return self.body.position.y;
+    }
+    /*
+    - (void)setAltitude:(float)altitude {
+    self.body.position.y = altitude;
+    }
+    */
+    var positionX: CGFloat {
+        return self.body.position.x
+    }
+    
+    var positionZ: CGFloat {
+        return self.body.position.z
+    }
     
     func reInit() {
-        body = RMXPhyisicsBodyMake();
-        
+        self.body = RMSPhysicsBody()
     }
-    func debug() {
-        //[rmxDebugger add:RMX_ERROR n:self t:_name];
+   
+    
+    var upVector: RMXVector3{
+    // GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),1);
+        return SCNVector3Make(self.body.orientation.m12,self.body.orientation.m22,self.body.orientation.m32);
     }
     
-    func upVector() -> RMXVector3{
-        let v: GLKVector4 = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),1)
-        return GLKVector3Make(v.x,v.y,v.z);
+    var rightVector: RMXVector3{
+    //  GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
+    return SCNVector3Make(-self.body.orientation.m11, -self.body.orientation.m21, -self.body.orientation.m31);
     }
     
-    func rightVector() -> RMXVector3{
-        let v: GLKVector4 = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0)
-        return GLKVector3Negate(GLKVector3Make(v.x,v.y,v.z));
+    var leftVector: RMXVector3{
+    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
+    return SCNVector3Make(self.body.orientation.m11,self.body.orientation.m21,self.body.orientation.m31);
     }
     
-    func leftVector() -> RMXVector3{
-        let v: GLKVector4 = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0)
-        return GLKVector3Make(v.x,v.y,v.z);
+    var forwardVector: RMXVector3{
+    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),2);
+    return SCNVector3Make(self.body.orientation.m13,self.body.orientation.m23,self.body.orientation.m33);
     }
     
-    func forwardVector() -> RMXVector3 {
-        let v: GLKVector4 = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),2)
-        return GLKVector3Make(v.x,v.y,v.z);
+    func distanceTo(object: RMXObject) -> Float {
+        return GLKVector3Distance(SCNVector3ToGLKVector3(self.body.position),SCNVector3ToGLKVector3(object.body.position));
     }
+    //- (void)animate{}
+    
+    
 }
 

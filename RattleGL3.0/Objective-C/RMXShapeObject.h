@@ -14,13 +14,14 @@
 
 @interface RMXShapeObject : RMXParticle <RMXDrawable>
 
-@property  GLKVector4 color;
+@property vector_float4 color;
 @property float r;
 @property  bool isRotating;
-@property  GLKVector3 rAxis;
+@property  RMXVector3 rAxis;
 @property float rotation,  w;
 @property GLenum type, gl_light;
 @property void (*render)(float);
 @property void(*shine)(GLenum, GLenum, const float*);
+- (void)setColorfv:(float*)c;
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 
 @implementation RMXDebugger
 const bool isDebugging = RMX_DEBUGGING;

@@ -30,21 +30,17 @@ float RMXGetSpeed(RMXVector3 v){
 
 
 RMXVector3 RMXVector3Abs(RMXVector3 v){
-    return GLKVector3Make(fabs(v.x),fabs(v.y),fabs(v.z));
+    return SCNVector3Make(fabs(v.x),fabs(v.y),fabs(v.z));
 }
-
-RMXPhysicsBody RMXPhyisicsBodyMake() {//float m, float r){
+/*
+SCNPhysicsBody RMXPhyisicsBodyMake() {//float m, float r){
     RMXPhysicsBody b;
-    b.position = GLKVector3Make(0,0,0);
-    b.velocity = GLKVector3Make(0,0,0);
-    b.acceleration = GLKVector3Make(0,0,0);
-    b.forces = GLKVector3Make(0,0,0);
-    b.orientation = GLKMatrix4Make(
-                                   1,0,0,0,
-                                   0,1,0,0,
-                                   0,0,1,0,
-                                   0,0,0,1
-                                   );
+    b.position = SCNVector3Make(0,0,0);
+    b.velocity = SCNVector3Make(0,0,0);
+    b.acceleration = SCNVector3Make(0,0,0);
+    b.forces = SCNVector3Make(0,0,0);
+    b.orientation = SCNMatrix4Identity;
+    
     b.vMatrix = GLKMatrix3Make(
                                0,0,0,
                                0,0,0,
@@ -57,78 +53,107 @@ RMXPhysicsBody RMXPhyisicsBodyMake() {//float m, float r){
 //    b.dragArea = r*r * PI;
     return b;
 }
-
+*/
 RMXVector3 RMXVector3DivideByScalar(RMXVector3 v, float s){
-    //v = GLKVector3DivideScalar(v,s);
+    vector_float3 fv = SCNVector3ToFloat3(v);
     for (int i=0; i<3;++i){
-        //if (abs(v.v[i]) < 0.01)
-            v.v[i] /= s;
+        //if (abs(v.v[i]) < 0.01SCNVector3Make)
+            fv[i] /= s;
     }
-    return v;
+    return SCNVector3FromFloat3(fv);
 }
 
-void RMXVector3RoundToZero(RMXVector3 * v, float dp){
+void RMXVector3RoundToZero(GLKVector3 * v, float dp){
     for (int i=0; i<3;++i){
-        if (abs(v->v[i]) < dp)
+        if (fabsf(v->v[i]) < dp)
             v->v[i] = 0;
     }
 }
 
-RMXVector3 RMXVector3Divide(RMXVector3 *top, RMXVector3 bottom){
+RMXVector3 RMXVector3Divide(RMXVector3 vTop, RMXVector3 vBottom){
+    vector_float3 top = SCNVector3ToFloat3(vTop);
+    vector_float3 bottom = SCNVector3ToFloat3(vBottom);
     for (int i=0; i<3;++i){
-        top->v[i] /= bottom.v[i];
+        top[i] /= bottom[i];
     }
-    return *top;
+    return SCNVector3FromFloat3(top);
 }
 
-RMXVector3 RMXVector3DivideScalar(RMXVector3 *top, float bottom){
+RMXVector3 RMXVector3DivideScalar(RMXVector3 top, float bottom){
+    vector_float3 fv = SCNVector3ToFloat3(top);
     for (int i=0; i<3;++i){
-        top->v[i] /= bottom;
+        fv[i] /= bottom;
     }
-    return *top;
+    return SCNVector3FromFloat3(fv);
+}
+
+RMXVector3 RMXVector3Add(RMXVector3 a ,RMXVector3 b){
+    return SCNVector3Make(a.x + b.x,
+                          a.y + b.y,
+                          a.z + b.z
+                          );
 }
 
 RMXVector3 RMXVector3Add3(RMXVector3 a ,RMXVector3 b, RMXVector3 c ){
-    return GLKVector3Add(a,GLKVector3Add(b,c));
+    return SCNVector3Make(a.x + b.x + c.x,
+                          a.y + b.y + c.y,
+                          a.z + b.z + c.z);
 }
 
 
 
 RMXVector3 RMXVector3Add4(RMXVector3 a ,RMXVector3 b, RMXVector3 c , RMXVector3 d){
-    return GLKVector3Add(a,GLKVector3Add(b,GLKVector3Add(c,d)));
+    return SCNVector3Make(a.x + b.x + c.x + d.x,
+                          a.y + b.y + c.y + d.y,
+                          a.z + b.z + c.z + d.z);
 }
 
 
 RMXVector3 RMXVector3AddScalar(RMXVector3 inOut, float s ){
-    for (int i=0;i<0;++i){
-        inOut.v[i] += s;
-    }
+    inOut.x += s;
+    inOut.y += s;
+    inOut.z += s;
     return inOut;
 }
 
 RMXVector3 RMXVector3MultiplyScalarAndSpeed(RMXVector3 v, float s){
-    return GLKVector3MultiplyScalar(RMXVector3Abs(v),s*RMXGetSpeed(v));
+    return SCNVector3FromGLKVector3(GLKVector3MultiplyScalar(SCNVector3ToGLKVector3(RMXVector3Abs(v)),s*RMXGetSpeed(v)));
 }
 
+RMXVector3 RMXVector3MultiplyScalar(RMXVector3 v, float s){
+    return SCNVector3FromGLKVector3(GLKVector3MultiplyScalar(SCNVector3ToGLKVector3(v),s));
+}
+RMXVector3 RMXVector3Zero(){
+    return SCNVector3Make(0,0,0);
+}
+
+
 RMXVector3 RMXMatrix3MultiplyScalarAndSpeed(RMXMatrix3 m, float s){
-    RMXVector3 result[3];
+    GLKVector3 result[3];
     for (int i=0;i<0;++i){
-        RMXVector3 v = GLKMatrix3GetRow(m,i);
-        result[i] = RMXVector3MultiplyScalarAndSpeed( v , s );
+        RMXVector3 v = SCNVector3FromGLKVector3(GLKMatrix3GetRow(m,i));
+        result[i] = SCNVector3ToGLKVector3(RMXVector3MultiplyScalarAndSpeed( v , s ));
     }
     
-    return GLKMatrix3MultiplyVector3(GLKMatrix3MakeWithRows(result[0],result[1],result[2]),GLKVector3Make(1,1,1));
-    
+    return SCNVector3FromGLKVector3(GLKMatrix3MultiplyVector3(GLKMatrix3MakeWithRows(result[0],result[1],result[2]),GLKVector3Make(1,1,1)));
+}
+
+RMXVector3 RMXMatrix4MultiplyVector3(RMXMatrix4 m, RMXVector3 s){
+    return SCNVector3FromGLKVector3(GLKMatrix4MultiplyVector3(SCNMatrix4ToGLKMatrix4(m),SCNVector3ToGLKVector3(s)));
+}
+
+RMXMatrix4 RMXMatrix4Transpose(RMXMatrix4 m){
+    return SCNMatrix4FromGLKMatrix4(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(m)));
 }
 
 RMXVector3 RMXScaler3FromVector3(RMXVector3 x, RMXVector3 y, RMXVector3 z){
-    return GLKVector3Make(RMXGetSpeed(x),RMXGetSpeed(y),RMXGetSpeed(z));
+    return SCNVector3Make(RMXGetSpeed(x),RMXGetSpeed(y),RMXGetSpeed(z));
 }
 
 RMXVector3 RMXScaler3FromMatrix3(RMXMatrix3 m){
-    return GLKVector3Make( RMXGetSpeed(GLKMatrix3GetRow(m,0))
-                          ,RMXGetSpeed(GLKMatrix3GetRow(m,1))
-                          ,RMXGetSpeed(GLKMatrix3GetRow(m,2))
+    return SCNVector3Make( RMXGetSpeed(SCNVector3FromGLKVector3(GLKMatrix3GetRow(m,0)))
+                          ,RMXGetSpeed(SCNVector3FromGLKVector3(GLKMatrix3GetRow(m,1)))
+                          ,RMXGetSpeed(SCNVector3FromGLKVector3(GLKMatrix3GetRow(m,2)))
                           );
 }
 
@@ -140,9 +165,11 @@ RMXMatrix3 RMXMatrix3RotateAboutY(float theta, RMXMatrix3  matrix){
 
 
 
-RMXVector3 RMXMatrix3MultiplyVector3(GLKMatrix3 matrixLeft, GLKVector3 vectorRight)
+RMXVector3 RMXMatrix3MultiplyVector3(RMXMatrix4 ml, RMXVector3 vr)
 {
-    GLKVector3 v = {
+    GLKMatrix4 matrixLeft = SCNMatrix4ToGLKMatrix4(ml);
+    GLKVector3 vectorRight = SCNVector3ToGLKVector3(vr);
+    RMXVector3 v = {
         matrixLeft.m[0] * vectorRight.v[0] + matrixLeft.m[1] * vectorRight.v[0] + matrixLeft.m[0] * vectorRight.v[0],
         matrixLeft.m[3] * vectorRight.v[1] + matrixLeft.m[4] * vectorRight.v[1] + matrixLeft.m[1] * vectorRight.v[2],
         matrixLeft.m[6] * vectorRight.v[2] + matrixLeft.m[7] * vectorRight.v[2] + matrixLeft.m[2] * vectorRight.v[2] };

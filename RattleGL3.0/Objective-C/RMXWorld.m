@@ -15,7 +15,7 @@
 
 #endif
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 
 @implementation RMXWorld

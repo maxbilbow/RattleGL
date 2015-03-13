@@ -11,7 +11,7 @@
 
 
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 @class Main;
 //static BOOL g_bLightingEnabled = TRUE;
@@ -30,8 +30,8 @@ static int g_yClick = 0;
 void center(){
 //
     bool center = false;//observer->hasFocus();
-    int x = center ? window.width/2 :[observer getMouse].x;
-    int y = center ? window.height/2 : [observer getMouse].y;
+    int x = center ? glutGet(GLUT_WINDOW_X)/2 :world.observer.mousePos.x;
+    int y = center ? glutGet(GLUT_WINDOW_Y)/2 :world.observer.mousePos.y;
 
     CGWarpMouseCursorPosition(CGPointMake(x + glutGet(GLUT_WINDOW_X), y + glutGet(GLUT_WINDOW_Y) ));
   //  pos.x = glutGet(GLUT_WINDOW_X)/2;
@@ -46,18 +46,18 @@ void MouseButton(int button, int state, int x, int y)
     // If button1 pressed, mark this state so we know in motion function.
 
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_UP))
-        [observer grabObject:[world closestObjectTo:observer]];//&art.sh);
+        [world.observer grabObject:[world.thisWorld closestObjectTo:world.observer]];//&art.sh);
     if ((button == GLUT_LEFT_BUTTON)&&(state==GLUT_DOWN))
-        [observer calibrateView:x vert:y];
+        [world.observer calibrateView:x vert:y];
     if (button == GLUT_LEFT_BUTTON)
     {
 
         g_bButton1Down = (state == GLUT_DOWN) ? TRUE : FALSE;
-        g_yClick = y - 3 * window.fViewDistance;
+        g_yClick = y - 3 * VIEWING_DISTANCE_MIN;
         //art.sh.setAnchor(&observer);
     }
     if ((button == GLUT_RIGHT_BUTTON)&&(state==GLUT_UP)){
-        [observer throwItem:15];
+        [world.observer throwItem:15];
     }
 }
 
@@ -66,36 +66,34 @@ void MouseButton(int button, int state, int x, int y)
 
 void MouseMotion(int x, int y)
 {
-    if (![observer hasFocus]) {
-        [observer mouse2view:x y:y];
+    if (![world.observer hasFocus]) {
+        [world.observer mouse2view:x y:y];
     }
     else {
-        [observer setMousePos:x y:y];
-        //observer->calibrateMouse(x,y);
+        [world.observer setMousePos:x y:y];
+        //world.observer->calibrateMouse(x,y);
     }
-    [rmxDebugger add:RMX_MOUSE_PROCESSOR n:@"MouseProcessor" t:[NSString stringWithFormat:@"MouseMotion: %i | %i",x,y]];
-    // If button1 pressed, zoom in/out if mouse is moved up/down.
-    if (g_bButton1Down)
-    {
-        window.fViewDistance = (y - g_yClick) / 3.0 ;
-        if (window.fViewDistance < VIEWING_DISTANCE_MIN)
-            window.fViewDistance = VIEWING_DISTANCE_MIN;
-        glutPostRedisplay();
-    }
+//    if (g_bButton1Down)
+//    {
+//        window.fViewDistance = (y - g_yClick) / 3.0 ;
+//        if (window.fViewDistance < VIEWING_DISTANCE_MIN)
+//            window.fViewDistance = VIEWING_DISTANCE_MIN;
+//        glutPostRedisplay();
+//    }
     
     
 }
 
 
 void mouseFree(int x, int y){
-    if ([observer hasFocus]) {
-        [observer mouse2view:x y:y];// mouse.setView(observer,x,y);
-        //observer->center();
+    if ([world.observer hasFocus]) {
+        [world.observer mouse2view:x y:y];// mouse.setView(world.observer,x,y);
+        //world.observer->center();
         center();
 
     }
     else
-        [observer setMousePos:x y:y];
+        [world.observer setMousePos:x y:y];
     
     //glutWarpPointer(window.getWidth()/2, window.getHeight()/2);
    

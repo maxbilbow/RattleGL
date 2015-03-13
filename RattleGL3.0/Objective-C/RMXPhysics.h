@@ -16,11 +16,11 @@
 @interface RMXPhysics : RMXObject
 @property float gravity;
 
-@property (readonly) GLKVector3 gVector;
+@property (readonly) RMXVector3 gVector;
 - (RMXVector3)gravityFor:(RMXParticle*)sender;
 - (RMXVector3)frictionFor:(RMXParticle*)sender;
 - (RMXVector3)normalFor:(RMXParticle*)sender;
-- (GLKVector3)dragFor:(RMXParticle*)sender;
+- (RMXVector3)dragFor:(RMXParticle*)sender;
 @end
 
 

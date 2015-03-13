@@ -13,7 +13,7 @@
 #endif
 
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 /*
  Provides basic movement attributes to any object
@@ -47,13 +47,12 @@
     //self.origin;
     self.armLength = 8;
     self.reach = 10;
-    self.physicsBody.mass = 9;
-    self.physicsBody.radius = 10;
-    body = RMXPhyisicsBodyMake(3,10);
-    body.position = GLKVector3Make(0,0,-0.4);
-    body.position = GLKVector3Make(20,self.physicsBody.radius,20);
+    self.body.mass = 9;
+    self.body.radius = 10;
+    self.body.position = SCNVector3Make(0,0,-0.4);
+    self.body.position = SCNVector3Make(20,self.body.radius,20);
     
-    //self.physicsBody.position[2] = -0.4;
+    //self.body.position[2] = -0.4;
     //    body.position = GLKVector3Make(-10,body.radius,-10);
     self.jumpStrength = 1;
 }
@@ -63,12 +62,12 @@ bool _itemWasAnimated = false;
 - (void)grabObject:(RMXObject*)i
 {
     
-    if (self.item == nil && GLKVector3Distance(body.position, i->body.position) < self.reach+i.physicsBody.radius) {
+    if (self.item == nil && GLKVector3Distance(SCNVector3ToGLKVector3(self.body.position), SCNVector3ToGLKVector3(i.body.position)) < self.reach+i.body.radius) {
         self.item = i;
-        self.itemPosition = i->body.position;
+        self.itemPosition = i.body.position;
         _itemWasAnimated = self.item.isAnimated;
         //[self.item setIsAnimated:false]; //TODO: Make this not necessary
-        self.armLength = GLKVector3Distance(self.center, self.itemPosition);
+        self.armLength = GLKVector3Distance(GLKVector3Make(self.center[0],self.center[1],self.center[2]), SCNVector3ToGLKVector3(self.itemPosition));
     } else
         [self releaseObject];
 }
@@ -99,9 +98,9 @@ bool _itemWasAnimated = false;
 - (GLKMatrix4)makeLookAt:(GLKMatrix4(float eyeX,float eyeY, float eyeZ, float cx,float cy, float cz, float ux,float uy, float uz ))lookAt
 {
     return (GLKMatrix4)lookAt(
-                              [self eye].x,   [self eye].y,     [self eye].z,
-                              [self center].x, [self center].y, [self center].z,
-                              [self up].x,     [self up].y,     [self up].z
+                              self.eye[0],      self.eye[1],    self.eye[2],
+                              self.center[0],   self.center[1], self.center[2],
+                              self.up[0],       self.up[1],     self.up[2]
                               );
 
 }
@@ -109,9 +108,9 @@ bool _itemWasAnimated = false;
 - (void)makeLookAtGl:(void(double eyeX,double eyeY, double eyeZ, double cx,double cy, double cz, double ux,double uy, double uz ))lookAt
 {
      lookAt(
-                              [self eye].x,   [self eye].y,     [self eye].z,
-                              [self center].x, [self center].y, [self center].z,
-                              [self up].x,     [self up].y,     [self up].z
+            self.eye[0],      self.eye[1],    self.eye[2],
+            self.center[0],   self.center[1], self.center[2],
+            self.up[0],       self.up[1],     self.up[2]
                               );
     
 }
@@ -152,21 +151,21 @@ bool _itemWasAnimated = false;
 
 - (void)debug{
 //    [super debug];
-    [rmxDebugger add:RMX_OBSERVER n:self t: self.describePosition];
-    [rmxDebugger add:RMX_OBSERVER n:self t: self.viewDescription];
+//    [rmxDebugger add:RMX_OBSERVER n:self t: self.describePosition];
+//    [rmxDebugger add:RMX_OBSERVER n:self t: self.viewDescription];
 }
 
 - (NSString*)viewDescription {
     return [NSString stringWithFormat:@"\n      EYE x%f, y%f, z%f\n   CENTRE x%f, y%f, z%f\n      UP: x%f, y%f, z%f\n",
-            [self eye].x,[self eye].y,[self eye].z,
-            [self center].x,[self center].y,[self center].z,
-            [self up].x,[self up].y,[self up].z];
+            self.eye[0],self.eye[1],self.eye[2],
+            self.center[0],self.center[1],self.center[2],
+            self.up[0],self.up[1],self.up[2]];
 }
 
 
-- (GLKMatrix4)modelViewMatrix {
+- (RMXMatrix4)modelViewMatrix {
     
-    GLKMatrix4 m = GLKMatrix4TranslateWithVector3(body.orientation, body.velocity);
+    SCNMatrix4 m = SCNMatrix4Translate(self.body.orientation, self.body.velocity.x, self.body.velocity.y, self.body.velocity.z);
 //    (
 //                                             GLKVector4MakeWithVector3(self.eye, 0),
 //                                             GLKVector4MakeWithVector3(self.center, 0),
@@ -176,19 +175,19 @@ bool _itemWasAnimated = false;
     return m;
 }
 
-- (GLKMatrix4)projectionMatrix {
+- (RMXMatrix4)projectionMatrix {
 //
 //    float aspect = fabsf(self.uiView.view.bounds.size.width / self.uiView.view.bounds.size.height);
 //    return GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
 //#else
-    return GLKMatrix4Identity;
+    return SCNMatrix4Identity;
 }
 
 - (void)throwItem:(float)strength
 {
     if (self.item == nil)return;
     
-    self.item->body.velocity = GLKVector3Add(body.velocity,GLKVector3MultiplyScalar(self.forwardVector,strength));
+    self.item.body.velocity = RMXVector3Add3(self.body.velocity,RMXVector3MultiplyScalar(self.forwardVector,strength),RMXVector3Zero());
     self.item.isAnimated = true;
     self.item = nil;
 }

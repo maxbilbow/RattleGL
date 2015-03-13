@@ -19,15 +19,15 @@ import Foundation
 //        return sprites.first as RMXObserver
 //    }
 
-    override init!(name: String!, parent: RMXObject!, world: RMXWorld!) {
+    override init(name: String!, parent: RMXObject!, world: RMXWorld!) {
         fatalError("DO not run this \(__FILE__)")
     }
     init(parent: RMXObject!, name: String = "The World", capacity: Int = 3004) {
         self.sprites = Array<RMXParticle>()
         super.init(name: name, parent: parent, world: nil)
-        self.physicsBody.radius = 1000
+        self.body.radius = 1000
         self.sprites.reserveCapacity(capacity)
-        self.observer = RMXObserver(name: "Main Observer", parent:self, world:self)
+        self.observer = RMXObserver(name: "Main Observer", parent: self, world: self)
         self.sprites.append(self.observer)
         //fatalError("Grav: \(self.physics.gravity)")
     }
@@ -67,7 +67,7 @@ import Foundation
     
     func normalForceAt(someBody: RMXParticle) -> Float {
         var result: Float = 0
-        let bounce: Float = 1.5
+        let bounce: Float = 1
         var s: String = ""
         if someBody.altitude < someBody.ground  * 9 / 10 {
             result = someBody.weight + abs(-someBody.altitude / someBody.ground) * bounce
@@ -75,7 +75,7 @@ import Foundation
         } else if someBody.altitude <= someBody.ground  {
             s = "\(someBody.altitude) == Ground  || "
             result = someBody.weight
-            someBody.setAltitude(someBody.ground - someBody.upThrust)
+            someBody.body.position.y = CGFloat(someBody.ground - someBody.upThrust)
         } else if someBody.altitude > someBody.ground {
             result = 0//someBody.weight// * self.physics.gravity; //air;
             s = "\(someBody.altitude) IN THE AIR || "
@@ -84,14 +84,12 @@ import Foundation
             result = someBody.weight
         }
 //        if someBody is RMXObserver {
-//            println ("\(s)Normal: \(result), Weight: \(someBody.weight), Altitude: \(someBody.altitude), upThrust: \(someBody.upThrust), Ground: \(someBody.ground), Radius: \(someBody.physicsBody.radius), dF: \(someBody.downForce)")
+//            println ("\(s)Normal: \(result), Weight: \(someBody.weight), Altitude: \(someBody.altitude), upThrust: \(someBody.upThrust), Ground: \(someBody.ground), Radius: \(someBody.body.radius), dF: \(someBody.downForce)")
 //        }
         return result
     }
     
-    public override func debug() {
-        
-    }
+   
     func animate() {
         for sprite in sprites {
             sprite.animate()
@@ -125,11 +123,7 @@ import Foundation
         return closest;//shapes[closest];
     }
     
-//    public func debug(){
-//        rmxDebugger.add(RMX_WORLD, n:self, t:"\(self.name) debug not set up")
-//        //[rmxDebugger feedback];
-//        // NSLog(@"Well, hellooo!");
-//    }
+  
         
     func applyGravity(hasGrav: Bool) {
         for sprite in sprites {

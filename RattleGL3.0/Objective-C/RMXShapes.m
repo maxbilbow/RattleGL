@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 
 static GLfloat g_fTeapotAngle2 = 0.0;
 //static GLfloat g_fViewDistance = 3 * VIEWING_DISTANCE_MIN;
@@ -121,7 +121,7 @@ void DrawPlane(float x)
     
 
     glPushMatrix();
-    glColor4fv(colorBlue);
+   // glColor4f(colorBlue[0],colorBlue[1],colorBlue[2],colorBlue[3]);
     
     glTranslatef(0, -1, 0);
     glBegin(GL_QUADS);
@@ -130,7 +130,7 @@ void DrawPlane(float x)
     glVertex3f(RMX_INFINITY,-0.001,RMX_INFINITY);
     glVertex3f(RMX_INFINITY,-0.001, -RMX_INFINITY);
     glEnd();
-    glColor4fv(colorNone);
+    //glColor4f(0,0,0,0);
     glPopMatrix();
     
     

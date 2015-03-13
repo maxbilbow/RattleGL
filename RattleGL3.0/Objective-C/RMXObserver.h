@@ -15,11 +15,11 @@
 
 @interface RMXObserver : RMXParticle <RMXMouseOwner,RMXPointOfView>
 @property RMXMouse *mouse;
-@property (readonly) GLKMatrix4 modelViewMatrix, projectionMatrix;
+@property (readonly) RMXMatrix4 modelViewMatrix, projectionMatrix;
 - (void)debug;
 - (void)grabObject:(RMXObject*)i;
 - (void)throwItem:(float)strength;
 - (void)extendArmLength:(float)i;
 @end
 
-RMXObserver* observer;// = * Observer();
+//RMXObserver* observer;// = * Observer();

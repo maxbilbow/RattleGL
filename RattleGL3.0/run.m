@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 #define TEXTURE_ID_CUBE 1
 void InitGraphics(void)
@@ -57,7 +57,7 @@ int run(int argc, char * argv[])
     glutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     
     
-    if ([window isFullscreen]){//&&glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)){
+    if (RMX_FULL_SCREEN){//&&glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)){
         glutEnterGameMode();
     }else {
         NSLog(@"Game Mode Not Possibe, Exit: %i",glutGameModeGet(GLUT_GAME_MODE_POSSIBLE));
@@ -65,7 +65,7 @@ int run(int argc, char * argv[])
         //[window create:glutCreateWindow];
         glutInitWindowPosition(100,100);
         glutInitWindowSize(1280,750);
-        glutCreateWindow(window.title);
+        glutCreateWindow("Window");
     }
     
     //Setup Display:
@@ -102,11 +102,11 @@ int run(int argc, char * argv[])
     
     //[mouse center];
     
-    if ([window isFullscreen]) {
-        [observer toggleFocus];
+    if (RMX_FULL_SCREEN) {
+        [world.observer toggleFocus];
         glutSetCursor(GLUT_CURSOR_NONE);
-        [observer calibrateView:0 vert:0];//observer->getMouse().x,observer->getMouse().y);
-        [observer mouse2view:0 y:0];
+        [world.observer calibrateView:0 vert:0];//observer->getMouse().x,observer->getMouse().y);
+        [world.observer mouse2view:0 y:0];
     }
     glutMainLoop ();
     return 0;
@@ -114,9 +114,9 @@ int run(int argc, char * argv[])
 
 
 void debug(){
-    [observer.item debug];
-    [observer debug];
-    [rmxDebugger feedback];
+//    [world.observer.item debug];
+//    [world.observer debug];
+    //[rmxDebugger feedback];
 };
 
 

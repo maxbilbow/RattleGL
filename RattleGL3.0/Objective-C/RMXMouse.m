@@ -7,7 +7,7 @@
 //
 
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 @implementation RMXMouse
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
@@ -58,7 +58,7 @@
     CGGetLastMouseDelta(&DeltaX, &DeltaY);
     
     
-    [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
+   // [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
        
         int dir = _focus ? 1 : -1;
         
@@ -76,6 +76,6 @@
 }
 
 - (void)debug {
-    [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+    //[rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 @end

@@ -75,4 +75,4 @@
 @end
 
 
-RMXWindow * window;// = RMXWindow;
+//RMXWindow * window;// = RMXWindow;

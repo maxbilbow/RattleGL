@@ -5,7 +5,7 @@
 //  Created by Max Bilbow on 25/01/2015.
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 
 #import <RattleGL-Swift.h>
 
@@ -15,13 +15,14 @@
 {
     self = [super initWithName:name parent:parent world:world];
     if (self) {
-        self.color = GLKVector4Make(1,1, 1, 1);
+        //vector_float4 color = {0,1, 1, 1};
+        //self.color = color;
         self.rotationSpeed = 2;
-        self.rAxis = GLKVector3Make(0,0,1);
+        self.rAxis = SCNVector3Make(0,0,1);
         self.rotation = 0;
         self.isRotating = false;
         self.r = 0;
-        body = RMXPhyisicsBodyMake();
+        
         
        
     }
@@ -38,10 +39,10 @@
 //        glPushMatrix();
 //        
         glTranslatef(self.anchor.x,self.anchor.y, self.anchor.z);
-        glTranslatef(body.position.x,body.position.y,body.position.z);
+        glTranslatef(self.body.position.x,self.body.position.y,self.body.position.z);
     
     [self setMaterial];
-    _render(self.physicsBody.radius);
+    _render(self.body.radius);
     [self unsetMaterial];
 
         glPopMatrix();
@@ -57,13 +58,14 @@
         _rotation += self.rotationSpeed/_r;
     //body.position.y += _rotation;
         GLKVector4 temp = RMXSomeCircle(_rotation, _r*2);
-        body.position = GLKVector3Make(temp.x-_r,temp.y,0);
+        self.body.position = SCNVector3Make(temp.x-_r,temp.y,0);
     }
     [super animate];
     if ([self isKindOfClass:[RMXLightSource class]]) {
         //glEnable(GL_LIGHTING);
         // Render lit geometry.
-                _shine(_gl_light, _type, GLKVector4MakeWithVector3(body.position, _w).v);
+        
+                _shine(_gl_light, _type, GLKVector4MakeWithVector3(SCNVector3ToGLKVector3(self.body.position), _w).v);
         //glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
         //glDisable(GL_LIGHTING);
 
@@ -75,31 +77,36 @@
 - (void)setMaterial
 {
     //glMaterialfv(GL_FRONT, GL_EMISSION, self.color.v);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, self.getColorfv);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, self.getColorfv);
+    float color[4] = { self.color[0], self.color[1], self.color[2], self.color[3] };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, color);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
 }
 
 - (void)unsetMaterial
 {
+     float nill[4] = { 0,0,0,0 };
     //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
-    glMaterialfv(GL_FRONT, GL_SPECULAR,nillVector);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, nillVector);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, nill);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
 }
 
-- (float*)getColorfv
+- (vector_float4)getColorfv
 {
-    return _color.v;
+    //float fv[4] = { _color[0], _color[1], _color[2], _color[3] };
+    return _color;
 }
 
 
 - (void)setColorfv:(float*)c
 {
-    _color = GLKVector4MakeWithArray(c);
+    for (int i=0;i<4;++i){
+        _color[i] = c[i];
+    }
 }
 
 - (void)debug {
     [super debug];
-    [rmxDebugger add:RMX_OBSERVER n:self t:[self describePosition]];
+    //[rmxDebugger add:RMX_OBSERVER n:self t:[self describePosition]];
 }
 
 @end

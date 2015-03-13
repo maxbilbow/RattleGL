@@ -12,7 +12,7 @@
 
 #endif
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 @implementation RMXWindow
 
@@ -186,7 +186,7 @@ kp:(void(void (*func)(unsigned char key, int x, int y)))keyPressed
 }
 
 - (void)debug {
-    [rmxDebugger add:RMX_WINDOW n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+    //[rmxDebugger add:RMX_WINDOW n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 
 @end

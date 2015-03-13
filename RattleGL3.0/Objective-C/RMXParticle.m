@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 //
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 @implementation RMXParticle
 
@@ -33,7 +33,7 @@ bool ignoreNextjump = false;
     _accelerationRate = 0.4;
     _speedLimit = 1.0;
     _limitSpeed = false;
-    _anchor = GLKVector3Make(0,0,0);
+    _anchor = SCNVector3Make(0,0,0);
 
     _rotationSpeed = -0.1;
     _jumpStrength = 1;
@@ -41,14 +41,14 @@ bool ignoreNextjump = false;
     _itemPosition = self.center;
     _squatLevel = 0;
     _goingUp = false;
-//    if (body.position.y < self.ground) {
-//        body.position.y = self.physicsBody.radius;
+//    if (self.body.position.y < self.ground) {
+//        self.body.position.y = self.body.radius;
 //    }
     self.isAnimated = true;
 }
 
 - (float)ground {
-    return self.physicsBody.radius - _squatLevel;
+    return self.body.radius - _squatLevel;
 }
     
 
@@ -60,7 +60,7 @@ bool ignoreNextjump = false;
 }
     
 - (float)weight{
-    return self.physicsBody.mass * self.physics.gravity;
+    return self.body.mass * self.physics.gravity;
 }
 
 -(void)animate
@@ -74,7 +74,7 @@ bool ignoreNextjump = false;
 
 - (void)jumpTest{
     if (_prepairingToJump || _goingUp || _squatLevel != 0){// || _squatLevel > 0){
-        float i = self.physicsBody.radius / 200;
+        float i = self.body.radius / 200;
         if (_prepairingToJump){
             _squatLevel += i;
             if (_squatLevel >= self.ground/4-i) {
@@ -101,52 +101,52 @@ bool ignoreNextjump = false;
 - (void)accelerate
 {
        //GLKVector3 upThrust = GLKVector3Make( 0,0,0 );
-    GLKVector3 g = (_hasGravity) ? [self.physics gravityFor:self] : GLKVector3Make(0,0,0);
-    GLKVector3 n = (_hasGravity) ? [self.physics normalFor:self] : GLKVector3Make(0,0,0);
-    GLKVector3 f = [self.physics frictionFor:self];// : GLKVector3Make(1,1,1);
-    GLKVector3 d = [self.physics dragFor:self];// : GLKVector3Make(1,1,1);
+    RMXVector3 g = (_hasGravity) ? [self.physics gravityFor:self] : RMXVector3Zero();
+    RMXVector3 n = (_hasGravity) ? [self.physics normalFor:self] : RMXVector3Zero();
+    RMXVector3 f = [self.physics frictionFor:self];// : GLKVector3Make(1,1,1);
+    RMXVector3 d = [self.physics dragFor:self];// : GLKVector3Make(1,1,1);
     
 
 //#if TARGET_OS_IPHONE
-//    body.velocity = GLKVector3DivideScalar(body.velocity, 1 );
+//    self.body.velocity = GLKVector3DivideScalar(self.body.velocity, 1 );
 //#else
-    body.velocity = GLKVector3DivideScalar(body.velocity, 1 + [self.world µAt:self] + d.x );
+    self.body.velocity = RMXVector3DivideScalar(self.body.velocity, 1 + [self.world µAt:self] + d.x );
     
     
-    GLKVector3 forces = GLKVector3Make(
+    RMXVector3 forces = SCNVector3Make(
                                        (g.x + /* d.x + f.x +*/ n.x),
                                        (g.y +/* d.y + f.y +*/ n.y),//+body.acceleration.y,
                                        (g.z +/* d.z + f.z +*/ n.z)
                                  );
     
-    body.forces.x += g.x + n.x;
-    body.forces.y += g.y + n.y;
-    body.forces.z += g.z + n.z;
+//    self.body.forces.x += g.x + n.x;
+//    self.body.forces.y += g.y + n.y;
+//    self.body.forces.z += g.z + n.z;
     
     
-    body.forces = GLKVector3Add(forces,GLKMatrix4MultiplyVector3( GLKMatrix4Transpose(body.orientation),body.acceleration));
-    body.velocity = GLKVector3Add(body.velocity,body.forces);
+    self.body.forces = RMXVector3Add(forces,RMXMatrix4MultiplyVector3( RMXMatrix4Transpose(self.body.orientation),self.body.acceleration));
+    self.body.velocity = RMXVector3Add(self.body.velocity,self.body.forces);
    
     
     
     [self.world collisionTest:self];
 
     [self applyLimits];
-    body.position = GLKVector3Add(body.position,body.velocity);
+    self.body.position = RMXVector3Add(self.body.position,self.body.velocity);
     
     
     
     if([self.name isEqual:@"Main Observer"]) {
-        [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"\n gv %f , %f, %f\n nv %f , %f, %f\n fv %f , %f, %f\n Dv %f , %f, %f"
+        if (RMX_DEBUGGING) NSLog(@"\n gv %f , %f, %f\n nv %f , %f, %f\n fv %f , %f, %f\n Dv %f , %f, %f"
                                              ,g.x,g.y,g.z
                                              ,n.x,n.y,n.z
                                              ,f.x,f.y,f.z
-                                             ,d.x,d.y,d.z]];
-        [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"\n FORCE: %f, %f, %f\n Accel: %f, %f, %f\n Veloc: %f, %f, %f\n Posit: %f, %f, %f",
-                                             body.forces.x,body.forces.y,body.forces.z,
-                                             body.acceleration.x,body.acceleration.y,body.acceleration.z,
-                                             body.velocity.x, body.velocity.y,body.velocity.z,
-                                             body.position.x, body.position.y, body.position.z ]];
+                                 ,d.x,d.y,d.z);
+        if (RMX_DEBUGGING) NSLog(@"\n FORCE: %f, %f, %f\n Accel: %f, %f, %f\n Veloc: %f, %f, %f\n Posit: %f, %f, %f",
+                                             self.body.forces.x,self.body.forces.y,self.body.forces.z,
+                                             self.body.acceleration.x,self.body.acceleration.y,self.body.acceleration.z,
+                                             self.body.velocity.x, self.body.velocity.y,self.body.velocity.z,
+                                 self.body.position.x, self.body.position.y, self.body.position.z );
     }
 
 }
@@ -157,15 +157,24 @@ bool ignoreNextjump = false;
 {
     //body.acceleration.y -= [self gravity];
     //Need to calculate this
-    
+    /*
     if (_limitSpeed){
-        for (int i=0;i<3;++i)
-            if (body.velocity.v[i] > _speedLimit){
-                body.velocity.v[i] = _speedLimit;
-            } else if (body.velocity.v[i] < -_speedLimit){
-                body.velocity.v[i] = -_speedLimit;
+            if (self.body.velocity.x > _speedLimit){
+                self.body.velocity.x = _speedLimit;
+            } else if (self.body.velocity.x < -_speedLimit){
+                self.body.velocity.x = -_speedLimit;
             }
-    }
+        if (self.body.velocity.y > _speedLimit){
+            self.body.velocity.y = _speedLimit;
+        } else if (self.body.velocity.y < -_speedLimit){
+            self.body.velocity.y = -_speedLimit;
+        }
+        if (self.body.velocity.z > _speedLimit){
+            self.body.velocity.z = _speedLimit;
+        } else if (self.body.velocity.z < -_speedLimit){
+            self.body.velocity.z = -_speedLimit;
+        }
+    } */
 }
 
 
@@ -173,14 +182,14 @@ bool ignoreNextjump = false;
 {
     
     if ( _item == nil ) return;
-    _item->body.position = GLKVector3Add(self.center,
-                                    GLKVector3MultiplyScalar(self.forwardVector,_armLength+_item.physicsBody.radius));
+    _item.body.position = RMXVector3Add(self.center,
+                                    RMXVector3MultiplyScalar(self.forwardVector,_armLength+_item.body.radius));
     //NSLog(@"manipulating: %@:\n%@",((RMXParticle*)_item).name,((RMXParticle*)_item).describePosition);
 }
 
 - (void)stop
 {
-   body.velocity = GLKVector3Make(0,0,0);
+   self.body.velocity = SCNVector3Make(0,0,0);
 }
 
 - (void)plusAngle:(float)theta up:(float)phi
@@ -192,23 +201,23 @@ bool ignoreNextjump = false;
     
 //    float lim = cos(0);
     
-    self.physicsBody.theta += theta;
-    self.physicsBody.phi += phi;
-//    if (body.angles.phi + phi > lim){
+    self.body.theta += theta;
+    self.body.phi += phi;
+//    if (self.body.angles.phi + phi > lim){
 //        phi = 0;
-//        body.angles.phi = lim;
-//    }else if (body.angles.phi + phi < -lim) {
+//        self.body.angles.phi = lim;
+//    }else if (self.body.angles.phi + phi < -lim) {
 //        phi = 0;
-//        body.angles.phi = -lim;
+//        self.body.angles.phi = -lim;
 //    }
 //    NSLog(@"Theta: %f, Phi: %f",body.angles.theta,body.angles.phi);
     
     
     
-    body.orientation = GLKMatrix4RotateWithVector3(body.orientation, theta, GLKVector3Make(0,1,0));
-    body.orientation = GLKMatrix4RotateWithVector4(body.orientation, phi, GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),0));
+    self.body.orientation = SCNMatrix4Rotate(self.body.orientation, theta, 0, 1, 0);
+    self.body.orientation = SCNMatrix4Rotate(self.body.orientation, phi, self.leftVector.x, self.leftVector.y, self.leftVector.z);
     
-    [rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",self.physicsBody.theta,self.physicsBody.phi ]];
+    //[rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",self.body.theta,self.body.phi ]];
    
 }
 
@@ -222,20 +231,20 @@ bool ignoreNextjump = false;
 
     
 - (bool)isGrounded{
-    return (body.position.y <= self.physicsBody.radius);
+    return (self.body.position.y <= self.body.radius);
 }
     
-- (void)push:(GLKVector3)direction
+- (void)push:(RMXVector3)direction
 {
-    body.velocity = GLKVector3Add(body.velocity, direction);
+    self.body.velocity = RMXVector3Add(self.body.velocity, direction);
 }
 
 - (float)upThrust {
-    return body.velocity.y;
+    return self.body.velocity.y;
 }
 
 - (float)downForce {
-    return body.forces.y;
+    return self.body.forces.y;
 }
 -(void)prepareToJump{
     _prepairingToJump = true;
@@ -253,7 +262,8 @@ bool ignoreNextjump = false;
     else if (self.hasGravity&&_prepairingToJump && !_goingUp) {
         //_upV = GLKVector3Add(_upV, _jumpStrength*20);
         //NSLog(@"Jump!");
-        body.acceleration.y += self.weight*_jumpStrength * self.physicsBody.radius / _squatLevel;// -_squatLevel * _jumpStrength;
+        float y = self.weight*_jumpStrength * self.body.radius / _squatLevel;
+        self.body.acceleration = RMXVector3Add(self.body.acceleration, SCNVector3Make(0,y,0));
         _goingUp = true;
         _prepairingToJump = false;
     }
@@ -274,64 +284,72 @@ bool ignoreNextjump = false;
 
 
 
-- (GLKVector3)eye
+- (RMXVector3)eye
 {
-    return body.position;
+    return self.body.position;
 }
 
-- (GLKVector3)center
+- (RMXVector3)center
 {
-    return GLKVector3Add(body.position,self.forwardVector);
+    return RMXVector3Add(self.body.position,self.forwardVector);
 }
 
-- (GLKVector3)up
+- (RMXVector3)up
 {
-    GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(body.orientation),1);
-    return GLKVector3Make(v.x,v.y,v.z);
+    //vector_float3 up = { 0,1,0};// self.body.orientation.m21,body.orientation.m22,body.orientation.m23 };
+    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(self.body.orientation),1);
+    return SCNVector3Make(0,1,0);
 }
 - (void)accelerateForward:(float)v
 {
-    body.acceleration.z = v * _accelerationRate;
+    float z = v * _accelerationRate;
+    self.body.acceleration = SCNVector3Make(0,0,z);
     
 }
 
 - (void)accelerateUp:(float)v
 {
-    body.acceleration.y = v * _accelerationRate;// * !self.hasGravity;
+    float y = v * _accelerationRate;
+    self.body.acceleration = SCNVector3Make(0,y,0);// * !self.hasGravity;
     //  accelerate();
     //       accelerate(GLKVector3Make(0,velocity*accelerationRate,0));
 }
 
 - (void)accelerateLeft:(float)v
 {
-    body.acceleration.x = v * _accelerationRate;
+    float x = v * _accelerationRate;
+
+    self.body.acceleration = SCNVector3Make(x,0,0);
     //accelerate();//accelerate(GLKVector3Make(velocity*accelerationRate,0,0));
 }
 
 
 - (void)forwardStop
 {
-    body.acceleration.z = 0;
+    RMXVector3 v = self.body.acceleration;
+    self.body.acceleration = SCNVector3Make(v.x, v.y, 0);
 }
 
 - (void)upStop
 {
-    body.acceleration.y = 0;// -velocity.y;
+    RMXVector3 v = self.body.acceleration;
+    self.body.acceleration = SCNVector3Make(v.x, 0, v.z);// -velocity.y;
 }
 
 - (void)leftStop
 {
-    body.acceleration.x = 0;// -velocity.x;
+    RMXVector3 v = self.body.acceleration;
+    self.body.acceleration = SCNVector3Make(0, v.y, v.z);// -velocity.x;
 }
 
 
 
 
 - (NSString*)describePosition {
-    GLKVector3 drag = [self.physics dragFor:self];
-    return [NSString stringWithFormat:@"\n   Pos: %f, %f, %f (%p)\n   Vel: %f, %f, %f (%p)\n   Acc: %f, %f, %f (%p)\n   µ: %f, %f, %f\n   g: %f, %f, %f\n  dF: %f, %f, %f\n  hasG: %i, hasF: %i, µ: %f", body.position.x,body.position.y,body.position.z,&body.position,
-            body.velocity.x,body.velocity.y,body.velocity.z,&body.velocity
-            ,body.acceleration.x,body.acceleration.y,body.acceleration.z,&body.acceleration,
+    RMXVector3 drag = [self.physics dragFor:self];
+    return [NSString stringWithFormat:@"\n   Pos: %f, %f, %f (%p)\n   Vel: %f, %f, %f (%p)\n   Acc: %f, %f, %f (%p)\n   µ: %f, %f, %f\n   g: %f, %f, %f\n  dF: %f, %f, %f\n  hasG: %i, hasF: %i, µ: %f", self.body.position.x,self.body.position.y,self.body.position.z,self.body,
+            self.body.velocity.x,self.body.velocity.y,self.body.velocity.z,self.body
+            ,self.body.acceleration.x,self.body.acceleration.y,self.body.acceleration.z,self.body,
             [self.physics frictionFor:self].x,[self.physics frictionFor:self].y,[self.physics frictionFor:self].z,
             [self.physics gravityFor:self].x,[self.physics gravityFor:self].y,[self.physics gravityFor:self].z,
             drag.x,drag.y,drag.z
@@ -343,10 +361,10 @@ bool ignoreNextjump = false;
 
 - (void)debug {
     [super debug];
-    [rmxDebugger add:RMX_PARTICLE n:self t:[self describePosition]];
+   // [rmxDebugger add:RMX_PARTICLE n:self t:[self describePosition]];
 }
 - (float)absFriction{
-    GLKVector3 µ = [self.physics frictionFor:self];
+    RMXVector3 µ = [self.physics frictionFor:self];
     
     return RMXGetSpeed(µ);
 }

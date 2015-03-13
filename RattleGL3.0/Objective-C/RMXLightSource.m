@@ -5,7 +5,7 @@
 //  Created by Max Bilbow on 25/01/2015.
 //  Copyright (c) 2015 Rattle Media Ltd. All rights reserved.
 
-#import "RattleGL-Bridging-Header.h"
+#import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 @implementation RMXLightSource
     
@@ -16,7 +16,7 @@
          //body.position = GLKVector3Make(1000,0,1000);
         self.hasGravity = 0;
         self.w=1;
-        self.physicsBody.radius = 50;
+        self.body.radius = 50;
         self.isRotating = true;
         self.r = 1000;
 
@@ -38,8 +38,8 @@
         
 - (void)lightUp:(float)i
 {
-    body.position = GLKVector3Make(body.position.x + i,body.position.y,body.position.z);
-    [rmxDebugger add:RMX_LIGHT n:self.name t:[NSString stringWithFormat:@" Light Y: %f", body.position.x]];
+    self.body.position = SCNVector3Make(self.body.position.x + i,self.body.position.y, self.body.position.z);
+   // [rmxDebugger add:RMX_LIGHT n:self.name t:[NSString stringWithFormat:@" Light Y: %f", body.position.x]];
 }
 - (void)lightSwitch:(char)i
 {
@@ -65,21 +65,21 @@
 }
     
 - (void)setMaterial{
-
-    glMaterialfv(GL_FRONT,GL_EMISSION, self.color.v);
+    const float color[4] = {self.color[0],self.color[1],self.color[2],self.color[3]};
+    glMaterialfv(GL_FRONT,GL_EMISSION, color);
 
     [super setMaterial];
 }
     
 - (void)unsetMaterial{
-
-    glMaterialfv(GL_FRONT, GL_EMISSION,nillVector);
+    const float nill[4] = {0,0,0,0};
+    glMaterialfv(GL_FRONT, GL_EMISSION,nill);//TODO
 
     [super unsetMaterial];
 }
 
 - (void)debug {
-    [rmxDebugger add:RMX_LIGHT n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
+    //[rmxDebugger add:RMX_LIGHT n:self t:[NSString stringWithFormat:@"%@ debug not set up",self.name]];
 }
 
 
