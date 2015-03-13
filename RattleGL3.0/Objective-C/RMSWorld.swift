@@ -127,7 +127,7 @@ import Foundation
         
     func applyGravity(hasGrav: Bool) {
         for sprite in sprites {
-            if !((sprite is RMXLightSource) && hasGrav) {
+            if !((sprite.isLightSource) && hasGrav) {
                 sprite.hasGravity = hasGrav
             }
         }

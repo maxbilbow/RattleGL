@@ -20,12 +20,14 @@
  */
 @interface RMXParticle : RMXObject  <RMXOrienrationProcessor>
 @property (readonly) RMXVector3 eye, center, up;
-@property RMXVector3 anchor,itemPosition;
+@property RMXShape * shape;
+@property RMXVector3 anchor,itemPosition, rAxis;
+@property float rotation, rotationCenterDistance;
 @property RMXParticle  * item; //return 1?;
 @property (readonly) float weight, ground;
 @property (readonly) float upThrust, downForce;
 @property float armLength, reach, accelerationRate, speedLimit, squatLevel, rotationSpeed, jumpStrength;
-@property BOOL limitSpeed, hasFriction, hasGravity, prepairingToJump, goingUp;
+@property BOOL limitSpeed, hasFriction, hasGravity, prepairingToJump, goingUp, isRotating, isLightSource;
 - (void)accelerateForward:(float)velocity;
 - (void)accelerateUp:(float)velocity;
 - (void)accelerateLeft:(float)velocity;

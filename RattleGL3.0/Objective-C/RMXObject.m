@@ -58,30 +58,24 @@
 }
 
 - (RMXVector3)upVector{
-   // GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),1);
     return SCNVector3Make(_body.orientation.m12,_body.orientation.m22,_body.orientation.m32);
 }
 
 - (RMXVector3)rightVector{
-   //  GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
     return SCNVector3Make(-_body.orientation.m11, -_body.orientation.m21, -_body.orientation.m31);
 }
 
 - (RMXVector3)leftVector{
-    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),0);
     return SCNVector3Make(_body.orientation.m11,_body.orientation.m21,_body.orientation.m31);
 }
 
 - (RMXVector3)forwardVector{
-    //GLKVector4 v = GLKMatrix4GetColumn(GLKMatrix4Transpose(SCNMatrix4ToGLKMatrix4(body.orientation)),2);
     return SCNVector3Make(_body.orientation.m13,_body.orientation.m23,_body.orientation.m33);
 }
 
 - (float)distanceTo:(RMXObject*)object {
     return GLKVector3Distance(SCNVector3ToGLKVector3(_body.position),SCNVector3ToGLKVector3(object.body.position));
 }
-//- (void)animate{}
-
 
 
 @end

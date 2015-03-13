@@ -15,7 +15,7 @@
 		503203D41AB0A719000DD1FE /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503203D31AB0A719000DD1FE /* SceneKit.framework */; };
 		503203DC1AB0A821000DD1FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503203DB1AB0A821000DD1FE /* main.swift */; };
 		503203E01AB0A861000DD1FE /* RMSPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DD5981AAF4DED008FFB84 /* RMSPhysicsBody.swift */; };
-		503203E41AB0A8A9000DD1FE /* cStuff.c in Sources */ = {isa = PBXBuildFile; fileRef = 503203E21AB0A8A9000DD1FE /* cStuff.c */; };
+		503203E41AB0A8A9000DD1FE /* cStuff.m in Sources */ = {isa = PBXBuildFile; fileRef = 503203E21AB0A8A9000DD1FE /* cStuff.m */; };
 		50384FB31AB0C99C0074E6DA /* RMSArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50384FB11AB0C77D0074E6DA /* RMSArt.swift */; };
 		50463CDE1AAE248300043611 /* RMXLightSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50891A9E7B7400B140D7 /* RMXLightSource.m */; };
 		50463CE31AAE29AA00043611 /* RMXMouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B508B1A9E7B7400B140D7 /* RMXMouse.m */; };
@@ -23,12 +23,9 @@
 		505A04651AB2ECE100CA1E92 /* RMXPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5066354D1AAF97C800B97E1B /* RMXPhysics.swift */; };
 		505A04681AB2FF1800CA1E92 /* RMXObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E131A71AAF3844001CE6ED /* RMXObject.m */; };
 		505A046B1AB3002600CA1E92 /* RMXObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505A04691AB3000900CA1E92 /* RMXObserver.swift */; };
-		505DC5981AB0A8ED006CC4A9 /* RMXParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B508F1A9E7B7400B140D7 /* RMXParticle.m */; };
-		505DC59A1AB0A8F3006CC4A9 /* RMXShapeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50921A9E7B7400B140D7 /* RMXShapeObject.m */; };
 		505DC59C1AB0A8FA006CC4A9 /* RMSPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505DD5981AAF4DED008FFB84 /* RMSPhysicsBody.swift */; };
 		505DC59D1AB0A8FE006CC4A9 /* RMXMouseProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B508C1A9E7B7400B140D7 /* RMXMouseProcessor.m */; };
 		505DC59E1AB0A900006CC4A9 /* RMXMouse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B508B1A9E7B7400B140D7 /* RMXMouse.m */; };
-		505DC59F1AB0A904006CC4A9 /* RMXLightSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50891A9E7B7400B140D7 /* RMXLightSource.m */; };
 		505DC5A01AB0A907006CC4A9 /* RMXKeyboardProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50881A9E7B7400B140D7 /* RMXKeyboardProcessor.m */; };
 		505DC5A11AB0A90B006CC4A9 /* RMXDisplayProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50871A9E7B7400B140D7 /* RMXDisplayProcessor.m */; };
 		505DC5A21AB0A90E006CC4A9 /* RMXDebugger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50861A9E7B7400B140D7 /* RMXDebugger.m */; };
@@ -42,7 +39,11 @@
 		505DD5A81AAF4FF0008FFB84 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 505DD5A71AAF4FF0008FFB84 /* Matrix4.m */; };
 		5066354F1AAF9B1D00B97E1B /* RMXPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50901A9E7B7400B140D7 /* RMXPhysics.m */; };
 		50765B0C1AAF6CF20092402C /* RMSWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50765B0B1AAF6CF20092402C /* RMSWorld.swift */; };
+		5080FA0C1AB347F100CD9E92 /* RMXShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5080FA0A1AB33FF700CD9E92 /* RMXShape.swift */; };
 		5096215A1AAF2AF20049EC5E /* RMXShapes.m in Sources */ = {isa = PBXBuildFile; fileRef = 509621591AAF2AF20049EC5E /* RMXShapes.m */; };
+		50AD01621AB36A94002ABB0D /* RMXParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AD01601AB36A02002ABB0D /* RMXParticle.swift */; };
+		50AD01651AB36BB2002ABB0D /* RMXCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AD01631AB36AFF002ABB0D /* RMXCamera.swift */; };
+		50AD01681AB36E27002ABB0D /* RMSMaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50AD01661AB36E0D002ABB0D /* RMSMaths.swift */; };
 		50DA68FB1AAE1AE000C81158 /* RMXArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DA68FA1AAE1AE000C81158 /* RMXArt.m */; };
 		50DA68FE1AAE1CBC00C81158 /* RMXDebugger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50861A9E7B7400B140D7 /* RMXDebugger.m */; };
 		50DA68FF1AAE1CC000C81158 /* RMXDisplayProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B50871A9E7B7400B140D7 /* RMXDisplayProcessor.m */; };
@@ -84,7 +85,7 @@
 		503203D91AB0A821000DD1FE /* RattleGLS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RattleGLS; sourceTree = BUILT_PRODUCTS_DIR; };
 		503203DB1AB0A821000DD1FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		503203E11AB0A8A9000DD1FE /* RattleGLS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RattleGLS-Bridging-Header.h"; sourceTree = "<group>"; };
-		503203E21AB0A8A9000DD1FE /* cStuff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cStuff.c; sourceTree = "<group>"; };
+		503203E21AB0A8A9000DD1FE /* cStuff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cStuff.m; sourceTree = "<group>"; };
 		503203E31AB0A8A9000DD1FE /* cStuff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cStuff.h; sourceTree = "<group>"; };
 		50384FB11AB0C77D0074E6DA /* RMSArt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RMSArt.swift; path = ../RMSArt.swift; sourceTree = "<group>"; };
 		50463CDD1AAE246500043611 /* RMXLightSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXLightSource.h; sourceTree = "<group>"; };
@@ -93,6 +94,7 @@
 		50463CE41AAE29B700043611 /* RMXMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXMouse.h; sourceTree = "<group>"; };
 		50463CE51AAE2A9100043611 /* RMXObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXObserver.h; sourceTree = "<group>"; };
 		50463CE81AAE2BCD00043611 /* RMXObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXObject.h; sourceTree = "<group>"; };
+		505374F51AB3354B00831050 /* RMXLightSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXLightSource.swift; sourceTree = "<group>"; };
 		505A04691AB3000900CA1E92 /* RMXObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXObserver.swift; sourceTree = "<group>"; };
 		505DD5981AAF4DED008FFB84 /* RMSPhysicsBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSPhysicsBody.swift; sourceTree = "<group>"; };
 		505DD5A61AAF4FF0008FFB84 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = SOURCE_ROOT; };
@@ -101,8 +103,12 @@
 		5066354D1AAF97C800B97E1B /* RMXPhysics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXPhysics.swift; sourceTree = "<group>"; };
 		5067292D1AAE1205007AB77A /* run.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = run.h; sourceTree = SOURCE_ROOT; };
 		50765B0B1AAF6CF20092402C /* RMSWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSWorld.swift; sourceTree = "<group>"; };
+		5080FA0A1AB33FF700CD9E92 /* RMXShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXShape.swift; sourceTree = "<group>"; };
 		509621591AAF2AF20049EC5E /* RMXShapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMXShapes.m; path = "Objective-C/RMXShapes.m"; sourceTree = SOURCE_ROOT; };
 		50AB0B001AAE4032003C8A4E /* RMXShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RMXShapes.h; path = "Objective-C/RMXShapes.h"; sourceTree = SOURCE_ROOT; };
+		50AD01601AB36A02002ABB0D /* RMXParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXParticle.swift; sourceTree = "<group>"; };
+		50AD01631AB36AFF002ABB0D /* RMXCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXCamera.swift; sourceTree = "<group>"; };
+		50AD01661AB36E0D002ABB0D /* RMSMaths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSMaths.swift; sourceTree = SOURCE_ROOT; };
 		50DA68FA1AAE1AE000C81158 /* RMXArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMXArt.m; sourceTree = "<group>"; };
 		50DA68FC1AAE1BD500C81158 /* RMXDebugger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXDebugger.h; sourceTree = "<group>"; };
 		50DA68FD1AAE1C4600C81158 /* RMXDisplayProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXDisplayProcessor.h; sourceTree = "<group>"; };
@@ -167,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				503203DB1AB0A821000DD1FE /* main.swift */,
-				503203E21AB0A8A9000DD1FE /* cStuff.c */,
+				503203E21AB0A8A9000DD1FE /* cStuff.m */,
 				503203E31AB0A8A9000DD1FE /* cStuff.h */,
 				503203E11AB0A8A9000DD1FE /* RattleGLS-Bridging-Header.h */,
 			);
@@ -177,6 +183,11 @@
 		505374F41AB3335B00831050 /* Redundant */ = {
 			isa = PBXGroup;
 			children = (
+				505374F51AB3354B00831050 /* RMXLightSource.swift */,
+				50463CDF1AAE257900043611 /* RMXShapeObject.h */,
+				6C7B50921A9E7B7400B140D7 /* RMXShapeObject.m */,
+				50463CDD1AAE246500043611 /* RMXLightSource.h */,
+				6C7B50891A9E7B7400B140D7 /* RMXLightSource.m */,
 				50463CE51AAE2A9100043611 /* RMXObserver.h */,
 				6C7B508E1A9E7B7400B140D7 /* RMXObserver.m */,
 				50183D351AAE2CA600FF2A26 /* RMXPhysics.h */,
@@ -224,6 +235,7 @@
 				50E6B9AE1AAE455600B5F1B3 /* RMXEquations.h */,
 				50E6B9AF1AAE455600B5F1B3 /* RMXEquations.m */,
 				50E6B9B01AAE455600B5F1B3 /* RMXMaths.h */,
+				50AD01661AB36E0D002ABB0D /* RMSMaths.swift */,
 				50E6B9B11AAE455600B5F1B3 /* RMXMaths.m */,
 				505DD5A61AAF4FF0008FFB84 /* Matrix4.h */,
 				505DD5A71AAF4FF0008FFB84 /* Matrix4.m */,
@@ -247,8 +259,6 @@
 				50DA69011AAE1D6F00C81158 /* RMXKeyboardProcessor.h */,
 				6C7B50881A9E7B7400B140D7 /* RMXKeyboardProcessor.m */,
 				50183D3F1AAE2E1000FF2A26 /* Protocols */,
-				50463CDD1AAE246500043611 /* RMXLightSource.h */,
-				6C7B50891A9E7B7400B140D7 /* RMXLightSource.m */,
 				50183D3B1AAE2D5E00FF2A26 /* RMXMenu.h */,
 				6C7B508A1A9E7B7400B140D7 /* RMXMenu.m */,
 				50463CE41AAE29B700043611 /* RMXMouse.h */,
@@ -259,12 +269,13 @@
 				50E131A71AAF3844001CE6ED /* RMXObject.m */,
 				50E131AA1AAF3AF1001CE6ED /* RMXObject.swift */,
 				505DD5981AAF4DED008FFB84 /* RMSPhysicsBody.swift */,
-				50463CDF1AAE257900043611 /* RMXShapeObject.h */,
-				6C7B50921A9E7B7400B140D7 /* RMXShapeObject.m */,
+				5080FA0A1AB33FF700CD9E92 /* RMXShape.swift */,
 				505374F41AB3335B00831050 /* Redundant */,
 				505A04691AB3000900CA1E92 /* RMXObserver.swift */,
 				50183D3D1AAE2D9900FF2A26 /* RMXParticle.h */,
 				6C7B508F1A9E7B7400B140D7 /* RMXParticle.m */,
+				50AD01601AB36A02002ABB0D /* RMXParticle.swift */,
+				50AD01631AB36AFF002ABB0D /* RMXCamera.swift */,
 				5066354D1AAF97C800B97E1B /* RMXPhysics.swift */,
 				50183D361AAE2CD100FF2A26 /* RMXWindow.h */,
 				6C7B50941A9E7B7400B140D7 /* RMXWindow.m */,
@@ -353,13 +364,15 @@
 				503203E01AB0A861000DD1FE /* RMSPhysicsBody.swift in Sources */,
 				505DC5A31AB0A911006CC4A9 /* RMXArt.m in Sources */,
 				505DC5A41AB0A914006CC4A9 /* run.m in Sources */,
+				50AD01621AB36A94002ABB0D /* RMXParticle.swift in Sources */,
+				50AD01651AB36BB2002ABB0D /* RMXCamera.swift in Sources */,
 				505DC5A91AB0A939006CC4A9 /* RMSWorld.swift in Sources */,
-				505DC59A1AB0A8F3006CC4A9 /* RMXShapeObject.m in Sources */,
-				505DC5981AB0A8ED006CC4A9 /* RMXParticle.m in Sources */,
+				5080FA0C1AB347F100CD9E92 /* RMXShape.swift in Sources */,
 				505DC5A61AB0A920006CC4A9 /* RMXEquations.m in Sources */,
 				505DC59E1AB0A900006CC4A9 /* RMXMouse.m in Sources */,
 				505DC5A81AB0A920006CC4A9 /* Matrix4.m in Sources */,
 				505A04681AB2FF1800CA1E92 /* RMXObject.m in Sources */,
+				50AD01681AB36E27002ABB0D /* RMSMaths.swift in Sources */,
 				505DC5A11AB0A90B006CC4A9 /* RMXDisplayProcessor.m in Sources */,
 				505DC5A01AB0A907006CC4A9 /* RMXKeyboardProcessor.m in Sources */,
 				505DC59D1AB0A8FE006CC4A9 /* RMXMouseProcessor.m in Sources */,
@@ -368,10 +381,9 @@
 				505DC5A51AB0A918006CC4A9 /* RMXShapes.m in Sources */,
 				50384FB31AB0C99C0074E6DA /* RMSArt.swift in Sources */,
 				505DC5A21AB0A90E006CC4A9 /* RMXDebugger.m in Sources */,
-				503203E41AB0A8A9000DD1FE /* cStuff.c in Sources */,
+				503203E41AB0A8A9000DD1FE /* cStuff.m in Sources */,
 				505DC5A71AB0A920006CC4A9 /* RMXMaths.m in Sources */,
 				505A04651AB2ECE100CA1E92 /* RMXPhysics.swift in Sources */,
-				505DC59F1AB0A904006CC4A9 /* RMXLightSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

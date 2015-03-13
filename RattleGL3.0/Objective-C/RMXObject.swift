@@ -22,15 +22,7 @@
         
         self.parent = parent
         self.world = world
-        //    if (world != nil && [world isKindOfClass:[RMXWorld class]]){
-        //        self.uiView = ((RMXWorld*)world).uiView;
-        //    } else if (world == nil && [parent isKindOfClass:[UIVideoEditorController class]]) {
-        //        self.uiView = (UIVideoEditorController*) parent;
-        //    }
         self.name = name;
-        //    self.physics = nil;
-        //self.physics = (world != nil) ? world.physics : RMXPhysics(parent: parent, world: self as RMXWorld)
-       
         self.reInit()
     }
     

@@ -55,32 +55,27 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
     
     
     
-    RMXLightSource * sun = [[RMXLightSource alloc]initWithName:@"SUN" parent:world world:world];
+    RMXParticle * sun = [[RMXParticle alloc]initWithName:@"SUN" parent:world world:world];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
     sun.body.radius = 100;
-    
-    [sun setColorfv:colorWhite];
+    sun.shape.color = GLKVector4Make(0.5,0.5,0.5,0.5);
+    [sun.shape makeAsSunWithRDist:world.body.radius*2 isRotating:true];
+    [sun.shape setRender: DrawSphere];
+    [world insertSprite:sun];
     
     float * axisColors[3] = {colorBlue , colorRed , colorGreen};
     
-    [sun setRender: DrawSphere];
-    
-    
-    
-    [sun setShine:glLightfv];
-    
-    [world insertSprite:sun];
-    [RMXArt drawAxis:axisColors world:world];
-    
-    [RMXArt randomObjects:world];
-    
-    RMXShapeObject *ZX = [[RMXShapeObject alloc]initWithName:@"ZX PLANE" parent:world world:world];
-    [ZX setRender:DrawPlane];
-    float planeColor[4]= {0.8,1.2,0.8,1};
-    [ZX setColorfv:planeColor];
+    RMXParticle *ZX = [[RMXParticle alloc]initWithName:@"ZX PLANE" parent:world world:world];
+    [ZX.shape setRender:DrawPlane];
+    ZX.shape.color = GLKVector4Make(0.8,1.2,0.8,0.5);
     ZX.isAnimated = false;
     ZX.body.position = SCNVector3Make(ZX.body.position.x, 0, ZX.body.position.z);
     [world insertSprite:ZX];
+
+    [RMXArt drawAxis:axisColors world:world];
+    [RMXArt randomObjects:world];
+    
+   
     
     return world;
     
@@ -100,15 +95,15 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
             } else {
                 count = 0;
                 axis[j][j] = i;
-                RMXShapeObject * shape = [[RMXShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
-                [shape setHasGravity: false];// ? true : false];
-                [shape setRender:DrawCubeWithTextureCoords];
-                shape.body.radius = limit/2;
-                shape.body.position = SCNVector3FromFloat3(axis[j]);
-                if ( j != 1 ) shape.body.position = SCNVector3Make(shape.body.position.x, shape.body.radius, shape.body.position.z);
-                [shape setColorfv:colors[j]];
-                [shape setIsAnimated:false];
-                [world insertSprite:shape];
+                RMXParticle * object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
+                object.hasGravity = false;// ? true : false];
+                [object.shape setRender:DrawCubeWithTextureCoords];
+                object.body.radius = limit/2;
+                object.body.position = SCNVector3FromFloat3(axis[j]);
+                if ( j != 1 ) object.body.position = SCNVector3Make(object.body.position.x, object.body.radius, object.body.position.z);
+                object.shape.color = GLKVector4MakeWithArray(colors[j]);
+                object.isAnimated = false;
+                [world insertSprite:object];
                 test++;
             }
         }
@@ -167,49 +162,42 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
         randPos[1]+=50;
         
         //gravity = !gravity;
-        RMXShapeObject * shape;
+        RMXParticle * object;
         if(false){//(rand() % 10000) == 1) {
-            shape = [[RMXLightSource alloc]initWithName:[NSString stringWithFormat:@"Sun: %i",i ] parent:world world:world];
-            //shape->body.radius = 20;
-            [shape setShine:glLightfv];
-            //[shape setRender:DrawCubeWithTextureCoords];
+            object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Light: %i",i ] parent:world world:world];
+            [object.shape makeAsSunWithRDist:0 isRotating:false];
         }
         else {
-            shape = [[RMXShapeObject alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
+            object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Cube: %i",i ] parent:world world:world];
         }
         
         if(rand() % 500 == 1) {
-            [shape setRender:DrawSphere];
+            [object.shape setRender:DrawSphere];
         } else {
-            [shape setRender:DrawCubeWithTextureCoords];
+            [object.shape setRender:DrawCubeWithTextureCoords];
         }
         
-        [shape setHasGravity: (rand()% 100)==1];
-        shape.body.radius = (rand() % 3 + 2);
-        shape.body.position = SCNVector3FromFloat3(randPos);
-        shape.body.mass = (rand()%15+2)/10;
-        //int drag = shape->body.mass * 10;
-        shape.body.dragC = (rand()% 99+1)/100;
-        //shape->body.dragArea = shape->body.radius * shape->body.radius * PI;
-        [shape setColor:[self rColor]];
-        // shape.rAxis = GLKVector3Make((rand() % 100)/10,(rand() % 100)/10,(rand() % 100)/10);
+        [object setHasGravity: (rand()% 100)==1];
+        object.body.radius = (rand() % 3 + 2);
+        object.body.position = SCNVector3FromFloat3(randPos);
+        object.body.mass = (rand()%15+2)/10;
+        object.body.dragC = (rand()% 99+1)/100;
+        [object.shape setColor:[self rColor]];
+        [world insertSprite:object];
         
-        [world insertSprite:shape];
-        
-        //free(&shape);
         
     }
 }
 
 
-+ (vector_float4)rColor {
++ (GLKVector4)rColor {
     //float rCol[4];
-    vector_float4 rCol;
+    GLKVector4 rCol = GLKVector4Make(0,0,0,0);
     //rCol.x = (rand() % 100)/10;
     for (int i = 0; i<3; ++i)
-        rCol[i] = (rand() % 800)/500;
+        rCol.v[i] = (rand() % 800)/500;
     
-    rCol[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
+    rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
     //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
     return rCol;
 }

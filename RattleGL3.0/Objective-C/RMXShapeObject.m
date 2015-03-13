@@ -77,20 +77,20 @@
 - (void)setMaterial
 {
     //glMaterialfv(GL_FRONT, GL_EMISSION, self.color.v);
-    float color[4] = { self.color[0], self.color[1], self.color[2], self.color[3] };
-    glMaterialfv(GL_FRONT, GL_SPECULAR, color);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
+    //float color[4] = { self.color[0], self.color[1], self.color[2], self.color[3] };
+    RMXGLMaterialfv(GL_FRONT, GL_SPECULAR, self.color);
+    RMXGLMaterialfv(GL_FRONT, GL_DIFFUSE, self.color);
 }
 
 - (void)unsetMaterial
 {
-     float nill[4] = { 0,0,0,0 };
+     GLKVector4 nill = GLKVector4Make( 0,0,0,0);
     //glMaterialfv(GL_FRONT, GL_EMISSION,nill);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, nill);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
+    RMXGLMaterialfv(GL_FRONT, GL_SPECULAR, nill);
+    RMXGLMaterialfv(GL_FRONT, GL_DIFFUSE, nill);
 }
 
-- (vector_float4)getColorfv
+- (GLKVector4)getColorfv
 {
     //float fv[4] = { _color[0], _color[1], _color[2], _color[3] };
     return _color;
@@ -100,7 +100,7 @@
 - (void)setColorfv:(float*)c
 {
     for (int i=0;i<4;++i){
-        _color[i] = c[i];
+        _color.v[i] = c[i];
     }
 }
 

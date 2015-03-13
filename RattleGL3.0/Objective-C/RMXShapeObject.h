@@ -12,16 +12,20 @@
 
 #endif
 
-@interface RMXShapeObject : RMXParticle <RMXDrawable>
+@interface RMXShapeObject : RMXParticle
 
-@property vector_float4 color;
+@property GLKVector4 color;
 @property float r;
 @property  bool isRotating;
 @property  RMXVector3 rAxis;
 @property float rotation,  w;
-@property GLenum type, gl_light;
+@property int32_t type, gl_light;
 @property void (*render)(float);
 @property void(*shine)(GLenum, GLenum, const float*);
 - (void)setColorfv:(float*)c;
+
+- (GLKVector4)getColorfv;
+- (void)setMaterial;
+- (void)unsetMaterial;
 
 @end

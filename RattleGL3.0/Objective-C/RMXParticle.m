@@ -25,8 +25,8 @@ bool ignoreNextjump = false;
 
 - (void)reInit {
     [super reInit];
-
-
+    
+    self.shape = [RMXShape Shape:self world:self.world render: nil];
     _hasGravity = TRUE;
     _hasFriction = TRUE;
    
@@ -45,6 +45,11 @@ bool ignoreNextjump = false;
 //        self.body.position.y = self.body.radius;
 //    }
     self.isAnimated = true;
+    
+    self.rAxis = SCNVector3Make(0,0,1);
+    self.rotation = 0;
+    self.isRotating = false;
+    self.rotationCenterDistance = 0;
 }
 
 - (float)ground {
@@ -65,11 +70,23 @@ bool ignoreNextjump = false;
 
 -(void)animate
 {
-    if(!self.isAnimated) return;
+    if(self.isAnimated) {
     
-    [self jumpTest];
-    [self accelerate];
-    [self manipulate];
+        
+        
+        [self jumpTest];
+        [self accelerate];
+        [self manipulate];
+    }
+    
+    if (_isRotating) {
+        self.rotation += self.rotationSpeed/self.rotationCenterDistance;
+        GLKVector4 temp = RMXSomeCircle(self.rotation, self.rotationCenterDistance * 2);
+        self.body.position = SCNVector3Make(temp.x-self.rotationCenterDistance,temp.y,0);
+    }
+    [self.shape draw];
+    
+    
 }
 
 - (void)jumpTest{
@@ -369,6 +386,9 @@ bool ignoreNextjump = false;
     return RMXGetSpeed(µ);
 }
 
+- (BOOL)isLightSource {
+    return (_shape != nil && _shape.isLight);
+}
 @end
 
 

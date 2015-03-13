@@ -13,11 +13,11 @@
 #endif
 
 @protocol RMXDrawable <NSObject>
-@property  vector_float4 color;
+@property  GLKVector4 color;
 @property  bool isRotating;
 @property  RMXVector3 rAxis;
 @property float rotation,  w;
-@property GLenum type, gl_light;
+@property int32_t type, gl_light;
 @property void (*render)(float);
 @property void(*shine)(GLenum, GLenum, const float*);
 

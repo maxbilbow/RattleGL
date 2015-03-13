@@ -14,7 +14,7 @@
 + (RMXWorld*)initializeTestingEnvironment;
 + (void)randomObjects:(RMXWorld*)sender;
 + (void)drawAxis:(float**)colors world:(RMXWorld*)world;
-+ (vector_float4)rColor;
++ (GLKVector4)rColor;
 
 @end
 

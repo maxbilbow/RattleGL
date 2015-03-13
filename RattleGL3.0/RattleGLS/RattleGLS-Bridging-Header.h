@@ -16,9 +16,9 @@
 #endif
 
 //Swift
-@class RMSPhysicsBody, RMXWorld, RMXPhysics, RMXObject, world;
+@class RMSPhysicsBody, RMXWorld, RMXPhysics, RMXObject, world, RMXObserver, RMXShape, RMXCamera;
 //Objc
-@class RMXArt, RMXDebugger, RMXLightSource, RMXObserver, RMXMouse, RMXShapeObject, RMXParticle, RMXDPad, RMXMouseProcessor;
+@class RMXArt, RMXDebugger, RMXMouse, RMXParticle, RMXDPad, RMXMouseProcessor;
 
 
 //
@@ -26,7 +26,7 @@
 //#import <GLKit/GLKit.h>
 
 //#import "RattleGL3-0-Swift.h"
-#import "cStuff.h"
+
 #import <SceneKit/SceneKit.h>
 #import "RMXMaths.h"
 #import "RMXEquations.h"
@@ -34,7 +34,7 @@
 #import "RMXObject.h"
 #import "RMXProtocols.h"
 
-
+#import "cStuff.h"
 #import "RMXDebugger.h"
 #import "RMXMouse.h"
 
@@ -42,9 +42,9 @@
 #import "RMXParticle.h"
 //#import "RMXObserver.h"
 
-#import "RMXDrawable.h"
-#import "RMXShapeObject.h"
-#import "RMXLightSource.h"
+//#import "RMXDrawable.h"
+//#import "RMXShapeObject.h"
+//#import "RMXLightSource.h"
 //#import "RMXWorld.h"
 #import "RMXArt.h"
 
