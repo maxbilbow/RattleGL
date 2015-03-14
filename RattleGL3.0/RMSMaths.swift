@@ -10,7 +10,7 @@ import Foundation
 
 
 extension RMXMatrix4 {
-    
+    /*
     var upVector: RMXVector3 {
         return SCNVector3Make(m12,m22,m32)
     }
@@ -26,7 +26,7 @@ extension RMXMatrix4 {
     var forwardVector: RMXVector3 {
         return SCNVector3Make(m13,m23,m33)
     }
-    
+    */
 }
 
 extension RMXVector3 {
@@ -34,3 +34,6 @@ extension RMXVector3 {
         return (x == 0) && (y == 0) && (z == 0)
     }
 }
+
+let PI: CGFloat = 3.14159265358979323846
+let PI_OVER_180: CGFloat = PI / 180

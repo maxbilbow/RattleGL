@@ -8,7 +8,7 @@
 
 
 @objc public class RMXPhysics {
-    var gravity: Float = 0.098
+    var gravity: CGFloat = 0.098
     public var parent: RMXObject!
     public var world: RMXWorld!
     var upVector: RMXVector3

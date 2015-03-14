@@ -13,7 +13,7 @@ import Foundation
 //    let _g: Float = 0.01/50
 //    let _f: Float = 1.1
     private let GRAVITY: Float = 9.8
-    private var sprites: [RMXParticle];
+    var sprites: [RMXParticle]
     var observer: RMXObserver! = nil
 //        {
 //        return sprites.first as RMXObserver
@@ -27,7 +27,7 @@ import Foundation
         super.init(name: name, parent: parent, world: nil)
         self.body.radius = 1000
         self.sprites.reserveCapacity(capacity)
-        self.observer = RMXObserver(name: "Main Observer", parent: self, world: self)
+        self.observer = RMXObserver(parent: self, world: self)
         self.sprites.append(self.observer)
         //fatalError("Grav: \(self.physics.gravity)")
     }

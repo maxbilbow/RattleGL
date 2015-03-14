@@ -9,20 +9,20 @@
 import Foundation
 
 
-@objc public class RMXObserver : RMXParticle {
+public class RMXObserver : RMXParticle {
     
     private lazy var mouse: RMXMouse = RMXMouse(name: self.name, parent:self, world:self.world)
     //@property (readonly) RMXMatrix4 modelViewMatrix, projectionMatrix;
     
-    override init (name:String!, parent:RMXObject!, world:RMXWorld!) {
+    override init(world: RMXWorld!, parent: RMXObject!) {
        // self.mouse = RMXMouse(name: name, parent:self, world:world)
-        super.init(name: name,parent: parent,world: world)
+        super.init(world: world,parent: parent)
         self.reInit()
     }
     
-    var mousePos:GLKVector2 {
-        return self.mouse.pos
-    }
+//    var mousePos:GLKVector2 {
+//        return self.mouse.pos
+//    }
     override public func reInit() {
         super.reInit()
         self.armLength = 8;
@@ -42,7 +42,9 @@ import Foundation
     
     func grabObject(i: RMXParticle) {
         
-        if !(self.item != nil) && (self.distanceTo(i) < self.reach + Float(i.body.radius)) {
+        if self.item != nil {
+            self.releaseObject()
+        } else if self.body.distanceTo(i) < self.reach + i.body.radius {
             self.item = i
             self.itemPosition = i.body.position
             _itemWasAnimated = self.item.isAnimated
@@ -50,9 +52,7 @@ import Foundation
             self.item.hasGravity = false
             self.item.isAnimated = true
             //[self.item setIsAnimated:false]; //TODO: Make this not necessary
-            self.armLength = self.distanceTo(self.item)
-        } else {
-            self.releaseObject()
+            self.armLength = self.body.distanceTo(self.item)
         }
     }
     
@@ -69,7 +69,7 @@ import Foundation
 //    }
     
     
-    func extendArmLength(i: Float)    {
+    func extendArmLength(i: CGFloat)    {
         if self.armLength + i > 1 {
             self.armLength += i
         }
@@ -85,15 +85,7 @@ import Foundation
     
     } */
     
-    func makeLookAtGl(lookAt: CFunctionPointer<(Double, Double, Double, Double, Double, Double, Double, Double, Double) -> Void>) -> Void {
-        
-        RMXMakeLookAtGL(lookAt,
-            Double(self.eye.x),     Double(self.eye.y),    Double(self.eye.z),
-            Double(self.center.x),  Double(self.center.y), Double(self.center.z),
-            Double(self.up.x),      Double(self.up.y),     Double(self.up.z)
-            )
     
-    }
     /*
     - (GLKMatrix4)makePerspective:(GLKMatrix4(float fovyRadians, float aspect, float nearZ, float farZ))make
     m:(float)m width:(int)width height:(int)height
@@ -130,7 +122,7 @@ import Foundation
     
     
     var viewDescription: String {
-        return "\n      EYE x\(self.eye.x), y\(self.eye.y), z\(self.eye.z)\n   CENTRE x\(self.center.x), y\(self.center.y), z\(self.center.z)\n      UP: x\(self.up.x), y\(self.up.y), z\(self.up.z)\n"
+        return self.camera.viewDescription
     }
     
     

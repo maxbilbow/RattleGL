@@ -57,6 +57,7 @@
     //[rmxDebugger add:RMX_ERROR n:self t:_name];
 }
 
+/*
 - (RMXVector3)upVector{
     return SCNVector3Make(_body.orientation.m12,_body.orientation.m22,_body.orientation.m32);
 }
@@ -71,11 +72,9 @@
 
 - (RMXVector3)forwardVector{
     return SCNVector3Make(_body.orientation.m13,_body.orientation.m23,_body.orientation.m33);
-}
+} */
 
-- (float)distanceTo:(RMXObject*)object {
-    return GLKVector3Distance(SCNVector3ToGLKVector3(_body.position),SCNVector3ToGLKVector3(object.body.position));
-}
+
 
 
 @end

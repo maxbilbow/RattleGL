@@ -33,7 +33,20 @@ public class RMXCamera {
         } else {
             return SCNVector3Make(parent.body.orientation.m12,parent.body.orientation.m22,parent.body.orientation.m32)
         }
+    }
+    
+    func makeLookAtGl(lookAt: CFunctionPointer<(Double, Double, Double, Double, Double, Double, Double, Double, Double) -> Void>) -> Void {
         
+        RMXMakeLookAtGL(lookAt,
+            Double(self.eye.x),     Double(self.eye.y),    Double(self.eye.z),
+            Double(self.center.x),  Double(self.center.y), Double(self.center.z),
+            Double(self.up.x),      Double(self.up.y),     Double(self.up.z)
+        )
+        
+    }
+    
+    var viewDescription: String {
+        return "\n      EYE x\(self.eye.x), y\(self.eye.y), z\(self.eye.z)\n   CENTRE x\(self.center.x), y\(self.center.y), z\(self.center.z)\n      UP: x\(self.up.x), y\(self.up.y), z\(self.up.z)\n"
     }
     
     
