@@ -39,3 +39,23 @@ void RMXGLShine(int32_t a, int32_t b, GLKVector4 color) {
 void RMXGLRender(void (*render)(float),float size) {
     render(size);
 }
+
+void RMXGLCenter(void (*center)(int,int),int x, int y){
+    center(x,y);
+}
+
+void RMXCGGetLastMouseDelta(int * x, int * y) {
+    CGGetLastMouseDelta(x,y);
+}
+
+GLKVector4 RMXRandomColor() {
+    //float rCol[4];
+    GLKVector4 rCol = GLKVector4Make(0,0,0,0);
+    //rCol.x = (rand() % 100)/10;
+    for (int i = 0; i<3; ++i)
+        rCol.v[i] = (rand() % 800)/500;
+        
+        rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
+        //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
+        return rCol;
+}

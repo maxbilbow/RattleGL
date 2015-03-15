@@ -44,7 +44,7 @@ void display (void) {
     glClearColor(0.8f, 0.85f, 1.8f, 0.0f);
     //[rmxDebugger add:RMX_DISPLAY_PROCESSOR n:@"DisplayProcessor" t:[NSString stringWithFormat:@"r%f, g%f, b%f, k%f",art.r,art.g,art.b,art.k]];
     glLoadIdentity(); // Load the Identity Matrix to reset our drawing locations
-    [world.observer makeLookAtGl:gluLookAt];
+    [world.observer.camera makeLookAtGl:gluLookAt];
   
     
     repeatedKeys();
@@ -54,7 +54,7 @@ void display (void) {
     glFlush();
     debug();
     //tester.checks[1] = observer->toString();
-    NSLog([world.observer viewDescription]);
+    //NSLog([world.observer viewDescription]);
    
     
 }

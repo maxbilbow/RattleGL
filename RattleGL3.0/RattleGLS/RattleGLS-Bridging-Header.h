@@ -31,22 +31,22 @@
 #import "RMXMaths.h"
 #import "RMXEquations.h"
 #import "RMXShapes.h"
-#import "RMXObject.h"
-#import "RMXProtocols.h"
+//#import "RMXObject.h"
+//#import "RMXProtocols.h"
 
 #import "cStuff.h"
 #import "RMXDebugger.h"
-#import "RMXMouse.h"
+//#import "RMXMouse.h"
 
 //#import "RMXPhysics.h"
-#import "RMXParticle.h"
+//#import "RMXParticle.h"
 //#import "RMXObserver.h"
 
 //#import "RMXDrawable.h"
 //#import "RMXShapeObject.h"
 //#import "RMXLightSource.h"
 //#import "RMXWorld.h"
-#import "RMXArt.h"
+//#import "RMXArt.h"
 
 //desktop below
 

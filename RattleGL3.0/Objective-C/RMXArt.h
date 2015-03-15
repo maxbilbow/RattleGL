@@ -8,7 +8,7 @@
 
 //const vector_float4 colorBronzeDiff, colorBronzeSpec, colorBlue, colorRed, colorGreen, colorYellow, nillVector;
 
-@interface RMXArt : RMXObject 
+@interface RMXArt   
 
 //@property float x, y, z, d, r, g, b, k;
 + (RMXWorld*)initializeTestingEnvironment;

@@ -14,7 +14,7 @@ import SceneKit
     var position, velocity, acceleration, forces: RMXVector3
     var orientation: RMXMatrix4
     var vMatrix: RMXMatrix4
-    var parent: RMXParticle
+    var parent: RMXParticle! = nil
     
     var theta, phi, radius, mass, dragC: CGFloat
     var dragArea: CGFloat {
@@ -44,19 +44,19 @@ import SceneKit
     }
     
     var weight: CGFloat{
-        return self.mass * parent.physics.gravity
+        return self.mass * parent.physics!.gravity
     }
     
     func accelerateForward(v: Float) {
-        self.acceleration.z = CGFloat(v) * parent.accelerationRate
+        self.acceleration.z = CGFloat(v) * self.parent.accelerationRate
     }
     
     func accelerateUp(v: Float) {
-        self.acceleration.y = CGFloat(v) * parent.accelerationRate
+        self.acceleration.y = CGFloat(v) * self.parent.accelerationRate
     }
     
     func accelerateLeft(v: Float) {
-        self.acceleration.x = CGFloat(v) * parent.accelerationRate
+        self.acceleration.x = CGFloat(v) * self.parent.accelerationRate
     }
     
     
@@ -89,7 +89,7 @@ import SceneKit
     }
     
     func distanceTo(object:RMXObject) -> CGFloat{
-        return CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(self.position),SCNVector3ToGLKVector3(object.body.position)))
+        return CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(self.position),SCNVector3ToGLKVector3(object.getPosition()!)))
     }
     
 }

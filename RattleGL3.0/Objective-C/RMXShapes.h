@@ -19,7 +19,7 @@
 void DrawCubeFace(float fSize);
 void DrawCubeWithTextureCoords (float fSize);
 void DrawSpheree(double r, int lats, int longs);
-void DrawSphere(float size);//Particle pCube = Particle();
+void RMXDrawSphere(float size);//Particle pCube = Particle();
 //void RenderObjects(void);
 //void DrawTeapot(float f);
 void DrawPlane(float x);

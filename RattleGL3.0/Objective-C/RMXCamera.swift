@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class RMXCamera {
+@objc public class RMXCamera {
     
     var parent: RMXParticle!
     
@@ -22,7 +22,7 @@ public class RMXCamera {
     }
     
     var center: RMXVector3{
-        return RMXVector3Add(SCNVector3Make(parent.body.orientation.m11,parent.body.orientation.m21,parent.body.orientation.m31),
+        return RMXVector3Add(SCNVector3Make(parent.body.orientation.m13,parent.body.orientation.m23,parent.body.orientation.m33),
         parent.body.position)
     }
     
@@ -31,7 +31,7 @@ public class RMXCamera {
         if simple {
             return SCNVector3Make(0,1,0)
         } else {
-            return SCNVector3Make(parent.body.orientation.m12,parent.body.orientation.m22,parent.body.orientation.m32)
+            //return SCNVector3Make(parent.body.orientation.m12,parent.body.orientation.m22,parent.body.orientation.m32)
         }
     }
     

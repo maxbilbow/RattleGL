@@ -28,53 +28,18 @@
     //    }
     _name = name;
 //    _physics = nil;
-    _physics = (world != nil) ? world.physics : [RMXPhysics NewWithParent:parent world: (RMXWorld*) self];
     [self reInit];
     return self;
 }
-
-- (float)altitude{
-    return _body.position.y;
-}
-/*
-- (void)setAltitude:(float)altitude {
-    self.body.position.y = altitude;
-}
-*/
-- (float)positionX{
-    return _body.position.x;
-}
-
-- (float)positionZ{
-    return _body.position.z;
-}
-
 - (void)reInit {
-    self.body = [RMSPhysicsBody New];
     
 }
 - (void)debug {
-    //[rmxDebugger add:RMX_ERROR n:self t:_name];
 }
 
-/*
-- (RMXVector3)upVector{
-    return SCNVector3Make(_body.orientation.m12,_body.orientation.m22,_body.orientation.m32);
+- (void)plusAngle:(float)x y:(float)y{
+    
 }
-
-- (RMXVector3)rightVector{
-    return SCNVector3Make(-_body.orientation.m11, -_body.orientation.m21, -_body.orientation.m31);
-}
-
-- (RMXVector3)leftVector{
-    return SCNVector3Make(_body.orientation.m11,_body.orientation.m21,_body.orientation.m31);
-}
-
-- (RMXVector3)forwardVector{
-    return SCNVector3Make(_body.orientation.m13,_body.orientation.m23,_body.orientation.m33);
-} */
-
-
 
 
 @end

@@ -13,6 +13,7 @@
 
 #import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
+
 @class Main;
 //static BOOL g_bLightingEnabled = TRUE;
 //static BOOL g_bFillPolygons = TRUE;
@@ -30,8 +31,8 @@ static int g_yClick = 0;
 void center(){
 //
     bool center = false;//observer->hasFocus();
-    int x = center ? glutGet(GLUT_WINDOW_X)/2 :world.observer.mousePos.x;
-    int y = center ? glutGet(GLUT_WINDOW_Y)/2 :world.observer.mousePos.y;
+    int x = center ? glutGet(GLUT_WINDOW_X)/2 :world.observer.mouse.x;
+    int y = center ? glutGet(GLUT_WINDOW_Y)/2 :world.observer.mouse.y;
 
     CGWarpMouseCursorPosition(CGPointMake(x + glutGet(GLUT_WINDOW_X), y + glutGet(GLUT_WINDOW_Y) ));
   //  pos.x = glutGet(GLUT_WINDOW_X)/2;

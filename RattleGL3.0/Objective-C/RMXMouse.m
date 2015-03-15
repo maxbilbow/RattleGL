@@ -8,6 +8,7 @@
 
 
 #import "RattleGLS-Bridging-Header.h"
+@class RMXParticle;
 @implementation RMXMouse
 
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world
@@ -44,11 +45,8 @@
     _pos.x = x;// + dx;
     _pos.y = y;//;
 }
-- (void)mouse2view:(int)x y:(int)y{
-    NSLog(@"ERROR: Mouse2View Called directly to Mouse!");
-}
 
-- (void)mouse2view:(int)x y:(int)y owner:(id)owner
+- (void)mouse2view:(int)x y:(int)y
 {
         //dx = dy = 0;
         
@@ -64,9 +62,8 @@
         
         float theta = (float)(DeltaX)*dir;
         float phi = (float)(DeltaY)*dir;// / 20.0f;
-        
-    [owner plusAngle:theta up:phi];
     
+    [self.parent plusAngle:theta y:phi];
         
     }
     

@@ -12,12 +12,14 @@
 
 #endif
 
-@interface RMXMouse : RMXObject <RMXMouseOwner>
+@interface RMXMouse <RMXMouseOwner>
 //@property bool focus;
+@property RMXObject * parent;
+@property RMXWorld * world;
 @property int dx, dy;
 @property GLKVector2 pos;
 @property RMXDPad* dPad;
 @property (getter=hasFocus) bool focus;
 - (id)initWithName:(NSString*)name  parent:(RMXObject*)parent world:(RMXWorld*)world;
-- (void)mouse2view:(int)x y:(int)y owner:(id)owner;
+- (void)mouse2view:(int)x y:(int)y;
 @end

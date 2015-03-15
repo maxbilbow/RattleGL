@@ -19,18 +19,14 @@
 
 @interface RMXObject : NSObject <RMXObjectProtocol>
 @property BOOL isAnimated;
-@property RMSPhysicsBody * body;
+@property (readwrite)RMXVector3 position;
 @property (readonly) NSString * name;
 @property RMXObject * parent;
 @property RMXWorld * world;
-@property RMXPhysics * physics;
-@property (readonly) float altitude, positionX, positionY;
+//@property (readonly) float altitude, positionX, positionY;
 //@property RMXPhysicsBody body;
-@property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
+//@property (readonly) RMXVector3 upVector, rightVector, forwardVector, leftVector;
 - (id)initWithName:(NSString*)name parent:(RMXObject*)parent world:(RMXWorld*)world;
+- (void)plusAngle:(float)x y:(float)y;
 - (void)debug;
-- (void)reInit;
-//- (void)setAltitude:(float)altitude;
-- (float)distanceTo:(RMXObject*)object;
-//+ (float)distanceBetween:(RMXObject*)a and:(RMXObject*)b;
 @end

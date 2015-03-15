@@ -92,7 +92,7 @@ void DrawSpheree(double r, int lats, int longs)
  
 }
 
-void DrawSphere(float size){
+void RMXDrawSphere(float size){
     DrawSpheree(size,20,20);
 }
 

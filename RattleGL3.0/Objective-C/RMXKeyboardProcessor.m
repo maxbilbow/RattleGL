@@ -56,50 +56,50 @@ void movement(float speed, int key){
     //if (keys.keyStates[keys.forward])  [observer accelerateForward:speed];
     if (key == keys.forward) {
         if (!speed)
-            [world.observer forwardStop];
+            [world.observer.body forwardStop];
         else
-            [world.observer accelerateForward:speed];
+            [world.observer.body accelerateForward:speed];
     }
     
     if (key == keys.back) {
         if (!speed)
-            [world.observer forwardStop];
+            [world.observer.body forwardStop];
         else
-            [world.observer accelerateForward:-speed];
+            [world.observer.body accelerateForward:-speed];
         //TODO
     }
     
     if (key == keys.left) {
         if (!speed)
-            [world.observer leftStop];
+            [world.observer.body leftStop];
         else
-            [world.observer accelerateLeft:speed];
+            [world.observer.body accelerateLeft:speed];
         //if(test) cout << keys.left << " ";
     }
     
     if (key == keys.right) {
         if (!speed)
-             [world.observer leftStop];
+             [world.observer.body leftStop];
         else
-            [world.observer accelerateLeft:-speed];
+            [world.observer.body accelerateLeft:-speed];
         //if(test) cout << keys.right << " ";
         //TODO
     }
     
     if (key == keys.up) {
         if (!speed)
-             [world.observer upStop];
+             [world.observer.body upStop];
         else
-             [world.observer accelerateUp:speed];
+             [world.observer.body accelerateUp:speed];
         //if(test) cout << keys.up << " ";
         //TODO
     }
     
     if (key == keys.down) {
         if (!speed)
-             [world.observer upStop];
+             [world.observer.body upStop];
         else
-             [world.observer accelerateUp:-speed];
+             [world.observer.body accelerateUp:-speed];
         //if(test) cout << keys.down << " ";
         //TODO
     }
@@ -181,7 +181,7 @@ void keyUpOperations(int key){
                 glutSetCursor(GLUT_CURSOR_NONE);
                
                 [world.observer calibrateView:0 vert:0];// [observer getMouse().x, [observer getMouse().y);
-                [world.observer mouse2view:0 y:0];
+                [world.observer.mouse mouse2view:0 y:0];
                 //glutWarpPointer(0,0);
                 
             }

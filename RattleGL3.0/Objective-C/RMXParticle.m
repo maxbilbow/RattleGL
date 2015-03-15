@@ -232,7 +232,7 @@ bool ignoreNextjump = false;
     
     
     self.body.orientation = SCNMatrix4Rotate(self.body.orientation, theta, 0, 1, 0);
-    self.body.orientation = SCNMatrix4Rotate(self.body.orientation, phi, self.leftVector.x, self.leftVector.y, self.leftVector.z);
+    self.body.orientation = SCNMatrix4Rotate(self.body.orientation, phi, self.body.leftVector.x, self.body.leftVector.y, self.body.leftVector.z);
     
     //[rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"Theta: %f, Phi: %f",self.body.theta,self.body.phi ]];
    

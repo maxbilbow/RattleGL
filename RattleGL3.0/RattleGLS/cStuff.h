@@ -22,3 +22,6 @@ void RMXGLMaterialfv(int32_t a,int32_t b, GLKVector4 color);
 void RMXGLTranslate(RMXVector3 v);
 void RMXGLShine(int a, int b, GLKVector4 color);
 void RMXGLRender(void (*render)(float),float size);
+void RMXGLCenter(void (*center)(int,int),int x, int y);
+void RMXCGGetLastMouseDelta(int * x, int * y);
+GLKVector4 RMXRandomColor();

@@ -9,9 +9,9 @@
 import Foundation
 
 
-public class RMXObserver : RMXParticle {
+@objc public class RMXObserver : RMXParticle {
     
-    private lazy var mouse: RMXMouse = RMXMouse(name: self.name, parent:self, world:self.world)
+    lazy var mouse: RMXMouse? = RMXMouse(parent:self, world:self.world)
     //@property (readonly) RMXMatrix4 modelViewMatrix, projectionMatrix;
     
     override init(world: RMXWorld!, parent: RMXObject!) {
@@ -44,7 +44,7 @@ public class RMXObserver : RMXParticle {
         
         if self.item != nil {
             self.releaseObject()
-        } else if self.body.distanceTo(i) < self.reach + i.body.radius {
+        } else if self.body.distanceTo(i) < self.reach + i.body.radius + self.body.radius {
             self.item = i
             self.itemPosition = i.body.position
             _itemWasAnimated = self.item.isAnimated
@@ -53,6 +53,7 @@ public class RMXObserver : RMXParticle {
             self.item.isAnimated = true
             //[self.item setIsAnimated:false]; //TODO: Make this not necessary
             self.armLength = self.body.distanceTo(self.item)
+            println(self.item.name)
         }
     }
     
@@ -97,32 +98,32 @@ public class RMXObserver : RMXParticle {
     */
     
     func setMousePos(x: Int32, y: Int32) {
-        self.mouse.setMousePos(x, y:y)
+        self.mouse!.setMousePos(x, y: y)
     }
     
     func mouse2view(x: Int32, y: Int32){
-        self.mouse.mouse2view(x, y:y, owner:self)
+        self.mouse!.mouse2view(x, y: y)
     }
    
     
     
     func toggleFocus() {
-        self.mouse.toggleFocus()
+        self.mouse!.toggleFocus()
     }
     func centerView(center: CFunctionPointer<( Int32,  Int32)->Void>) {
-        self.mouse.centerView(center)
+        self.mouse!.centerView(center)
     }
     func calibrateView(x: Int32, vert:Int32) {
-        self.mouse.calibrateView(x, vert:vert)
+        self.mouse!.calibrateView(x, y:vert)
     }
     var hasFocus: Bool {
-        return self.mouse.focus
+        return self.mouse!.focus
     }
     
     
     
-    var viewDescription: String {
-        return self.camera.viewDescription
+    var viewDescription: String? {
+        return self.camera?.viewDescription
     }
     
     
@@ -150,7 +151,7 @@ public class RMXObserver : RMXParticle {
     {
         if self.item != nil {
             self.item.isAnimated = true
-            self.item.body.velocity = RMXVector3Add3(self.body.velocity,RMXVector3MultiplyScalar(self.forwardVector,strength),RMXVector3Zero())
+            self.item.body.velocity = RMXVector3Add3(self.body.velocity,RMXVector3MultiplyScalar(self.body.forwardVector,strength),RMXVector3Zero())
             self.item = nil
         } else {
             return

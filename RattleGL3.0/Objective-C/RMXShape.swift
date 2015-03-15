@@ -8,12 +8,16 @@
 
 import Foundation
 
+//@objc public protocol RMXRenderable {
+//    var render: CFunctionPointer<(Float)->Void> { get set }
+//}
+
 @objc public class RMXShape {
     
     var color: GLKVector4 = GLKVector4Make(0,0,0,0)
     var isLight: Bool = false
     var type, gl_light: Int32
-    var render: CFunctionPointer<(Float)->Void> = nil
+    public var render: ((Float) -> Void)?//UnsafeMutablePointer<(Float) -> Void> = UnsafeMutablePointer<(Float) -> Void>()//.alloc(sizeof(<(Float) -> Void>))
     var parent: RMXParticle!
     var world: RMXWorld!
     var visible: Bool = true;
@@ -28,13 +32,13 @@ import Foundation
     }
     
    
-    class func Shape(parent: RMXParticle!, world: RMXWorld!, render: CFunctionPointer<(Float)->Void> = nil) -> RMXShape {
-        let s = RMXShape(parent: parent, world: world)
-        s.render = render
-        return s
-    }
+//    class func Shape(parent: RMXParticle!, world: RMXWorld!, render: CFunctionPointer<(Float)->Void> = nil) -> RMXShape {
+//        let s = RMXShape(parent: parent, world: world)
+//        s.render = render
+//        return s
+//    }
     
-    func makeAsSun(rDist: Float = 1000, isRotating: Bool = true){
+    func makeAsSun(rDist: CGFloat = 1000, isRotating: Bool = true){
         self.parent.rotationCenterDistance = rDist
         self.parent.isRotating = isRotating
         self.parent.rotationSpeed = 1
@@ -54,7 +58,8 @@ import Foundation
             RMXGLTranslate(parent.anchor)
             RMXGLTranslate(parent.body.position)
             self.setMaterial()
-            RMXGLRender(self.render,Float(self.parent.body.radius))
+//            RMXGLRender(self.render, Float(self.parent.body.radius))
+            self.render!(Float(self.parent.body.radius))
             self.unsetMaterial()
             glPopMatrix();
         }
@@ -84,7 +89,11 @@ import Foundation
         return self.color
     }
     
-    
+    func setRenderer(render: (Float)->()) {
+        
+//       self.render.put(render
+        self.render = render
+    }
     func setColorfv(c: [Float]) {
         self.color = GLKVector4Make(c[0],c[1],c[2],c[3])
         

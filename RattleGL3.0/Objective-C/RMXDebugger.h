@@ -51,11 +51,11 @@
 #define RMX_DEPRECATED(from, to) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA)
 
 
-@interface RMXDebugger : NSString
-@property const bool isDebugging;
--(void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
--(void)cycle:(int)dir;
-- (void)feedback;
-@end
+//@protocol RMXDebuggerProtocol
+//@property const bool isDebugging;
+//+ (void)add:(int)index n:(id)name t:(NSString*)text;//, ...;
+//+ (void)cycle:(int)dir;
+//+ (void)feedback;
+//@end
 
 //const RMXDebugger *rmxDebugger;

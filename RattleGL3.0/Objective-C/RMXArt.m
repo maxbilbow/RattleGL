@@ -5,10 +5,10 @@
 //  Created by Max Bilbow on 09/03/2015.
 //  Copyright (c) 2015 Rattle Media. All rights reserved.
 //
-
-#import "RattleGLS-Bridging-Header.h"
 #import <complex.h>
 #import <RattleGL-Swift.h>
+#import "RattleGLS-Bridging-Header.h"
+
 
 float colorBronzeDiff[4]  = { 0.8, 0.6, 0.0, 1.0 };
  float colorBronzeSpec[4]  = { 1.0, 1.0, 0.4, 1.0 };
@@ -55,7 +55,7 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
     
     
     
-    RMXParticle * sun = [[RMXParticle alloc]initWithName:@"SUN" parent:world world:world];
+    RMXParticle * sun = [RMXParticle NewWithWorld:world parent:nil];
     //[sun setRAxis:GLKVector3Make(0, 0, 1)];
     sun.body.radius = 100;
     sun.shape.color = GLKVector4Make(0.5,0.5,0.5,0.5);
@@ -65,7 +65,7 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
     
     float * axisColors[3] = {colorBlue , colorRed , colorGreen};
     
-    RMXParticle *ZX = [[RMXParticle alloc]initWithName:@"ZX PLANE" parent:world world:world];
+    RMXParticle *ZX = [RMXParticle NewWithWorld:world parent:world];
     [ZX.shape setRender:DrawPlane];
     ZX.shape.color = GLKVector4Make(0.8,1.2,0.8,0.5);
     ZX.isAnimated = false;
@@ -95,7 +95,7 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
             } else {
                 count = 0;
                 axis[j][j] = i;
-                RMXParticle * object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Shape: %i",i ] parent:world world:world];
+                RMXParticle * object = [RMXParticle NewWithWorld:world parent:nil];
                 object.hasGravity = false;// ? true : false];
                 [object.shape setRender:DrawCubeWithTextureCoords];
                 object.body.radius = limit/2;
@@ -164,11 +164,11 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
         //gravity = !gravity;
         RMXParticle * object;
         if(false){//(rand() % 10000) == 1) {
-            object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Light: %i",i ] parent:world world:world];
+            object = [RMXParticle NewWithWorld:world parent:nil];
             [object.shape makeAsSunWithRDist:0 isRotating:false];
         }
         else {
-            object = [[RMXParticle alloc]initWithName:[NSString stringWithFormat:@"Cube: %i",i ] parent:world world:world];
+            object = [RMXParticle NewWithWorld:world parent:nil];
         }
         
         if(rand() % 500 == 1) {
@@ -179,7 +179,7 @@ float colorBlue[4]        = { 0.0, 0.0, 0.1, 1.0 };
         
         [object setHasGravity: (rand()% 100)==1];
         object.body.radius = (rand() % 3 + 2);
-        object.body.position = SCNVector3FromFloat3(randPos);
+        object.body.position = SCNVector3Make(randPos[0], randPos[1], randPos[2]);
         object.body.mass = (rand()%15+2)/10;
         object.body.dragC = (rand()% 99+1)/100;
         [object.shape setColor:[self rColor]];
