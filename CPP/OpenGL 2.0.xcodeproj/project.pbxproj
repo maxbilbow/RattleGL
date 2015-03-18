@@ -1,0 +1,1076 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5039ED041A9A9C2900FCBD6E /* RMXDataTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 5039ED011A9A9C2900FCBD6E /* RMXDataTypes.h */; };
+		5039ED051A9A9C2900FCBD6E /* RMXEquations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5039ED021A9A9C2900FCBD6E /* RMXEquations.h */; };
+		5039ED061A9A9C2900FCBD6E /* RMXMaths.h in Headers */ = {isa = PBXBuildFile; fileRef = 5039ED031A9A9C2900FCBD6E /* RMXMaths.h */; };
+		5039ED1D1A9A9D5500FCBD6E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5039ED0C1A9A9D5500FCBD6E /* Info.plist */; };
+		504771C71A99E8DA00484D8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504771C61A99E8DA00484D8C /* AppDelegate.swift */; };
+		504771C91A99E8DA00484D8C /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 504771C81A99E8DA00484D8C /* Shader.fsh */; };
+		504771CB1A99E8DA00484D8C /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 504771CA1A99E8DA00484D8C /* Shader.vsh */; };
+		504771CD1A99E8DA00484D8C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504771CC1A99E8DA00484D8C /* GameViewController.swift */; };
+		504771D01A99E8DA00484D8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504771CE1A99E8DA00484D8C /* Main.storyboard */; };
+		504771D21A99E8DA00484D8C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504771D11A99E8DA00484D8C /* Images.xcassets */; };
+		504771D51A99E8DA00484D8C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504771D31A99E8DA00484D8C /* LaunchScreen.xib */; };
+		504771E11A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504771E01A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift */; };
+		50639F2A1A92CC9100A94E5C /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50639F291A92CC9100A94E5C /* CoreFoundation.framework */; };
+		509857831A72E009009F50A3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509857821A72E009009F50A3 /* GLUT.framework */; };
+		509857851A72E011009F50A3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509857841A72E011009F50A3 /* GLKit.framework */; };
+		509857871A72E01E009F50A3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509857861A72E01E009F50A3 /* OpenGL.framework */; };
+		50BC367C1A743774008E8B78 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50BC367B1A743774008E8B78 /* ApplicationServices.framework */; };
+		50CFB7391A9D44A90089614D /* Gile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508C1BB41A9D213B00E6E942 /* Gile.swift */; };
+		50DEC2871A960E1B00336687 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DEC27E1A960E1B00336687 /* main.cpp */; };
+		50DEC28C1A960EFE00336687 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50DEC28B1A960EFE00336687 /* OpenCL.framework */; };
+		6C34BFDD1A9AAA9200021680 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5039ED0F1A9A9D5500FCBD6E /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		504771DB1A99E8DA00484D8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 509857631A72A6C7009F50A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 504771C11A99E8DA00484D8C;
+			remoteInfo = "RattleGL iOS objc";
+		};
+		504772091A99EAA600484D8C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 509857631A72A6C7009F50A3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 504771EB1A99EAA600484D8C;
+			remoteInfo = "RattleGL (objc)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		505ADEEC1A957A1C00A91318 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		509857691A72A6C7009F50A3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5039ED011A9A9C2900FCBD6E /* RMXDataTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXDataTypes.h; path = C/RMXDataTypes.h; sourceTree = "<group>"; };
+		5039ED021A9A9C2900FCBD6E /* RMXEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXEquations.h; path = C/RMXEquations.h; sourceTree = "<group>"; };
+		5039ED031A9A9C2900FCBD6E /* RMXMaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXMaths.h; path = C/RMXMaths.h; sourceTree = "<group>"; };
+		5039ED0A1A9A9D5500FCBD6E /* RMXArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXArt.h; sourceTree = "<group>"; };
+		5039ED0B1A9A9D5500FCBD6E /* RMXDisplayProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXDisplayProcessor.h; sourceTree = "<group>"; };
+		5039ED0C1A9A9D5500FCBD6E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5039ED0D1A9A9D5500FCBD6E /* RMXKeyboardProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXKeyboardProcessor.h; sourceTree = "<group>"; };
+		5039ED0E1A9A9D5500FCBD6E /* RMXLightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXLightSource.h; sourceTree = "<group>"; };
+		5039ED0F1A9A9D5500FCBD6E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5039ED101A9A9D5500FCBD6E /* RMXMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMenu.h; sourceTree = "<group>"; };
+		5039ED111A9A9D5500FCBD6E /* RMXMouseProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMouseProcessor.h; sourceTree = "<group>"; };
+		5039ED121A9A9D5500FCBD6E /* RMXObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXObserver.h; sourceTree = "<group>"; };
+		5039ED131A9A9D5500FCBD6E /* oHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oHeader.h; sourceTree = "<group>"; };
+		5039ED141A9A9D5500FCBD6E /* RMXParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXParticle.h; sourceTree = "<group>"; };
+		5039ED151A9A9D5500FCBD6E /* RMXPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXPhysics.h; sourceTree = "<group>"; };
+		5039ED161A9A9D5500FCBD6E /* RMXProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXProtocols.h; sourceTree = "<group>"; };
+		5039ED171A9A9D5500FCBD6E /* RMXDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXDebugger.h; sourceTree = "<group>"; };
+		5039ED181A9A9D5500FCBD6E /* RMXMouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXMouse.h; sourceTree = "<group>"; };
+		5039ED191A9A9D5500FCBD6E /* RMXShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXShapeObject.h; sourceTree = "<group>"; };
+		5039ED1A1A9A9D5500FCBD6E /* RMXShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMXShapes.h; path = "Lets Make a GLES game/Objective-C/RMXShapes.h"; sourceTree = "<group>"; };
+		5039ED1B1A9A9D5500FCBD6E /* RMXWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXWindow.h; sourceTree = "<group>"; };
+		5039ED1C1A9A9D5500FCBD6E /* RMXWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMXWorld.h; sourceTree = "<group>"; };
+		504771C21A99E8DA00484D8C /* RattleGL iOS objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RattleGL iOS objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		504771C51A99E8DA00484D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		504771C61A99E8DA00484D8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		504771C81A99E8DA00484D8C /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		504771CA1A99E8DA00484D8C /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		504771CC1A99E8DA00484D8C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		504771CF1A99E8DA00484D8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		504771D11A99E8DA00484D8C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		504771D41A99E8DA00484D8C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		504771DA1A99E8DA00484D8C /* RattleGL iOS objcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RattleGL iOS objcTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		504771DF1A99E8DA00484D8C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		504771E01A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RattleGL_iOS_objcTests.swift; sourceTree = "<group>"; };
+		504771EC1A99EAA600484D8C /* RattleGL (objc).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RattleGL (objc).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		504772081A99EAA600484D8C /* RattleGL (objc)Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RattleGL (objc)Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "OpenGL 2.1 (OC)"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rattle GL 2.0.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		50639F291A92CC9100A94E5C /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		506C4A411A78896F00EB3C97 /* Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Window.xib; path = GUI/Window.xib; sourceTree = SOURCE_ROOT; };
+		508C1BB31A9D213A00E6E942 /* OpenGL 2.0-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenGL 2.0-Bridging-Header.h"; sourceTree = "<group>"; };
+		508C1BB41A9D213B00E6E942 /* Gile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Gile.swift; path = "Lets Make a GLES game/SwiftPortTest/Gile.swift"; sourceTree = SOURCE_ROOT; };
+		5098576B1A72A6C7009F50A3 /* OpenGL_2.0 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_2.0; sourceTree = BUILT_PRODUCTS_DIR; };
+		509857821A72E009009F50A3 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		509857841A72E011009F50A3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		509857861A72E01E009F50A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		50BC367B1A743774008E8B78 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		50DEC2701A960E1B00336687 /* Art.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Art.h; sourceTree = "<group>"; };
+		50DEC2711A960E1B00336687 /* LightSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightSource.h; sourceTree = "<group>"; };
+		50DEC2721A960E1B00336687 /* ShapeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeObject.h; sourceTree = "<group>"; };
+		50DEC2731A960E1B00336687 /* Shapes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shapes.hpp; sourceTree = "<group>"; };
+		50DEC2751A960E1B00336687 /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
+		50DEC2761A960E1B00336687 /* cppheader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = cppheader.hpp; path = CPP/cppheader.hpp; sourceTree = SOURCE_ROOT; };
+		50DEC2781A960E1B00336687 /* DisplayProcessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DisplayProcessor.hpp; sourceTree = "<group>"; };
+		50DEC2791A960E1B00336687 /* KeyboardProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardProcessor.h; sourceTree = "<group>"; };
+		50DEC27A1A960E1B00336687 /* Menu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Menu.hpp; sourceTree = "<group>"; };
+		50DEC27B1A960E1B00336687 /* MouseProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseProcessor.h; sourceTree = "<group>"; };
+		50DEC27C1A960E1B00336687 /* RattleGLI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RattleGLI.h; sourceTree = "<group>"; };
+		50DEC27D1A960E1B00336687 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		50DEC27E1A960E1B00336687 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = CPP/main.cpp; sourceTree = SOURCE_ROOT; };
+		50DEC27F1A960E1B00336687 /* Debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debugger.h; path = CPP/Debugger.h; sourceTree = SOURCE_ROOT; };
+		50DEC2811A960E1B00336687 /* Mouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mouse.h; sourceTree = "<group>"; };
+		50DEC2821A960E1B00336687 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
+		50DEC2831A960E1B00336687 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		50DEC2841A960E1B00336687 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
+		50DEC2851A960E1B00336687 /* PointOfView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointOfView.h; sourceTree = "<group>"; };
+		50DEC2861A960E1B00336687 /* SimpleParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleParticle.h; sourceTree = "<group>"; };
+		50DEC28B1A960EFE00336687 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		504771BF1A99E8DA00484D8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771D71A99E8DA00484D8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771E91A99EAA600484D8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504772051A99EAA600484D8C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		505ADEEB1A957A1C00A91318 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50639F241A92CC9100A94E5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50639F2A1A92CC9100A94E5C /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		509857681A72A6C7009F50A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50DEC28C1A960EFE00336687 /* OpenCL.framework in Frameworks */,
+				50BC367C1A743774008E8B78 /* ApplicationServices.framework in Frameworks */,
+				509857871A72E01E009F50A3 /* OpenGL.framework in Frameworks */,
+				509857851A72E011009F50A3 /* GLKit.framework in Frameworks */,
+				509857831A72E009009F50A3 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5039ED091A9A9D5500FCBD6E /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				5039ED0A1A9A9D5500FCBD6E /* RMXArt.h */,
+				5039ED0B1A9A9D5500FCBD6E /* RMXDisplayProcessor.h */,
+				5039ED0C1A9A9D5500FCBD6E /* Info.plist */,
+				5039ED0D1A9A9D5500FCBD6E /* RMXKeyboardProcessor.h */,
+				5039ED0E1A9A9D5500FCBD6E /* RMXLightSource.h */,
+				5039ED0F1A9A9D5500FCBD6E /* main.m */,
+				5039ED101A9A9D5500FCBD6E /* RMXMenu.h */,
+				5039ED111A9A9D5500FCBD6E /* RMXMouseProcessor.h */,
+				5039ED121A9A9D5500FCBD6E /* RMXObserver.h */,
+				508C1BB41A9D213B00E6E942 /* Gile.swift */,
+				5039ED131A9A9D5500FCBD6E /* oHeader.h */,
+				5039ED141A9A9D5500FCBD6E /* RMXParticle.h */,
+				5039ED151A9A9D5500FCBD6E /* RMXPhysics.h */,
+				5039ED161A9A9D5500FCBD6E /* RMXProtocols.h */,
+				5039ED171A9A9D5500FCBD6E /* RMXDebugger.h */,
+				5039ED181A9A9D5500FCBD6E /* RMXMouse.h */,
+				5039ED191A9A9D5500FCBD6E /* RMXShapeObject.h */,
+				5039ED1B1A9A9D5500FCBD6E /* RMXWindow.h */,
+				5039ED1C1A9A9D5500FCBD6E /* RMXWorld.h */,
+				508C1BB31A9D213A00E6E942 /* OpenGL 2.0-Bridging-Header.h */,
+			);
+			name = "Objective-C";
+			path = "Lets Make a GLES game/Objective-C";
+			sourceTree = "<group>";
+		};
+		504771C31A99E8DA00484D8C /* RattleGL iOS Swift */ = {
+			isa = PBXGroup;
+			children = (
+				504771DD1A99E8DA00484D8C /* RattleGL iOS objcTests */,
+				504771C61A99E8DA00484D8C /* AppDelegate.swift */,
+				504771C81A99E8DA00484D8C /* Shader.fsh */,
+				504771CA1A99E8DA00484D8C /* Shader.vsh */,
+				504771CC1A99E8DA00484D8C /* GameViewController.swift */,
+				504771CE1A99E8DA00484D8C /* Main.storyboard */,
+				504771D11A99E8DA00484D8C /* Images.xcassets */,
+				504771D31A99E8DA00484D8C /* LaunchScreen.xib */,
+				504771C41A99E8DA00484D8C /* Supporting Files */,
+			);
+			name = "RattleGL iOS Swift";
+			path = "RattleGL iOS objc";
+			sourceTree = "<group>";
+		};
+		504771C41A99E8DA00484D8C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				504771C51A99E8DA00484D8C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		504771DD1A99E8DA00484D8C /* RattleGL iOS objcTests */ = {
+			isa = PBXGroup;
+			children = (
+				504771E01A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift */,
+				504771DE1A99E8DA00484D8C /* Supporting Files */,
+			);
+			path = "RattleGL iOS objcTests";
+			sourceTree = SOURCE_ROOT;
+		};
+		504771DE1A99E8DA00484D8C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				504771DF1A99E8DA00484D8C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50639F281A92CC9100A94E5C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				50BC367B1A743774008E8B78 /* ApplicationServices.framework */,
+				509857861A72E01E009F50A3 /* OpenGL.framework */,
+				509857841A72E011009F50A3 /* GLKit.framework */,
+				509857821A72E009009F50A3 /* GLUT.framework */,
+				50DEC28B1A960EFE00336687 /* OpenCL.framework */,
+				50639F291A92CC9100A94E5C /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		509857621A72A6C7009F50A3 = {
+			isa = PBXGroup;
+			children = (
+				50639F281A92CC9100A94E5C /* Frameworks */,
+				5098576D1A72A6C7009F50A3 /* CPP */,
+				50A40CB61A99CB9F00935BB6 /* C */,
+				5039ED091A9A9D5500FCBD6E /* Objective-C */,
+				5098576C1A72A6C7009F50A3 /* Products */,
+				504771C31A99E8DA00484D8C /* RattleGL iOS Swift */,
+			);
+			sourceTree = "<group>";
+		};
+		5098576C1A72A6C7009F50A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5098576B1A72A6C7009F50A3 /* OpenGL_2.0 */,
+				50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */,
+				505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */,
+				504771C21A99E8DA00484D8C /* RattleGL iOS objc.app */,
+				504771DA1A99E8DA00484D8C /* RattleGL iOS objcTests.xctest */,
+				504771EC1A99EAA600484D8C /* RattleGL (objc).app */,
+				504772081A99EAA600484D8C /* RattleGL (objc)Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5098576D1A72A6C7009F50A3 /* CPP */ = {
+			isa = PBXGroup;
+			children = (
+				50DEC26F1A960E1B00336687 /* Art */,
+				50DEC2741A960E1B00336687 /* Foundation */,
+				50DEC2761A960E1B00336687 /* cppheader.hpp */,
+				50DEC2771A960E1B00336687 /* Interface */,
+				50DEC27E1A960E1B00336687 /* main.cpp */,
+				50DEC27F1A960E1B00336687 /* Debugger.h */,
+				50DEC2801A960E1B00336687 /* Sprite */,
+				506C4A411A78896F00EB3C97 /* Window.xib */,
+			);
+			name = CPP;
+			path = "OpenGL 2.0";
+			sourceTree = "<group>";
+		};
+		50A40CB61A99CB9F00935BB6 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				5039ED011A9A9C2900FCBD6E /* RMXDataTypes.h */,
+				5039ED021A9A9C2900FCBD6E /* RMXEquations.h */,
+				5039ED031A9A9C2900FCBD6E /* RMXMaths.h */,
+				5039ED1A1A9A9D5500FCBD6E /* RMXShapes.h */,
+			);
+			name = C;
+			sourceTree = "<group>";
+		};
+		50DEC26F1A960E1B00336687 /* Art */ = {
+			isa = PBXGroup;
+			children = (
+				50DEC2701A960E1B00336687 /* Art.h */,
+				50DEC2711A960E1B00336687 /* LightSource.h */,
+				50DEC2721A960E1B00336687 /* ShapeObject.h */,
+				50DEC2731A960E1B00336687 /* Shapes.hpp */,
+			);
+			name = Art;
+			path = CPP/Art;
+			sourceTree = SOURCE_ROOT;
+		};
+		50DEC2741A960E1B00336687 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				50DEC2751A960E1B00336687 /* World.h */,
+			);
+			name = Foundation;
+			path = CPP/Foundation;
+			sourceTree = SOURCE_ROOT;
+		};
+		50DEC2771A960E1B00336687 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				50DEC2781A960E1B00336687 /* DisplayProcessor.hpp */,
+				50DEC2791A960E1B00336687 /* KeyboardProcessor.h */,
+				50DEC27A1A960E1B00336687 /* Menu.hpp */,
+				50DEC27B1A960E1B00336687 /* MouseProcessor.h */,
+				50DEC27C1A960E1B00336687 /* RattleGLI.h */,
+				50DEC27D1A960E1B00336687 /* Window.h */,
+			);
+			name = Interface;
+			path = CPP/Interface;
+			sourceTree = SOURCE_ROOT;
+		};
+		50DEC2801A960E1B00336687 /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				50DEC2811A960E1B00336687 /* Mouse.h */,
+				50DEC2821A960E1B00336687 /* Observer.h */,
+				50DEC2831A960E1B00336687 /* Particle.h */,
+				50DEC2841A960E1B00336687 /* Physics.h */,
+				50DEC2851A960E1B00336687 /* PointOfView.h */,
+				50DEC2861A960E1B00336687 /* SimpleParticle.h */,
+			);
+			name = Sprite;
+			path = CPP/Sprite;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		50639F251A92CC9100A94E5C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5039ED051A9A9C2900FCBD6E /* RMXEquations.h in Headers */,
+				5039ED061A9A9C2900FCBD6E /* RMXMaths.h in Headers */,
+				5039ED041A9A9C2900FCBD6E /* RMXDataTypes.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		504771C11A99E8DA00484D8C /* RattleGL iOS objc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 504771E21A99E8DA00484D8C /* Build configuration list for PBXNativeTarget "RattleGL iOS objc" */;
+			buildPhases = (
+				504771BE1A99E8DA00484D8C /* Sources */,
+				504771BF1A99E8DA00484D8C /* Frameworks */,
+				504771C01A99E8DA00484D8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RattleGL iOS objc";
+			productName = "RattleGL iOS objc";
+			productReference = 504771C21A99E8DA00484D8C /* RattleGL iOS objc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		504771D91A99E8DA00484D8C /* RattleGL iOS objcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 504771E51A99E8DA00484D8C /* Build configuration list for PBXNativeTarget "RattleGL iOS objcTests" */;
+			buildPhases = (
+				504771D61A99E8DA00484D8C /* Sources */,
+				504771D71A99E8DA00484D8C /* Frameworks */,
+				504771D81A99E8DA00484D8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				504771DC1A99E8DA00484D8C /* PBXTargetDependency */,
+			);
+			name = "RattleGL iOS objcTests";
+			productName = "RattleGL iOS objcTests";
+			productReference = 504771DA1A99E8DA00484D8C /* RattleGL iOS objcTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		504771EB1A99EAA600484D8C /* RattleGL (objc) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 504772101A99EAA700484D8C /* Build configuration list for PBXNativeTarget "RattleGL (objc)" */;
+			buildPhases = (
+				504771E81A99EAA600484D8C /* Sources */,
+				504771E91A99EAA600484D8C /* Frameworks */,
+				504771EA1A99EAA600484D8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RattleGL (objc)";
+			productName = "RattleGL (objc)";
+			productReference = 504771EC1A99EAA600484D8C /* RattleGL (objc).app */;
+			productType = "com.apple.product-type.application";
+		};
+		504772071A99EAA600484D8C /* RattleGL (objc)Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 504772131A99EAA700484D8C /* Build configuration list for PBXNativeTarget "RattleGL (objc)Tests" */;
+			buildPhases = (
+				504772041A99EAA600484D8C /* Sources */,
+				504772051A99EAA600484D8C /* Frameworks */,
+				504772061A99EAA600484D8C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5047720A1A99EAA600484D8C /* PBXTargetDependency */,
+			);
+			name = "RattleGL (objc)Tests";
+			productName = "RattleGL (objc)Tests";
+			productReference = 504772081A99EAA600484D8C /* RattleGL (objc)Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		505ADEED1A957A1C00A91318 /* OpenGL 2.1 (OC) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 505ADEF21A957A1C00A91318 /* Build configuration list for PBXNativeTarget "OpenGL 2.1 (OC)" */;
+			buildPhases = (
+				505ADEEA1A957A1C00A91318 /* Sources */,
+				505ADEEB1A957A1C00A91318 /* Frameworks */,
+				505ADEEC1A957A1C00A91318 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenGL 2.1 (OC)";
+			productName = "OpenGL 2.1 (OC)";
+			productReference = 505ADEEE1A957A1C00A91318 /* OpenGL 2.1 (OC) */;
+			productType = "com.apple.product-type.tool";
+		};
+		50639F261A92CC9100A94E5C /* Rattle GL 2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50639F381A92CC9100A94E5C /* Build configuration list for PBXNativeTarget "Rattle GL 2.0" */;
+			buildPhases = (
+				50639F231A92CC9100A94E5C /* Sources */,
+				50639F241A92CC9100A94E5C /* Frameworks */,
+				50639F251A92CC9100A94E5C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Rattle GL 2.0";
+			productName = "Rattle GL 2.0";
+			productReference = 50639F271A92CC9100A94E5C /* Rattle GL 2.0.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		5098576A1A72A6C7009F50A3 /* OpenGL 2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 509857721A72A6C7009F50A3 /* Build configuration list for PBXNativeTarget "OpenGL 2.0" */;
+			buildPhases = (
+				509857671A72A6C7009F50A3 /* Sources */,
+				509857681A72A6C7009F50A3 /* Frameworks */,
+				509857691A72A6C7009F50A3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenGL 2.0";
+			productName = "OpenGL 2.0";
+			productReference = 5098576B1A72A6C7009F50A3 /* OpenGL_2.0 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		509857631A72A6C7009F50A3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Rattle Media Ltd";
+				TargetAttributes = {
+					504771C11A99E8DA00484D8C = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					504771D91A99E8DA00484D8C = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 504771C11A99E8DA00484D8C;
+					};
+					504771EB1A99EAA600484D8C = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					504772071A99EAA600484D8C = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 504771EB1A99EAA600484D8C;
+					};
+					505ADEED1A957A1C00A91318 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					50639F261A92CC9100A94E5C = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					5098576A1A72A6C7009F50A3 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 509857661A72A6C7009F50A3 /* Build configuration list for PBXProject "OpenGL 2.0" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 509857621A72A6C7009F50A3;
+			productRefGroup = 5098576C1A72A6C7009F50A3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5098576A1A72A6C7009F50A3 /* OpenGL 2.0 */,
+				50639F261A92CC9100A94E5C /* Rattle GL 2.0 */,
+				505ADEED1A957A1C00A91318 /* OpenGL 2.1 (OC) */,
+				504771C11A99E8DA00484D8C /* RattleGL iOS objc */,
+				504771D91A99E8DA00484D8C /* RattleGL iOS objcTests */,
+				504771EB1A99EAA600484D8C /* RattleGL (objc) */,
+				504772071A99EAA600484D8C /* RattleGL (objc)Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		504771C01A99E8DA00484D8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				504771D51A99E8DA00484D8C /* LaunchScreen.xib in Resources */,
+				504771D01A99E8DA00484D8C /* Main.storyboard in Resources */,
+				5039ED1D1A9A9D5500FCBD6E /* Info.plist in Resources */,
+				504771D21A99E8DA00484D8C /* Images.xcassets in Resources */,
+				504771CB1A99E8DA00484D8C /* Shader.vsh in Resources */,
+				504771C91A99E8DA00484D8C /* Shader.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771D81A99E8DA00484D8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771EA1A99EAA600484D8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504772061A99EAA600484D8C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		504771BE1A99E8DA00484D8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				504771CD1A99E8DA00484D8C /* GameViewController.swift in Sources */,
+				504771C71A99E8DA00484D8C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771D61A99E8DA00484D8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				504771E11A99E8DA00484D8C /* RattleGL_iOS_objcTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504771E81A99EAA600484D8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		504772041A99EAA600484D8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		505ADEEA1A957A1C00A91318 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50CFB7391A9D44A90089614D /* Gile.swift in Sources */,
+				6C34BFDD1A9AAA9200021680 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50639F231A92CC9100A94E5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		509857671A72A6C7009F50A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50DEC2871A960E1B00336687 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		504771DC1A99E8DA00484D8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 504771C11A99E8DA00484D8C /* RattleGL iOS objc */;
+			targetProxy = 504771DB1A99E8DA00484D8C /* PBXContainerItemProxy */;
+		};
+		5047720A1A99EAA600484D8C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 504771EB1A99EAA600484D8C /* RattleGL (objc) */;
+			targetProxy = 504772091A99EAA600484D8C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		504771CE1A99E8DA00484D8C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				504771CF1A99E8DA00484D8C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		504771D31A99E8DA00484D8C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				504771D41A99E8DA00484D8C /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		504771E31A99E8DA00484D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL iOS objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		504771E41A99E8DA00484D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = "RattleGL iOS objc/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		504771E61A99E8DA00484D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL iOS objcTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGL iOS objc.app/RattleGL iOS objc";
+			};
+			name = Debug;
+		};
+		504771E71A99E8DA00484D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL iOS objcTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGL iOS objc.app/RattleGL iOS objc";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		504772111A99EAA700484D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL (objc)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		504772121A99EAA700484D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = "RattleGL (objc)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		504772141A99EAA700484D8C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL (objc)Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGL (objc).app/RattleGL (objc)";
+			};
+			name = Debug;
+		};
+		504772151A99EAA700484D8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "RattleGL (objc)Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGL (objc).app/RattleGL (objc)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		505ADEF31A957A1C00A91318 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		505ADEF41A957A1C00A91318 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		50639F361A92CC9100A94E5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Rattle GL 2.0/Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		50639F371A92CC9100A94E5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Rattle GL 2.0/Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		509857701A72A6C7009F50A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		509857711A72A6C7009F50A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		509857731A72A6C7009F50A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_MODULE_NAME = OpenGL_2.0;
+				PRODUCT_NAME = OpenGL_2.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lets Make a GLES game/Objective-C/OpenGL 2.0-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		509857741A72A6C7009F50A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_MODULE_NAME = OpenGL_2.0;
+				PRODUCT_NAME = OpenGL_2.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "Lets Make a GLES game/Objective-C/OpenGL 2.0-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		504771E21A99E8DA00484D8C /* Build configuration list for PBXNativeTarget "RattleGL iOS objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				504771E31A99E8DA00484D8C /* Debug */,
+				504771E41A99E8DA00484D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		504771E51A99E8DA00484D8C /* Build configuration list for PBXNativeTarget "RattleGL iOS objcTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				504771E61A99E8DA00484D8C /* Debug */,
+				504771E71A99E8DA00484D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		504772101A99EAA700484D8C /* Build configuration list for PBXNativeTarget "RattleGL (objc)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				504772111A99EAA700484D8C /* Debug */,
+				504772121A99EAA700484D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		504772131A99EAA700484D8C /* Build configuration list for PBXNativeTarget "RattleGL (objc)Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				504772141A99EAA700484D8C /* Debug */,
+				504772151A99EAA700484D8C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		505ADEF21A957A1C00A91318 /* Build configuration list for PBXNativeTarget "OpenGL 2.1 (OC)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				505ADEF31A957A1C00A91318 /* Debug */,
+				505ADEF41A957A1C00A91318 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50639F381A92CC9100A94E5C /* Build configuration list for PBXNativeTarget "Rattle GL 2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50639F361A92CC9100A94E5C /* Debug */,
+				50639F371A92CC9100A94E5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		509857661A72A6C7009F50A3 /* Build configuration list for PBXProject "OpenGL 2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				509857701A72A6C7009F50A3 /* Debug */,
+				509857711A72A6C7009F50A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		509857721A72A6C7009F50A3 /* Build configuration list for PBXNativeTarget "OpenGL 2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				509857731A72A6C7009F50A3 /* Debug */,
+				509857741A72A6C7009F50A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 509857631A72A6C7009F50A3 /* Project object */;
+}

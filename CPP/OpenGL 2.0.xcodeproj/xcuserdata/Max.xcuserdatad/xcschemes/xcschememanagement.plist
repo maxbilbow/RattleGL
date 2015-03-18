@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>OpenGL 2.0.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>OpenGL 2.1 (OC).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Rattle GL 2.0.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>RattleGL (objc).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>RattleGL iOS objc.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>504771C11A99E8DA00484D8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>504771D91A99E8DA00484D8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>504771EB1A99EAA600484D8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>504772071A99EAA600484D8C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>505ADEED1A957A1C00A91318</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>50639F261A92CC9100A94E5C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5098576A1A72A6C7009F50A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
