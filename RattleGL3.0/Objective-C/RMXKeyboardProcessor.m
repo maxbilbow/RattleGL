@@ -40,13 +40,13 @@ void RepeatedKeys(){
         if (keys.keyStates[9])
             return;//[sun lightUp:1];
         else
-            [RMXGLProxy.activeSprite.actions extendArmLength:1];
+            [RMXGLProxy.activeSprite.actions extendArmLength:5];
 
     } else if(keys.keySpecialStates[GLUT_KEY_DOWN]) {
         if (keys.keyStates[9]) {
             return;//[sun lightUp:-1];
         } else {
-            [RMXGLProxy.activeSprite.actions extendArmLength:-1];
+            [RMXGLProxy.activeSprite.actions extendArmLength:-5];
         }
     }
 

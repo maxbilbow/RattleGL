@@ -31,6 +31,14 @@ func start() {
                         sprite.actions?.prepareToJump()
                     }
                 })
+                
+                sprite.addBehaviour({
+                    if !sprite.hasGravity && scene.observer?.actions!.item != nil {
+                        if sprite.body.distanceTo((scene.observer?.actions?.item)!) < 50 {
+                            sprite.hasGravity = true
+                        }
+                    }
+                })
             }
         }
         RMXGLProxy.initialize(scene,callbacks: RepeatedKeys)
