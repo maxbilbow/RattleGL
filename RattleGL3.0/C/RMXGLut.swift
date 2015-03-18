@@ -23,6 +23,9 @@ public protocol RMXGLView  {
     static var callbacks: [()->Void] = Array<()->Void>()
     static var gameView: RMXGLView?
     static var effect: GLKBaseEffect? = GLKBaseEffect()
+    static var itemBody: RMSPhysicsBody? {
+        return self.activeSprite?.actions?.item?.body
+    }
     static var activeSprite: RMXParticle? {
         return self.gameView?.activeSprite
     }

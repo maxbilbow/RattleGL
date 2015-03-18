@@ -118,7 +118,13 @@ void keyDownOperations (int key) {
     movement((float)1.0, key);
     
     
-//    if (keys.keyStates['=']) {
+    if (keys.keyStates['+']) {
+        RMXGLProxy.itemBody.radius += 0.5;
+    }
+    if (keys.keyStates['_']) {
+        RMXGLProxy.itemBody.radius -= 0.5;
+    }
+    
 //        if (keys.keyStates['r'])
 //            art.r += 0.05;
 //        if (keys.keyStates['g'])

@@ -25,21 +25,32 @@ func start() {
     autoreleasepool {
         let scene = RMXArt.initializeTestingEnvironment()
         for sprite in scene.sprites {
-            if sprite.rmxID != scene.observer?.rmxID && sprite.isAnimated {
-                sprite.addBehaviour({
-                    if sprite.body.distanceTo(scene.observer!) < 50 {
-                        sprite.actions?.prepareToJump()
-                    }
-                })
+            if sprite.rmxID != scene.observer?.rmxID {
                 
-                sprite.addBehaviour({
-                    if !sprite.hasGravity && scene.observer?.actions!.item != nil {
-                        if sprite.body.distanceTo((scene.observer?.actions?.item)!) < 50 {
-                            sprite.hasGravity = true
+                if sprite.isAnimated {
+                    sprite.addBehaviour({
+                        let dist = sprite.body.distanceTo(scene.observer!)
+                        let distTest = sprite.body.radius + (scene.observer?.body.radius)! + (scene.observer?.actions?.reach)!
+                            if dist <= distTest {
+                                sprite.body.velocity = RMXVector3Add(sprite.body.velocity, (scene.observer?.body.velocity)!)
+                            } else if dist < distTest * 10 {
+                                sprite.actions?.prepareToJump()
+                            }
+                    })
+                    
+                    sprite.addBehaviour({
+                        if !sprite.hasGravity && scene.observer?.actions!.item != nil {
+                            if sprite.body.distanceTo((scene.observer?.actions?.item)!) < 50 {
+                                sprite.hasGravity = true
+                            }
                         }
-                    }
-                })
+                    })
+                    
+
+                }
             }
+            
+            
         }
         RMXGLProxy.initialize(scene,callbacks: RepeatedKeys)
         run(Process.argc, Process.unsafeArgv)
