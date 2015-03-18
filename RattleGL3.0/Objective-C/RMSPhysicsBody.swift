@@ -10,86 +10,86 @@ import SceneKit
 
 @objc public class RMSPhysicsBody {
     
-    private let PI: CGFloat = 3.14159265358979323846
+    private let PI: Float = 3.14159265358979323846
     var position, velocity, acceleration, forces: RMXVector3
     var orientation: RMXMatrix4
     var vMatrix: RMXMatrix4
-    var parent: RMXParticle! = nil
+    var parent: RMSParticle! = nil
     
-    var theta, phi, radius, mass, dragC: CGFloat
-    var dragArea: CGFloat {
+    var theta, phi, radius, mass, dragC: Float
+    var dragArea: Float {
         return ( self.radius * self.radius * self.PI )
     }
     
-    init(parent: RMXParticle, mass: Float = 1, radius: Float = 1, dragC: Float = 0.1){
+    init(parent: RMSParticle, mass: Float = 1, radius: Float = 1, dragC: Float = 0.1){
         self.theta = 0
         self.phi = 0
-        self.mass = CGFloat(mass)
-        self.radius = CGFloat(radius)
-        self.dragC = CGFloat(dragC)
-        self.position = SCNVector3Make(0,0,0)
-        self.velocity = SCNVector3Make(0,0,0)
-        self.acceleration = SCNVector3Make(0,0,0)
-        self.forces = SCNVector3Make(0,0,0)
+        self.mass = mass
+        self.radius = radius
+        self.dragC = dragC
+        self.position = GLKVector3Make(0,0,0)
+        self.velocity = GLKVector3Make(0,0,0)
+        self.acceleration = GLKVector3Make(0,0,0)
+        self.forces = GLKVector3Make(0,0,0)
         self.orientation = SCNMatrix4Identity
         self.vMatrix = SCNMatrix4MakeScale(0,0,0)
         self.parent = parent
     }
     
-    class func New(parent: RMXParticle) -> RMSPhysicsBody{
+    class func New(parent: RMSParticle) -> RMSPhysicsBody{
         return RMSPhysicsBody(parent: parent)
     }
-    class func New(parent: RMXParticle, mass: Float = 1, radius: Float = 1, dragC: Float = 0.1) -> RMSPhysicsBody {
+    class func New(parent: RMSParticle, mass: Float = 1, radius: Float = 1, dragC: Float = 0.1) -> RMSPhysicsBody {
         return RMSPhysicsBody(parent: parent, mass: mass, radius: radius, dragC: dragC)
     }
     
-    var weight: CGFloat{
+    var weight: Float{
         return self.mass * parent.physics!.gravity
     }
     
     func accelerateForward(v: Float) {
-        self.acceleration.z = CGFloat(v) * self.parent.accelerationRate
+        RMXVector3SetZ(&self.acceleration, v * self.parent.accelerationRate)
     }
     
     func accelerateUp(v: Float) {
-        self.acceleration.y = CGFloat(v) * self.parent.accelerationRate
+        RMXVector3SetY(&self.acceleration, v * self.parent.accelerationRate)
     }
     
     func accelerateLeft(v: Float) {
-        self.acceleration.x = CGFloat(v) * self.parent.accelerationRate
+        RMXVector3SetX(&self.acceleration, v * self.parent.accelerationRate)
     }
     
     
     func forwardStop() {
-        self.acceleration.z = 0
+        RMXVector3SetZ(&self.acceleration,0)
     }
     
     func upStop() {
-        self.acceleration.y = 0
+        RMXVector3SetY(&self.acceleration,0)
     }
     
     func leftStop() {
-        self.acceleration.x = 0
+        RMXVector3SetX(&self.acceleration,0)
     }
 
     var upVector: RMXVector3 {
-        return SCNVector3Make(self.orientation.m12,self.orientation.m22,self.orientation.m32)
+        return GLKVector3Make(Float(self.orientation.m12),Float(self.orientation.m22),Float(self.orientation.m32))
     }
     
     var rightVector: RMXVector3 {
-        return SCNVector3Make(-self.orientation.m11, -self.orientation.m21, -self.orientation.m31)
+        return GLKVector3Make(Float(-self.orientation.m11), Float(-self.orientation.m21), Float(-self.orientation.m31))
     }
     
     var leftVector: RMXVector3 {
-        return SCNVector3Make(self.orientation.m11,self.orientation.m21,self.orientation.m31)
+        return GLKVector3Make(Float(self.orientation.m11),Float(self.orientation.m21),Float(self.orientation.m31))
     }
     
     var forwardVector: RMXVector3 {
-        return SCNVector3Make(self.orientation.m13,self.orientation.m23,self.orientation.m33)
+        return GLKVector3Make(Float(self.orientation.m13),Float(self.orientation.m23),Float(self.orientation.m33))
     }
     
-    func distanceTo(object:RMXObject) -> CGFloat{
-        return CGFloat(GLKVector3Distance(SCNVector3ToGLKVector3(self.position),SCNVector3ToGLKVector3(object.getPosition()!)))
+    func distanceTo(object:RMXObject) -> Float{
+        return GLKVector3Distance(self.position,object.getPosition()!)
     }
     
 }

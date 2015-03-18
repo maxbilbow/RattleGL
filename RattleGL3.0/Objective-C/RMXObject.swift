@@ -14,6 +14,7 @@ public class RMXObject {
     var name: String
     var parent: RMXObject?
     var world: RMXWorld?
+    var resets: [() -> () ]
     
     init(parent: RMXObject? = nil, world: RMXWorld? = nil, name: String = __FUNCTION__){
         self.parent = parent
@@ -21,13 +22,24 @@ public class RMXObject {
         self.rmxID = RMXObject.COUNT
         self.name = "\(self.rmxID): \(name)";
         RMXObject.COUNT++
-        self.reInit()
+        self.resets = Array<() -> ()>()
+        
+        self.resets.append({ println("INIT: \(name), \(self.rmxID)")})
         
     }
     
+    func addInitCall(reset: () -> ()){
+        self.resets.append(reset)
+        self.resets.last?()
+    }
     
-    func reInit() {  }
+    
    
+    func reset(){
+        for re in resets {
+            re()
+        }
+    }
    
     func plusAngle(x: Float,y:Float) {  }
     

@@ -11,7 +11,7 @@ import Foundation
 
 @objc public class RMXObserver : RMXParticle {
     
-    lazy var mouse: RMXMouse? = RMXMouse(parent:self, world:self.world)
+    
     //@property (readonly) RMXMatrix4 modelViewMatrix, projectionMatrix;
     
     override init(world: RMXWorld!, parent: RMXObject!) {
@@ -97,28 +97,8 @@ import Foundation
     
     */
     
-    func setMousePos(x: Int32, y: Int32) {
-        self.mouse!.setMousePos(x, y: y)
-    }
-    
-    func mouse2view(x: Int32, y: Int32){
-        self.mouse!.mouse2view(x, y: y)
-    }
-   
     
     
-    func toggleFocus() {
-        self.mouse!.toggleFocus()
-    }
-    func centerView(center: CFunctionPointer<( Int32,  Int32)->Void>) {
-        self.mouse!.centerView(center)
-    }
-    func calibrateView(x: Int32, vert:Int32) {
-        self.mouse!.calibrateView(x, y:vert)
-    }
-    var hasFocus: Bool {
-        return self.mouse!.focus
-    }
     
     
     
@@ -147,16 +127,7 @@ import Foundation
         return SCNMatrix4Identity;
     }
     
-    func throwItem(strength: Float)
-    {
-        if self.item != nil {
-            self.item.isAnimated = true
-            self.item.body.velocity = RMXVector3Add3(self.body.velocity,RMXVector3MultiplyScalar(self.body.forwardVector,strength),RMXVector3Zero())
-            self.item = nil
-        } else {
-            return
-        }
-    }
+    
     
 
 }

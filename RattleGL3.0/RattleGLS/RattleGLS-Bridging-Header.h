@@ -5,7 +5,7 @@
 @import Foundation;
 @import GLUT;
 @import GLKit;
-@import OpenGL;
+//@import OpenGL;
 
 
 
@@ -16,11 +16,9 @@
 #endif
 
 //Swift
-@class RMSPhysicsBody, RMXWorld, RMXPhysics, RMXObject, world, RMXObserver, RMXShape, RMXCamera;
-//Objc
-@class RMXArt, RMXDebugger, RMXMouse, RMXParticle, RMXDPad, RMXMouseProcessor;
+//@class world;
 
-
+#define RMX_DEPRECATED(from, to, msg) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_##from, __MAC_##to, __IPHONE_NA, __IPHONE_NA, "" #msg "")
 //
 //#import <GLKit/GLKMatrix4.h>
 //#import <GLKit/GLKit.h>
@@ -34,8 +32,8 @@
 //#import "RMXObject.h"
 //#import "RMXProtocols.h"
 
-#import "cStuff.h"
-#import "RMXDebugger.h"
+
+//#import "RMXDebugger.h"
 //#import "RMXMouse.h"
 
 //#import "RMXPhysics.h"
@@ -52,7 +50,8 @@
 
 //#import "RMXMenu.h"
 //#import "RMXWindow.h"
-#import "RMXMouseProcessor.h"
+
+#import "cStuff.h"
+//#import "RMXDisplayProcessor.h"
 #import "RMXKeyboardProcessor.h"
-#import "RMXDisplayProcessor.h"
 #import "run.h"

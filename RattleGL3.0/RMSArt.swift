@@ -28,7 +28,7 @@ public class RMXArt : RMXObject {
         if (world.observer == nil ){ fatalError(__FUNCTION__) }
     
     
-        let sun = RMXParticle.New(world: world)
+        let sun = RMSParticle(world: world)
         //[sun setRAxis:GLKVector3Make(0, 0, 1)];
         sun.body.radius = 100
         sun.shape!.color = GLKVector4Make(0.5,0.5,0.5,0.5)
@@ -38,14 +38,14 @@ public class RMXArt : RMXObject {
         
         let axisColors = [colorBlue , colorRed , colorGreen]
         
-        let ZX = RMXParticle(world: world)
+        let ZX = RMSParticle(world: world)
         ZX.shape!.setRenderer(DrawPlane)
         ZX.shape!.color = GLKVector4Make(0.8,1.2,0.8,0.5)
         ZX.isAnimated = false
-        ZX.body.position = SCNVector3Make(ZX.body.position.x, 0, ZX.body.position.z)
+        ZX.body.position = GLKVector3Make(ZX.body.position.x, 0, ZX.body.position.z)
         world.insertSprite(ZX)
         
-        RMXArt.drawAxis(axisColors, world:world)
+        RMXArt.drawAxis(world)
         RMXArt.randomObjects(world)
         
 
@@ -57,51 +57,55 @@ public class RMXArt : RMXObject {
         RMXDrawSphere(radius)
     }
     
-    class func drawAxis(colors:[[Float]], world: RMXWorld) {//xCol y:(float*)yCol z:(float*)zCol{
-        return
+    class func drawAxis(world: RMXWorld) {//xCol y:(float*)yCol z:(float*)zCol{
+    
     //BOOL gravity = false;
-        let noOfShapes: Float = Float(world.body.radius) / 4.0
-        var axis: [[CGFloat]] = [[CGFloat]]()//[(x:CGFloat, y:CGFloat, z:CGFloat)] = Array<(x:CGFloat, y:CGFloat, z:CGFloat)>()
-        var limit: Float = Float(world.body.radius) / noOfShapes
-        var test = 0
-       
-        for (var j=0;j<3;++j) {
-            var count: Float = 0;
-            for(var i: Int = Int(-world.body.radius); i < Int(world.body.radius); ++i) {
-                if (count < limit) {
-                    ++count
-                } else {
-                    count = 0
-                    
-                    /* switch (i) {
-                    case 0:
-                        axis[j].x = CGFloat(i)
-                        break
-                    case 1:
-                        axis[j].y = CGFloat(i)
-                        break
-                    case 2:
-                        axis[j].z = CGFloat(i)
-                        break
-                    default:
-                        NSLog("Draw Axis (Max says so)")
-                    } */
-                    let object = RMXParticle.New(world: world)
+        let shapeRadius: Float = 10
+        let axisLenght = world.body.radius * 2
+        let shapesPerAxis: Float = axisLenght / (shapeRadius * 2)
+        let step: Float = axisLenght / shapesPerAxis
+        
+        func drawAxis(axis: String) {
+            var point =  -world.body.radius
+            var color: [Float]
+            switch axis {
+            case "x":
+                color = self.colorRed
+                break
+            case "y":
+                color = self.colorGreen
+                break
+            case "z":
+                color = self.colorBlue
+                break
+            default:
+                fatalError(__FUNCTION__)
+            }
+            for (var i: Float = 0; i < shapesPerAxis; ++i){
+                let position = GLKVector3Make(axis == "x" ? point : 0, axis == "y" ? point : 0, axis == "z" ? point : 0)
+                point += step
+                let object:RMSParticle = RMSParticle(world: world)
+                object.addInitCall( {
                     object.hasGravity = false
-                    object.shape!.setRenderer(DrawCubeWithTextureCoords)
-                    object.body.radius = CGFloat(limit/2)
-                    object.body.position = SCNVector3Make(axis[i][j],axis[i][j],axis[i][j])
-                    if ( j != 1 ) {
-                        object.body.position = SCNVector3Make(object.body.position.x, object.body.radius, object.body.position.z)
-                    }
-                    object.shape!.color = GLKVector4Make(colors[j][0], colors[j][1], colors[j][2], colors[j][3])
+                    object.body.radius = shapeRadius
+                    object.body.position = position
+                    object.shape!.visible = true
+                    object.shape?.setRenderer(DrawCubeWithTextureCoords)
+                    //object.shape?.setRenderer(DrawCubeWithTextureCoords)
+                    // if y??? object.body.position = GLKVector3Make(object.body.position.x, object.body.radius, object.body.position.z)
+                    //}
+            
+                    object.shape!.color = GLKVector4Make(color[0], color[1], color[2], color[3])
                     object.isAnimated = false
-                    world.insertSprite(object)
-                    test++;
-                    }
+                })
+                world.insertSprite(object)
+            }
+            
+            
         }
-    }
-    //[rmxDebugger add:RMX_ERROR n:self t:[NSString stringWithFormat:@"axis shapes: %i, radius: %f",test,self.parent->body.radius ]];
+        drawAxis("x")
+        drawAxis("y")
+        drawAxis("z")
     }
     
     class func randomObjects(world: RMXWorld )    {
@@ -153,7 +157,7 @@ public class RMXArt : RMXObject {
         randPos[1] = randPos[1] + 50
         
         //gravity = !gravity;
-            let object: RMXParticle = RMXParticle(world: world)
+            let object: RMSParticle = RMSParticle(world: world)
 //            if(false){//(rand() % 10000) == 1) {
 //                object.shape.makeAsSun(rDist: 0, isRotating:false)
 //            }
@@ -165,10 +169,10 @@ public class RMXArt : RMXObject {
         }
         
         object.hasGravity = false //(rand()% 100) == 1
-        object.body.radius = CGFloat(random() % 3 + 2)
-        object.body.position = SCNVector3Make(CGFloat(randPos[0]),CGFloat(randPos[1]), CGFloat(randPos[2]))
-        object.body.mass = CGFloat(random()%15+2)/10;
-        object.body.dragC = CGFloat(random() % 99+1)/100;
+        object.body.radius = Float(random() % 3 + 2)
+        object.body.position = GLKVector3Make(randPos[0], randPos[1], randPos[2])
+        object.body.mass = Float(random()%15+2)/10;
+        object.body.dragC = Float(random() % 99+1)/100;
         object.shape!.color = RMXRandomColor()
         world.insertSprite(object)
         

@@ -20,8 +20,5 @@
                         // Initial window height
 void center();
 void MouseButton(int button, int state, int x, int y);
-
-
 void MouseMotion(int x, int y);
-
-void mouseFree(int x, int y);
+void MouseFree(int x, int y);

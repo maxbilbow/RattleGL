@@ -35,7 +35,7 @@ union _RMXVector2
 typedef union _RMXVector2 RMXVector2;
 #endif
 
-typedef SCNVector3 RMXVector3;
+typedef GLKVector3 RMXVector3;
 typedef GLKMatrix3 RMXMatrix3;
 typedef SCNMatrix4 RMXMatrix4;
 
@@ -90,6 +90,10 @@ RMXVector3 RMXScaler3FromMatrix3(RMXMatrix3 m);
 RMXMatrix3 RMXMatrix3RotateAboutY(float theta, RMXMatrix3  matrix);
 RMXVector3 RMXMatrix3MultiplyVector3(RMXMatrix4 matrixLeft, RMXVector3 vectorRight);
 RMXMatrix4 RMXMatrix4Transpose(RMXMatrix4 m);
+void RMXVector3SetX(RMXVector3 * v, float x);
+void RMXVector3SetY(RMXVector3 * v, float y);
+void RMXVector3SetZ(RMXVector3 * v, float z);
+
 
 void RMXPrintMatrix(GLKMatrix4 m);
 //@class RMXParticle;

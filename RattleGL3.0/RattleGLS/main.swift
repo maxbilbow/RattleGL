@@ -9,28 +9,20 @@
 import Foundation
 let rmxDebugger = RMXDebugger()
 
-@objc public class world {
-    static let thisWorld: RMXWorld = RMXArt.initializeTestingEnvironment()
-    static var observer: RMXObserver {
-        return thisWorld.observer
-    }
-}
+//@objc public class world {
+//    static let thisWorld: RMXWorld = RMXArt.initializeTestingEnvironment()
+//    static var observer: RMXParticle {
+//        return thisWorld.observer!
+//    }
+//}
 
 println("Hello, World!")
 
 func start() {
-    // var argc: Int32 = C_ARGC
-    // var argv: UnsafeMutablePointer<UnsafePointer<Int8>> = UnsafeMutablePointer<UnsafePointer<Int8>>(C_ARGV)
+
     
     autoreleasepool {
-       // rmxDebugger = RMXDebugger()
-       // world = RMXArt.initializeTestingEnvironment()
-        //art = RMXArt(name: "Art", parent:world, world:world)
-       // observer = world.observer
-        //observer.physicsBody.mass = 90
-        
-        //window = RMXWindow(name:"RMX Window", parent:world, world:world)
-        
+        RMXGLProxy.initialize(RMXArt.initializeTestingEnvironment(),callbacks: RepeatedKeys)
         run(Process.argc, Process.unsafeArgv)
     }
 }

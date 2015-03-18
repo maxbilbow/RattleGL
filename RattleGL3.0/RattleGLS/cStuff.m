@@ -10,19 +10,28 @@
 #import <GLKit/GLKit.h>
 #import <SceneKit/SceneKit.h>
 #import "RMXMaths.h"
-#include "cStuff.h"
+#import <RattleGL-Swift.h>
+#import "cStuff.h"
 
 
 void RMXMakeLookAtGL(void (* lookAt)(double eyeX, double eyeY, double eyez,
                                      double centerX, double centerY, double centerZ,
                                      double upX, double upY, double upZ),double eyeX, double eyeY, double eyez,
                      double centerX, double centerY, double centerZ,
-                     double upX, double upY, double upZ) {
+                     double upX, double upY, double upZ) { 
     lookAt(eyeX,eyeY,eyez,
            centerX,centerY,centerZ,
            upX,upY,upZ);
     
 }
+
+
+void RMXGLMakeLookAt(RMXCamera * view) {
+    gluLookAt(view.eye.x, view.eye.y, view.eye.z,
+              view.center.x, view.center.y, view.center.z,
+              view.up.x, view.up.y, view.up.z );
+}
+
 
 void RMXGLMaterialfv(int32_t a,int32_t b, GLKVector4 color){
     glMaterialfv(a,b,color.v);
@@ -58,4 +67,38 @@ GLKVector4 RMXRandomColor() {
         rCol.v[3] = 1.0;//{ ( ,(rand() % 100)/10,(rand() % 100)/10, 1.0 };
         //if (rCol.v[2] == rCol.z) NSLog(@"Fuck me!");
         return rCol;
+}
+
+void RMXGLPostRedisplay(){
+    glutPostRedisplay();
+}
+
+void RMXGLMakePerspective(float fovy, float aspect, float near, float far){
+    gluPerspective(fovy, aspect, near, far);
+}
+
+void RMXGlutSwapBuffers(){
+    glutSwapBuffers();
+}
+
+void RMXGlutInit(int argc, char * argv[]){
+    glutInit(&argc, argv);
+}
+
+void RMXGlutInitDisplayMode(unsigned int mode){
+    glutInitDisplayMode(mode);
+}
+void RMXGlutEnterGameMode(){
+    glutEnterGameMode();
+}
+
+void RMXGlutMakeWindow(int posx,int posy, int w, int h, const char * name){
+    glutInitWindowPosition(posx,posy);
+    glutInitWindowSize(w,h);
+    glutCreateWindow(name);
+}
+
+void RMXGLRegisterCallbacks(void *display,void *reshape){
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
 }

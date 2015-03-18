@@ -11,7 +11,7 @@ import Foundation
 
 @objc public class RMXMouse : RMXObject{
     
-    var focus = false
+    var hasFocus = false
     var dx: Int32 = 0
     var dy: Int32 = 0
     var pos:(x:Int32, y:Int32) = ( x:0, y: 0 )
@@ -24,13 +24,13 @@ import Foundation
         return self.pos.y
     }
     func toggleFocus()    {
-        self.focus = !self.focus
+        self.hasFocus = !self.hasFocus
     }
     
     
     
     public override func getPosition() -> RMXVector3? {
-        return SCNVector3Make(CGFloat(pos.x), CGFloat(pos.y),0)
+        return GLKVector3Make(Float(pos.x), Float(pos.y), 0)
     }
     
     func centerView(center: CFunctionPointer<(Int32, Int32)->Void>) {
@@ -53,7 +53,7 @@ import Foundation
     
     // [rmxDebugger add:RMX_MOUSE n:self t:[NSString stringWithFormat:@"Mousie diffX: %i, diffY: %i",DeltaX, DeltaY]];
     
-        var dir:Int32 = self.focus ? 1 : -1
+        var dir:Int32 = self.hasFocus ? 1 : -1
     
         var theta: Float = Float(DeltaX * Int32(dir))
         var phi: Float =   Float(DeltaY * Int32(dir))// / 20.0f;

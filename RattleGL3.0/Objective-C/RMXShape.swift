@@ -12,33 +12,33 @@ import Foundation
 //    var render: CFunctionPointer<(Float)->Void> { get set }
 //}
 
-@objc public class RMXShape {
+public class RMXShape {
     
     var color: GLKVector4 = GLKVector4Make(0,0,0,0)
     var isLight: Bool = false
     var type, gl_light: Int32
     public var render: ((Float) -> Void)?//UnsafeMutablePointer<(Float) -> Void> = UnsafeMutablePointer<(Float) -> Void>()//.alloc(sizeof(<(Float) -> Void>))
-    var parent: RMXParticle!
-    var world: RMXWorld!
+    var parent: RMSParticle!
+    var world: RMXWorld?
     var visible: Bool = true;
     //var shine: CFunctionPointer<(Int32, Int32, [Float])->Void>
     var brigtness: Float = 1
     
-    init(parent: RMXParticle!, world: RMXWorld!)    {
-        self.parent = parent
+    init(parent: RMSParticle?, world: RMXWorld?)    {
+        self.parent = parent!
         self.world = world
         self.type = GL_POSITION
         self.gl_light = GL_LIGHT0
     }
     
    
-//    class func Shape(parent: RMXParticle!, world: RMXWorld!, render: CFunctionPointer<(Float)->Void> = nil) -> RMXShape {
+//    class func Shape(parent: RMSParticle!, world: RMXWorld!, render: CFunctionPointer<(Float)->Void> = nil) -> RMXShape {
 //        let s = RMXShape(parent: parent, world: world)
 //        s.render = render
 //        return s
 //    }
     
-    func makeAsSun(rDist: CGFloat = 1000, isRotating: Bool = true){
+    func makeAsSun(rDist: Float = 1000, isRotating: Bool = true){
         self.parent.rotationCenterDistance = rDist
         self.parent.isRotating = isRotating
         self.parent.rotationSpeed = 1
@@ -51,7 +51,7 @@ import Foundation
         if !self.visible { return }
         
             if self.isLight {
-                RMXGLShine(self.gl_light, self.type, GLKVector4MakeWithVector3(SCNVector3ToGLKVector3(self.parent.body.position), 1));
+                RMXGLShine(self.gl_light, self.type, GLKVector4MakeWithVector3(self.parent.body.position, 1))
             }
         if self.render != nil {
             glPushMatrix();

@@ -19,7 +19,7 @@ struct KeyProcessor;
 
 void initKeys();
 
-void repeatedKeys();
+void RepeatedKeys();
 
 void movement(float speed, int key);
 

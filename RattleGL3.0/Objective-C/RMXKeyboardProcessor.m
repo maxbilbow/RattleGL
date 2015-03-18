@@ -9,7 +9,7 @@
 
 #import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
-
+@class RMX, RMXGLProxy;
 
 struct KeyProcessor {
     char forward, back, left, right, up, down, stop, jump;
@@ -34,19 +34,19 @@ void initKeys(){
 }
 
 
-void repeatedKeys(){
+void RepeatedKeys(){
     
     if (keys.keySpecialStates[GLUT_KEY_UP]) {
         if (keys.keyStates[9])
             return;//[sun lightUp:1];
         else
-            [world.observer extendArmLength:1];
+            [RMXGLProxy.activeSprite.actions extendArmLength:1];
 
     } else if(keys.keySpecialStates[GLUT_KEY_DOWN]) {
         if (keys.keyStates[9]) {
             return;//[sun lightUp:-1];
         } else {
-            [world.observer extendArmLength:-1];
+            [RMXGLProxy.activeSprite.actions extendArmLength:-1];
         }
     }
 
@@ -56,58 +56,58 @@ void movement(float speed, int key){
     //if (keys.keyStates[keys.forward])  [observer accelerateForward:speed];
     if (key == keys.forward) {
         if (!speed)
-            [world.observer.body forwardStop];
+            [RMXGLProxy.activeSprite.body forwardStop];
         else
-            [world.observer.body accelerateForward:speed];
+            [RMXGLProxy.activeSprite.body accelerateForward:speed];
     }
     
     if (key == keys.back) {
         if (!speed)
-            [world.observer.body forwardStop];
+            [RMXGLProxy.activeSprite.body forwardStop];
         else
-            [world.observer.body accelerateForward:-speed];
+            [RMXGLProxy.activeSprite.body accelerateForward:-speed];
         //TODO
     }
     
     if (key == keys.left) {
         if (!speed)
-            [world.observer.body leftStop];
+            [RMXGLProxy.activeSprite.body leftStop];
         else
-            [world.observer.body accelerateLeft:speed];
+            [RMXGLProxy.activeSprite.body accelerateLeft:speed];
         //if(test) cout << keys.left << " ";
     }
     
     if (key == keys.right) {
         if (!speed)
-             [world.observer.body leftStop];
+             [RMXGLProxy.activeSprite.body leftStop];
         else
-            [world.observer.body accelerateLeft:-speed];
+            [RMXGLProxy.activeSprite.body accelerateLeft:-speed];
         //if(test) cout << keys.right << " ";
         //TODO
     }
     
     if (key == keys.up) {
         if (!speed)
-             [world.observer.body upStop];
+             [RMXGLProxy.activeSprite.body upStop];
         else
-             [world.observer.body accelerateUp:speed];
+             [RMXGLProxy.activeSprite.body accelerateUp:speed];
         //if(test) cout << keys.up << " ";
         //TODO
     }
     
     if (key == keys.down) {
         if (!speed)
-             [world.observer.body upStop];
+             [RMXGLProxy.activeSprite.body upStop];
         else
-             [world.observer.body accelerateUp:-speed];
+             [RMXGLProxy.activeSprite.body accelerateUp:-speed];
         //if(test) cout << keys.down << " ";
         //TODO
     }
     if (key == 32) {
         if (speed==0)
-             [world.observer jump];
+             [RMXGLProxy.activeSprite.actions jump];
         else
-             [world.observer prepareToJump];
+             [RMXGLProxy.activeSprite.actions prepareToJump];
     //TODO
     }
 
@@ -146,13 +146,13 @@ void keyDownOperations (int key) {
 void keyUpOperations(int key){
     movement((bool)false, key); //Change to Zero if maintaining velocity
     if (key == 'i'){
-        NSLog(@"%@",world.observer.viewDescription);//me.toString();
+        NSLog(@"%@",RMXGLProxy.activeSprite.camera.viewDescription);//me.toString();
     }
     
     switch (key)
     {
         default:
-            if (RMX_DEBUGGING) NSLog(@"%i unassigned",key);
+            if (RMX.isDebugging) NSLog(@"%i unassigned",key);
             break;
         case 27:             // ESCAPE key
             //glutSetKeyRepeat(true);
@@ -168,20 +168,20 @@ void keyUpOperations(int key){
             SelectFromMenu(MENU_TEXTURING);
             break;*/
         case 'z':
-            [world.thisWorld applyGravity:true];
+            [RMXGLProxy message:@"applyGravity" args:@(true)];
             break;
         case 'Z':
-            [world.thisWorld applyGravity:false];
+            [RMXGLProxy message:@"applyGravity" args:@(false)]; //args:false];
             break;
         case 'm':
-             [world.observer toggleFocus];
+             [RMXGLProxy.activeSprite.mouse toggleFocus];
             NSLog(@"m");
-            if ( [world.observer hasFocus]){
+            if ( RMXGLProxy.activeSprite.mouse.hasFocus){
                 //center();
                 glutSetCursor(GLUT_CURSOR_NONE);
                
-                [world.observer calibrateView:0 vert:0];// [observer getMouse().x, [observer getMouse().y);
-                [world.observer.mouse mouse2view:0 y:0];
+                [RMXGLProxy.activeSprite.mouse calibrateView:0 y:0];// [observer getMouse().x, [observer getMouse().y);
+                [RMXGLProxy.activeSprite.mouse mouse2view:0 y:0];
                 //glutWarpPointer(0,0);
                 
             }
@@ -191,14 +191,14 @@ void keyUpOperations(int key){
             break;
         case 32:
     // [observer stop();
-            if (RMX_DEBUGGING) NSLog(@"%i: Space Bar",key);
+            if (RMX.isDebugging) NSLog(@"%i: Space Bar",key);
             break;
         case 9:
             // [observer stop();
-            if (RMX_DEBUGGING) NSLog(@"%i: TAB",key);
+            if (RMX.isDebugging) NSLog(@"%i: TAB",key);
             break;
         case 'G':
-             [world.observer toggleGravity];
+             [RMXGLProxy.activeSprite toggleGravity];
             break;
         case '0':
         case '1':
@@ -216,7 +216,7 @@ void keyUpOperations(int key){
            // sun.setAnchor(&observer);
             break;
         case 'R':
-            [world.thisWorld resetWorld];
+            [RMXGLProxy message:@"resetWorld" args:nil];
             break;
         case 6: //cntrl f
             NSLog(@"ERROR: Toggle Full Screen not working");//[window toggleFullScreen];
@@ -228,20 +228,20 @@ void keyUpOperations(int key){
 void keySpecialDownOperations(int key) {
     if (key == GLUT_KEY_UP) { // If the left arrow key has been pressed
         //me.look(Observer::UP);
-        if (RMX_DEBUGGING) NSLog(@"%i:UP Pressed",key);
+        if (RMX.isDebugging) NSLog(@"%i:UP Pressed",key);
         //TODO
     }
     
     if (key == GLUT_KEY_DOWN) {
-        if (RMX_DEBUGGING) NSLog(@"%i:DOWN Pressed",key);
+        if (RMX.isDebugging) NSLog(@"%i:DOWN Pressed",key);
     }
     
     if (key == GLUT_KEY_LEFT) {
-        if (RMX_DEBUGGING) NSLog(@"%i:LEFT Pressed",key);
+        if (RMX.isDebugging) NSLog(@"%i:LEFT Pressed",key);
     }
     
     if (key == GLUT_KEY_RIGHT) {
-        if (RMX_DEBUGGING) NSLog(@"%i:RIGHT Pressed",key);
+        if (RMX.isDebugging) NSLog(@"%i:RIGHT Pressed",key);
         //TODO
     }
     

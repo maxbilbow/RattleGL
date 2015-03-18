@@ -8,7 +8,10 @@
 
 #import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
+#import "RMXMouseProcessor.h"
+#import "RMXKeyboardProcessor.h"
 #define TEXTURE_ID_CUBE 1
+@class RMXGLProxy, RMX;
 void InitGraphics(void)
 {
 //    int width, height;
@@ -41,55 +44,73 @@ void InitGraphics(void)
 }
 
 
+void display(){
+    [RMXGLProxy display];
+}
+void reshape(int w, int h) {
+    [RMXGLProxy reshape:w height:h];
+}
+
+void keyPressed (unsigned char key, int x, int y){
+    RMXkeyPressed(key, x, y);
+}
+void keyUp (unsigned char key, int x, int y){
+    RMXkeyUp(key, x, y);
+}
+void keySpecial (int key, int x, int y){
+    RMXkeySpecial(key, x, y);
+}
+void keySpecialUp (int key, int x, int y){
+    RMXkeySpecialUp(key, x, y);
+}
+
+void mouseButton(int button, int state, int x, int y){
+    MouseButton(button, state, x, y);
+}
+void mouseMotion(int x, int y){
+    MouseMotion(x, y);
+}
+void mouseFree(int x, int y){
+    MouseFree(x, y);
+}
+
+void idle(){
+    [RMXGLProxy animateScene];
+}
+
 int run(int argc, char * argv[])
 {
-    //main = [Main new];
-   // world = [RMXArt initializeTestingEnvironment];
-    glutInit(&argc, argv);
+    RMXGlutInit(argc,argv);
     initKeys();
-
-    //    window = [[RMXWindow alloc]initWithMethods:glutInitWindowSize
-//                                               disp:glutDisplayFunc rs:glutReshapeFunc
-//                                               kp:glutKeyboardFunc ku:glutKeyboardUpFunc ks:glutSpecialFunc ksu:glutSpecialUpFunc
-//                                               mf:glutMouseFunc mF:glutMotionFunc pmf:glutPassiveMotionFunc
-//                                               iF:glutIdleFunc];
-    
-    glutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     
     
-    if (RMX_FULL_SCREEN){//&&glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)){
-        glutEnterGameMode();
+    RMXGlutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
+    
+    
+    if (RMX.isFullscreen){//&&glutGameModeGet(GLUT_GAME_MODE_POSSIBLE)){
+        RMXGlutEnterGameMode();
     }else {
-        NSLog(@"Game Mode Not Possibe, Exit: %i",glutGameModeGet(GLUT_GAME_MODE_POSSIBLE));
-        //window.create(glutCreateWindow);
-        //[window create:glutCreateWindow];
-        glutInitWindowPosition(100,100);
-        glutInitWindowSize(1280,750);
-        glutCreateWindow("Window");
+        //NSLog("Game Mode Not Possibe, Exit: \(glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))")
+        RMXGlutMakeWindow(100,100,1280,720,"Window");
     }
-    
     //Setup Display:
     //[window display:display rs:reshape];
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     
     // Register callbacks:
-    //[window keyboard:RMXkeyPressed up:RMXkeyUp sp:RMXkeySpecial spU:RMXkeySpecialUp];
-    glutKeyboardFunc(RMXkeyPressed);
-    glutKeyboardUpFunc(RMXkeyUp);
-    glutSpecialFunc(RMXkeySpecial);
-    glutSpecialUpFunc(RMXkeySpecialUp);
-    
-    //Mouse Callbacks:
-    //[window mouse:MouseButton m:MouseMotion pm:mouseFree];
-   
-    glutMouseFunc(MouseButton);
-    glutMotionFunc(MouseMotion);
+    glutKeyboardFunc(keyPressed);
+    glutKeyboardUpFunc(keyUp);
+    glutSpecialFunc(keySpecial);
+    glutSpecialUpFunc(keySpecialUp);
+ 
+    glutMouseFunc(mouseButton);
+    glutMotionFunc(mouseMotion);
     glutPassiveMotionFunc(mouseFree);
     
     //Animation
     // [window idle:AnimateScene];
-    glutIdleFunc(AnimateScene);
+    glutIdleFunc(idle);
     
     // Create our popup menu
     //BuildPopupMenu();
@@ -102,13 +123,13 @@ int run(int argc, char * argv[])
     
     //[mouse center];
     
-    if (RMX_FULL_SCREEN) {
-        [world.observer toggleFocus];
+    if (RMX.isFullscreen) {
+        [RMXGLProxy.activeSprite.mouse toggleFocus];
         glutSetCursor(GLUT_CURSOR_NONE);
-        [world.observer calibrateView:0 vert:0];//observer->getMouse().x,observer->getMouse().y);
-        [world.observer mouse2view:0 y:0];
+        [RMXGLProxy.activeSprite.mouse calibrateView:0 y:0];
+        [RMXGLProxy.activeSprite.mouse mouse2view:0 y:0];
     }
-    glutMainLoop ();
+    glutMainLoop();
     return 0;
 }
 

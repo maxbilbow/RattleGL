@@ -11,7 +11,7 @@
 #import "RattleGLS-Bridging-Header.h"
 #import <RattleGL-Swift.h>
 
-
+//@class RMXGLProxy;
 void AnimateScene(void)
 {
     //animate();
