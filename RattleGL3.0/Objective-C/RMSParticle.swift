@@ -112,9 +112,9 @@ public class RMSParticle : RMXObject, RMXParticle {
         
     }
     
-    func addBehaviour(() -> ()) {
-        self.behaviours.append(reset)
-        self.behaviours.last?()
+    func addBehaviour(behaviour: () -> ()) {
+        self.behaviours.append(behaviour)
+        //self.behaviours.last?()
     }
    
     
@@ -132,13 +132,13 @@ public class RMSParticle : RMXObject, RMXParticle {
     }
     
     func animate() {
-        for behaviour in self.behaviours {
-            behaviour()
-        }
         if self.isAnimated {
             self.actions?.jumpTest()
             self.accelerate()
             self.actions?.manipulate()
+            for behaviour in self.behaviours {
+                behaviour()
+            }
         }
     
     

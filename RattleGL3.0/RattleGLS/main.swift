@@ -23,8 +23,20 @@ func start() {
 
     
     autoreleasepool {
-        RMXGLProxy.initialize(RMXArt.initializeTestingEnvironment(),callbacks: RepeatedKeys)
+        let scene = RMXArt.initializeTestingEnvironment()
+        for sprite in scene.sprites {
+            if sprite.rmxID != scene.observer?.rmxID && sprite.isAnimated {
+                sprite.addBehaviour({
+                    if sprite.body.distanceTo(scene.observer!) < 50 {
+                        sprite.actions?.prepareToJump()
+                    }
+                })
+            }
+        }
+        RMXGLProxy.initialize(scene,callbacks: RepeatedKeys)
         run(Process.argc, Process.unsafeArgv)
+    
+        
     }
 }
 

@@ -122,7 +122,9 @@ import Foundation
    
     
     func prepareToJump() {
-        _prepairingToJump = true
+        if !_goingUp || _ignoreNextJump {
+            _prepairingToJump = true
+        }
     }
     
     func jump() {

@@ -319,7 +319,8 @@
 			children = (
 				503203D31AB0A719000DD1FE /* SceneKit.framework */,
 				505DD5A91AAF5B3D008FFB84 /* GLKit.framework */,
-				6C7B50721A9E7B2E00B140D7 /* RattleGL3.0 */,
+				6C7B507F1A9E7B7400B140D7 /* Swift */,
+				6C7B507A1A9E7B7400B140D7 /* C */,
 				503203DA1AB0A821000DD1FE /* RattleGLS */,
 				5008DA3E1AB9F34E00565A28 /* RattleGLES */,
 				5008DA581AB9F34E00565A28 /* RattleGLESTests */,
@@ -338,20 +339,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6C7B50721A9E7B2E00B140D7 /* RattleGL3.0 */ = {
-			isa = PBXGroup;
-			children = (
-				6C7B507A1A9E7B7400B140D7 /* C */,
-				5067292D1AAE1205007AB77A /* run.h */,
-				6C7B507E1A9E7B7400B140D7 /* run.m */,
-				6C7B507F1A9E7B7400B140D7 /* Swift */,
-			);
-			path = RattleGL3.0;
-			sourceTree = "<group>";
-		};
 		6C7B507A1A9E7B7400B140D7 /* C */ = {
 			isa = PBXGroup;
 			children = (
+				5067292D1AAE1205007AB77A /* run.h */,
+				6C7B507E1A9E7B7400B140D7 /* run.m */,
 				505374F41AB3335B00831050 /* Redundant */,
 				50DA69011AAE1D6F00C81158 /* RMXKeyboardProcessor.h */,
 				6C7B50881A9E7B7400B140D7 /* RMXKeyboardProcessor.m */,
