@@ -120,6 +120,7 @@ void keyDownOperations (int key) {
     
     if (keys.keyStates['+']) {
         RMXGLProxy.itemBody.radius += 0.5;
+        RMXGLProxy.itemBody.mass += 1;
     }
     if (keys.keyStates['_']) {
         RMXGLProxy.itemBody.radius -= 0.5;
