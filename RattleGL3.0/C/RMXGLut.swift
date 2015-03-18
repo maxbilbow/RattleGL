@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol RMXGLView {
+public protocol RMXGLView  {
+//    var effect: GLKBaseEffect? { get set }
+//    var context: GLContext? { get set }
     var activeCamera: RMXCamera? { get }
     var activeSprite: RMSParticle? { get }
     func animate()
@@ -20,6 +22,7 @@ public protocol RMXGLView {
     //let world: RMXWorld? = RMXArt.initializeTestingEnvironment()
     static var callbacks: [()->Void] = Array<()->Void>()
     static var gameView: RMXGLView?
+    static var effect: GLKBaseEffect? = GLKBaseEffect()
     static var activeSprite: RMXParticle? {
         return self.gameView?.activeSprite
     }
@@ -57,7 +60,7 @@ public protocol RMXGLView {
         glViewport(0, 0, width, height)
         glMatrixMode(GLenum(GL_PROJECTION))
         glLoadIdentity()
-        self.gameView?.activeCamera?.makePerspective(width, height: height)
+        self.gameView?.activeCamera?.makePerspective(width, height: height,effect: &self.effect)
         glMatrixMode(GLenum(GL_MODELVIEW))
         
     }
@@ -70,7 +73,7 @@ public protocol RMXGLView {
         //[rmxDebugger add:RMX_DISPLAY_PROCESSOR n:@"DisplayProcessor" t:[NSString stringWithFormat:@"r%f, g%f, b%f, k%f",art.r,art.g,art.b,art.k]];
         glLoadIdentity(); // Load the Identity Matrix to reset our drawing locations
         if self.gameView?.activeCamera != nil {
-            RMXGLMakeLookAt(self.gameView?.activeCamera)
+            self.gameView?.activeCamera?.updateView(&self.effect!)
         } else {
             fatalError("World Camera not initialised")
         }
@@ -81,12 +84,17 @@ public protocol RMXGLView {
 
         // Make sure changes appear onscreen
         RMXGlutSwapBuffers()
-        glFlush();
-        debug();
+        glFlush()
+        debug()
         //tester.checks[1] = observer->toString();
         //NSLog([world.observer viewDescription]);
     }
     
         
 
+}
+
+
+extension RMXGLProxy {
+    
 }

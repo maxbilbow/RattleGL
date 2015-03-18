@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5008DA991AB9FA5900565A28 /* RMXValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA971AB9FA5900565A28 /* RMXValue.swift */; };
+		5008DA9A1AB9FA5900565A28 /* RMXDPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA981AB9FA5900565A28 /* RMXDPad.swift */; };
 		506729261AADD69D007AB77A /* RMXData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506729251AADD69D007AB77A /* RMXData.swift */; };
 		506729281AADE3AD007AB77A /* RMXGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506729271AADE3AD007AB77A /* RMXGameView.swift */; };
 		50A57CDA1AACC3BF00E2D567 /* RMXWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A57CD91AACC3BF00E2D567 /* RMXWorld.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5008DA971AB9FA5900565A28 /* RMXValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXValue.swift; sourceTree = "<group>"; };
+		5008DA981AB9FA5900565A28 /* RMXDPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXDPad.swift; sourceTree = "<group>"; };
 		506729251AADD69D007AB77A /* RMXData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXData.swift; sourceTree = "<group>"; };
 		506729271AADE3AD007AB77A /* RMXGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXGameView.swift; sourceTree = "<group>"; };
 		50A57CD91AACC3BF00E2D567 /* RMXWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMXWorld.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				50CFB76B1A9E446E0089614D /* RMXDPad.swift */,
 				50F2A6F21A9E479700FCA5B9 /* RMXValue.swift */,
 				50D0B8561A9E49E700041E73 /* RMXLog.swift */,
+				5008DA971AB9FA5900565A28 /* RMXValue.swift */,
+				5008DA981AB9FA5900565A28 /* RMXDPad.swift */,
 				50CFB74D1A9E41CC0089614D /* Shaders.metal */,
 				50CFB74F1A9E41CC0089614D /* Main.storyboard */,
 				50CFB7521A9E41CC0089614D /* Images.xcassets */,
@@ -262,10 +268,12 @@
 				50A57CE01AACCB0300E2D567 /* RMXDataTypes.swift in Sources */,
 				50A57CE21AACCB3500E2D567 /* RMXNode.swift in Sources */,
 				50CFB76C1A9E446E0089614D /* RMXDPad.swift in Sources */,
+				5008DA9A1AB9FA5900565A28 /* RMXDPad.swift in Sources */,
 				50CFB74E1A9E41CC0089614D /* Shaders.metal in Sources */,
 				50A57CDA1AACC3BF00E2D567 /* RMXWorld.swift in Sources */,
 				50D0B8581A9E4C9900041E73 /* RMXValue.swift in Sources */,
 				50CFB74C1A9E41CC0089614D /* GameViewController.swift in Sources */,
+				5008DA991AB9FA5900565A28 /* RMXValue.swift in Sources */,
 				506729261AADD69D007AB77A /* RMXData.swift in Sources */,
 				50CFB74A1A9E41CC0089614D /* AppDelegate.swift in Sources */,
 			);

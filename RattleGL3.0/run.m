@@ -95,6 +95,7 @@ int run(int argc, char * argv[])
     }
     //Setup Display:
     //[window display:display rs:reshape];
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     

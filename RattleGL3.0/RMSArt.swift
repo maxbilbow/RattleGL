@@ -112,48 +112,55 @@ public class RMXArt : RMXObject {
     //int max =100, min = -100;
     //BOOL gravity = true;
         let noOfShapes: Int32 = 1980
+        
         for(var i: Int32 = -noOfShapes / 2; i < noOfShapes / 2; ++i) {
-            let points = doASum(Float(world.body.radius), i, noOfShapes )
-            let X = points.x
-            let Y = points.y
-            let Z = points.z
-        //float randPos[3] = {(rand() % (max + min))-max/2, (rand() % max), (rand() % (max + min))-max/2};
-        let chance = 1;//(rand() % 6 + 1);
-            var randPos: [Float] = [ X, Y, Z ]
-            switch (chance) {
-                case 1:
-                    randPos[0] = X
-                    randPos[1] = Y
-                    randPos[2] = Z
-                    break
-                case 2:
-                    randPos[0] = Z
-                    randPos[1] = X
-                    randPos[2] = Y
-                    break
-                case 3:
-                    randPos[0] = Y
-                    randPos[1] = Z
-                    randPos[2] = X
-                    break
-                case 4:
-                    randPos[0] = Y
-                    randPos[1] = X
-                    randPos[2] = Z
-                    break
-                case 5:
-                    randPos[0] = X
-                    randPos[1] = Z
-                    randPos[2] = Y
-                    break
-                default:
-                    randPos[0] = Z
-                    randPos[1] = Y
-                    randPos[2] = X
-                    break
-            
-            
+            var randPos: [Float]
+            var X: Float = 0; var Y: Float = 0; var Z: Float = 0
+            func thisRandom(inout x: Float, inout y: Float, inout z: Float) -> [Float] {
+                do {
+                    let points = doASum(Float(world.body.radius), i, noOfShapes )
+                    x = points.x
+                    y = points.y
+                    z = points.z
+                } while GLKVector3Distance(GLKVector3Make(x,y,z), RMXVector3Zero()) > world.body.radius
+                return [ x, y, z ]
             }
+            randPos = thisRandom(&X,&Y,&Z)
+            let chance = 1//(rand() % 6 + 1);
+//            switch (chance) {
+//                case 1:
+//                    randPos[0] = X
+//                    randPos[1] = Y
+//                    randPos[2] = Z
+//                    break
+//                case 2:
+//                    randPos[0] = Z
+//                    randPos[1] = X
+//                    randPos[2] = Y
+//                    break
+//                case 3:
+//                    randPos[0] = Y
+//                    randPos[1] = Z
+//                    randPos[2] = X
+//                    break
+//                case 4:
+//                    randPos[0] = Y
+//                    randPos[1] = X
+//                    randPos[2] = Z
+//                    break
+//                case 5:
+//                    randPos[0] = X
+//                    randPos[1] = Z
+//                    randPos[2] = Y
+//                    break
+//                default:
+//                    randPos[0] = Z
+//                    randPos[1] = Y
+//                    randPos[2] = X
+//                    break
+//            
+//            
+//            }
         randPos[1] = randPos[1] + 50
         
         //gravity = !gravity;
@@ -162,7 +169,7 @@ public class RMXArt : RMXObject {
 //                object.shape.makeAsSun(rDist: 0, isRotating:false)
 //            }
         
-        if(random() % 500 == 1) {
+        if(random() % 50 == 1) {
             object.shape!.setRenderer(self.drawSphere)
         } else {
             object.shape!.setRenderer(DrawCubeWithTextureCoords)

@@ -43,7 +43,9 @@ public class RMXWorld : RMSParticle, RMXGLView {
     
   
     func insertSprite(sprite: RMSParticle){
-        self.sprites.append(sprite)
+        if sprite.body.distanceTo(self) <= self.body.radius {
+            self.sprites.append(sprite)
+        }
     }
             
     func µAt(someBody: RMSParticle) -> Float {

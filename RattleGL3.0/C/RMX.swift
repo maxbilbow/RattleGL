@@ -11,4 +11,6 @@ import Foundation
 @objc public class RMX {
     static let isDebugging: Bool = true
     static let isFullscreen: Bool = false
+    static let usingDepreciated: Bool = true
+    
 }

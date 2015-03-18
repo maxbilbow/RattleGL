@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5008DA421AB9F34E00565A28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA411AB9F34E00565A28 /* AppDelegate.swift */; };
+		5008DA441AB9F34E00565A28 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 5008DA431AB9F34E00565A28 /* Shader.fsh */; };
+		5008DA461AB9F34E00565A28 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 5008DA451AB9F34E00565A28 /* Shader.vsh */; };
+		5008DA481AB9F34E00565A28 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA471AB9F34E00565A28 /* GameViewController.swift */; };
+		5008DA4B1AB9F34E00565A28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5008DA491AB9F34E00565A28 /* Main.storyboard */; };
+		5008DA4D1AB9F34E00565A28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5008DA4C1AB9F34E00565A28 /* Images.xcassets */; };
+		5008DA501AB9F34E00565A28 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5008DA4E1AB9F34E00565A28 /* LaunchScreen.xib */; };
+		5008DA5C1AB9F34E00565A28 /* RattleGLESTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA5B1AB9F34E00565A28 /* RattleGLESTests.swift */; };
+		5008DA9F1AB9FA8900565A28 /* RMXValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5008DA9C1AB9FA8400565A28 /* RMXValue.swift */; };
 		500CCC741AB5CC1300D700B8 /* RMXArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DA68FA1AAE1AE000C81158 /* RMXArt.m */; };
 		500CCC751AB5CC3700D700B8 /* RMSArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50384FB11AB0C77D0074E6DA /* RMSArt.swift */; };
 		50183D3C1AAE2D9600FF2A26 /* RMXParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7B508F1A9E7B7400B140D7 /* RMXParticle.m */; };
@@ -50,6 +59,16 @@
 		50E6B9B31AAE455600B5F1B3 /* RMXMaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E6B9B11AAE455600B5F1B3 /* RMXMaths.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5008DA561AB9F34E00565A28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6C7B50681A9E7B2E00B140D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5008DA3C1AB9F34E00565A28;
+			remoteInfo = RattleGLES;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		503203D71AB0A821000DD1FE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -72,6 +91,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5008DA3D1AB9F34E00565A28 /* RattleGLES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RattleGLES.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5008DA401AB9F34E00565A28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5008DA411AB9F34E00565A28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5008DA431AB9F34E00565A28 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		5008DA451AB9F34E00565A28 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		5008DA471AB9F34E00565A28 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		5008DA4A1AB9F34E00565A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5008DA4C1AB9F34E00565A28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5008DA4F1AB9F34E00565A28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		5008DA551AB9F34E00565A28 /* RattleGLESTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RattleGLESTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5008DA5A1AB9F34E00565A28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5008DA5B1AB9F34E00565A28 /* RattleGLESTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RattleGLESTests.swift; sourceTree = "<group>"; };
+		5008DA9B1AB9FA8400565A28 /* RMXDPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RMXDPad.swift; path = ../RattleGLS/RMXDPad.swift; sourceTree = "<group>"; };
+		5008DA9C1AB9FA8400565A28 /* RMXValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RMXValue.swift; path = ../RattleGLS/RMXValue.swift; sourceTree = "<group>"; };
+		5008DAA01AB9FC8D00565A28 /* RMSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RMSViewController.swift; sourceTree = "<group>"; };
 		50183D351AAE2CA600FF2A26 /* RMXPhysics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXPhysics.h; sourceTree = "<group>"; };
 		50183D361AAE2CD100FF2A26 /* RMXWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXWindow.h; sourceTree = "<group>"; };
 		50183D381AAE2D1100FF2A26 /* RMXWorld.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMXWorld.h; sourceTree = "<group>"; };
@@ -144,6 +178,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5008DA3A1AB9F34E00565A28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5008DA521AB9F34E00565A28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		503203D61AB0A821000DD1FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +211,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5008DA3E1AB9F34E00565A28 /* RattleGLES */ = {
+			isa = PBXGroup;
+			children = (
+				5008DA9B1AB9FA8400565A28 /* RMXDPad.swift */,
+				5008DA9C1AB9FA8400565A28 /* RMXValue.swift */,
+				5008DA411AB9F34E00565A28 /* AppDelegate.swift */,
+				5008DA431AB9F34E00565A28 /* Shader.fsh */,
+				5008DA451AB9F34E00565A28 /* Shader.vsh */,
+				5008DA471AB9F34E00565A28 /* GameViewController.swift */,
+				5008DA491AB9F34E00565A28 /* Main.storyboard */,
+				5008DA4C1AB9F34E00565A28 /* Images.xcassets */,
+				5008DA4E1AB9F34E00565A28 /* LaunchScreen.xib */,
+				5008DA3F1AB9F34E00565A28 /* Supporting Files */,
+			);
+			path = RattleGLES;
+			sourceTree = "<group>";
+		};
+		5008DA3F1AB9F34E00565A28 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5008DA401AB9F34E00565A28 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5008DA581AB9F34E00565A28 /* RattleGLESTests */ = {
+			isa = PBXGroup;
+			children = (
+				5008DA5B1AB9F34E00565A28 /* RattleGLESTests.swift */,
+				5008DA591AB9F34E00565A28 /* Supporting Files */,
+			);
+			path = RattleGLESTests;
+			sourceTree = "<group>";
+		};
+		5008DA591AB9F34E00565A28 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5008DA5A1AB9F34E00565A28 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		50183D3F1AAE2E1000FF2A26 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +267,9 @@
 			isa = PBXGroup;
 			children = (
 				503203DB1AB0A821000DD1FE /* main.swift */,
-				503203E21AB0A8A9000DD1FE /* cStuff.m */,
+				5008DAA01AB9FC8D00565A28 /* RMSViewController.swift */,
 				503203E31AB0A8A9000DD1FE /* cStuff.h */,
+				503203E21AB0A8A9000DD1FE /* cStuff.m */,
 				503203E11AB0A8A9000DD1FE /* RattleGLS-Bridging-Header.h */,
 			);
 			path = RattleGLS;
@@ -230,6 +321,8 @@
 				505DD5A91AAF5B3D008FFB84 /* GLKit.framework */,
 				6C7B50721A9E7B2E00B140D7 /* RattleGL3.0 */,
 				503203DA1AB0A821000DD1FE /* RattleGLS */,
+				5008DA3E1AB9F34E00565A28 /* RattleGLES */,
+				5008DA581AB9F34E00565A28 /* RattleGLESTests */,
 				6C7B50711A9E7B2E00B140D7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -239,6 +332,8 @@
 			children = (
 				6C7B50701A9E7B2E00B140D7 /* RattleGL */,
 				503203D91AB0A821000DD1FE /* RattleGLS */,
+				5008DA3D1AB9F34E00565A28 /* RattleGLES.app */,
+				5008DA551AB9F34E00565A28 /* RattleGLESTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,7 +344,7 @@
 				6C7B507A1A9E7B7400B140D7 /* C */,
 				5067292D1AAE1205007AB77A /* run.h */,
 				6C7B507E1A9E7B7400B140D7 /* run.m */,
-				6C7B507F1A9E7B7400B140D7 /* Objective-C */,
+				6C7B507F1A9E7B7400B140D7 /* Swift */,
 			);
 			path = RattleGL3.0;
 			sourceTree = "<group>";
@@ -273,7 +368,7 @@
 			path = C;
 			sourceTree = SOURCE_ROOT;
 		};
-		6C7B507F1A9E7B7400B140D7 /* Objective-C */ = {
+		6C7B507F1A9E7B7400B140D7 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				6C7B50811A9E7B7400B140D7 /* Info.plist */,
@@ -292,12 +387,48 @@
 				5066354D1AAF97C800B97E1B /* RMXPhysics.swift */,
 				50765B0B1AAF6CF20092402C /* RMSWorld.swift */,
 			);
+			name = Swift;
 			path = "Objective-C";
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5008DA3C1AB9F34E00565A28 /* RattleGLES */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5008DA5D1AB9F34E00565A28 /* Build configuration list for PBXNativeTarget "RattleGLES" */;
+			buildPhases = (
+				5008DA391AB9F34E00565A28 /* Sources */,
+				5008DA3A1AB9F34E00565A28 /* Frameworks */,
+				5008DA3B1AB9F34E00565A28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RattleGLES;
+			productName = RattleGLES;
+			productReference = 5008DA3D1AB9F34E00565A28 /* RattleGLES.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5008DA541AB9F34E00565A28 /* RattleGLESTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5008DA601AB9F34E00565A28 /* Build configuration list for PBXNativeTarget "RattleGLESTests" */;
+			buildPhases = (
+				5008DA511AB9F34E00565A28 /* Sources */,
+				5008DA521AB9F34E00565A28 /* Frameworks */,
+				5008DA531AB9F34E00565A28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5008DA571AB9F34E00565A28 /* PBXTargetDependency */,
+			);
+			name = RattleGLESTests;
+			productName = RattleGLESTests;
+			productReference = 5008DA551AB9F34E00565A28 /* RattleGLESTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		503203D81AB0A821000DD1FE /* RattleGLS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 503203DD1AB0A821000DD1FE /* Build configuration list for PBXNativeTarget "RattleGLS" */;
@@ -341,6 +472,13 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Rattle Media";
 				TargetAttributes = {
+					5008DA3C1AB9F34E00565A28 = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					5008DA541AB9F34E00565A28 = {
+						CreatedOnToolsVersion = 6.3;
+						TestTargetID = 5008DA3C1AB9F34E00565A28;
+					};
 					503203D81AB0A821000DD1FE = {
 						CreatedOnToolsVersion = 6.3;
 					};
@@ -355,6 +493,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 6C7B50671A9E7B2E00B140D7;
 			productRefGroup = 6C7B50711A9E7B2E00B140D7 /* Products */;
@@ -363,11 +502,53 @@
 			targets = (
 				6C7B506F1A9E7B2E00B140D7 /* RattleGL */,
 				503203D81AB0A821000DD1FE /* RattleGLS */,
+				5008DA3C1AB9F34E00565A28 /* RattleGLES */,
+				5008DA541AB9F34E00565A28 /* RattleGLESTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		5008DA3B1AB9F34E00565A28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5008DA501AB9F34E00565A28 /* LaunchScreen.xib in Resources */,
+				5008DA4B1AB9F34E00565A28 /* Main.storyboard in Resources */,
+				5008DA4D1AB9F34E00565A28 /* Images.xcassets in Resources */,
+				5008DA461AB9F34E00565A28 /* Shader.vsh in Resources */,
+				5008DA441AB9F34E00565A28 /* Shader.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5008DA531AB9F34E00565A28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		5008DA391AB9F34E00565A28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5008DA9F1AB9FA8900565A28 /* RMXValue.swift in Sources */,
+				5008DA481AB9F34E00565A28 /* GameViewController.swift in Sources */,
+				5008DA421AB9F34E00565A28 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5008DA511AB9F34E00565A28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5008DA5C1AB9F34E00565A28 /* RattleGLESTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		503203D51AB0A821000DD1FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,7 +604,115 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		5008DA571AB9F34E00565A28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5008DA3C1AB9F34E00565A28 /* RattleGLES */;
+			targetProxy = 5008DA561AB9F34E00565A28 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5008DA491AB9F34E00565A28 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5008DA4A1AB9F34E00565A28 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5008DA4E1AB9F34E00565A28 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5008DA4F1AB9F34E00565A28 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		5008DA5E1AB9F34E00565A28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RattleGLES/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5008DA5F1AB9F34E00565A28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = RattleGLES/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5008DA611AB9F34E00565A28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RattleGLESTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGLES.app/RattleGLES";
+			};
+			name = Debug;
+		};
+		5008DA621AB9F34E00565A28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = RattleGLESTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RattleGLES.app/RattleGLES";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		503203DE1AB0A821000DD1FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -559,6 +848,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5008DA5D1AB9F34E00565A28 /* Build configuration list for PBXNativeTarget "RattleGLES" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5008DA5E1AB9F34E00565A28 /* Debug */,
+				5008DA5F1AB9F34E00565A28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5008DA601AB9F34E00565A28 /* Build configuration list for PBXNativeTarget "RattleGLESTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5008DA611AB9F34E00565A28 /* Debug */,
+				5008DA621AB9F34E00565A28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		503203DD1AB0A821000DD1FE /* Build configuration list for PBXNativeTarget "RattleGLS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

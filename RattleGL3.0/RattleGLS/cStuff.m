@@ -25,11 +25,18 @@ void RMXMakeLookAtGL(void (* lookAt)(double eyeX, double eyeY, double eyez,
     
 }
 
+void RMXGLKMakeLookAt(GLKBaseEffect * effect,RMXCamera * view) {
+    effect.transform.modelviewMatrix = GLKMatrix4MakeLookAt(view.eye.x, view.eye.y, view.eye.z,
+                                 view.center.x, view.center.y, view.center.z,
+                                 view.up.x, view.up.y, view.up.z );
+}
+
 
 void RMXGLMakeLookAt(RMXCamera * view) {
     gluLookAt(view.eye.x, view.eye.y, view.eye.z,
               view.center.x, view.center.y, view.center.z,
               view.up.x, view.up.y, view.up.z );
+
 }
 
 
