@@ -14,11 +14,11 @@
 		<string>https://github.com/maxbilbow/RattleGL.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>OpenGL 2.0.xcodeproj</string>
+	<string>CPP/OpenGL 2.0.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2B339A9C24BE45B472F1EB58BBFD8DE7AD418995</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/maxbilbow/RattleGL.git</string>
