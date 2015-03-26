@@ -2,9 +2,9 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-//@import Foundation;
+@import Foundation;
 //@import GLUT;
-//@import GLKit;
+@import GLKit;
 //@import OpenGL;
 
 
@@ -28,10 +28,10 @@
 
 #import "RMXMaths.h"
 #import "RMXEquations.h"
-#import "RMXShapes.h"
+//#import "RMXShapes.h"
 //#import "RMXObject.h"
 //#import "RMXProtocols.h"
-
+#import "Geometry.h"
 
 
 //#import "RMXDebugger.h"
@@ -54,7 +54,7 @@
 
 #import "cStuff.h"
 //#import "RMXDisplayProcessor.h"
-#import "RMXKeyboardProcessor.h"
-#import "run.h"
+//#import "RMXKeyboardProcessor.h"
+//#import "run.h"
 //#import "SSGameSceneController.h"
-
+#import "GameViewController.h"
